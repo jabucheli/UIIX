@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tesis Doctoral · Gestión de proyectos basada en controles de ingeniería</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-text" id="brandText">Tesis Doctoral · Gestión de proyectos basada en controles de ingeniería</span>
+      </div>
+      <nav class="tabs" id="tabs" aria-label="Diapositivas"></nav>
+      <div class="controls">
+        <span class="counter" id="counter">1 / 2</span>
+        <button class="btn-nav" id="btnPrev" type="button" aria-label="Diapositiva anterior"></button>
+        <button class="btn-nav" id="btnNext" type="button" aria-label="Diapositiva siguiente"></button>
+        <button class="btn-fs" id="btnFullscreen" type="button" aria-label="Pantalla completa"></button>
+      </div>
+    </header>
+    <main class="stage" id="stage">
+      <div class="scale-wrap" id="scaleWrap">
+        <div class="slide-frame" id="slideFrame"></div>
+      </div>
+    </main>
+  </div>
+  <script src="js/icons.js"></script>
+  <script src="js/data/thesisData.js"></script>
+  <script src="js/data/problematizationData.js"></script>
+  <script src="js/components/justificationCard.js"></script>
+  <script src="js/slides/slide01Cover.js"></script>
+  <script src="js/slides/slide02Problematization.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
