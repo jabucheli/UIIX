@@ -5,12 +5,19 @@
   function dec(v) { return String(v).replace('.', ','); }
 
   window.slideRenderers.problematizacion = function (thesis, p) {
-    var tiles = p.indicators.map(function (s) {
-      return '<div class="ev-tile">' +
-        '<div class="ev-value">' + s.value + '</div>' +
-        '<div class="ev-caption">' + s.caption + '</div>' +
+    var tilesHtml = '<div class="ev-hist">' + p.historical.map(function (g) {
+      return '<div class="ev-period">' +
+        '<div class="ev-period-label">' + g.period + '</div>' +
+        '<div class="ev-period-stats">' +
+          g.stats.map(function (s) {
+            return '<div class="ev-tile">' +
+              '<div class="ev-value">' + s.value + '</div>' +
+              '<div class="ev-caption">' + s.caption + '</div>' +
+            '</div>';
+          }).join('') +
+        '</div>' +
       '</div>';
-    }).join('');
+    }).join('') + '</div>';
 
     var max = p.bars.items[0].value;
     var bars = p.bars.items.map(function (b) {
@@ -34,7 +41,8 @@
 
     var evPanel = '<aside class="ev-column">' +
       '<div class="ev-label">' + p.evidenceLabel + '</div>' +
-      '<div class="ev-tiles">' + tiles + '</div>' +
+      tilesHtml +
+      '<div class="ev-footnote">' + p.footnote + '</div>' +
       '<div class="ev-block ev-donut-block">' +
         '<div class="ev-block-title">Accidentalidad en obra</div>' + donutHtml +
       '</div>' +
@@ -43,7 +51,17 @@
         '<div class="ev-bars">' + bars + '</div>' +
         '<div class="ev-source">Fuente: ' + p.bars.source + '</div>' +
       '</div>' +
-      '<div class="ev-footnote">' + p.footnote + '</div>' +
+      '<div class="ev-block ev-sources-block">' +
+        '<div class="ev-block-title">Fuentes de consulta</div>' +
+        '<div class="ev-sources">' +
+          p.sources.map(function (s) {
+            return '<div class="src-item">' +
+              '<span class="src-num">' + s.n + '</span>' +
+              '<span class="src-text">' + s.text + '</span>' +
+            '</div>';
+          }).join('') +
+        '</div>' +
+      '</div>' +
     '</aside>';
 
     var flowHtml = '';
@@ -68,6 +86,11 @@
       '</div>';
     }
 
+    var objBlock = '<div class="obj-block">' +
+      '<div class="obj-head">' + p.studyObjectHeader + '</div>' +
+      '<div class="obj-text">' + p.studyObject + '</div>' +
+    '</div>';
+
     var lvlWidths = [100, 82, 64, 46, 28];
     var pyramid = p.hierarchy.levels.map(function (lv, i) {
       var active = i === 2;
@@ -84,7 +107,12 @@
         '<span class="ps-arrow">' + window.Icons.svg('downArrow', 10) + '</span>' +
         '<span class="ps-bottom">Menos eficaz</span>' +
       '</div>' +
-      '<div class="pyramid-caption">Control en origen, medio y receptor — C.D. 513 (art. 53)</div>' +
+      '<div class="pyramid-caption">Control en origen, medio y receptor — C.D. 513 (art. 53) · D.E. 255</div>' +
+    '</div>';
+
+    var campoBlock = '<div class="campo-block">' +
+      '<div class="campo-head">' + p.actionFieldHeader + '</div>' +
+      '<div class="campo-line">' + p.actionField + '</div>' +
     '</div>';
 
     var cards = p.justifications.map(function (j) {
@@ -97,7 +125,7 @@
         evPanel +
         '<div class="flow">' +
           flowHtml +
-          '<div class="flow-link" style="top:510px">' + window.Icons.svg('chevRight', 13) + '</div>' +
+          '<div class="flow-link">' + window.Icons.svg('chevRight', 13) + '</div>' +
         '</div>' +
         '<aside class="just-column">' +
           '<div class="just-panel">' +
@@ -105,6 +133,8 @@
             '<div class="just-header">' + p.justHeader + '</div>' +
             '<div class="just-cards">' + cards + '</div>' +
             pyramidBlock +
+            objBlock +
+            campoBlock +
           '</div>' +
         '</aside>' +
       '</div>' +

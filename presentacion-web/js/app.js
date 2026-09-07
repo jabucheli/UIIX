@@ -59,8 +59,8 @@
   }
 
   function fit() {
-    var W = 1280;
-    var H = 720;
+    var W = 2816;
+    var H = 1440;
     var stage = document.getElementById('stage');
     var s = Math.min(stage.clientWidth / W, stage.clientHeight / H);
     frame.style.transform = 'scale(' + s + ')';
