@@ -10,5 +10,7 @@ window.THESIS = {
 
 window.SLIDES = [
   { id: 1, key: 'cover', label: 'Carátula' },
-  { id: 2, key: 'problematizacion', label: 'Problematización' }
+  { id: 2, key: 'problematizacion', label: 'Problematización' },
+  { id: 3, key: 'objetivos', label: 'Objetivos' },
+  { id: 4, key: 'teorias', label: 'Teorías' }
 ];

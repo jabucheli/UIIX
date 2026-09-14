@@ -27,7 +27,7 @@
   function buildSlides() {
     frame.innerHTML = window.SLIDES.map(function (s) {
       var fn = window.slideRenderers[s.key];
-      return fn ? fn(window.THESIS, window.PROBLEMA) : '<section class="slide"><div style="padding:40px">Sin contenido</div></section>';
+      return fn ? fn(window.THESIS, window.PROBLEMA, window.OBJETIVOS, window.TEORIAS) : '<section class="slide"><div style="padding:40px">Sin contenido</div></section>';
     }).join('');
   }
 

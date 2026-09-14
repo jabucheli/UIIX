@@ -14,8 +14,12 @@
     chevLeft: '<path d="M14.5 5.5L8 12l6.5 6.5"/>',
     chevRight: '<path d="M9.5 5.5L16 12l-6.5 6.5"/>',
     downArrow: '<path d="M4 8l8 8 8-8"/>',
+    search: '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.2-4.2"/><path d="M8 11h6M11 8v6"/>',
+    check: '<path d="M4 12.5l5 5L20 6.5"/><path d="M10 17.5h6"/>',
+    flask: '<path d="M10 3.5V9L4.6 16.4a2.2 2.2 0 0 0 1.8 3.4h11.2a2.2 2.2 0 0 0 1.8-3.4L14 9V3.5"/><path d="M8 3.5h8"/><path d="M7.5 13.5h9"/><path d="M10.5 17h3"/>',
     expand: '<path d="M8 3.5H3.5V8M16 3.5h4.5V8M8 20.5H3.5V16M16 20.5h4.5V16"/>',
-    compress: '<path d="M8 8V3.5M8 8H3.5M16 8V3.5M16 8h4.5M8 16V20.5M8 16H3.5M16 16v4.5M16 16h4.5"/>'
+    compress: '<path d="M8 8V3.5M8 8H3.5M16 8V3.5M16 8h4.5M8 16V20.5M8 16H3.5M16 16v4.5M16 16h4.5"/>',
+    pin: '<path d="M12 21s-7-5.4-7-11a7 7 0 0 1 14 0c0 5.6-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/>'
   };
 
   function svg(name, size, cls) {
