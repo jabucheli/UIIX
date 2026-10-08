@@ -25,10 +25,29 @@
             '<div class="th-bflow-item"><b>' + f.kw + '</b><span>' + f.det + '</span></div>';
         }).join('') + '</div>';
       }
+      var boxNflow = '';
+      if (b.nflow) {
+        boxNflow = '<div class="th-nflow">' + t.numerals.map(function (c, i) {
+          return (i > 0 ? '<span class="th-narr">&#10132;</span>' : '') +
+            '<span class="th-ncell"><b>' + c[0] + '</b>' + c[1] + '</span>';
+        }).join('') + '</div>';
+      }
+      var mc = '';
+      if (b.mc) {
+        mc = '<div class="th-steps">' + b.mc.map(function (st, i) {
+          var red = i === 5 || i === 7;
+          return '<div class="th-step' + (red ? ' th-step--red' : '') + '">' +
+            '<span class="th-step-o">' + (i + 1) + '</span>' +
+            '<div><b>' + st.t + '</b>' + (st.s ? '<span>' + st.s + '</span>' : '') + '</div>' +
+          '</div>';
+        }).join('') + '</div>';
+      }
+      var content = b.flow ? flow : (b.mc ? mc : '<p>' + (b.lines || '') + '</p>');
       return '<div class="th-box' + cls + '">' +
         '<h3>' + b.h + '</h3>' +
-        (b.flow ? flow : '<p>' + b.lines + '</p>') +
+        content +
         timeline +
+        boxNflow +
         (b.ref ? '<p class="th-ref">' + b.ref + '</p>' : '') +
       '</div>';
     }).join('');
@@ -56,11 +75,6 @@
         '</div>';
     }).join('');
 
-    var nflow = t.numerals.map(function (c, i) {
-      return (i > 0 ? '<span class="th-narr">&#10132;</span>' : '') +
-        '<span class="th-ncell"><b>' + c[0] + '</b>' + c[1] + '</span>';
-    }).join('');
-
     return '<section class="slide slide-teorias" data-slide="4">' +
       '<header class="slide-head">' +
         '<span class="th-tag">' + t.tag + '</span>' +
@@ -80,7 +94,6 @@
                 '<div class="th-flow-title">' + t.flowTitle + '</div>' +
                 '<div class="th-flow-row">' + flow + '</div>' +
               '</div>' +
-              '<div class="th-nflow">' + nflow + '</div>' +
             '</div>' +
             '<div class="th-legal">' +
               '<h4>' + t.legalTitle + '</h4>' +
@@ -90,7 +103,6 @@
           '</div>' +
         '</div>' +
       '</div>' +
-      '<footer class="th-footer">' + t.footer + '</footer>' +
     '</section>';
   };
 })();

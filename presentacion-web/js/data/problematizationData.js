@@ -1,5 +1,5 @@
 window.PROBLEMA = {
-  title: 'PROBLEMATIZACIÓN',
+  title: 'Problematización',
   evidenceLabel: 'EVIDENCIA',
   historical: [
     { period: '2014–2019', stats: [

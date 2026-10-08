@@ -1,0 +1,19 @@
+# Dependencias locales (se regeneran con npm install)
+node_modules/
+
+# Artefactos generados de verificación (se regeneran con verify-all.cmd)
+tools/out/
+
+# Dumps temporales de depuración
+*.out
+f
+
+# Bloqueos y temporales de Office (~$*.docx, ~$*.pptx, ~WRL*.tmp, ...)
+~$*
+*.tmp
+~WRL*
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

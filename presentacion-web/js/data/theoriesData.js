@@ -16,19 +16,33 @@ window.TEORIAS = {
         { y: '1921–1929', t: 'Ley de Accidentes de Trabajo → Ley de Prevención de Accidentes → Ley de Responsabilidad por Accidentes.' },
         { y: '1978', t: 'Decreto Supremo No. 2213: prestaciones por accidentes de trabajo y enfermedades profesionales.' },
         { y: '1986', t: 'D.E. 2393: Reglamento de Seguridad y Salud de los Trabajadores.' },
-        { y: '2024', t: 'D.E. 255-2024 reemplaza al D.E. 2393 y actualiza el Reglamento de SST.' },
+        { y: '2024', t: 'D.E. 255-2024 reemplaza al D.E. 2393 y actualiza el Reglamento de SST. AM MDT-2024-196 (3 Anexos).' },
         { y: '2025', t: 'AM MDT-2025-122: Reglamento de Seguridad en el Trabajo y Prevención de Riesgos Laborales para la Construcción y Obras Públicas y Privadas.' }
       ]
     },
-    { cls: '', h: 'Marco contextual actual', lines: '<b>SECTOR CONSTRUCCIÓN + QUITO + RIESGO</b><br>Importancia económica, accidentabilidad, costos por siniestros y presión regulatoria. Suárez Sánchez (2021) aborda la gestión de riesgos laborales en construcción desde una <b>perspectiva técnica y cuantitativa</b>, mediante simulación y predicción, demostrando que la accidentalidad puede analizarse sistemáticamente a partir de variables de riesgo para fortalecer la toma de decisiones.', ref: '(Zabala & Guamán, 2024; Toro et al., 2021; Suárez Sánchez, 2021; Nørgaard, 2018)' },
     {
-      cls: 'dark', h: 'Finalidad',
+      cls: '', h: 'Marco contextual actual',
+      mc: [
+        { t: 'Contexto del sector', s: 'Quito, Ecuador' },
+        { t: 'Presión regulatoria', s: 'Normativa vigente' },
+        { t: 'Gestión del riesgo laboral', s: 'Sector construcción' },
+        { t: 'Perspectiva técnica y cuantitativa', s: 'Suárez Sánchez (2021)' },
+        { t: 'Variables de riesgo', s: 'Datos de entrada' },
+        { t: 'Simulación de variables', s: 'Modelo predictivo' },
+        { t: 'Predicción de accidentalidad', s: 'Análisis sistemático' },
+        { t: 'Fortalecimiento', s: 'Toma de decisiones' }
+      ],
+      ref: '(Zabala & Guamán, 2024; Toro et al., 2021; Suárez Sánchez, 2021; Nørgaard, 2018)'
+    },
+    {
+      cls: 'dark', h: 'Aplicación',
       flow: [
         { kw: 'DISEÑO DE ESTRATEGIAS DE INGENIERÍA', det: 'mecanismo requerido por proyectos públicos y privados existentes y proyectados → dinamiza la economía del Ecuador' },
-        { kw: 'INTERÉS REGIONAL Y MUNDIAL', det: 'antecedente: tesis doctoral Suárez Sánchez (2021) — simulación y predicción aplicada a edificios, Colombia' },
+        { kw: 'INTERÉS REGIONAL Y MUNDIAL', det: 'antecedente: tesis doctoral Suárez Sánchez (2021) — simulación y predicción aplicada a edificios' },
         { kw: 'APORTE PRINCIPAL', det: 'accidentalidad en obra analizada sistemáticamente → fortalece la toma de decisiones en SST' }
       ]
-    }
+    },
+    { cls: '', h: '2.2 Marco Teórico — Técnicas aplicadas', nflow: true }
   ],
   theories: [
     { num: 'TEORÍA 01', name: 'Gestión basada en riesgo', key: '<b>IDENTIFICAR</b> → <b>EVALUAR</b> → <b>CONTROLAR</b>', accent: false, text: '<b>Criterios cuantificables</b> · toma de decisiones · reducción de siniestros · <b>OSH-PRM</b> · criticidad · asignación de recursos preventivos.', apa: '(Ganiyev et al., 2024; Sousa et al., 2015)' },
@@ -51,6 +65,5 @@ window.TEORIAS = {
   ],
   legalTitle: '2.4 Marco Legal y Normativo',
   legalText: '<b>D.E. 255-2024</b> · <b>AM-MDT-2024-196</b> · <b>AM-MDT-2025-122</b> · IESS / SGRT',
-  legalImage: 'ESPACIO PARA IMAGEN<br>&ldquo;Jerarquía de instrumentos aplicables en Ecuador&rdquo;<br>(ubicar aquí la figura del marco legal-normativo)',
-  footer: '<b>Lectura sugerida para defensa:</b> antecedentes → evolución normativa → contexto actual → cuatro teorías base → enfoque integrado → aplicación bajo normativa ecuatoriana vigente.'
+  legalImage: '<img src="assets/Imagen1.png" alt="Jerarquía de instrumentos aplicables en Ecuador">'
 };

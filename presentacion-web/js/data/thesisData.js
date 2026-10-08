@@ -5,12 +5,21 @@ window.THESIS = {
   programPlaceholder: "ESCUELA DE POSGRADO · DOCTORADO EN ……………………………………",
   doctorandoPlaceholder: "…………………………………",
   direccionPlaceholder: "…………………………………",
-  ciudadFechaPlaceholder: "…………………………………"
+  ciudadFechaPlaceholder: "…………………………………",
+  kickerPresentacion: "Presentación Tesis Doctoral",
+  programaDoctorado: "DOCTORADO EN DIRECCIÓN DE PROYECTOS",
+  candidato: "Jorge Alexander Bucheli García",
+  asesora: "Dra. Julia Ayuso, Ph.D."
 };
 
 window.SLIDES = [
   { id: 1, key: 'cover', label: 'Carátula' },
   { id: 2, key: 'problematizacion', label: 'Problematización' },
   { id: 3, key: 'objetivos', label: 'Objetivos' },
-  { id: 4, key: 'teorias', label: 'Teorías' }
+  { id: 4, key: 'teorias', label: 'Teorías' },
+  { id: 5, key: 'metodologia', label: 'Metodología' },
+  { id: 6, key: 'resultados', label: 'Resultados' },
+  { id: 7, key: 'resultados2', label: 'Resultados (2)' },
+  { id: 8, key: 'resultados3', label: 'Resultados (3)' },
+  { id: 9, key: 'ept', label: 'Transformación' }
 ];

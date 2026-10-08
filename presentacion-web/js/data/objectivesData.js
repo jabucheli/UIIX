@@ -1,5 +1,5 @@
 window.OBJETIVOS = {
-  title: 'Objetivos - Hipótesis',
+  title: 'Objetivos - hipótesis',
   generalHeader: 'OBJETIVO GENERAL',
   generalIcon: 'target',
   general: 'Proponer una <strong>estrategia metodológica de gestión de proyectos</strong> basada en <strong>controles de ingeniería</strong>, orientada a la mejora de las condiciones de <strong>seguridad laboral y prevención de riesgos</strong> en proyectos de construcción de la ciudad de <strong>Quito</strong>, en conformidad con la normativa ecuatoriana vigente entre <strong>2024 y 2026</strong>.',

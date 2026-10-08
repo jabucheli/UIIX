@@ -27,8 +27,30 @@
   function buildSlides() {
     frame.innerHTML = window.SLIDES.map(function (s) {
       var fn = window.slideRenderers[s.key];
-      return fn ? fn(window.THESIS, window.PROBLEMA, window.OBJETIVOS, window.TEORIAS) : '<section class="slide"><div style="padding:40px">Sin contenido</div></section>';
+      return fn ? fn(window.THESIS, window.PROBLEMA, window.OBJETIVOS, window.TEORIAS, window.METODOLOGIA, window.RESULTADOS) : '<section class="slide"><div style="padding:40px">Sin contenido</div></section>';
     }).join('');
+/* Logotipo en la esquina superior derecha de las láminas
+       (assets/logo.png, logo.bmp renderizado); en la carátula se omite por
+       llevar su propio logocaratula.png dentro de la banda negra. */
+    Array.prototype.forEach.call(frame.children, function (slide) {
+      if (!slide.classList.contains('slide-cover')) {
+        var img = document.createElement('img');
+        img.className = 'slide-logo';
+        img.src = 'assets/logo.png';
+        img.alt = 'Logotipo';
+        slide.appendChild(img);
+      }
+      /* Pie institucional: banda al borde inferior (solo visible en
+         pantalla completa; CSS conmuta body.is-fullscreen-presentation,
+         crece el marco para no alterar el contenido). */
+      var foot = document.createElement('div');
+      foot.className = 'slide-foot';
+      var fi = document.createElement('img');
+      fi.src = 'assets/logo-inf.png';
+      fi.alt = '';
+      foot.appendChild(fi);
+      slide.appendChild(foot);
+    });
   }
 
   function show(i) {
@@ -41,6 +63,7 @@
     for (var j = 0; j < slides.length; j++) {
       slides[j].classList.toggle('active', j === current);
     }
+    clearAllFocus();
     counterEl.textContent = (current + 1) + ' / ' + window.SLIDES.length;
     prevBtn.disabled = current === 0;
     nextBtn.disabled = current === window.SLIDES.length - 1;
@@ -60,7 +83,9 @@
 
   function fit() {
     var W = 2816;
-    var H = 1440;
+    /* En pantalla completa el marco crece 160px (la banda del pie
+       institucional, 720 -> 800), así que el área de proyección también. */
+    var H = document.body.classList.contains('is-fullscreen-presentation') ? 1600 : 1440;
     var stage = document.getElementById('stage');
     var s = Math.min(stage.clientWidth / W, stage.clientHeight / H);
     frame.style.transform = 'scale(' + s + ')';
@@ -76,14 +101,210 @@
     }
   }
 
+  /* Foco por clic: bloques 1-2 y ramas del mapa (slide 5), bloques 1-3 (slide 6),
+     la Fase 3 (slide 7: bloques NE, NP, NC, NR y NI, que abren el
+     cuadro de ER.docx que les corresponde, y la Fotografía 1, que aloja la
+     aplicación web de evaluación) y la secuencia de resultados de la prueba
+     piloto (slide 8: seis pasos que abren su gráfico, tabla o figura, y un
+     segundo clic sobre la imagen la proyecta a máximo tamaño) */
+  var FOCUS_SCOPES = [
+    { sel: 'md-body', cls: 'md-body--f', keys: ['1', '2', 'lt', 'lb', 'rt', 'rb', 'cb'] },
+    { sel: 'rs-body', cls: 'rs-body--f', keys: ['1', '1a', '1b', '2', '3', '2a', '2b', '3a', '3b', '3aimg', '3bimg'], parents: { '3aimg': '3a', '3bimg': '3b' } },
+    { sel: 'rs2-body', cls: 'rs2-body--f', keys: ['ne', 'np', 'nc', 'nr', 'ni', 'f1'] },
+    { sel: 'rs3-body', cls: 'rs3-body--f',
+      keys: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p1i', 'p2i', 'p3i', 'p4i', 'p5i', 'p6i'],
+      parents: { p1i: 'p1', p2i: 'p2', p3i: 'p3', p4i: 'p4', p5i: 'p5', p6i: 'p6' } }
+  ];
+
+  /* Niveles anidados: al cerrar un nivel con `parents[key]`, se vuelve a ese
+     nivel (p. ej. 3aimg -> 3a) en vez de a la pantalla inicial. */
+  function parentOf(key, def) {
+    return (def.parents || {})[key] || null;
+  }
+
+  function activeSlide() {
+    return frame.querySelector('.slide.active');
+  }
+
+  function scopeOf(target) {
+    if (!target || !target.closest) return null;
+    for (var i = 0; i < FOCUS_SCOPES.length; i++) {
+      var el = target.closest('.' + FOCUS_SCOPES[i].sel);
+      if (el) return { el: el, def: FOCUS_SCOPES[i] };
+    }
+    return null;
+  }
+
+  /* Sombra de la pantalla original: clona el layout en reposo y lo muestra
+     atenuado detrás del bloque ampliado. */
+  var GHOST_CFG = {
+    'md-body': { nodes: ['.md-top', '.md-panel--mapa'], pad: '6px 20px 12px', gap: '8px' },
+    'rs-body': { nodes: ['.rs-cols'], pad: '4px 20px 12px', gap: '8px' },
+    'rs2-body': { nodes: ['.rs2-cols'], pad: '4px 20px 12px', gap: '8px' },
+    'rs3-body': { nodes: ['.rs3-cols'], pad: '4px 20px 12px', gap: '8px' }
+  };
+
+  function ghostSlide(el) {
+    /* El ghost va siempre en la lámina que contiene el scope, no en la que
+       esté activa: si no, un foco creado sobre una lámina oculta clona su
+       contenido dentro de la lámina visible. */
+    if (el && el.closest) {
+      var own = el.closest('.slide');
+      if (own) return own;
+    }
+    return activeSlide();
+  }
+
+  function buildGhost(el, def) {
+    var slide = ghostSlide(el);
+    if (!slide) return;
+    var ghost = document.createElement('div');
+    ghost.className = 'scope-ghost';
+    ghost.setAttribute('aria-hidden', 'true');
+    if ('inert' in ghost) { ghost.inert = true; }
+    var cfg = GHOST_CFG[def.sel];
+    var inner = document.createElement('div');
+    inner.className = 'scope-ghost-inner';
+    inner.style.padding = cfg.pad;
+    inner.style.gap = cfg.gap;
+    cfg.nodes.forEach(function (sel) {
+      var node = el.querySelector(sel);
+      if (!node) return;
+      var copy = node.cloneNode(true);
+      copy.removeAttribute('id');
+      copy.querySelectorAll('[id]').forEach(function (x) { x.removeAttribute('id'); });
+      copy.querySelectorAll('[tabindex]').forEach(function (x) { x.removeAttribute('tabindex'); });
+      copy.querySelectorAll('button').forEach(function (b) { b.setAttribute('tabindex', '-1'); });
+      inner.appendChild(copy);
+    });
+    ghost.appendChild(inner);
+    var off = el.offsetLeft;
+    ghost.style.left = off + 'px';
+    ghost.style.top = el.offsetTop + 'px';
+    ghost.style.width = el.offsetWidth + 'px';
+    ghost.style.height = el.offsetHeight + 'px';
+    slide.appendChild(ghost);
+  }
+
+  function showGhost(el, def) {
+    var slide = ghostSlide(el);
+    if (!slide) return;
+    var ghost = slide.querySelector('.scope-ghost');
+    if (!ghost) { buildGhost(el, def); ghost = slide.querySelector('.scope-ghost'); }
+    if (ghost) { ghost.classList.add('is-on'); }
+  }
+
+  function hideGhost(el) {
+    var slide = ghostSlide(el);
+    if (!slide) return;
+    var ghost = slide.querySelector('.scope-ghost');
+    if (ghost) { slide.removeChild(ghost); }
+  }
+
+  function setScopeFocus(el, def, key) {
+    if (!el || !def) return;
+    hideGhost(el);
+    def.keys.forEach(function (k) { el.classList.remove(def.cls + k); });
+    if (key) {
+      el.classList.add(def.cls + key);
+      el.setAttribute('data-focus', key);
+      showGhost(el, def);
+    } else {
+      el.removeAttribute('data-focus');
+    }
+    /* Aviso a la lámina de qué foco quedó abierto (o ninguno), para que cada
+       bloque pueda montar y desmontar lo que necesite. Se lanza al final, con
+       el ghost ya construido, para que la copia atenuada salga sin el iframe.
+       `bubbles` para que lo escuche quien esté en `document`, no solo el
+       propio scope. */
+    el.dispatchEvent(new CustomEvent('slide:focus', {
+      detail: { key: key || '', scope: def.sel }, bubbles: true
+    }));
+  }
+
+  function clearAllFocus() {
+    var slide = activeSlide();
+    if (!slide) return;
+    FOCUS_SCOPES.forEach(function (def) {
+      var el = slide.querySelector('.' + def.sel);
+      if (el) setScopeFocus(el, def, '');
+    });
+  }
+
+  function currentFocus() {
+    var slide = activeSlide();
+    if (!slide) return null;
+    for (var i = 0; i < FOCUS_SCOPES.length; i++) {
+      var el = slide.querySelector('.' + FOCUS_SCOPES[i].sel);
+      if (el && el.getAttribute('data-focus')) {
+        return { el: el, def: FOCUS_SCOPES[i], key: el.getAttribute('data-focus') };
+      }
+    }
+    return null;
+  }
+
+  function toggleFocus(target) {
+    var found = scopeOf(target);
+    if (!found) return false;
+    var key = target.getAttribute('data-focus');
+    if (!key) return false;
+    var was = found.el.getAttribute('data-focus') === key;
+    clearAllFocus();
+    if (was) {
+      var p = parentOf(key, found.def);
+      if (p) setScopeFocus(found.el, found.def, p);
+    } else {
+      setScopeFocus(found.el, found.def, key);
+    }
+    return true;
+  }
+
+  /* Cierra el foco actual; si es un nivel anidado, vuelve a su nivel padre. */
+  function closeOrStep() {
+    var cf = currentFocus();
+    if (!cf) return;
+    var p = parentOf(cf.key, cf.def);
+    if (p) setScopeFocus(cf.el, cf.def, p);
+    else clearAllFocus();
+  }
+
+  function onFrameClick(e) {
+    var found = scopeOf(e.target);
+    if (!found) {
+      closeOrStep();
+      return;
+    }
+    var item = e.target.closest('[data-focus]');
+    if (!item || item === found.el) {
+      closeOrStep();
+      return;
+    }
+    toggleFocus(item);
+  }
+
   function onKey(e) {
     if (e.key === 'ArrowRight') { e.preventDefault(); goto(current + 1); }
     else if (e.key === 'ArrowLeft') { e.preventDefault(); goto(current - 1); }
     else if (e.key === 'Home') { e.preventDefault(); goto(0); }
     else if (e.key === 'End') { e.preventDefault(); goto(window.SLIDES.length - 1); }
+    else if (e.key === 'Escape') {
+      var cf = currentFocus();
+      if (cf) { e.preventDefault(); closeOrStep(); }
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      var active = document.activeElement;
+      var slideEl = activeSlide();
+      /* Solo se activa lo que pertenece a la lámina visible: el foco del
+         teclado puede quedarse en una lámina ya oculta al cambiar de diapositiva. */
+      if (active && active.getAttribute && active.getAttribute('data-focus') &&
+        slideEl && slideEl.contains(active)) {
+        e.preventDefault();
+        toggleFocus(active);
+      }
+    }
   }
 
   function onFullscreen() {
+    document.body.classList.toggle('is-fullscreen-presentation', !!document.fullscreenElement);
     fsBtn.innerHTML = window.Icons.svg(document.fullscreenElement ? 'compress' : 'expand', 18);
     fit();
   }
@@ -97,6 +318,7 @@
     nextBtn.addEventListener('click', function () { goto(current + 1); });
     fsBtn.addEventListener('click', toggleFullscreen);
     document.addEventListener('keydown', onKey);
+    frame.addEventListener('click', onFrameClick);
     window.addEventListener('resize', fit);
     document.addEventListener('fullscreenchange', onFullscreen);
   }

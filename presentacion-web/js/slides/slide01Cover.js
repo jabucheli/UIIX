@@ -1,29 +1,29 @@
 (function () {
   window.slideRenderers = window.slideRenderers || {};
 
+  /* Carátula: réplica del slide 1 de Ejemplo.pptx (texto y forma).
+     Banda negra superior con logocaratula.png centrado, textos centrados en
+     el mismo orden (Presentación Tesis Doctoral / título / DOCTORADO… /
+     candidato / asesora) y acentos: franjas verticales a la izquierda,
+     tira abstracta rojo/verde a la derecha y etiqueta vertical al pie. */
   window.slideRenderers.cover = function (thesis) {
-    var sil = '<div class="sil-a">' + window.Icons.svg('building', 90, '') + '</div>' +
-              '<div class="sil-b">' + window.Icons.svg('building', 70, '') + '</div>' +
-              '<div class="sil-c">' + window.Icons.svg('building', 116, '') + '</div>';
-
     return '<section class="slide slide-cover" data-slide="1">' +
       '<div class="cover-band">' +
-        window.Icons.emblem(52) +
-        '<div class="cover-univ">' + thesis.universityPlaceholder + '</div>' +
-        '<div class="cover-sub">' + thesis.programPlaceholder + '</div>' +
+        '<img class="cover-logo" src="assets/logocaratula.png" alt="">' +
       '</div>' +
       '<div class="cover-body">' +
-        '<div class="cover-kicker">TESIS DOCTORAL</div>' +
+        '<div class="cover-kicker">' + thesis.kickerPresentacion + '</div>' +
         '<h1 class="cover-title">' + thesis.title + '</h1>' +
-        '<div class="cover-rule"></div>' +
-        '<div class="cover-meta">' +
-          '<div class="cover-meta-row"><span class="m-label">PRESENTA</span><span class="m-line">' + thesis.doctorandoPlaceholder + '</span></div>' +
-          '<div class="cover-meta-row"><span class="m-label">DIRECCIÓN</span><span class="m-line">' + thesis.direccionPlaceholder + '</span></div>' +
-          '<div class="cover-meta-row"><span class="m-label">CIUDAD Y FECHA</span><span class="m-line">' + thesis.ciudadFechaPlaceholder + '</span></div>' +
-        '</div>' +
-        '<div class="cover-sil">' + sil + '</div>' +
+        '<div class="cover-prog">' + thesis.programaDoctorado + '</div>' +
+        '<div class="cover-candidato"><span class="c-label">Candidato:</span> ' + thesis.candidato + '</div>' +
+        '<div class="cover-asesora"><span class="c-label">Asesora:</span> ' + thesis.asesora + '</div>' +
       '</div>' +
-      '<div class="cover-foot"><div class="c-red"></div><div class="c-line"></div></div>' +
+      '<div class="cover-accents" aria-hidden="true">' +
+        '<span class="cacc-red"></span>' +
+        '<span class="cacc-green"></span>' +
+        '<span class="cacc-black"></span>' +
+        '<img class="cacc-abstract" src="assets/cover-abstract.png" alt="">' +
+      '</div>' +
     '</section>';
   };
 })();
