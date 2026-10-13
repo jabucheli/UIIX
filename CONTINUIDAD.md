@@ -1,9 +1,9 @@
 # Continuidad — Presentación web de tesis doctoral
 
 > Documento de trabajo autónomo para retomar el trabajo **en este computador o en otro**.
-> Alcance actual: **los 9 slides de la presentación** de `presentacion-web` + integración con la app
+> Alcance actual: **los 11 slides de la presentación** de `presentacion-web` + integración con la app
 > de `D:\ejemplo\tesis\0` (desde el bloque Riesgo del slide 7).
-> Última actualización: **2026-10-07**.
+> Última actualización: **2026-10-10**.
 
 ---
 
@@ -11,23 +11,23 @@
 
 | | |
 |---|---|
-| **Reanudar (este equipo)** | `cd tools` y ejecutar **`reanudar.cmd`** → comprueba Node/Chrome/jsdom/app hermana, verifica todo (**54/54 + 549/549**), genera capturas, y muestra el estado git de los dos repos y dónde sigue la doc. Variantes: `reanudar.cmd shot` (además genera los PNG) y `reanudar.cmd app` (además ejecuta las **52/52** pruebas de la app). Ver §17. |
-| **Guardar / llevar a otro equipo** | `cd tools` y **`traspaso.cmd paquete`** → comprueba el **inventario** completo (`verificar-inventario.js`, manifiesto en `tools/inventario.json`), avisa de lo que git no ha guardado y genera el zip portable `tools\out\traspaso\tes-tesis-AAAAMMDD-HHMM.zip` (tes + tesis hermana + respaldos JSON + historial git + LEEME). Procedimiento completo en `TRASPASO.md`. |
+| **Reanudar (este equipo)** | `cd tools` y ejecutar **`reanudar.cmd`** → comprueba Node/Chrome/jsdom/app hermana, verifica todo (**54/54 + 712/712**), genera capturas, y muestra el estado git de los dos repos y dónde sigue la doc. Variantes: `reanudar.cmd shot` (además genera los PNG) y `reanudar.cmd app` (además ejecuta las **52/52** pruebas de la app). Ver §17. |
+| **Guardar / llevar a otro equipo** | `cd tools` y **`traspaso.cmd paquete`** → comprueba el **inventario** completo (`verificar-inventario.js`, manifiesto en `tools/inventario.json`), avisa de lo que git no ha guardado y genera el zip portable `tools\out\traspaso\presentacion-tesis-AAAAMMDD-HHMM.zip` (presentacion + tesis hermana + respaldos JSON + historial git + LEEME). Procedimiento completo en `TRASPASO.md`. |
 
-**Regla de oro para mover el trabajo:** `tes` y `tesis` son carpetas **hermanas**
+**Regla de oro para mover el trabajo:** `presentacion` y `tesis` son carpetas **hermanas**
 (al mismo nivel) y viajan **juntas**: la presentación embebe la app `tesis\0`
 desde el bloque Riesgo del slide 7. El paquete de `traspaso.cmd paquete` lleva
 ambas.
-| Estado | **Los 9 slides están desarrollados y verificados**: carátula (réplica del slide 1 de `Ejemplo.pptx`), problematización, objetivos+hipótesis, marco teórico, metodología (5 fases + mapa circular con zoom por clic), resultados (3 columnas + sub-bloques + nivel 2 de imágenes), resultados (2) (flujograma NTP 330 + cuadros de `ER.docx` + embebido de la app de `tesis/0`), resultados (3) (6 resultados + ART + galería de fotos) y **EPT** (diagrama esquemático de 5 franjas aplicado **muy detalladamente** según `EPTransf.md`: lógica de transformación arriba, franja central Fundamento → Etapa 1 → Etapa 2 → Etapa 3 → Propósito, resultado esperado y recursos clave, con la paleta verde/rojo del deck). Ver §18-§26 para la historia reciente. |
+| Estado | **Los 11 slides están desarrollados y verificados**: carátula (réplica del slide 1 de `Ejemplo.pptx`), problematización, objetivos+hipótesis, marco teórico, metodología (5 fases + mapa circular con zoom por clic), resultados (3 columnas + sub-bloques + nivel 2 de imágenes), resultados (2) (flujograma NTP 330 + cuadros de `ER.docx` + embebido de la app de `tesis/0`), resultados (3) (6 resultados + ART + galería de fotos) y **EPT** (diagrama esquemático de 5 franjas aplicado **muy detalladamente** según `EPTransf.md`: secuencia de transformación arriba, franja central Fundamento → Etapa 1 → Etapa 2 → Etapa 3 → Propósito, resultado esperado y recursos clave, con la paleta verde/rojo del deck; banda central al **75 % de alto (309 px)**, conjunto **centrado verticalmente**, títulos de etapa **+20 %** y flechas centrales **verde → rojo → verde → rojo**, §27-§28; y **clic en cada etapa → imagen de detalle** `pt1..pt4.png` en primer plano con aparición sencilla (proyección de escala `scale(.5→1)` al abrir y de más a menos al cerrar, sin giro), nivel 2 en Etapa 3 (pt3 → pt4) y clic fuera/ESC → pantalla principal, con el slide atenuado detrás, §29; y **nivel 2 en Etapa 2**: clic sobre pt2 → `riesgos1.png` + `riesgos2.png` lado a lado, §33); y **Validación** (slide 10 nuevo, §31: mapa mental del proceso Delphi con núcleo «Validación de la propuesta», panel de 8 expertos, tres rondas —verde/rojo/verde— y banda de síntesis, con **clic en cada ronda o en la síntesis** → modal con su tabla y comparativa final; y mapa a **altura natural con el conjunto centrado en vertical**, §32); y **Conclusiones** (slide 11 nuevo, §34: seis bloques encadenados 1→6 —verde/rojo, **el bloque 6 en rojo**— con conectores radiales hacia el nodo central «CONCLUSIONES» y franja de aporte central, códigos normativos como chips y la validación Delphi como cajas; **interacción en dos pasos**: 1.er clic → el bloque se **agranda y centra**, 2.º clic → pantalla con la conclusión completa del bloque). Ver §18-§34 para la historia reciente. |
 | Carátula (slide 1) | **Reescrita en §23**: banda negra `#262626` de 211px con `logocaratula.png` centrado (430px, `aspect-ratio:306/65`), textos del ejemplo ("Presentación Tesis Doctoral", título, "DOCTORADO EN DIRECCIÓN DE PROYECTOS", "Candidato: Jorge Alexander Bucheli García", "Asesora: Dra. Julia Ayuso, Ph.D."), franjas verticales a la izquierda, tira abstracta rojo/verde a la derecha **atenuada al 50%** (`opacity: 0.5`, §24). **Sin** el logotipo de `logo.bmp` y **sin** la etiqueta "ETIQUETA". |
 | Encabezado | Pestañas de navegación con el índice; **retirado el texto** "Tesis Doctoral · Gestión de proyectos…" (`.brand-text`), queda solo el punto verde de la izquierda. |
 | Logo superior | `logo.bmp` convertido a `assets/logo.png` en la **esquina superior derecha de los slides 2-9** (no en la carátula), `top:8px; right:12px; width:140px`. Ver §21. |
 | Pie institucional | `logo-inf.png` → `assets/logo-inf.png` (1316→1119px, −15%) **solo en pantalla completa**: banda de 80px en flujo al pie del marco (720→800px) que NO desplaza el contenido; `align-items:flex-end` lo apoya en el borde inferior. Ver §22. |
 | Paleta | Verde `#006E49` · Rojo `#C0242A` · negros/grises de `Ejemplo.pptx` (banda `#262626`, textos `#4C4A4F`/`#595959`, verde de programa `#006E49`). |
-| Verificación | **`cd tools && reanudar.cmd`** (una orden: entorno + todo + estado git); atajo: `verify-all.cmd shot`. Objetivo actual: **54/54 (map) + 549/549 (focus, los 9 slides) + `TODO OK`**. |
-| Capturas | `tools/out/slide01_cover.png` y `slide01_cover_fs.png` (carátula normal/pantalla completa) · `slide_fs_foot.png` (pie en pantalla completa) · `slide05_map.png`, `md_shot*.png` · `slide06*.png` · `slide07*.png` · `slide08*.png` · `slide09.png` (EPT) · `res2_shot*.png` · `res3_shot*.png` |
-| Revisar a ojo (no las puede leer el asistente) | `slide01_cover.png` (banda negra + logos + tira al 50%), `slide_fs_foot.png` (pie 1119px al borde), `slide09.png` (esquema EPT), y las capturas de logos en los slides 2-9. El usuario impone el diseño; el asistente mide geometría con Chrome y el usuario valida lo visual. |
-| Pendiente | Nada bloqueado. Próximos pasos típicos: revisión visual del usuario de las capturas, ajustes de textos/tamaños, nuevos contenidos por slide. |
+| Verificación | **`cd tools && reanudar.cmd`** (una orden: entorno + todo + estado git); atajo: `verify-all.cmd shot`. Objetivo actual: **54/54 (map) + 712/712 (focus, los 11 slides) + `TODO OK`**. |
+| Capturas | `tools/out/slide01_cover.png` y `slide01_cover_fs.png` (carátula normal/pantalla completa) · `slide_fs_foot.png` (pie en pantalla completa) · `slide05_map.png`, `md_shot*.png` · `slide06*.png` · `slide07*.png` · `slide08*.png` · `slide09.png` + `slide09_f1/f2/f3/f3img.png` + `slide09_f2img.png` + `slide09_frs.png` (EPT y sus detalles) · `slide10.png` + `slide10_fr1/fr2/fr3/frn.png` (Validación y sus modales) · `slide11.png` + `slide11_zoom1..6.png` (bloque agrandado) + `slide11_fb1..6.png` (conclusión) [Conclusiones] · `res2_shot*.png` · `res3_shot*.png` |
+| Revisar a ojo (no las puede leer el asistente) | `slide01_cover.png` (banda negra + logos + tira al 50%), `slide_fs_foot.png` (pie 1119px al borde), `slide09.png` (esquema EPT) y `slide09_f1/f2/f3/f3img.png` (imágenes de detalle al hacer clic en cada Etapa) + `slide09_f2img.png` (riesgos1 + riesgos2 en paralelo, §33), `slide10.png` (mapa de validación) y `slide10_fr1/fr2/fr3/frn.png` (modales de ronda y tabla comparativa), las capturas de logos en los slides 2-11, más `slide11.png` + `slide11_zoom1..6.png` (el bloque agrandado y centrado) + `slide11_fb1..6.png` (la conclusión) del slide de Conclusiones. El usuario impone el diseño; el asistente mide geometría con Chrome y el usuario valida lo visual. |
+| Pendiente | Nada bloqueado. Próximos pasos típicos: revisión visual del usuario de las capturas (en especial del slide 11: `slide11.png`, `slide11_zoom1..6.png` y `slide11_fb1..6.png`), ajustes de textos/tamaños, nuevos contenidos por slide. Pendiente aparte: transcribir a HTML las imágenes `pt1..pt5` del slide 9 (falta fuente para `pt5`). |
 
 ---
 
@@ -50,7 +50,7 @@ Lo que hay que llevar (clone/zip de la carpeta del repo): **todo EXCEPTO** `tool
 `presentacion-web/assets/`** (ref-norm.png, c-cheq.png, procesos1/2.png, riesgos1/2.png,
 Imagen1.png) — si el clone no las trae, las fases/sub-bloques mostrarán «Imagen pendiente».
 
-> **Atajo:** `traspaso.cmd paquete` genera un único `.zip` con `tes` y la app hermana
+> **Atajo:** `traspaso.cmd paquete` genera un único `.zip` con `presentacion` y la app hermana
 > `tesis` listo para otro equipo; el procedimiento completo está en `TRASPASO.md`.
 > La carpeta hermana `tesis` hay que llevarla **sí o sí** (slide 7 y `reanudar.cmd`
 > la requieren todo el tiempo).
@@ -67,7 +67,7 @@ npm install            # instala jsdom ^24 (única dependencia)
 #    En macOS/Linux (los scripts son .cmd; usa los comandos sueltos):
 node --check ../presentacion-web/js/app.js   # y demás JS (verify-all los lista)
 node map_check.js                            # 54 checks jsdom (slide 5)
-node focus_check.js                          # 549 checks jsdom (los 9 slides)
+node focus_check.js                          # 712 checks jsdom (los 11 slides)
 node gen_map_shot.js && node gen_heights.js  # harness slide 5
 node gen_results_heights.js                  # harness slide 6 (+ copia assets a out/)
 # capturas (opcional): apuntar CHROME a la ruta local y usar
@@ -91,18 +91,18 @@ completa en la cabecera.
 | Archivo | Qué hace |
 |---|---|
 | `verify-all.cmd` | Orquestador: `node --check` × 8 (incluye `js/data/erTables.js`) → `map_check.js` → `focus_check.js` → `gen_map_shot.js` → `gen_heights.js` → `gen_results_heights.js` → `gen_slide7_shot.js` → captura opcional (incluye `slide07*.png` y `res2_shot*.html`). |
-| `reanudar.cmd` | **Punto de entrada al retomar el trabajo**: [1] entorno (Node, jsdom con `npm install` automático, Chrome, app hermana `../../tesis/0`), [2] `verify-all`, [3] opcional `app` → `app_cdp.js --tab=pruebas --run` (52/52), [4] `git status` de `tes` y `tesis`, [5] rutas de doc y comandos. Uso: `reanudar.cmd` · `reanudar.cmd shot` · `reanudar.cmd app` · `reanudar.cmd shot app` (ver §17). |
-| `verificar-inventario.js` | **Comprueba el inventario** (`tools/inventario.json`): que existan todos los archivos y carpetas requeridos de `tes` **y** de la hermana `tesis`, avisa de la basura y de lo que git tiene sin commitear. `node verificar-inventario.js`. |
+| `reanudar.cmd` | **Punto de entrada al retomar el trabajo**: [1] entorno (Node, jsdom con `npm install` automático, Chrome, app hermana `../../tesis/0`), [2] `verify-all`, [3] opcional `app` → `app_cdp.js --tab=pruebas --run` (52/52), [4] `git status` de `presentacion` y `tesis`, [5] rutas de doc y comandos. Uso: `reanudar.cmd` · `reanudar.cmd shot` · `reanudar.cmd app` · `reanudar.cmd shot app` (ver §17). |
+| `verificar-inventario.js` | **Comprueba el inventario** (`tools/inventario.json`): que existan todos los archivos y carpetas requeridos de `presentacion` **y** de la hermana `tesis`, avisa de la basura y de lo que git tiene sin commitear. `node verificar-inventario.js`. |
 | `traspaso.cmd` | **Guardado y traspaso**: `traspaso.cmd` (inventario + git), `traspaso.cmd paquete` (además genera el zip portable en `tools\out\traspaso\`), `traspaso.cmd todo` (paquete + `verify-all`). Todo el procedimiento en `TRASPASO.md`. |
-| `traspaso-empaquetar.ps1` | Empaquetador que llama `traspaso.cmd` (PowerShell, sin dependencias): comprime `tes` + `tesis` + respaldos JSON + historial git en `tools\out\traspaso\.` |
+| `traspaso-empaquetar.ps1` | Empaquetador que llama `traspaso.cmd` (PowerShell, sin dependencias): comprime `presentacion` + `tesis` + respaldos JSON + historial git en `tools\out\traspaso\.` |
 | `map_check.js` | **54 checks** en jsdom: estructura, posiciones, colores, insignias, textos prohibidos, ruta, nota, higiene. No necesita Chrome. |
-`focus_check.js` | **383 checks** en jsdom de la interacción (mínimo histórico; **hoy el total es 549** y desde §21 también comprueba el logo superior de los slides 2-9, el pie de pantalla completa, los contenidos/forma de la carátula de §23-§25 y el esquema EPT del §26): foco por clic/teclado/ESC del slide 6 (**sub-bloques 1a/1b/2a/2b, fases 3a/3b y nivel 2 3aimg/3bimg** + ghost), del slide 5 (bloques 1-2 y 5 ramas + ghost) y del slide 7 (**página seccionada**: banda del flujograma al 18.75% con los 7 nodos, banda inferior con los dos recuadros de fotos, **los cinco cuadros de `ER.docx`**: cinco objetivos `data-focus` ne/np/nc/nr/ni, `window.ER_TABLES` cargado, los cinco cuadros ocultos en reposo, `Enter` y clic abriendo **solo** el cuadro del bloque pulsado, severidad rojo/verde, cierre con segundo clic y con `ESC`/clic fuera, ghost al abrir y ausente al cerrar, el CSS del crecimiento/encogimiento, **el centrado de todas las celdas**, **la matriz NR con sus tres ejes rotulados** — banner «Nivel de Probabilidad (NP)» con `colspan` de 4, rótulo vertical «Nivel de Consecuencias (NC)» con `rowspan` de 4, y los nombres del NP en las columnas y del NC en las filas — y **el bloque Riesgo abre la app de `tesis/0`**: `data-focus="f1"`, aria-label «Abrir la aplicación de evaluación de riesgos», iframe perezoso con `src` y `title` correctos, los 7 bloques ocultos con efecto (`opacity: 0; visibility: hidden`), fondo blanco opaco del recuadro abierto delante del ghost (`z-index: 2` sobre `z-index: 0`), y los recuadros de foto sin `data-focus`/`tabindex`/`role`) y **del slide 8** (`RESULTADOS3`: seis pasos `p1`…`p6` en secuencia con sus seis imágenes en disco y en orden, cifras resumen, verde/rojo, clic abre un único resultado y abre el de ese paso, cierre con segundo clic y `ESC`, ghost al abrir, resumen `.rs3-idle` visible en reposo y oculto al abrir, y el CSS de `.rs3-body`/`.rs3-panel`) y **del slide 9** (`EPT`: título "Estructura de la propuesta de transformación", subtítulo de EPTransf.md (secuencia metodológica orientada al fortalecimiento de la gestión preventiva en proyectos de construcción de edificaciones e infraestructura básica en Quito), el registro en `SLIDES`, las **5 franjas** de la lámina, la franja de lógica con sus 4 nodos, el central con Fundamento/Propósito y las 3 etapas (nombres exactos de EPTransf con su segunda línea, 4+4+5 viñetas exactas, cápsulas `NTP 324`/`NTP 330` solo en las etapas 2-3, los 3 grupos de "Recursos requeridos" con 5 pill cada uno y las 3 franjas de salida), el resultado esperado con sus 3 nodos, los 7 ítems de recursos clave, y el CSS verde/rojo (alternancia) / tintes EPTransf / `flex:1` del cuerpo). Inyecta `css/styles.css` para poder usar `getComputedStyle` (jsdom no carga el `<link>`). No necesita Chrome. |
+`focus_check.js` | **383 checks** en jsdom de la interacción (mínimo histórico; **hoy el total es 654** y desde §21 también comprueba el logo superior de los slides 2-10, el pie de pantalla completa, los contenidos/forma de la carátula de §23-§25 y el esquema EPT del §26): foco por clic/teclado/ESC del slide 6 (**sub-bloques 1a/1b/2a/2b, fases 3a/3b y nivel 2 3aimg/3bimg** + ghost), del slide 5 (bloques 1-2 y 5 ramas + ghost) y del slide 7 (**página seccionada**: banda del flujograma al 18.75% con los 7 nodos, banda inferior con los dos recuadros de fotos, **los cinco cuadros de `ER.docx`**: cinco objetivos `data-focus` ne/np/nc/nr/ni, `window.ER_TABLES` cargado, los cinco cuadros ocultos en reposo, `Enter` y clic abriendo **solo** el cuadro del bloque pulsado, severidad rojo/verde, cierre con segundo clic y con `ESC`/clic fuera, ghost al abrir y ausente al cerrar, el CSS del crecimiento/encogimiento, **el centrado de todas las celdas**, **la matriz NR con sus tres ejes rotulados** — banner «Nivel de Probabilidad (NP)» con `colspan` de 4, rótulo vertical «Nivel de Consecuencias (NC)» con `rowspan` de 4, y los nombres del NP en las columnas y del NC en las filas — y **el bloque Riesgo abre la app de `tesis/0`**: `data-focus="f1"`, aria-label «Abrir la aplicación de evaluación de riesgos», iframe perezoso con `src` y `title` correctos, los 7 bloques ocultos con efecto (`opacity: 0; visibility: hidden`), fondo blanco opaco del recuadro abierto delante del ghost (`z-index: 2` sobre `z-index: 0`), y los recuadros de foto sin `data-focus`/`tabindex`/`role`) y **del slide 8** (`RESULTADOS3`: seis pasos `p1`…`p6` en secuencia con sus seis imágenes en disco y en orden, cifras resumen, verde/rojo, clic abre un único resultado y abre el de ese paso, cierre con segundo clic y `ESC`, ghost al abrir, resumen `.rs3-idle` visible en reposo y oculto al abrir, y el CSS de `.rs3-body`/`.rs3-panel`) y **del slide 9** (`EPT`: título "Estructura de la propuesta de transformación", subtítulo de EPTransf.md (secuencia metodológica orientada al fortalecimiento de la gestión preventiva en proyectos de construcción de edificaciones e infraestructura básica en Quito), el registro en `SLIDES`, las **5 franjas** de la lámina, la franja de lógica con sus 4 nodos, el central con Fundamento/Propósito y las 3 etapas (nombres exactos de EPTransf con su segunda línea, 4+4+5 viñetas exactas, cápsulas `NTP 324`/`NTP 330` solo en las etapas 2-3, los 3 grupos de "Recursos requeridos" con 5 pill cada uno y las 3 franjas de salida), el resultado esperado con sus 3 nodos, los 7 ítems de recursos clave, y el CSS verde/rojo (alternancia) / tintes EPTransf / `flex:1` del cuerpo). Inyecta `css/styles.css` para poder usar `getComputedStyle` (jsdom no carga el `<link>`). No necesita Chrome. |
 | `gen_map_shot.js` | Escribe `out/map_shot.html` para la captura. |
 | `gen_heights.js` | Escribe `out/heights.html` con un `<pre id="report">` de geometría del slide 5: estado normal detallado + auditoría de **9 estados** (normal, f1, f2, las 5 ramas, restaurado). También escribe `out/md_shot*.html`. |
 | `gen_results_heights.js` | Igual para el **slide 6**: escribe `out/results_heights.html` y `out/results_shot*.html` (anchos de columna, clips, holgura por panel, líneas por ítem y por celda). Audita **13 estados** (reposo, f1, f1a, f1b, f2, f3, f2a, f2b, **f3a, f3b, f3aimg, f3bimg**, restaurado). |
 | `gen_slide8_shot.js` | Audita el **slide 8**: `out/res3_heights.html` (reposo), `out/res3_focos.html` (los seis focos **y sus seis niveles 2**, 12 estados) y `out/res3_shot.html` + `out/res3_shot_fp1..fp6.html` y `fp1i..fp6i.html`. Los informes se lanzan en `load` para que las imagenes tengan `naturalWidth`. Encabezado 1408×76, cuerpo 1408×644, banda de pasos 1368×118 con 6 nodos de 209×102 y 5 conectores. En reposo: `.rs3-idle` 1368×486 y pantalla 1368×0. Con foco: resumen oculto y un panel 1368×498 (imagen centrada `object-fit: contain`, caja 1346×445). En el nivel 2 (`pNi`): secuencia y resumen ocultos, panel 1368×628 y caja de imagen 1350×610, cursor `zoom-out`. **0 clip/tx/OVERFLOW** en los trece estados. Reporta también `panel -` cuando ningún panel queda visible: así se detecta al vuelo un selector de clase mal escrito. |
 | `gen_slide7_shot.js` | Audita el **slide 7**: `out/res2_heights.html` (reposo), `out/res2_focos.html` (seis focos) y `out/res2_shot.html` + `out/res2_shot_f{ne,np,nc,nr,ni,f1}.html`. Encabezado 1408×76, cuerpo 1408×644, flujo 1368×118 y 7 nodos de 166×118. En reposo: fotos 1368×486 y recuadros 677×486, sin iframe. Con tabla: fotos colapsadas y un cuadro 1368×486. Con `f1`: foto 1352×486 e iframe 1338×431 (`app-rect 27 259 1338 431`). **0 clip/tx/OVERFLOW** en los siete estados. Resuelve a absoluta la ruta de la app (`path.resolve(ROOT, …fotos[0].app.src)`) y falla si falta `tesis/0`. Excluye el ghost y los elementos colapsados al medir. |
-| `gen_ept_shot.js` | Audita el **slide 9 (EPT)**: escribe `out/ept_shot.html` con un `#report` fuera de pantalla (`left:-9999px`). Cabecera 1408×92 (subtítulo de 2 líneas), cuerpo 1408×628, franjas lógica 1364×73 / central 1364×412 / resultado 1364×70 / recursos 1364×30; 3 tarjetas de 305×412 (anchos iguales 3/3), 4 nodos de lógica, 3 nodos de resultado, 7 ítems de recursos, logo y pie presentes. **0 clip/tx/OVERFLOW**. Inyecta el logo y el pie (oculto sin pantalla completa) como `app.js`. |
+| `gen_ept_shot.js` | Audita el **slide 9 (EPT)**: escribe `out/ept_shot.html` con un `#report` fuera de pantalla (`left:-9999px`). Cabecera 1408×92 (subtítulo de 2 líneas), cuerpo 1408×628, franjas lógica 1364×75 / central 1364×309 / resultado 1364×73 / recursos 1364×28; 3 tarjetas de 316×309 (anchos iguales 3/3), 4 nodos de lógica, 3 nodos de resultado, 7 ítems de recursos, logo y pie presentes. **0 clip/tx/OVERFLOW**. La franja central tiene **alto fijo de 309 px** (el 75 % de los 412 px anteriores) y el resultado esperado va **pegado a continuación** (sin `margin-top: auto`); los laterales Fundamento/Propósito la igualan con `align-items: stretch` (ver §27). Inyecta el logo y el pie (oculto sin pantalla completa) como `app.js`. |
 | `png_stats.js` | Lee un PNG de Chrome (decodifica IDAT con `zlib`, sin dependencias) e informa de **cuántos colores distintos y qué porcentaje de píxeles pintados** hay en un rectángulo. Comprueba que el iframe cargó aunque su DOM sea de otro origen. La captura actual, con fondo sólido, da **7 980 colores y 32,8 % pintado** en `54 518 2676 862`. `uso: node png_stats.js <archivo.png> [x y w h]`; las coordenadas salen de `app-rect` en el reporte de `gen_slide7_shot.js`, multiplicadas por 2 por la escala de la captura. |
 | `app_cdp.js` | Controlador Chrome/CDP de la app hermana, sin dependencias npm (WebSocket de Node 22). Captura errores JS, estilos calculados, colores NI y desborde horizontal. `--tab=pruebas --run` exige **52/52**; `--flow` recorre la evaluación y comprueba los gráficos; `--pdf` genera y revisa cuatro PDF con las bibliotecas reales; `--viewport --width=1338 --height=431` simula el tamaño interior actual de Fotografía 1. Copia de trabajo y perfil aislados por ejecución. |
 | `gen_fase_probe.js` | Probe de **app real** (Chrome `--dump-dom`): clic real sobre las fases 3a/3b y sus imágenes (**nivel 2 3aimg/3bimg**), y el bloque **S7** del slide 7, que con la lámina en blanco comprueba el encabezado (`h2=RESULTADOS (2)`, subtítulo de la Fase 3), el cuerpo 1408×644 con `texto=""` y 0 etapas/0 flechas/0 paneles/0 secuencia, y que no queda foco. Debe ejecutarse con `*{transition:none !important;animation:none !important}`. Cuando el slide 7 tenga contenido accionable, el bloque S7 deberá ampliar bloques reales y **excluir la capa `scope-ghost`** (`!x.closest('.scope-ghost')`) al medirlos, si no cada bloque se cuenta dos veces. |
@@ -112,13 +112,13 @@ completa en la cabecera.
 Auditoría visual en Chrome (imprime el reporte en stdout):
 ```bash
 "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu \
-  --window-size=1408,760 --dump-dom "file:///D:/ejemplo/tes/tools/out/heights.html"
+  --window-size=1408,760 --dump-dom "file:///D:/ejemplo/presentacion/tools/out/heights.html"
 # y para el slide 6:
 "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu \
-  --window-size=1408,760 --dump-dom "file:///D:/ejemplo/tes/tools/out/results_heights.html"
+  --window-size=1408,760 --dump-dom "file:///D:/ejemplo/presentacion/tools/out/results_heights.html"
 # y para el slide 7:
 "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu \
-  --window-size=1408,720 --dump-dom "file:///D:/ejemplo/tes/tools/out/res2_heights.html"
+  --window-size=1408,720 --dump-dom "file:///D:/ejemplo/presentacion/tools/out/res2_heights.html"
 ```
 > Objetivo del reporte del slide 6: **0 `clip`, 0 `textx-overflow`, 0 `OVERLAP`/`OVERFLOW`, holgura
 > menor de ~25px en los tres paneles** (hoy 18/22/19).
@@ -161,7 +161,7 @@ con qué se quería / qué se hizo / verificación / capturas para revisar a ojo
 3. **Sincronizar las autoverificaciones** en `tools/focus_check.js` (jsdom) cuando
    cambies DOM/clases/CSS/recuentos: añade `has(…)` y actualiza las cantidades
    (total = nº de `has()`; avísalo en la sección nueva del doc). El objetivo es
-   **54/54 (map) + 549/549 (focus) + `TODO OK`** de `verify-all.cmd`.
+   **54/54 (map) + 654/654 (focus) + `TODO OK`** de `verify-all.cmd`.
 4. **Verificar:** `cd tools && verify-all.cmd` (o `reanudar.cmd` para entorno+git).
    Nunca terminar al rojo.
 5. **Auditoría de layout real** (cuando el cambio afecte a la geometría): crear un
@@ -216,7 +216,7 @@ con qué se quería / qué se hizo / verificación / capturas para revisar a ojo
 ## 2. Estructura del proyecto
 
 ```
-D:\ejemplo\tes\
+D:\ejemplo\presentacion\
 ├─ presentacion-web\            # la presentación (abre index.html)
 │  ├─ index.html                # carga icons + 6 data + 6 slides + app.js
 │  ├─ assets\
@@ -1828,3 +1828,415 @@ Diagnóstico y medición · Intervención operativa.
 - Captura nueva: `tools/out/slide09.png` (2816×1440). Revisar a ojo el esquema
   de 5 franjas (lógica → central con las 3 etapas → resultado → recursos) y
   que el subtítulo quepa en 2 líneas.
+
+---
+
+## 27. Slide 9 (EPT): franja central al 75 % de alto y resultado esperado a continuación (2026-10-07)
+
+### Pedido del usuario
+
+> "En el slide 9: el alto de los bloques de etapa 1, 2, 3 redúcelo al 75 % del
+> tamaño actual en vertical; el bloque de fundamento y el bloque propósito
+> deberán tener la misma altura que los anteriores; el bloque de resultado
+> esperado deberá subir y colocarse a continuación de los bloques
+> anteriormente mencionados."
+
+### Qué se hizo
+
+- **`presentacion-web/css/styles.css`**:
+  - `.ept-central`: pasa de `flex: 1 1 0` (estiraba la franja central a todo
+    el alto disponible, 412 px) a **`flex: 0 0 auto` + `height: 309 px`**
+    (412 × 0,75 = **309 px**, el 75 % pedido). Sigue con `align-items: stretch`
+    y `justify-content: center`.
+  - `.ept-e` (Etapas 1-2-3): no cambió su regla; con el alto fijo del contenedor
+    queda **309 px** (su `min-height: 100%` resuelve contra los 309 px).
+  - `.ept-side` (Fundamento / Propósito): `align-self: stretch` dentro de la
+    franja de 309 px les da **la misma altura que las etapas**, como pidió el
+    usuario.
+  - `.ept-result`: se **eliminó `margin-top: auto`** (lo anclaba al fondo de la
+    lámina). Ahora el resultado esperado queda **pegado a la franja central**,
+    "a continuación" de las etapas, como pidió el usuario.
+  - El alto libre (~111 px) queda al pie de la lámina (bajo la banda de
+    recursos clave), al alinearse el conjunto a arriba (`justify-content:
+    flex-start` del cuerpo, sin cambios).
+- **Sin cambios** en `slide09EPT.js`, `transformationData.js` ni
+  `focus_check.js` (no hay checks de alturas en el EPT: el total se mantiene en
+  **549**).
+
+### Verificación
+
+- **54/54 (map) + 549/549 (focus) + `TODO OK`** en `verify-all.cmd shot`.
+- Auditoría Chrome (`gen_ept_shot.js`, `--dump-dom`): cabecera 1408×92, cuerpo
+  1408×628, bandas lógica 1364×75 / **central 1364×309** / resultado 1364×73 /
+  recursos 1364×28; **3 tarjetas de 316×309 con anchos iguales 3/3**;
+  `items 4,4,5`; cápsulas `-,NTP 324,NTP 330`; pill 5,5,5; salidas correctas;
+  logo presente; pie presente (oculto sin pantalla completa);
+  **0 clip / 0 tx / 0 OVERFLOW**.
+- Captura nueva: `tools/out/slide09.png` (2816×1440). **Revisar a ojo** que la
+  franja central quede más compacta (309 px), que Fundamento y Propósito tengan
+  la misma altura que las etapas y que el resultado esperado esté pegado debajo
+  de la franja central (sin hueco intermedio). Si el alto libre inferior se
+  ve descompensado, el usuario decide si se centra el conjunto
+  (`justify-content: center` en `.ept-body`) en lugar de alinearlo arriba.
+
+---
+
+## 28. Slide 9 (EPT): conjunto centrado, títulos de etapa +20 % y flechas verde/rojo alternadas (2026-10-07)
+
+### Pedido del usuario
+
+> "Centralo", pero: el texto de los títulos "Etapa 1, Etapa 2, Etapa 3"
+> +20 % (aumentando en vertical las franjas del título si hace falta); y las
+> flechas entre Fundamento, Etapas y Propósito alternadas **verde, rojo,
+> verde, rojo**.
+
+### Qué se hizo
+
+- **`presentacion-web/css/styles.css`**:
+  - `.ept-body`: `justify-content` pasa de `flex-start` a **`center`**: el
+    conjunto de franjas (lógica → central → resultado → recursos) queda
+    **centrado verticalmente** en la lámina, repartiendo el alto libre (~111 px)
+    arriba y abajo por igual.
+  - `.ept-e-head`: `font-size` de **11px → 13.2px** (+20 %) y `padding` vertical
+    de **5px → 7px** para que la franja crezca un poco junto con el título
+    (de ~23px a ~30px de alto). Al ser `flex: 0 0 auto`, la franja se adapta sin
+    tocar el alto fijo de la tarjeta (309px); la lista `flex: 1` absorbe la
+    diferencia (verificado con **0 clip**).
+- **`presentacion-web/js/slides/slide09EPT.js`**: la 4.ª flecha de la franja
+  central (la que precede a Propósito) pasa de `ept-arrow--green` a
+  **`ept-arrow--red`**: la secuencia completa queda **verde → rojo → verde →
+  rojo** (Fundamento → Etapa 1 → Etapa 2 → Etapa 3 → Propósito).
+- **Sin cambios** en `transformationData.js` ni `focus_check.js` (no hay checks
+  de colores de flecha ni de tamaños del título: el total sigue en **549**).
+
+### Verificación
+
+- **54/54 (map) + 549/549 (focus) + `TODO OK`** en `verify-all.cmd shot`.
+- Auditoría Chrome (`gen_ept_shot.js`, `--dump-dom`): cabecera 1408×92, cuerpo
+  1408×628, bandas lógica 1364×75 / central 1364×309 / resultado 1364×73 /
+  recursos 1364×28; **3 tarjetas de 316×309 con anchos iguales 3/3**;
+  `items 4,4,5`; cápsulas `-,NTP 324,NTP 330`; pill 5,5,5; salidas correctas;
+  flechas centrales en orden **green, red, green, red**; logo presente; pie
+  presente (oculto sin pantalla completa); **0 clip / 0 tx / 0 OVERFLOW**.
+- Captura nueva: `tools/out/slide09.png` (2816×1440). **Revisar a ojo**: el
+  conjunto centrado, el título de etapa más grande dentro de su franja y las
+  flechas alternando verde/rojo/verde/rojo.
+
+## 29. Slide 9 (EPT): clic en las etapas muestra su imagen de detalle (pt1..pt4) (2026-10-08)
+
+### Pedido del usuario
+
+> "Que al hacer clic en el bloque de la Etapa 1 aparezca la imagen pt1.png
+> (rotando una vez), al hacer clic en Etapa 2 su imagen pt2.png, al hacer clic
+> en Etapa 3 su imagen pt3.png; y al hacer clic sobre esta imagen que aparezca
+> pt4.png; para todos, al hacer clic fuera de la imagen volver a la pantalla
+> principal del slide 9. Mientras estas imágenes se muestran, en el fondo debe
+> aparecer la imagen del slide 9 muy atenuada."
+
+### Qué se hizo
+
+- **`presentacion-web/assets/pt1.png` … `pt4.png`**: copiadas desde la raíz
+  del repo al directorio de la presentación (ya había que empaquetarlas con el
+  resto de imágenes del slide 9).
+- **`presentacion-web/js/slides/slide09EPT.js`**:
+  - Las tarjetas de etapa pasan a ser accionables: `data-focus="1|2|3"` +
+    `role="button"` + `tabindex="0"` (+ `aria-label` "Abrir el detalle de la
+    Etapa N"), usando el `num` que ya trae `transformationData.js`.
+  - Cuatro overlays montados al final de `.ept-body`, uno por imagen:
+    `<div class="ept-img ept-img--N">` con su rótulo `.ept-img-cap`, un
+    `<figure class="ept-fig" data-focus="…">` y el `<img src="assets/ptN.png">`.
+    **El panel `.ept-img` NO lleva `data-focus`**: así, clic *fuera de la
+    imagen* (sobre el panel, la cabecera, o ESC) cierra a la pantalla principal
+    mientras que clic *sobre la imagen* actúa sobre la figura.
+  - Nivel 2 de la Etapa 3: **pt3 y pt4 comparten `data-focus="3img"`**. Etapa 1
+    y 2 (claves `1` y `2`) se cierran solas al pulsar su imagen.
+- **`presentacion-web/js/app.js`**:
+  - `FOCUS_SCOPES` gana el scope
+    `{ sel: 'ept-body', cls: 'ept-body--f', keys: ['1', '2', '3', '3img'] }`
+    (sin `parents`: los clics fuera/ESC salen directos a la pantalla principal,
+    incluido desde el nivel 2, que es lo pedido).
+  - `GHOST_CFG['ept-body']` clona las cuatro franjas
+    (`['.ept-logica','.ept-central','.ept-result','.ept-rc']`, pad
+    `'6px 22px 8px'`, gap `'7px'`): el ghost (opacity 0.12) atenúa la lámina
+    detrás del detalle abierto.
+- **`presentacion-web/css/styles.css`**:
+  - `.ept-body` gana `position: relative` (ancla de los overlays).
+  - `.ept-img`: panel absoluto (`left/top/right/bottom: 8px`), `z-index: 3`,
+    fondo **translúcido** `rgba(240,240,242,0.72)` con anillo verde suave: al
+    combinarse con el ghost se ve la lámina del slide 9 «muy atenuada» detrás.
+  - `.ept-fig`: figura que llena el panel (`flex: 1`, `min-width/height: 0`),
+    imagen `max-width/height: 100%` con `object-fit: contain` (sin recortes).
+  - Estados: `.ept-body--f1 .ept-img--1`, `--f2 .ept-img--2`, `--f3
+    .ept-img--3` y `--f3img .ept-img--4` → `opacity: 1` + `visibility: visible`;
+    el resto queda oculto.
+  - **Efecto de aparición sencillo**: la imagen se **proyecta de menos a más
+    al abrir** (transform `scale(.5 -> 1)` + opacity 0→1, .3s) y **de más a
+    menos al cerrar** (transición inversa; la `visibility` se oculta con
+    retardo `0s linear .28s` para que se vea la salida). Sustituye al giro de
+    360° (`@keyframes ept-rotate`, eliminado) a petición del usuario — ver el
+    ajuste al final de esta sección.
+- **`tools/gen_ept_shot.js`**: el informe pasa a auditar **5 estados** (`== SIN
+  FOCO ==`, `== FOCO 1/2/3/3img ==` y `== RESTAURADO ==`), reportando también
+  el overlay visible y su imagen (p. ej. `detalles ept-img--3=1392x612` +
+  `imagenes pt3.png`), y genera las capturas `ept_shot_f1/f2/f3/f3img.html`;
+  el árbol completo de `assets/` se copia a `out/assets/` (ahora con las pt*).
+- **`tools/verify-all.cmd`**: cuatro capturas nuevas
+  `out/slide09_f1.png`, `slide09_f2.png`, `slide09_f3.png` y
+  `slide09_f3img.png`.
+
+### Decisión anotada (validar con el usuario)
+
+- En el **nivel 2 (pt4)**, tanto el clic **sobre** pt4 como el clic **fuera**
+  vuelven a la pantalla principal (sin pasar por pt3), tal como se pidió
+  literalmente («para todos, al hacer clic fuera de la imagen volver a la
+  pantalla principal»). Alternativa posible del estilo slide 6
+  (`parents: {'3img':'3'}`): el clic sobre/ESC en pt4 regresaría primero a pt3.
+
+### Ajuste en la misma sesión: aparición más sencilla (proyección de escala)
+
+Pedido posterior: *"quiero que el efecto de aparición sea más sencillo; que se
+proyecte de menos a más al aparecer y de más a menos para desaparecer"*. Se
+sustituye el giro de 360° por transiciones de `transform: scale(.5 → 1)` +
+`opacity` (0.28–0.3s). Para que la **salida** sea animada, los overlays ya no
+usan `display: none` sino `opacity: 0` + `visibility: hidden` (transición de
+`visibility` con retardo `0s linear .28s` al ocultarse); los estados de foco
+ponen `visibility: visible` inmediato. Los checks de `focus_check.js` pasan de
+`display` a `visibility`, y `gen_ept_shot.js` filtra las imágenes visibles por
+`visibility` (con layout permanente, `offsetParent` ya no distingue).
+Verificado: **54/54 + 593/593 + `TODO OK`**; auditoría Chrome 0 clip/tx/OVERFLOW
+en los cinco estados.
+
+### Verificación
+
+- **54/54 (map) + 593/593 (focus, +44 checks) + `TODO OK`** en
+  `verify-all.cmd shot`.
+- `focus_check.js`: tarjetas accionables con claves `1,2,3`; cuatro figuras con
+  `data-focus` `1,2,3img,3img` apuntando a `assets/ptN.png`; clic Etapa 1 → f1
+  (muestra pt1 y oculta el resto, ghost `is-on`); clic sobre pt1 cierra; idem
+  Etapa 2; Etapa 3 → f3 (pt3 sin pt4) → clic sobre pt3 → `3img` (pt4), clic
+  fuera del panel → principal; ESC en los dos niveles → principal; clic en la
+  cabecera (fuera de la imagen) → principal; teclado Enter sobre tarjeta e
+  imagen; y regex de CSS/motor (overlays ocultos con `opacity 0` +
+  `visibility hidden`, proyecto de `scale(.5) -> 1`, visibilidad con retardo al
+  cerrar, **ausencia de `ept-rotate`**, FOCUS_SCOPES y GHOST_CFG de `app.js`).
+- Auditoría Chrome (`gen_ept_shot.js`): reposo intacto (bandas
+  1364×75/309/73/28, tarjetas 316×309); en cada foco solo su detalle
+  (1392×612) con su imagen (`pt1/2/3/4.png`); **0 clip / 0 tx / 0 OVERFLOW**
+  en los cinco estados.
+- Capturas nuevas: `tools/out/slide09.png` (reposo) y `slide09_f1.png`,
+  `slide09_f2.png`, `slide09_f3.png`, `slide09_f3img.png` (2816×1440).
+  **Revisar a ojo**: el detalle en primer plano, el fondo atenuado del slide 9
+  (ghost + panel translúcido) y el efecto de proyección (de menos a más al
+  abrir, de más a menos al cerrar).
+
+---
+
+## 30. Slide 9 (EPT): la franja superior se rotula «Secuencia de transformación» (2026-10-08)
+
+Pedido: *«cambiar el título lógica de transformación por secuencia de transformación»*.
+
+- `presentacion-web/js/data/transformationData.js` → `logica.key = 'Secuencia de transformación'`
+  (es el único texto visible: `slide09EPT.js` lo imprime en `.ept-band-k`).
+  Las clases (`ept-logica`, `ept-band-k`), el CSS y el DOM **no cambian**, así
+  que no hay que tocar `FOCUS_SCOPES` ni los selectores de foco.
+- `tools/focus_check.js`: el check de la franja pasa a
+  `/Secuencia de transformación/i` y su mensaje describe el rótulo nuevo.
+- El rótulo crece 3 caracteres; no hay ancho fijo en `.ept-band-k`, y la
+  auditoría de `gen_ept_shot.js` sigue dando **0 clip / 0 tx**.
+- `EPTransf.md` conserva su redacción original (documento fuente, no editar).
+- Verificado: **54/54 (map) + 593/593 (focus) + `TODO OK`** con
+  `verify-all.cmd shot`; capturas nuevas en `tools/out/slide09*.png`.
+  **Revisar a ojo**: `slide09.png` (rótulo de la franja superior).
+
+---
+
+## 31. Slide 10 «Validación»: mapa mental del proceso Delphi (2026-10-09)
+
+Pedido: *«genera la diapositiva 10 validación, puedes guiarte de 1Validacion.md
+y Validacion.docx, mantén el formato de las demás diapositivas, aplícalo al
+panel de diapositivas … coloca el nombre 10. Validación y deja el título del
+título de la diapositiva que está en el .md»*.
+
+**Fuente.** Contenido literal de `Validacion.docx` (método Delphi con 8 expertos
+en 3 rondas); `1Validacion.md` describe la estructura. Ni `1Validacion.md` ni
+`Validacion.docx` se editan (documentos fuente). La paleta del `.md`
+(`#087A59`/`#C9252D`) se **alinea** con los tokens ya establecidos del deck
+(`#006E49`/`#C0242A`) para conservar el formato, como en el slide 9.
+
+**Datos** — `presentacion-web/js/data/validationData.js` (nuevo, solo datos,
+`window.VALIDACION`): `title` «Proceso de validación de la propuesta», `subtitle`,
+`nota`, `core` (núcleo «Validación / de la propuesta» · Método Delphi · 3 rondas
+· 8 expertos · criterios), `panel` (Panel experto · 8 expertos · 5 áreas · apoyo),
+`rondas[3]` (Ronda 1 verde «Aceptación inicial» 99,46 % / 183 de 184; Ronda 2
+roja «Evaluación técnica» 4,958 / 5 · CV 4,04 %; Ronda 3 verde «Consenso final»
+2,973 / 3 · 97,32 % Sí), cada una con su tabla del modal, y `sintesis` (flujo
+Aceptación inicial → Evaluación técnica → Consenso final, 3 cápsulas y la tabla
+comparativa de 5 columnas).
+
+**Render** — `presentacion-web/js/slides/slide10Validation.js` (nuevo): `.vl-map`
+(grid 3×3 con áreas `panel · core · r1/r2/r3`, conectores SVG `.vl-links`
+decorativos), `.vl-panel`, `.vl-core` (elipse verde oscuro) y 3 `.vl-round`
+clicables (`data-focus` r1/r2/r3, `role="button"`, `tabindex="0"`), banda
+`.vl-synth` (`data-focus="rn"`), `.vl-note` y 4 modales `.vl-modal--r1/r2/r3/rn`
+con `.vl-card` y botón de cierre (`data-focus`, icono `compress`). Guard en fase
+de captura sobre `#slideFrame`: un clic dentro de `.vl-card` que **no** caiga en
+un `[data-focus]` propio de la tarjeta hace `stopPropagation()` para que no llegue
+a `app.js` y cierre el modal (se corrigió el guard para ignorar el `data-focus`
+del propio scope `.vl-body`).
+
+**Registro.** `thesisData.js` → `{ id: 10, key: 'validacion', label: 'Validación' }`
+(la pestaña muestra `10. Validación`). `index.html` carga
+`js/data/validationData.js` y `js/slides/slide10Validation.js` antes de `app.js`.
+`app.js` → `FOCUS_SCOPES` añade `{ sel: 'vl-body', cls: 'vl-body--f', keys:
+['r1','r2','r3','rn'] }` y `GHOST_CFG['vl-body']` = `{ nodes: ['.vl-map',
+'.vl-synth'], pad: '6px 22px 8px', gap: '8px' }`.
+
+**CSS** — nuevo bloque `.vl-*` al final de `css/styles.css` (mapa, panel, núcleo
+elipse, rondas verde/rojo, síntesis, nota, modales y los estados
+`.vl-body--fr1/fr2/fr3/frn` que muestran `visibility:visible` + `scale(.86→1)`).
+
+**Verificación.**
+- `tools/focus_check.js`: carga los dos ficheros nuevos; recuentos `slidesAll`
+  9→10, `logos` 8→9, `feet` 9→10, `h2s` 8→9; añade el check del slide 10 en
+  `SLIDES` y ~57 `has()` nuevos (estructura, colores, tablas, modales, apertura/
+  cierre por clic/teclado/ESC, guard del modal y CSS). Total **604 → 654**.
+- `tools/verify-all.cmd`: `node --check` de los dos ficheros; `gen_slide10_shot.js`;
+  capturas `slide10.png` + `slide10_fr1/fr2/fr3/frn.png`.
+- `tools/gen_slide10_shot.js` (nuevo, modelo `gen_ept_shot.js`).
+- **54/54 (map) + 654/654 (focus) + `TODO OK`** con `verify-all.cmd shot`.
+  Auditoría Chrome (`vl_shot.html`, `--dump-dom`): **0 clip / 0 tx / 0 OVERFLOW /
+  0 MISSING** en reposo y en los cuatro focos. Geometría: cuerpo 628 px, mapa
+  528 px, núcleo 499×177, síntesis 62 px, modal 1392×612.
+- **Revisar a ojo**: `slide10.png` (mapa mental) y `slide10_fr1/fr2/fr3/frn.png`
+  (modales de ronda y tabla comparativa).
+
+## 32. Slide 10 (Validación): mapa a altura natural y conjunto centrado en vertical (2026-10-10)
+
+Pedido: *«al momento de poner en pantalla completa, asegúrate que el slide 10
+esté centrado en vertical»*. Se aclaró que el mapa no debe estirarse y que el
+grupo (mapa + síntesis + nota) quede centrado con aire arriba y abajo, como el
+slide 9.
+
+**Diagnóstico.** El cuerpo del slide 10 mide 628 px tanto en ventana (marco 720)
+como en pantalla completa (marco 800, con pie de 80), así que el cambio es
+idéntico en ambos modos. Antes, `.vl-map` tenía `flex: 1 1 auto` y **llenaba** el
+cuerpo (528 px): no había hueco que centrar y el mapa se estiraba. Ahora se
+midió que su altura natural es **471 px**.
+
+**Cambio (solo CSS, `presentacion-web/css/styles.css`):**
+- `.vl-body`: se añade `justify-content: center` → el conjunto se reparte con
+  aire arriba y abajo (≈35/35 px) en vez de quedar pegado.
+- `.vl-map`: `flex: 1 1 auto` → **`flex: 0 0 auto`** → el mapa toma su altura
+  natural (471 px), más compacto, y deja de estirarse.
+
+Sin cambios de DOM/clases ni de renderer (los modales siguen absolutos sobre
+`.vl-body`, centrados).
+
+**Verificación.**
+- `tools/focus_check.js`: dos `has()` nuevos (`.vl-body` con
+  `justify-content:center` y `.vl-map` con `flex: 0 0 auto`); total **654 → 656**.
+- **54/54 (map) + 656/656 (focus) + `TODO OK`** con `verify-all.cmd shot`.
+- Auditoría Chrome (`vl_shot.html`, `--dump-dom`): **0 clip / 0 tx / 0 OVERFLOW /
+  0 MISSING** en reposo y en los cuatro focos. Geometría nueva: cuerpo 628 px,
+  **mapa 1364×471**, núcleo 499×158, rondas 499×149 / 423×158 / 499×149, síntesis
+  62 px, modal 1392×612 (sin cambios).
+- Capturas regeneradas: `tools/out/slide10.png` y `slide10_fr1/fr2/fr3/frn.png`.
+  **Revisar a ojo**: el conjunto centrado con el mapa más compacto.
+
+## 33. Slide 9 (EPT): la Etapa 2 abre un segundo nivel con riesgos1 + riesgos2 en paralelo (2026-10-10)
+
+Pedido: *«al hacer clic en el bloque Etapa 2 debe desplegarse la imagen pt2.png,
+y al hacer clic en esta quiero que se desplieguen simultáneamente uno al lado de
+otro las imágenes riesgos1.png y riesgos2.png»*.
+
+**Cambios.**
+- `presentacion-web/js/slides/slide09EPT.js`: la figura de la Etapa 2 pasa de
+  `data-focus="2"` a **`data-focus="2img"`** (like la Etapa 3/pt3) y se añade el
+  overlay **`.ept-img--2b`** con un contenedor **`.ept-pair`** que aloja dos
+  `.ept-fig` (`data-focus="2img"`): `assets/riesgos1.png` (edificación) y
+  `assets/riesgos2.png` (infraestructura), en ese orden (izq. → der.).
+- `presentacion-web/css/styles.css`: `.ept-pair` (flex `row`, `gap:14px`,
+  ancho 100%, `flex:1 1 auto`) con sus `.ept-fig` a `flex:1 1 50%` y cursor
+  `zoom-out`; se añaden `.ept-body--f2img .ept-img--2b` (visible) y su
+  `.ept-fig` (`scale(.5→1)`) a las listas de estados.
+- `presentacion-web/js/app.js`: `FOCUS_SCOPES` de `ept-body` pasa a
+  `keys: ['1','2','2img','3','3img','rs']`.
+- `tools/gen_ept_shot.js`: el informe y las capturas incluyen el estado `2img`
+  (y `.ept-pair` en las listas de clip/overflow).
+- `tools/verify-all.cmd`: nueva captura `slide09_f2img.png` (`ept_shot_f2img.html`).
+- `tools/focus_check.js`: figuras de detalle 5 → **7** (5 sencillas + el par);
+  reordenado el `data-focus` a `1,2img,2img,2img,3img,3img,rs`; checks nuevos del
+  par (assets, `.ept-pair`), de la interacción pt2 → 2img y del CSS; total
+  **656 → 663**.
+
+**Verificación.**
+- **54/54 (map) + 663/663 (focus) + `TODO OK`** con `verify-all.cmd shot`.
+- Auditoría Chrome (`ept_shot.html`, `--dump-dom`) del estado `2img`:
+  `detalles ept-img--2b=1392×612`, `imagenes riesgos1.png,riesgos2.png` (solo el
+  par visible, pt2 detrás); **0 clip / 0 tx / 0 OVERFLOW / 0 MISSING**.
+- Capturas nuevas/actualizadas: `tools/out/slide09_f2img.png` (además de las ya
+  existentes `slide09*.png`). **Revisar a ojo**: el par de riesgos lado a lado.
+
+---
+
+## 34. Slide 11 «Conclusiones»: seis bloques, chips normativos y validación Delphi como cajas; interacción en dos pasos (2026-10-10)
+
+Slide nuevo (`js/slides/slide11Conclusions.js` + `js/data/conclusionsData.js`,
+`CONCLUSIONES.docx` / `Conclusiones.md` como fuente). Cierra el deck con seis
+bloques encadenados 1→6, conectores radiales hacia el nodo central
+«CONCLUSIONES» y franja de **APORTE CENTRAL**.
+
+**Diseño (verde/rojo del deck).**
+- Seis `.cn-card` (213×338) encadenadas por cinco `.cn-arrow` (chevRight), con
+  `.cn-strata` (SVG `.cn-links`, seis `path` Bézier) bajando al `.cn-node`
+  (158×158) y `.cn-aporte` (1364×30). Alternan verde/rojo; **el bloque 6 va en
+  rojo** (mismo formato que los bloques 2 y 4). Se eliminaron las reglas
+  `.cn-card--dark` / `.cn-dialog--dark` y se adaptaron `.cn-checks li` y
+  `.cn-checks-ico` al rojo.
+- **Códigos normativos como chips**: los items con norma pasaron de `(…)` en el
+  texto a objetos `{ t, c }` que el render `lista()` vuelve
+  `<span class="cn-li-t">` + `<span class="cn-li-c">`. `.cn-li-c` es un
+  recuadro blanco con borde de acento, radius 7, `font-size:10px`,
+  `font-weight:800`, en línea propia (`.cn-list li` pasó a flex column). Items:
+  b1-4 `D.E. 255, A.M. 196; A.M. 122`; b2-2 `5-I, 7-E`; b2-3 `23-I, 21-E`;
+  b3-3 `NTP-330`.
+- **VALIDACIÓN DELPHI como cajas** (mini del bloque 5, `tipo:'cajas'`):
+  `.cn-bgrid` (flex wrap) con `.cn-caja` (`1 1 calc(50% - 4px)`), items
+  `{ r, v, cv?, d }` → `.cn-caja-r` (6.8px), `.cn-caja-v` (10px),
+  `.cn-caja em.cn-caja-cv` (**10px, 800, verde oscuro**; selector con
+  especificidad para vencer a `.cn-caja em`), `.cn-caja em` (detalle 6.8px).
+  Contenido: Ronda 1 `99,46 % / Aceptación inicial favorable`; Ronda 2
+  `4,958 / 5`, `CV 4,04 %`, `Alto consenso técnico`; Ronda 3 `2,973 / 3`,
+  `CV 5,45 %`, `DE global 0,162`; Ronda final `8 expertos aprueban / Aprobación
+  final de la propuesta`.
+- **Interacción en dos pasos** (pedido: *«…se presente después de que se
+  visualice el mismo bloque agrandado… al hacer clic una vez, el otro al hacer
+  clic nuevamente»*): 1.er clic en un bloque → **copia agrandada y centrada**
+  (`.cn-zoom` con `.cn-zoom-card`, `transform: scale(1.72)`, foco `zbN`); 2.º
+  clic sobre esa copia → **pantalla con la conclusión** (`.cn-modal--bN`,
+  foco `bN`). Cerrar la conclusión (✕, ESC o fondo) vuelve al bloque agrandado;
+  otro ESC (o clic fuera) vuelve a la vista completa.
+
+**Cambios.**
+- `js/app.js`: `FOCUS_SCOPES` de `cn-body` a dos niveles
+  `keys:['zb1'..'zb6','b1'..'b6']` con `parents:{ bN:'zbN' }`.
+- `js/slides/slide11Conclusions.js`: tarjetas con `data-focus="zbN"`; `bloque(b,
+  zoom)` genera también la copia `.cn-zoom` (`data-focus="bN"`, role/tabindex)
+  por bloque; guarda de clic dentro de `.cn-dialog` intacta.
+- `css/styles.css`: bloque `.cn-zoom` / `.cn-zoom-card` + reglas `fzb1..fzb6`
+  (copia visible, resto del diagrama oculto sobre el ghost).
+- `tools/gen_slide11_shot.js`: el informe audita reposo + `zb1..zb6` + `b1..b6`
+  y genera `cn_shot.html` + `cn_shot_fzb1..zb6.html` + `cn_shot_fb1..fb6.html`.
+- `tools/verify-all.cmd`: `node --check` de `conclusionsData.js` /
+  `slide11Conclusions.js`, `node gen_slide11_shot.js` y capturas
+  `slide11.png`, `slide11_zoom1..6.png`, `slide11_fb1..fb6.png`.
+- `tools/focus_check.js`: checks del slide 11 reescritos (DOM, dos niveles de
+  foco, interacción en dos pasos, CSS, `app.js`); total **663 → 712**.
+
+**Verificación.**
+- **54/54 (map) + 712/712 (focus) + `TODO OK`** con `reanudar.cmd shot`.
+- Auditoría Chrome (`cn_shot.html`, `--dump-dom`) en reposo, `zb1..zb6` y
+  `b1..b6`: tarjetas 213×338, nodo 158×158, aporte 1364×30, zoom visible
+  `cn-zoom--bN=1392×612::213×338`; **0 clip / 0 tx / 0 OVERFLOW**.
+- Capturas: `tools/out/slide11.png`, `slide11_zoom1..6.png`,
+  `slide11_fb1..6.png`. **Revisar a ojo**: el bloque agrandado y centrado.

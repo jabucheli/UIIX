@@ -1,6 +1,6 @@
 @echo off
 REM ============================================================
-REM traspaso.cmd  -  Proceso de guardado y traspaso de la carpeta tes
+REM traspaso.cmd  -  Proceso de guardado y traspaso de la carpeta presentacion
 REM ============================================================
 REM Asegura que la carpeta contenga TODO lo necesario para retomar el
 REM trabajo en este u otro computador y, en modo "paquete", genera un
@@ -8,16 +8,16 @@ REM .zip portable que se puede guardar y llevar donde sea.
 REM
 REM Uso:
 REM   traspaso.cmd             inventario + estado git (verificacion)
-REM   traspaso.cmd paquete     ademas genera tools\out\traspaso\tes-tesis-*.zip
+REM   traspaso.cmd paquete     ademas genera tools\out\traspaso\presentacion-tesis-*.zip
 REM   traspaso.cmd todo        paquete + verificacion completa (verify-all.cmd)
 REM
 REM El .zip incluye:
-REM   tes\    las carpetas y archivos de la tesis (sin .git, sin node_modules,
-REM           sin tools\out, sin basura de Office)
-REM   tesis\  la app hermana de evaluacion de riesgos (sin .git, sin
-REM           0\pruebas\out); NECESARIA: el slide 7 la embebe
+REM   presentacion\  las carpetas y archivos de la tesis (sin .git, sin
+REM                  node_modules, sin tools\out, sin basura de Office)
+REM   tesis\         la app hermana de evaluacion de riesgos (sin .git, sin
+REM                  0\pruebas\out); NECESARIA: el slide 7 la embebe
 REM   datos-respaldo\  respaldos JSON de evaluaciones si existen en
-REM                     ..\..\tesis\0\pruebas\out\respaldos
+REM                    ..\..\tesis\0\pruebas\out\respaldos
 REM   historial-*.bundle  copia del historial git (para restaurar commits)
 REM   LEEME.txt  instrucciones de restauracion en el equipo nuevo
 REM
@@ -67,10 +67,10 @@ echo ============================================================
 if exist "%TREE%" rmdir /s /q "%TREE%"
 mkdir "%TREE%" >nul 2>&1
 
-REM --- tes ------------------------------------------------
-robocopy "%ROOT%" "%TREE%\tes" /E /XD .git node_modules out /XF "~$*" *.tmp f /R:1 /W:1 /NJH /NJS /NFL /NDL /NP >nul
+REM --- presentacion ---------------------------------------
+robocopy "%ROOT%" "%TREE%\presentacion" /E /XD .git node_modules out /XF "~$*" *.tmp f /R:1 /W:1 /NJH /NJS /NFL /NDL /NP >nul
 if errorlevel 8 goto :err_robo
-echo   tes: ok (%ROOT%)
+echo   presentacion: ok (%ROOT%)
 
 REM --- tesis (app hermana) --------------------------------
 if not exist "%HERMANA%" goto :sin_hermana
@@ -99,7 +99,7 @@ goto :tras_hist
 
 REM --- historial git (bundle) -----------------------------
 :tras_hist
-if exist "%ROOT%\.git"    git -C "%ROOT%"    bundle create "%TREE%\historial-tes.bundle" --all >nul 2>&1 && echo   historial-tes.bundle: ok
+if exist "%ROOT%\.git"    git -C "%ROOT%"    bundle create "%TREE%\historial-presentacion.bundle" --all >nul 2>&1 && echo   historial-presentacion.bundle: ok
 if exist "%HERMANA%\.git" git -C "%HERMANA%" bundle create "%TREE%\historial-tesis.bundle" --all >nul 2>&1 && echo   historial-tesis.bundle: ok
 
 REM --- LEEME.txt -------------------------------------------
@@ -109,32 +109,29 @@ REM --- LEEME.txt -------------------------------------------
 >> "%TREE%\LEEME.txt" echo ==================================================
 >> "%TREE%\LEEME.txt" echo.
 >> "%TREE%\LEEME.txt" echo LAS DOS CARPETAS SON HERMANAS Y VAN JUNTAS:
->> "%TREE%\LEEME.txt" echo   tes\    presentacion web + fuentes + herramientas
->> "%TREE%\LEEME.txt" echo   tesis\  app de evaluacion de riesgos NTP 330 (0\)
+>> "%TREE%\LEEME.txt" echo   presentacion\  presentacion web + fuentes + herramientas
+>> "%TREE%\LEEME.txt" echo   tesis\         app de evaluacion de riesgos NTP 330 (0\)
 >> "%TREE%\LEEME.txt" echo Se descomprimen las dos en la MISMA carpeta madre, por
->> "%TREE%\LEEME.txt" echo ejemplo D:\ejemplo\tes y D:\ejemplo\tesis.
+>> "%TREE%\LEEME.txt" echo ejemplo D:\ejemplo\presentacion y D:\ejemplo\tesis.
 >> "%TREE%\LEEME.txt" echo.
 >> "%TREE%\LEEME.txt" echo PASOS EN EL EQUIPO NUEVO:
 >> "%TREE%\LEEME.txt" echo   1. Instalar Node.js 22 o superior.
->> "%TREE%\LEEME.txt" echo   2. Descomprimir el zip manteniendo tes\ y tesis\.
->> "%TREE%\LEEME.txt" echo   3. cd tes\tools  y luego:  npm install
->> "%TREE%\LEEME.txt" echo   4. reanudar.cmd        (o traspaso.cmd paquete no hace falta)
+>> "%TREE%\LEEME.txt" echo   2. Descomprimir el zip manteniendo presentacion\ y tesis\.
+>> "%TREE%\LEEME.txt" echo   3. cd presentacion\tools  y luego:  npm install
+>> "%TREE%\LEEME.txt" echo   4. doble clic en presentacion\iniciar.cmd  (o  reanudar.cmd)
 >> "%TREE%\LEEME.txt" echo      Si Chrome no esta en la ruta por defecto, editar CHROME
->> "%TREE%\LEEME.txt" echo      en tools\verify-all.cmd y tools\reanudar.cmd.
->> "%TREE%\LEEME.txt" echo   5. Abrir presentacion-web\index.html (doble clic o npx serve).
->> "%TREE%\LEEME.txt" echo      La app de evaluacion se abre desde el bloque Riesgo
->> "%TREE%\LEEME.txt" echo      del slide 7 y vive en tesis\0.
->> "%TREE%\LEEME.txt" echo   6. datos-respaldo\: si lleva JSON, restaurarlo en la app:
->> "%TREE%\LEEME.txt" echo      abrir tesis\0\index.html - pestana Catalog o - Restaurar.
->> "%TREE%\LEEME.txt" echo   7. Historico git (opcional):
->> "%TREE%\LEEME.txt" echo      git clone historial-tes.bundle     (restaura commits de tes)
->> "%TREE%\LEEME.txt" echo      git clone historial-tesis.bundle   (restaura commits de tesis)
+>> "%TREE%\LEEME.txt" echo      en tools\verify-all.cmd y tools\reanudar.cmd
+>> "%TREE%\LEEME.txt" echo   5. La presentacion se abre en el navegador (presentacion-web\index.html).
+>> "%TREE%\LEEME.txt" echo      La app de evaluacion se abre desde el bloque Riesgo del slide 7.
+>> "%TREE%\LEEME.txt" echo   6. Historial git:
+>> "%TREE%\LEEME.txt" echo        git clone historial-presentacion.bundle presentacion
+>> "%TREE%\LEEME.txt" echo        git clone historial-tesis.bundle tesis
 >> "%TREE%\LEEME.txt" echo      La app guarda los datos en localStorage: las evaluaciones
 >> "%TREE%\LEEME.txt" echo      solo viajan con el JSON de datos-respaldo\.
 >> "%TREE%\LEEME.txt" echo.
 >> "%TREE%\LEEME.txt" echo DOCUMENTACION:
->> "%TREE%\LEEME.txt" echo   tes\CONTINUIDAD.md  - como retomar (este u otro equipo)
->> "%TREE%\LEEME.txt" echo   tes\TRASPASO.md     - este proceso en detalle
+>> "%TREE%\LEEME.txt" echo   presentacion\CONTINUIDAD.md  - como retomar (este u otro equipo)
+>> "%TREE%\LEEME.txt" echo   presentacion\TRASPASO.md     - este proceso en detalle
 >> "%TREE%\LEEME.txt" echo   tesis\AGENTS.md     - reglas de la app
 >> "%TREE%\LEEME.txt" echo   tesis\0\docs\ESTADO.md  - estado de la app
 
@@ -149,7 +146,7 @@ for /f "usebackq delims=" %%d in (`powershell -NoProfile -Command "$d=Get-Date -
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0traspaso-empaquetar.ps1" -Tree "%TREE%" -Out "%OUT%" -Stamp "%STAMP%"
 if errorlevel 1 goto :err_zip
 
-for /f "delims=" %%z in ('dir /b /o-d "%OUT%\tes-tesis-*.zip"') do set PAQ=%OUT%\%%z& goto :paq_listo
+for /f "delims=" %%z in ('dir /b /o-d "%OUT%\presentacion-tesis-*.zip"') do set PAQ=%OUT%\%%z& goto :paq_listo
 goto :err_zip
 
 :paq_listo
@@ -164,7 +161,7 @@ echo   Tamano:           %PAQTAM% bytes
 echo   Guardarlo con el resto del trabajo o llevarlo a otro equipo.
 echo.
 echo   Para restaurar en el equipo nuevo, ver LEEME.txt dentro del zip
-echo   y tes\TRASPASO.md.
+echo   y presentacion\TRASPASO.md.
 echo.
 echo TRASPASO COMPLETADO
 exit /b 0

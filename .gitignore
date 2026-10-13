@@ -6,7 +6,6 @@ tools/out/
 
 # Dumps temporales de depuración
 *.out
-f
 
 # Bloqueos y temporales de Office (~$*.docx, ~$*.pptx, ~WRL*.tmp, ...)
 ~$*

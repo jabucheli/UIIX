@@ -68,12 +68,12 @@ const audit = [
   'o+="logica nodos "+q(".ept-logica .ept-nodo-t").map(function(n){return n.textContent;}).join(" → ")+NL;',
   'o+="resultado nodos "+q(".ept-rs .ept-nodo-t").map(function(n){return n.textContent;}).join(" → ")+NL;',
   'function live(el){return el&&el.offsetParent!==null&&el.offsetHeight>0&&getComputedStyle(el).visibility!=="hidden";}',
-  '[".slide-head",".ept-subtitle",".ept-body",".ept-logica",".ept-central",".ept-side",".ept-e",".ept-e-rec",".ept-e-out",".ept-result",".ept-rs",".ept-rc",".ept-rc-items"].forEach(function(cn){',
+  '[".slide-head",".ept-subtitle",".ept-body",".ept-logica",".ept-central",".ept-side",".ept-e",".ept-e-rec",".ept-e-out",".ept-result",".ept-rs",".ept-rc",".ept-rc-items",".ept-img",".ept-pair",".ept-fig"].forEach(function(cn){',
   'q(cn).filter(live).forEach(function(el,i){var c=el.scrollHeight-el.clientHeight;if(c>0)o+="  clip "+cn+i+" "+c+NL;});});',
-  'q(".ept-subtitle,.ept-nodo-t,.ept-side-t,.ept-e-nombre,.ept-e-item,.ept-pill,.ept-e-cap,.ept-e-out,.ept-rc-it").filter(live).forEach(function(e,i){',
+  'q(".ept-subtitle,.ept-nodo-t,.ept-side-t,.ept-e-nombre,.ept-e-item,.ept-pill,.ept-e-cap,.ept-e-out,.ept-rc-it,.ept-img-cap").filter(live).forEach(function(e,i){',
   'if(e.scrollWidth>e.clientWidth+1)o+="  tx "+i+" <"+e.className+"> w"+e.clientWidth+"/"+e.scrollWidth+NL;});',
   'var fr=document.querySelector(".slide-frame").getBoundingClientRect();',
-  'q(".slide-head,.ept-body,.ept-logica,.ept-central,.ept-side,.ept-e,.ept-result,.ept-rc,.ept-arrow").forEach(function(e,i){var r=e.getBoundingClientRect();if(!r.width)return;var ov=[];',
+  'q(".slide-head,.ept-body,.ept-logica,.ept-central,.ept-side,.ept-e,.ept-result,.ept-rc,.ept-arrow,.ept-img,.ept-pair,.ept-fig").forEach(function(e,i){var r=e.getBoundingClientRect();if(!r.width)return;var ov=[];',
   'if(r.left<fr.left-1)ov.push("left");if(r.right>fr.right+1)ov.push("right");if(r.top<fr.top-1)ov.push("top");if(r.bottom>fr.bottom+1)ov.push("bottom");',
   'if(ov.length)o+="  frame OVERFLOW "+i+" <"+e.className+"> "+ov.join(",")+NL;});',
   'o+="tarjetas "+cards.map(function(c){return c.offsetWidth+"x"+c.offsetHeight;}).join(" ")+NL;',
@@ -86,6 +86,22 @@ const audit = [
 
 const report = [
   'var NL=String.fromCharCode(10);var o="";',
+  'var q=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};',
+  'function live(el){return el&&el.offsetParent!==null&&el.offsetHeight>0&&getComputedStyle(el).visibility!=="hidden";}',
+  'o+="== SIN FOCO =="+NL;',
+  'o+=audit();',
+  'var eb=document.querySelector(".ept-body");',
+  '["1","2","2img","3","rs"].forEach(function(k){',
+  'eb.className="ept-body ept-body--f"+k;eb.setAttribute("data-focus",k);',
+  'o+="== FOCO "+k+" =="+NL;',
+  'o+=audit();',
+  'var vi=q(".ept-img").filter(live);',
+  'o+="detalles "+vi.map(function(v){return v.className.replace("ept-img ","")+"="+v.offsetWidth+"x"+v.offsetHeight;}).join(" ")+NL;',
+  'var im=q(".ept-img .ept-fig img").filter(function(i){return getComputedStyle(i.closest(".ept-img")).visibility==="visible";});',
+  'o+="imagenes "+im.map(function(i){return i.getAttribute("src").split("/").pop();}).join(",")+NL;',
+  '});',
+  'eb.className="ept-body";eb.removeAttribute("data-focus");',
+  'o+="== RESTAURADO =="+NL;',
   'o+=audit();',
   'var pre=document.createElement("pre");pre.id="report";pre.textContent=o;' +
   'pre.style.cssText="position:fixed;left:-9999px;top:0;z-index:0;";' +
@@ -106,4 +122,36 @@ const shell = [
 
 fs.writeFileSync(path.join(OUT, 'ept_shot.html'),
   shell + boot + audit + 'try{' + report + '}catch(e){var ep=document.createElement("pre");ep.id="err";ep.textContent=e&&e.stack?e.stack:String(e);document.body.appendChild(ep);}' + '</script></body></html>');
-console.log('ok ept_shot.html');
+
+/* Capturas: estado normal y los estados de foco (pt1, pt2, pt3, nivel 2 pt4 y
+   resultado esperado pt5). */
+function shot(focus) {
+  const apply = focus
+    ? 'setTimeout(function(){var b=document.querySelector(".ept-body");'
+      + 'b.className="ept-body ept-body--f' + focus + '";b.setAttribute("data-focus","' + focus + '");'
+      + 'document.querySelector(".ept-subtitle").textContent="Clic fuera de la imagen o tecla ESC para volver a la vista completa";},60);'
+    : '';
+  return shell + boot + apply + '</script></body></html>';
+}
+['1', '2', '2img', '3', 'rs'].forEach(function (k) {
+  fs.writeFileSync(path.join(OUT, 'ept_shot_f' + k + '.html'), shot(k));
+});
+
+/* Copia las imágenes referenciadas por la lámina a out/assets/ para las
+   capturas headless (el slide 9 cuelga ahora assets/pt1..pt4.png). */
+var ASSET_OUT = path.join(OUT, 'assets');
+function copiarAssets(dir) {
+  fs.readdirSync(dir, { withFileTypes: true }).forEach(function (e) {
+    var src = path.join(dir, e.name);
+    var dst = path.join(ASSET_OUT, path.relative(path.join(ROOT, 'assets'), src));
+    if (e.isDirectory()) {
+      fs.mkdirSync(dst, { recursive: true });
+      copiarAssets(src);
+    } else {
+      fs.copyFileSync(src, dst);
+    }
+  });
+}
+if (!fs.existsSync(ASSET_OUT)) fs.mkdirSync(ASSET_OUT, { recursive: true });
+copiarAssets(path.join(ROOT, 'assets'));
+console.log('capturas: ept_shot.html + f1/f2/f2img/f3/frs; assets copiados a out/assets');

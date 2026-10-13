@@ -21,5 +21,7 @@ window.SLIDES = [
   { id: 6, key: 'resultados', label: 'Resultados' },
   { id: 7, key: 'resultados2', label: 'Resultados (2)' },
   { id: 8, key: 'resultados3', label: 'Resultados (3)' },
-  { id: 9, key: 'ept', label: 'Transformación' }
+  { id: 9, key: 'ept', label: 'Transformación' },
+  { id: 10, key: 'validacion', label: 'Validación' },
+  { id: 11, key: 'conclusiones', label: 'Conclusiones' }
 ];

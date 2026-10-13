@@ -113,7 +113,14 @@
     { sel: 'rs2-body', cls: 'rs2-body--f', keys: ['ne', 'np', 'nc', 'nr', 'ni', 'f1'] },
     { sel: 'rs3-body', cls: 'rs3-body--f',
       keys: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p1i', 'p2i', 'p3i', 'p4i', 'p5i', 'p6i'],
-      parents: { p1i: 'p1', p2i: 'p2', p3i: 'p3', p4i: 'p4', p5i: 'p5', p6i: 'p6' } }
+      parents: { p1i: 'p1', p2i: 'p2', p3i: 'p3', p4i: 'p4', p5i: 'p5', p6i: 'p6' } },
+    { sel: 'ept-body', cls: 'ept-body--f',
+      keys: ['1', '2', '2img', '3', 'rs'] },
+    { sel: 'vl-body', cls: 'vl-body--f',
+      keys: ['r1', 'r2', 'r3', 'rn'] },
+    { sel: 'cn-body', cls: 'cn-body--f',
+      keys: ['zb1', 'zb2', 'zb3', 'zb4', 'zb5', 'zb6', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6'],
+      parents: { b1: 'zb1', b2: 'zb2', b3: 'zb3', b4: 'zb4', b5: 'zb5', b6: 'zb6' } }
   ];
 
   /* Niveles anidados: al cerrar un nivel con `parents[key]`, se vuelve a ese
@@ -141,7 +148,10 @@
     'md-body': { nodes: ['.md-top', '.md-panel--mapa'], pad: '6px 20px 12px', gap: '8px' },
     'rs-body': { nodes: ['.rs-cols'], pad: '4px 20px 12px', gap: '8px' },
     'rs2-body': { nodes: ['.rs2-cols'], pad: '4px 20px 12px', gap: '8px' },
-    'rs3-body': { nodes: ['.rs3-cols'], pad: '4px 20px 12px', gap: '8px' }
+    'rs3-body': { nodes: ['.rs3-cols'], pad: '4px 20px 12px', gap: '8px' },
+    'ept-body': { nodes: ['.ept-logica', '.ept-central', '.ept-result', '.ept-rc'], pad: '6px 22px 8px', gap: '7px' },
+    'vl-body': { nodes: ['.vl-map', '.vl-synth'], pad: '6px 22px 8px', gap: '8px' },
+    'cn-body': { nodes: ['.cn-flow', '.cn-strata', '.cn-node-row', '.cn-aporte'], pad: '6px 22px 8px', gap: '6px' }
   };
 
   function ghostSlide(el) {

@@ -2,7 +2,7 @@
    Configuración del diagrama esquemático ejecutivo según el documento
    EPTransf.md ("Instrucciones específicas para la realización del diagrama"):
    una única lámina que comunica, en cinco franjas, la lógica de la propuesta
-     - Lógica de transformación (4 nodos);
+      - Secuencia de transformación (4 nodos);
      - Fundamento · Etapa 1 · Etapa 2 · Etapa 3 · Propósito (franja central);
      - Resultado esperado (3 nodos);
      - Recursos clave (banda inferior).
@@ -13,9 +13,9 @@ window.EPT = {
   title: 'Estructura de la propuesta de transformación',
   subtitle: 'Secuencia metodológica orientada al fortalecimiento de la gestión preventiva en proyectos de construcción de edificaciones e infraestructura básica en Quito',
 
-  /* Franja superior: lógica de transformación (cuatro nodos en secuencia). */
+  /* Franja superior: secuencia de transformación (cuatro nodos en cadena). */
   logica: {
-    key: 'Lógica de transformación',
+    key: 'Secuencia de transformación',
     nodos: [
       { icono: 'balance', texto: 'Análisis normativo' },
       { icono: 'search', texto: 'Verificación técnica' },

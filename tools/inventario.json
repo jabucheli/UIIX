@@ -1,5 +1,5 @@
 {
-  "proyecto": "tes",
+  "proyecto": "presentacion",
   "descripcion": "Carpeta maestra de la tesis doctoral (presentacion web + herramientas + fuentes). El manifiesto de lo que DEBE estar en la carpeta para poder retomar el trabajo en este u otro computador. Lo lee tools/verificar-inventario.js.",
   "archivosReq": [
     ".gitignore",
@@ -90,6 +90,10 @@
     "presentacion-web/assets/nd-res1.png",
     "presentacion-web/assets/procesos1.png",
     "presentacion-web/assets/procesos2.png",
+    "presentacion-web/assets/pt1.png",
+    "presentacion-web/assets/pt2.png",
+    "presentacion-web/assets/pt3.png",
+    "presentacion-web/assets/pt4.png",
     "presentacion-web/assets/ref-norm.png",
     "presentacion-web/assets/riesgos-res.png",
     "presentacion-web/assets/riesgos-res1.png",
@@ -131,7 +135,7 @@
   ],
   "hermana": {
     "carpeta": "../tesis",
-    "nota": "La app de evaluacion de riesgos vive en la carpeta HERMANA tesis/0. El slide 7 la embebe; reanudar.cmd y gen_slide7_shot.js comprueban que exista. Las dos carpetas deben copiarse juntas (tes y tesis).",
+    "nota": "La app de evaluacion de riesgos vive en la carpeta HERMANA tesis/0. El slide 7 la embebe; reanudar.cmd y gen_slide7_shot.js comprueban que exista. Las dos carpetas deben copiarse juntas (presentacion y tesis).",
     "archivos": [
       "AGENTS.md",
       "0/index.html",

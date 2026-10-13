@@ -2,7 +2,7 @@
 /*
  * verificar-inventario.js
  *
- * Comprueba que la carpeta tes contiene TODO lo necesario para retomar el
+ * Comprueba que la carpeta presentacion contiene TODO lo necesario para retomar el
  * trabajo en este u otro computador, a partir de tools/inventario.json.
  *
  * Uso:
@@ -18,7 +18,7 @@
  * Notas:
  * - Los directorios/carpetas "generadas" (tools/node_modules, tools/out, ...)
  *   NO son requeridas: se regeneran y no viajan entre equipos.
- * - La carpeta hermanna ../tesis DEBE existir al lado de tes.
+ * - La carpeta hermanna ../tesis DEBE existir al lado de presentacion.
  * - Lo que git tenga sin commitear se informa como aviso: no rompe la
  *   verificación de "presencia física", pero sin commit el código no viaja en
  *   git (sí viaja en el paquete de tools/traspaso.cmd).
@@ -106,7 +106,7 @@ const sinCommit = [];
 const borrados = [];
 const hayGit = fs.existsSync(path.join(tes, '.git'));
 if (!hayGit) {
-  avisos.push('sin carpeta .git (copia extraída del paquete de traspaso): el historial se restaura con historial-tes.bundle.');
+  avisos.push('sin carpeta .git (copia extraída del paquete de traspaso): el historial se restaura con historial-presentacion.bundle.');
 } else {
   try { git = spawnSync('git', ['-C', tes, 'status', '--porcelain', '--branch'], { encoding: 'utf8' }); }
   catch (e) { git = null; }
@@ -148,7 +148,7 @@ for (const a of avisos) console.log('  [!] ' + a);
 console.log('\n[GIT] ' + (hayGit ? ('rama ' + (gitBranch || '(no detectada)')) : 'sin repositorio .git en esta copia'));
 const totalGC = sinCommit.length + borrados.length;
 if (!hayGit) {
-  console.log('  (nada que comprobar: el historial se restaura con historial-tes.bundle)');
+  console.log('  (nada que comprobar: el historial se restaura con historial-presentacion.bundle)');
 } else if (totalGC === 0) {
   console.log('  Arbol limpio: nada pendiente de commit.');
 } else {

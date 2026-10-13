@@ -4,7 +4,7 @@ param(
     [string]$Stamp = ''
 )
 
-# Empaqueta el arbol de staging (tes + tesis + respaldos + historial + LEEME)
+# Empaqueta el arbol de staging (presentacion + tesis + respaldos + historial + LEEME)
 # en un unico .zip. Lo llama tools/traspaso.cmd paquete.
 # Uso:
 #   powershell -NoProfile -ExecutionPolicy Bypass -File traspaso-empaquetar.ps1 `
@@ -15,16 +15,16 @@ $ErrorActionPreference = 'Stop'
 if ($Stamp -eq '') { $Stamp = Get-Date -Format 'yyyyMMdd-HHmm' }
 if ($Out -eq '')   { $Out = Join-Path $PSScriptRoot 'out\traspaso' }
 
-if (-not (Test-Path $Tree) -or -not (Test-Path (Join-Path $Tree 'tes'))) {
+if (-not (Test-Path $Tree) -or -not (Test-Path (Join-Path $Tree 'presentacion'))) {
     throw "No existe el arbol de staging en: $Tree"
 }
 
 $items = @()
-foreach ($n in @('tes', 'tesis', 'LEEME.txt')) {
+foreach ($n in @('presentacion', 'tesis', 'LEEME.txt')) {
     $p = Join-Path $Tree $n
     if (Test-Path $p) { $items += , $p }
 }
-foreach ($n in @('datos-respaldo', 'historial-tes.bundle', 'historial-tesis.bundle')) {
+foreach ($n in @('datos-respaldo', 'historial-presentacion.bundle', 'historial-tesis.bundle')) {
     $p = Join-Path $Tree $n
     if (Test-Path $p) { $items += , $p }
 }
@@ -32,7 +32,7 @@ foreach ($n in @('datos-respaldo', 'historial-tes.bundle', 'historial-tesis.bund
 if ($items.Count -eq 0) { throw 'No hay nada que empaquetar en el arbol de staging' }
 
 if (-not (Test-Path $Out)) { New-Item -ItemType Directory -Path $Out -Force | Out-Null }
-$zip = Join-Path $Out ("tes-tesis-" + $Stamp + ".zip")
+$zip = Join-Path $Out ("presentacion-tesis-" + $Stamp + ".zip")
 
 Compress-Archive -Path $items -DestinationPath $zip -Force
 

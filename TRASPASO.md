@@ -1,6 +1,6 @@
-# Traspaso y guardado de la carpeta `tes`
+# Traspaso y guardado de la carpeta `presentacion`
 
-Procedimiento para garantizar que la carpeta `tes` **contiene guardado todo lo
+Procedimiento para garantizar que la carpeta `presentacion` **contiene guardado todo lo
 necesario** para retomar el trabajo en este u otro computador. Es el complemento
 práctico de `CONTINUIDAD.md`: aquí se describe el **proceso de cierre**
 (dejar la carpeta lista para guardar/llevar) y el de **apertura** (ponerla en
@@ -10,7 +10,7 @@ Herramientas:
 
 | Archivo | Qué hace |
 |---|---|
-| `tools/inventario.json` | Manifiesto: archivos y carpetas que DEBEN existir en `tes` (más la hermana `tesis`). |
+| `tools/inventario.json` | Manifiesto: archivos y carpetas que DEBEN existir en `presentacion` (más la hermana `tesis`). |
 | `tools/verificar-inventario.js` | Comprueba el manifiesto y avisa de lo que git tiene sin commitear. `node tools/verificar-inventario.js`. |
 | `tools/traspaso.cmd` | Orquestador: inventario → (opcional verificación completa) → **genera el `.zip` portable** en `tools\out\traspaso\`. |
 | `tools/traspaso-empaquetar.ps1` | Empaquetador (lo llama `traspaso.cmd`): comprime `tes` + `tesis` + respaldos. |
@@ -29,9 +29,9 @@ Todo el árbol de `tes` **excepto** lo que se regenera y la basura:
 | Fuentes: `Ejemplo.pptx`, `*.docx`, `*.md`, imágenes, `fotos\` | dump temporal `f`, `*.out`, `*.tmp` |
 | `tesis\` (carpeta **hermana**): la app `0\` de evaluación NTP 330 | `tesis\0\pruebas\out\` (se regenera) |
 
-> **Regla de oro:** `tes` y `tesis` son **carpetas hermanas** y viajan juntas. La
+> **Regla de oro:** `presentacion` y `tesis` son **carpetas hermanas** y viajan juntas. La
 > presentación embebe la app del slide 7 desde `tesis\0`, y `reanudar.cmd`
-> comprueba que exista. Si se copia `tes` sola, falta la app.
+> comprueba que exista. Si se copia `presentacion` sola, falta la app.
 
 El verificador (`inventario.json` + `verificar-inventario.js`) es quien da fe de
 que todo lo de la columna «Va» está físicamente presente.
@@ -56,7 +56,7 @@ traspaso.cmd               # 1. inventario + estado git
    ```bash
    cd ..\..\tesis      # (solo si hay cambios en la app)
    git add -A && git commit -m "Descripción breve en español"
-   cd ..\tes\tools
+   cd ..\presentacion\tools
    git -C .. add -A && git -C .. commit -m "Descripción breve en español"
    ```
 
@@ -66,13 +66,13 @@ traspaso.cmd               # 1. inventario + estado git
    traspaso.cmd paquete     # o: traspaso.cmd todo  (agrega verify-all completo)
    ```
 
-   Genera `tools\out\traspaso\tes-tesis-AAAAMMDD-HHMM.zip` que contiene:
+   Genera `tools\out\traspaso\presentacion-tesis-AAAAMMDD-HHMM.zip` que contiene:
 
-   - `tes\` — todo el árbol (sin `.git`, sin `node_modules`, sin `tools\out`, sin basura).
+   - `presentacion\` — todo el árbol (sin `.git`, sin `node_modules`, sin `tools\out`, sin basura).
    - `tesis\` — la app hermana completa (sin `.git`, sin `0\pruebas\out`).
    - `datos-respaldo\` — copias JSON de las evaluaciones si existen en
      `..\..\tesis\0\pruebas\out\respaldos`.
-   - `historial-tes.bundle` / `historial-tesis.bundle` — historial git completo.
+   - `historial-presentacion.bundle` / `historial-tesis.bundle` — historial git completo.
    - `LEEME.txt` — instrucciones de restauración.
 
 4. Opcional, para asegurar que el zip sirve: extraerlo en una carpeta temporal
@@ -86,19 +86,19 @@ traspaso.cmd               # 1. inventario + estado git
 
 ## 3. Proceso de apertura (en otro computador)
 
-Con el `tes-tesis-*.zip` en el equipo nuevo:
+Con el `presentacion-tesis-*.zip` en el equipo nuevo:
 
 1. Instalar **Node.js 22 o superior** (npm incluido). Chrome solo hace falta si
    se quieren capturas/verificación visual.
 2. Descomprimir el zip en la carpeta donde vayan a vivir las dos carpetas,
-   **habiendo `tes\` y `tesis\` al mismo nivel** (ej. `D:\ejemplo\tes` y
+   **habiendo `presentacion\` y `tesis\` al mismo nivel** (ej. `D:\ejemplo\presentacion` y
    `D:\ejemplo\tesis`).
 3. Primera vez, instalar las dependencias de verificación y comprobar:
 
    ```bash
-   cd tes\tools
+   cd presentacion\tools
    npm install
-   reanudar.cmd            # entorno + verificación completa (54/54 + 549/549)
+   reanudar.cmd            # entorno + verificación completa (54/54 + 712/712)
    ```
 
    Si Chrome no está en `C:\Program Files\Google\Chrome\Application\chrome.exe`,
@@ -109,16 +109,16 @@ Con el `tes-tesis-*.zip` en el equipo nuevo:
 5. Si el paquete trae `datos-respaldo\*.json` (evaluaciones de la app): abrir
    `tesis\0\index.html` → pestaña **Catálogo** → **Restaurar respaldo**.
 6. Historial git (opcional, para recuperar los commits): en una carpeta vacía,
-   `git bundle unbundle historial-tes.bundle` / `historial-tesis.bundle`, o
-   `git clone historial-tes.bundle tes`.
+   `git bundle unbundle historial-presentacion.bundle` / `historial-tesis.bundle`, o
+   `git clone historial-presentacion.bundle presentacion`.
 
 Documentación de referencia una vez dentro:
 
 | Doc | Qué es |
 |---|---|
-| `tes\CONTINUIDAD.md` | Cómo retomar el trabajo en este u otro equipo. |
-| `tes\TRASPASO.md` | Este documento. |
-| `tes\EPTransf.md` | Especificación de la propuesta de transformación (EPT). |
+| `presentacion\CONTINUIDAD.md` | Cómo retomar el trabajo en este u otro equipo. |
+| `presentacion\TRASPASO.md` | Este documento. |
+| `presentacion\EPTransf.md` | Especificación de la propuesta de transformación (EPT). |
 | `tesis\AGENTS.md` | Reglas de la aplicación de evaluación de riesgos. |
 | `tesis\0\docs\ESTADO.md` | Estado y pendientes de la app NTP 330. |
 

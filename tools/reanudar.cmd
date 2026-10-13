@@ -49,7 +49,7 @@ if exist "%CHROME%" (
 if not exist "..\..\tesis\0\index.html" (
   echo   FALTA la app hermana ..\..\tesis\0\index.html
   echo   La presentacion la embebe desde el bloque Riesgo del slide 7.
-  echo   Deben existir como carpetas hermanas:  D:\ejemplo\tes  y  D:\ejemplo\tesis
+  echo   Deben existir como carpetas hermanas:  D:\ejemplo\presentacion  y  D:\ejemplo\tesis
   exit /b 1
 )
 echo   app hermana OK: ..\..\tesis\0
@@ -79,7 +79,7 @@ echo.
 echo ============================================================
 echo  [4/5] Estado git (hay cambios sin confirmar?)
 echo ============================================================
-git -C .. status --short --branch 2>nul || echo   (tes no es un repo git)
+git -C .. status --short --branch 2>nul || echo   (presentacion no es un repo git)
 echo   --------------------------------
 git -C ..\..\tesis status --short --branch 2>nul || echo   (tesis no es un repo git)
 

@@ -5177,9 +5177,10 @@ body.is-fullscreen-presentation .slide-foot {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   gap: 7px;
   padding: 6px 22px 8px;
+  position: relative;
 }
 
 /* Encabezados de franja (mayúsculas, verde o rojo oscuro, centrados). */
@@ -5262,9 +5263,13 @@ body.is-fullscreen-presentation .slide-foot {
   flex-wrap: nowrap;
 }
 
-/* Franja central: laterales + tres etapas en flujo. */
+/* Franja central: laterales + tres etapas en flujo.
+   Alto fijo al 75% del anterior (412px → 309px): la franja deja de
+   estirarse al alto de la lámina y el resultado esperado queda a
+   continuación. Los laterales la igualan con align-items: stretch. */
 .ept-central {
-  flex: 1 1 0;
+  flex: 0 0 auto;
+  height: 309px; /* 75% del alto anterior de 412px */
   min-height: 0;
   display: flex;
   align-items: stretch;
@@ -5272,7 +5277,7 @@ body.is-fullscreen-presentation .slide-foot {
 }
 
 .ept-side {
-  flex: 0 0 170.85px;
+  flex: 0 0 55.98px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -5315,7 +5320,7 @@ body.is-fullscreen-presentation .slide-foot {
 
 /* Tarjeta de etapa (verde / rojo alternados). */
 .ept-e {
-  flex: 1 1 0;
+  flex: 0.41 1 0;
   min-width: 0;
   min-height: 100%;
   display: flex;
@@ -5332,11 +5337,11 @@ body.is-fullscreen-presentation .slide-foot {
 
 .ept-e-head {
   flex: 0 0 auto;
-  padding: 5px 4px;
+  padding: 7px 4px;
   color: #fff;
   text-align: center;
   font-family: var(--font-title);
-  font-size: 11px;
+  font-size: 13.2px; /* +20% sobre los 11px anteriores */
   letter-spacing: 2.6px;
 }
 
@@ -5418,8 +5423,8 @@ body.is-fullscreen-presentation .slide-foot {
 .ept-e-rec {
   flex: 0 0 auto;
   border-top: 1px dashed var(--line);
-  padding: 2px 8px 3px;
-  margin-top: auto;
+  padding: 1px 8px 2px;
+  margin-top: 0;
 }
 
 .ept-e-rec-k {
@@ -5462,7 +5467,9 @@ body.is-fullscreen-presentation .slide-foot {
 .ept-e--green .ept-e-out { background: var(--ept-verde-claro); color: var(--ept-verde-osc); }
 .ept-e--red .ept-e-out { background: var(--ept-rojo-claro); color: var(--ept-rojo-osc); }
 
-/* Franja de resultado esperado (fondo rojo suave, encabezado rojo oscuro). */
+/* Franja de resultado esperado (fondo rojo suave, encabezado rojo oscuro).
+   Sin margin-top:auto: queda pegada a la franja central (las etapas),
+   no flotando sobre el fondo de la lámina. */
 .ept-result {
   flex: 0 0 auto;
   display: flex;
@@ -5473,7 +5480,6 @@ body.is-fullscreen-presentation .slide-foot {
   background: var(--ept-rojo-claro);
   border: 1px solid #e7bfc2;
   border-radius: 10px;
-  margin-top: auto;
 }
 
 .ept-rs-k { color: var(--ept-rojo-osc); }
@@ -5538,4 +5544,1232 @@ body.is-fullscreen-presentation .slide-foot {
 .ept-rc-sep {
   color: var(--light);
   font-size: 11px;
+}
+
+/* --- Slide 9 · foco por clic en las etapas (imágenes assets/pt1..pt4) --------
+   Al pulsar una tarjeta de etapa, el cuerpo recibe la clase ept-body--fN y se
+   muestra su imagen a máximo tamaño, en primer plano, con el ghost de la
+   lámina (app.js) atenuado detrás. El efecto de aparición es una proyección
+   simple: de menos a más al abrir (escala .5 -> 1) y de más a menos al cerrar
+   (transiciones de transform + opacity; la visibilidad se retrasa al ocultar
+   para que se vea la salida). El panel no lleva data-focus: clic fuera de la
+   imagen (o ESC) vuelve a la vista principal. */
+.ept-img {
+  display: flex;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
+  z-index: 3;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 18px;
+  background: rgba(240, 240, 242, 0.72);
+  border: 1px solid var(--ept-verde-claro);
+  border-radius: 12px;
+  box-shadow: 0 0 0 3px rgba(0, 110, 73, 0.18), 0 18px 48px rgba(38, 38, 38, 0.3);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0s linear 0.28s;
+}
+
+.ept-img-cap {
+  font-family: var(--font-title);
+  font-size: 13.2px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ept-verde-osc);
+  text-align: center;
+}
+
+.ept-fig {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+  transform: scale(0.5);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.3s ease;
+}
+
+.ept-fig img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(38, 38, 38, 0.22);
+}
+
+.ept-fig[data-focus="1"],
+.ept-fig[data-focus="2"],
+.ept-fig[data-focus="rs"] { cursor: zoom-out; }
+
+/* Segundo nivel de la Etapa 2: dos mapas de riesgos (edificación e
+   infraestructura) en paralelo, uno al lado del otro. */
+.ept-pair {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  gap: 14px;
+}
+
+.ept-pair .ept-fig {
+  flex: 1 1 50%;
+  cursor: zoom-out;
+}
+
+.ept-body--f1 .ept-img--1,
+.ept-body--f2 .ept-img--2,
+.ept-body--f2img .ept-img--2b,
+.ept-body--f3 .ept-img--3,
+.ept-body--frs .ept-img--5 {
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0s;
+}
+
+.ept-body--f1 .ept-img--1 .ept-fig,
+.ept-body--f2 .ept-img--2 .ept-fig,
+.ept-body--f2img .ept-img--2b .ept-fig,
+.ept-body--f3 .ept-img--3 .ept-fig,
+.ept-body--frs .ept-img--5 .ept-fig {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ============ DIAPOSITIVA 10 - VALIDACIÓN ============
+   Mapa mental interactivo del proceso de validación por método Delphi
+   (1Validacion.md / Validacion.docx): nodo central «Validación de la
+   propuesta», rama izquierda del panel de 8 expertos, tres rondas
+   (Ronda 1 verde aceptación inicial, Ronda 2 roja evaluación técnica,
+   Ronda 3 verde consenso final) y banda inferior de síntesis. Al hacer clic
+   en cada ronda (o en la síntesis) se abre un modal con su tabla. Mantiene la
+   paleta verde/rojo del deck (mismos tintes que el slide 9), la cabecera con
+   título + subtítulo, la regla roja/verde, el .slide-logo y el .slide-foot.
+   Nota: la paleta de 1Validacion.md (#087A59/#C9252D) se alinea con los tokens
+   ya establecidos del deck (#006e49/#c0242a) para conservar el formato. */
+.slide-validacion {
+  --vl-verde: #006e49;
+  --vl-verde-osc: #005a40;
+  --vl-verde-claro: #eaf6f1;
+  --vl-rojo: #c0242a;
+  --vl-rojo-osc: #9e1d23;
+  --vl-rojo-claro: #fcedee;
+  --vl-gris: #eff3f4;
+  --vl-line: #c9d1d5;
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(0, 110, 73, .07), rgba(255, 255, 255, 0) 44%),
+    radial-gradient(ellipse at 88% 100%, rgba(192, 36, 42, .07), rgba(255, 255, 255, 0) 46%),
+    #ffffff;
+}
+
+.slide-validacion .slide-head { height: 92px; }
+
+.vl-subtitle {
+  font-size: 11px;
+  letter-spacing: 2.2px;
+  color: var(--gray);
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 2px;
+  max-width: 78%;
+  line-height: 1.3;
+}
+
+.vl-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  padding: 6px 22px 8px;
+  position: relative;
+}
+
+/* --- mapa mental: panel · núcleo central · tres rondas ------------------- */
+.vl-map {
+  flex: 0 0 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1.06fr) minmax(0, 1fr);
+  grid-template-areas:
+    ".     r1   ."
+    "panel core r2"
+    ".     r3   .";
+  gap: 8px 10px;
+  position: relative;
+}
+
+.vl-links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.vl-links line {
+  stroke: var(--vl-line);
+  stroke-width: 0.4;
+  stroke-dasharray: 2 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.vl-panel { grid-area: panel; }
+.vl-core { grid-area: core; }
+.vl-round[data-focus="r1"] { grid-area: r1; }
+.vl-round[data-focus="r2"] { grid-area: r2; }
+.vl-round[data-focus="r3"] { grid-area: r3; }
+
+/* Rama izquierda: panel de expertos (mismo formato que Ronda 2, en rojo del panel). */
+.vl-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 0;
+  padding: 8px 10px 9px;
+  background: var(--vl-rojo-claro);
+  border: 1px solid var(--vl-rojo);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.vl-panel .vl-r-ico { background: var(--vl-rojo); }
+.vl-panel .vl-r-num { color: var(--vl-rojo-osc); }
+.vl-panel .vl-r-dic { background: var(--vl-rojo); }
+
+/* Núcleo central: elipse verde oscuro con el método. */
+.vl-core {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+  padding: 14px 22px;
+  background: var(--vl-verde-osc);
+  color: #fff;
+  border: 2px solid var(--vl-verde-claro);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--vl-line), 0 12px 26px rgba(0, 90, 64, .3);
+}
+
+.vl-core-ico {
+  display: flex;
+  color: #fff;
+  opacity: .92;
+  margin-bottom: 2px;
+}
+
+.vl-core-t {
+  font-family: var(--font-title);
+  font-size: 19px;
+  line-height: 1.12;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.vl-core-m {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .4px;
+}
+
+.vl-core-d {
+  font-size: 11px;
+  opacity: .92;
+}
+
+.vl-core-c {
+  margin-top: 3px;
+  max-width: 96%;
+  font-size: 8.4px;
+  line-height: 1.3;
+  opacity: .82;
+}
+
+/* Bloques de ronda (verde / rojo alternados, clicables). */
+.vl-round {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 0;
+  padding: 8px 10px 9px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.vl-round--green {
+  background: var(--vl-verde-claro);
+  border: 1px solid var(--vl-verde-osc);
+}
+
+.vl-round--red {
+  background: var(--vl-rojo-claro);
+  border: 1px solid var(--vl-rojo-osc);
+}
+
+.vl-round[data-focus],
+.vl-synth[data-focus] { cursor: pointer; }
+
+.vl-r-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vl-r-ico {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.vl-round--green .vl-r-ico { background: var(--vl-verde); }
+.vl-round--red .vl-r-ico { background: var(--vl-rojo); }
+
+.vl-r-num {
+  font-family: var(--font-title);
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.vl-round--green .vl-r-num { color: var(--vl-verde-osc); }
+.vl-round--red .vl-r-num { color: var(--vl-rojo-osc); }
+
+.vl-r-etapa {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.vl-r-props {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.vl-r-prop {
+  font-size: 9.3px;
+  color: var(--gray);
+  background: #fff;
+  border: 1px solid var(--vl-line);
+  border-radius: 20px;
+  padding: 1px 7px;
+  white-space: nowrap;
+}
+
+.vl-r-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 9.3px;
+  color: var(--gray);
+  line-height: 1.28;
+}
+
+.vl-r-meta-i b {
+  color: var(--mid);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.vl-r-res {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+
+.vl-r-res-i {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.vl-round--green .vl-r-res-i:first-child { color: var(--vl-verde-osc); }
+.vl-round--red .vl-r-res-i:first-child { color: var(--vl-rojo-osc); }
+
+.vl-r-dic {
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 6px;
+  padding: 3px 10px;
+}
+
+.vl-round--green .vl-r-dic { background: var(--vl-verde); }
+.vl-round--red .vl-r-dic { background: var(--vl-rojo); }
+
+/* --- banda inferior: síntesis del proceso --------------------------------- */
+.vl-synth {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 7px 14px;
+  background: var(--vl-gris);
+  border: 1px solid var(--vl-line);
+  border-radius: 10px;
+}
+
+.vl-syn-l {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.vl-syn-k {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-title);
+  font-size: 10.5px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.vl-syn-ico { display: flex; color: var(--mid); }
+
+.vl-syn-flow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.vl-syn-node {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray);
+  white-space: nowrap;
+}
+
+.vl-syn-arrow { display: flex; color: var(--light); }
+
+.vl-syn-concl {
+  font-size: 9.5px;
+  font-style: italic;
+  color: var(--mid);
+}
+
+.vl-syn-r {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex: 0 0 auto;
+}
+
+.vl-caps {
+  display: flex;
+  gap: 6px;
+}
+
+.vl-cap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 7px;
+  padding: 2px 9px;
+}
+
+.vl-cap em {
+  font-style: normal;
+  font-size: 7.6px;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  opacity: .85;
+}
+
+.vl-cap b { font-size: 11px; }
+
+.vl-cap--green {
+  background: var(--vl-verde-claro);
+  color: var(--vl-verde-osc);
+  border: 1px solid var(--vl-verde);
+}
+
+.vl-cap--red {
+  background: var(--vl-rojo-claro);
+  color: var(--vl-rojo-osc);
+  border: 1px solid var(--vl-rojo);
+}
+
+.vl-syn-dic {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--vl-verde-osc);
+}
+
+.vl-note {
+  margin: 0;
+  text-align: center;
+  font-size: 8.8px;
+  font-style: italic;
+  color: var(--light);
+}
+
+/* --- modales: tabla resumida de cada ronda y síntesis comparativa --------- */
+.vl-modal {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(240, 240, 242, .72);
+  border: 1px solid var(--vl-verde-claro);
+  border-radius: 12px;
+  box-shadow: 0 0 0 3px rgba(0, 110, 73, .18), 0 18px 48px rgba(38, 38, 38, .3);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0s linear 0.28s;
+}
+
+.vl-card {
+  width: min(760px, 94%);
+  max-height: 100%;
+  overflow: auto;
+  padding: 14px 18px 16px;
+  background: #fff;
+  border-radius: 12px;
+  border-top: 5px solid var(--vl-verde);
+  box-shadow: 0 14px 36px rgba(38, 38, 38, .26);
+  transform: scale(0.86);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.3s ease;
+}
+
+.vl-card--red { border-top-color: var(--vl-rojo); }
+.vl-modal--rn .vl-card { width: min(1180px, 97%); }
+
+.vl-card-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.vl-card-k {
+  font-family: var(--font-title);
+  font-size: 15px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--vl-verde-osc);
+}
+
+.vl-card--red .vl-card-k { color: var(--vl-rojo-osc); }
+
+.vl-card-x {
+  appearance: none;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--vl-line);
+  border-radius: 7px;
+  color: var(--mid);
+  cursor: pointer;
+}
+
+.vl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.vl-table th,
+.vl-table td {
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--vl-line);
+  vertical-align: top;
+}
+
+.vl-table th {
+  width: 62%;
+  text-align: left;
+  font-weight: 600;
+  color: var(--mid);
+}
+
+.vl-table td {
+  text-align: right;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.vl-table tr:last-child th,
+.vl-table tr:last-child td { border-bottom: none; }
+
+.vl-card-p {
+  margin: 12px 0 0;
+  font-size: 11px;
+  color: var(--gray);
+}
+
+.vl-table--comp { font-size: 9.6px; }
+
+.vl-table--comp th,
+.vl-table--comp td {
+  width: auto;
+  text-align: left;
+  white-space: normal;
+  vertical-align: top;
+}
+
+.vl-table--comp thead th {
+  font-size: 8.4px;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: var(--vl-verde-osc);
+}
+
+.vl-table--comp td {
+  font-weight: 400;
+  color: var(--gray);
+}
+
+.vl-table--comp td:first-child {
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.vl-body--fr1 .vl-modal--r1,
+.vl-body--fr2 .vl-modal--r2,
+.vl-body--fr3 .vl-modal--r3,
+.vl-body--frn .vl-modal--rn {
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0s;
+}
+
+.vl-body--fr1 .vl-modal--r1 .vl-card,
+.vl-body--fr2 .vl-modal--r2 .vl-card,
+.vl-body--fr3 .vl-modal--r3 .vl-card,
+.vl-body--frn .vl-modal--rn .vl-card {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ============ DIAPOSITIVA 11 - CONCLUSIONES ============
+   Estructura híbrida (Conclusiones.md / CONCLUSIONES.docx): seis tarjetas
+   verticales encadenadas 1 -> 6 con flechas horizontales, conectores radiales
+   (SVG Bézier) hacia un nodo central inferior «CONCLUSIONES», y franja de
+   APORTE CENTRAL. Al hacer clic en cada bloque se abre su conclusión completa
+   transcrita de CONCLUSIONES.docx. Mantiene la paleta verde/rojo del deck
+   (mismos tintes que los slides 9-10), la cabecera con título + subtítulo, la
+   regla roja/verde, el .slide-logo y el .slide-foot. */
+.slide-conclusiones {
+  --cn-verde: #006e49;
+  --cn-verde-osc: #005a40;
+  --cn-verde-claro: #eaf6f1;
+  --cn-rojo: #c0242a;
+  --cn-rojo-osc: #9e1d23;
+  --cn-rojo-claro: #fcedee;
+  --cn-gris: #eff3f4;
+  --cn-line: #c9d1d5;
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(0, 110, 73, .07), rgba(255, 255, 255, 0) 44%),
+    radial-gradient(ellipse at 88% 100%, rgba(192, 36, 42, .07), rgba(255, 255, 255, 0) 46%),
+    #ffffff;
+}
+
+.slide-conclusiones .slide-head { height: 92px; }
+.slide-conclusiones .slide-head h2 { color: var(--cn-verde-osc); }
+
+.cn-subtitle {
+  font-size: 11px;
+  letter-spacing: 2.2px;
+  color: var(--gray);
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 2px;
+  max-width: 84%;
+  line-height: 1.3;
+}
+
+.cn-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 22px 8px;
+  position: relative;
+}
+
+/* --- fila de tarjetas 1 -> 6 ---------------------------------------------- */
+.cn-flow {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: stretch;
+}
+
+.cn-card {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 338px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cn-card--green {
+  background: var(--cn-verde-claro);
+  border: 1px solid var(--cn-verde);
+  --cn-accent: var(--cn-verde);
+  --cn-accent-osc: var(--cn-verde-osc);
+}
+
+.cn-card--red {
+  background: var(--cn-rojo-claro);
+  border: 1px solid var(--cn-rojo);
+  --cn-accent: var(--cn-rojo);
+  --cn-accent-osc: var(--cn-rojo-osc);
+}
+
+.cn-card::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cn-accent);
+  transform: translateX(-50%);
+}
+
+.cn-card-h {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  background: var(--cn-accent);
+  color: #fff;
+}
+
+.cn-card-ico {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.cn-card-num {
+  font-family: var(--font-title);
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.cn-card-t {
+  margin: 0;
+  padding: 5px 9px 4px;
+  background: var(--cn-accent);
+  color: #fff;
+  font-family: var(--font-title);
+  font-size: 12px;
+  line-height: 1.16;
+  letter-spacing: .3px;
+}
+
+.cn-arrow {
+  flex: 0 0 auto;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1px;
+  color: var(--cn-line);
+}
+
+.cn-list {
+  margin: 0;
+  padding: 6px 9px 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cn-list li {
+  position: relative;
+  padding-left: 10px;
+  font-size: 9.2px;
+  line-height: 1.26;
+  color: var(--gray);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cn-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--cn-accent);
+}
+
+.cn-li-c {
+  display: block;
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 3px 10px;
+  border-radius: 7px;
+  background: #fff;
+  border: 1px solid var(--cn-accent);
+  color: var(--cn-accent-osc);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .4px;
+  line-height: 1.25;
+}
+
+.cn-stats {
+  display: flex;
+  gap: 5px;
+  padding: 7px 9px 0;
+}
+
+.cn-stat {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--cn-rojo);
+  border-radius: 7px;
+  padding: 3px 2px;
+}
+
+.cn-stat b {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--cn-rojo-osc);
+}
+
+.cn-stat em {
+  font-style: normal;
+  font-size: 6.8px;
+  line-height: 1.1;
+  text-align: center;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+.cn-mini { padding: 5px 9px 0; }
+
+.cn-mini-k {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-title);
+  font-size: 8.6px;
+  letter-spacing: .6px;
+  color: var(--cn-verde-osc);
+}
+
+.cn-mini-ico { display: flex; }
+
+.cn-list--mini { margin-top: 2px; gap: 2px; padding: 0; }
+.cn-list--mini li { display: flex; flex-direction: column; padding-left: 0; gap: 1px; }
+.cn-list--mini li::before { display: none; }
+.cn-list--mini b { font-size: 9px; color: var(--cn-accent-osc); }
+.cn-list--mini span { font-size: 8px; line-height: 1.14; color: var(--gray); }
+
+.cn-bgrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.cn-caja {
+  flex: 1 1 calc(50% - 4px);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--cn-accent);
+  border-radius: 7px;
+  padding: 3px 4px;
+}
+
+.cn-caja b {
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  color: var(--cn-accent-osc);
+}
+
+.cn-caja-r {
+  font-size: 6.8px;
+  letter-spacing: .3px;
+}
+
+.cn-caja-v {
+  font-size: 10px;
+  margin-top: 1px;
+}
+
+.cn-caja em.cn-caja-cv {
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  color: var(--cn-accent-osc);
+  margin-top: 2px;
+}
+
+.cn-caja em {
+  font-style: normal;
+  font-size: 6.8px;
+  line-height: 1.1;
+  text-align: center;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+.cn-checks {
+  margin: 0;
+  padding: 7px 9px 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cn-checks li {
+  display: flex;
+  gap: 5px;
+  font-size: 9px;
+  line-height: 1.22;
+  color: var(--gray);
+}
+
+.cn-checks-ico {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--cn-rojo-claro);
+  color: var(--cn-rojo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cn-card-k {
+  margin-top: auto;
+  padding: 6px 9px;
+  font-size: 8.6px;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--cn-accent-osc);
+  border-top: 1px dashed rgba(0, 0, 0, .12);
+}
+
+/* --- conectores radiales hacia el nodo central ---------------------------- */
+.cn-strata {
+  flex: 0 0 auto;
+  height: 44px;
+  position: relative;
+}
+
+.cn-links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cn-links path {
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.cn-node-row {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.cn-node {
+  position: relative;
+  width: 158px;
+  height: 158px;
+  border-radius: 50%;
+  background: var(--cn-verde-osc);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 3px solid var(--cn-verde);
+  box-shadow: 0 0 0 4px var(--cn-rojo), 0 12px 24px rgba(0, 0, 0, .18);
+}
+
+.cn-node::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cn-rojo);
+  transform: translateX(-50%);
+}
+
+.cn-node-ico { display: flex; color: #fff; }
+
+.cn-node-t {
+  font-family: var(--font-title);
+  font-size: 14px;
+  letter-spacing: 1.5px;
+}
+
+/* --- franja inferior: aporte central -------------------------------------- */
+.cn-aporte {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cn-aporte-k {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-title);
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--cn-verde-osc);
+}
+
+.cn-aporte-ico { display: flex; color: var(--cn-verde-osc); }
+
+.cn-aporte-c {
+  background: var(--cn-rojo);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 7px 18px;
+  border-radius: 30px;
+}
+
+/* --- paneles: conclusión completa de cada bloque -------------------------- */
+.cn-modal {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(240, 240, 242, .72);
+  border: 1px solid var(--cn-verde-claro);
+  border-radius: 12px;
+  box-shadow: 0 0 0 3px rgba(0, 110, 73, .18), 0 18px 48px rgba(38, 38, 38, .3);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0s linear 0.28s;
+}
+
+.cn-dialog {
+  width: min(820px, 94%);
+  max-height: 100%;
+  overflow: auto;
+  padding: 14px 18px 16px;
+  background: #fff;
+  border-radius: 12px;
+  border-top: 5px solid var(--cn-verde);
+  box-shadow: 0 14px 36px rgba(38, 38, 38, .26);
+  transform: scale(0.86);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.3s ease;
+}
+
+.cn-dialog--red { border-top-color: var(--cn-rojo); }
+
+.cn-dialog-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.cn-dialog-k {
+  font-family: var(--font-title);
+  font-size: 15px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--cn-verde-osc);
+}
+
+.cn-dialog--red .cn-dialog-k { color: var(--cn-rojo-osc); }
+
+.cn-dialog-x {
+  appearance: none;
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--cn-line);
+  border-radius: 7px;
+  color: var(--mid);
+  cursor: pointer;
+}
+
+.cn-dialog-p {
+  margin: 0 0 8px;
+  font-size: 11.5px;
+  line-height: 1.46;
+  color: var(--gray);
+}
+
+.cn-dialog-p:last-child { margin-bottom: 0; }
+
+.cn-body--fb1 .cn-modal--b1,
+.cn-body--fb2 .cn-modal--b2,
+.cn-body--fb3 .cn-modal--b3,
+.cn-body--fb4 .cn-modal--b4,
+.cn-body--fb5 .cn-modal--b5,
+.cn-body--fb6 .cn-modal--b6 {
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0s;
+}
+
+.cn-body--fb1 .cn-modal--b1 .cn-dialog,
+.cn-body--fb2 .cn-modal--b2 .cn-dialog,
+.cn-body--fb3 .cn-modal--b3 .cn-dialog,
+.cn-body--fb4 .cn-modal--b4 .cn-dialog,
+.cn-body--fb5 .cn-modal--b5 .cn-dialog,
+.cn-body--fb6 .cn-modal--b6 .cn-dialog {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* --- nivel intermedio: bloque agrandado y centrado ----------------------- */
+.cn-zoom {
+  position: absolute;
+  inset: 8px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .24s ease, visibility 0s linear .24s;
+}
+
+.cn-zoom-card {
+  flex: 0 0 auto;
+  width: 213px;
+  height: 338px;
+  transform: scale(1.72);
+  box-shadow: 0 20px 50px rgba(38, 38, 38, .34);
+}
+
+.cn-body--fzb1 .cn-zoom--b1,
+.cn-body--fzb2 .cn-zoom--b2,
+.cn-body--fzb3 .cn-zoom--b3,
+.cn-body--fzb4 .cn-zoom--b4,
+.cn-body--fzb5 .cn-zoom--b5,
+.cn-body--fzb6 .cn-zoom--b6 {
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0s;
+}
+
+.cn-body--fzb1 .cn-zoom--b1 .cn-zoom-card,
+.cn-body--fzb2 .cn-zoom--b2 .cn-zoom-card,
+.cn-body--fzb3 .cn-zoom--b3 .cn-zoom-card,
+.cn-body--fzb4 .cn-zoom--b4 .cn-zoom-card,
+.cn-body--fzb5 .cn-zoom--b5 .cn-zoom-card,
+.cn-body--fzb6 .cn-zoom--b6 .cn-zoom-card {
+  pointer-events: auto;
+}
+
+.cn-body--fzb1 .cn-flow, .cn-body--fzb1 .cn-strata, .cn-body--fzb1 .cn-node-row, .cn-body--fzb1 .cn-aporte,
+.cn-body--fzb2 .cn-flow, .cn-body--fzb2 .cn-strata, .cn-body--fzb2 .cn-node-row, .cn-body--fzb2 .cn-aporte,
+.cn-body--fzb3 .cn-flow, .cn-body--fzb3 .cn-strata, .cn-body--fzb3 .cn-node-row, .cn-body--fzb3 .cn-aporte,
+.cn-body--fzb4 .cn-flow, .cn-body--fzb4 .cn-strata, .cn-body--fzb4 .cn-node-row, .cn-body--fzb4 .cn-aporte,
+.cn-body--fzb5 .cn-flow, .cn-body--fzb5 .cn-strata, .cn-body--fzb5 .cn-node-row, .cn-body--fzb5 .cn-aporte,
+.cn-body--fzb6 .cn-flow, .cn-body--fzb6 .cn-strata, .cn-body--fzb6 .cn-node-row, .cn-body--fzb6 .cn-aporte {
+  opacity: 0;
+  visibility: hidden;
 }

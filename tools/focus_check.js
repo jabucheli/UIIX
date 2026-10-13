@@ -44,6 +44,8 @@ load('js/data/resultsData.js');
 load('js/data/resultsData2.js');
 load('js/data/resultsData3.js');
 load('js/data/transformationData.js');
+load('js/data/validationData.js');
+load('js/data/conclusionsData.js');
 load('js/data/erTables.js');
 load('js/components/justificationCard.js');
 load('js/slides/slide01Cover.js');
@@ -58,6 +60,8 @@ load('js/slides/slide08Zoom.js');
 load('js/slides/slide08Photos.js');
 load('js/slides/slide08Art.js');
 load('js/slides/slide09EPT.js');
+load('js/slides/slide10Validation.js');
+load('js/slides/slide11Conclusions.js');
 load('js/app.js');
 
 /* app.js arranca con DOMContentLoaded; en jsdom ya paso, lo disparamos a mano */
@@ -913,15 +917,21 @@ function arrastreDe(marco, x0, y0, x1, y1) {
   doc.dispatchEvent(raton('mouseup', x1, y1));
 }
 
-has(win.SLIDES.length === 9 && win.SLIDES[7].key === 'resultados3',
+has(win.SLIDES.length === 11 && win.SLIDES[7].key === 'resultados3',
   'el slide 8 (Resultados 3) está en la lista de láminas');
 has(win.SLIDES[8].id === 9 && win.SLIDES[8].key === 'ept',
   'el slide 9 (EPT) está en la lista de láminas como { id: 9, key: ept }');
 has(win.SLIDES[8].label === 'Transformación',
   'la pestaña del slide 9 se titula solo "Transformación"');
+has(win.SLIDES[9].id === 10 && win.SLIDES[9].key === 'validacion' &&
+   win.SLIDES[9].label === 'Validación',
+  'el slide 10 (Validación) está en la lista de láminas como { id: 10, key: validacion }');
+has(win.SLIDES[10].id === 11 && win.SLIDES[10].key === 'conclusiones' &&
+   win.SLIDES[10].label === 'Conclusiones',
+  'el slide 11 (Conclusiones) está en la lista de láminas como { id: 11, key: conclusiones }');
 has(win.SLIDES.slice(1).every(function (s) {
   return /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ0-9() ]*$/.test(s.label);
-}), 'las pestañas 2-9 van en minúsculas salvo la primera letra');
+}), 'las pestañas 2-11 van en minúsculas salvo la primera letra');
 has(pasos8.length === 6, 'RESULTADOS3 lleva los seis pasos de la secuencia');
 has(pasos8.map(function (p) { return p.key; }).join(',') === 'p1,p2,p3,p4,p5,p6',
   'las claves de los pasos son p1 a p6');
@@ -1295,9 +1305,9 @@ has(rs3Focus() === null, 'reposo tras la secuencia del ART');
 
 /* --- el logo va en la esquina superior derecha de todos los slides -------- */
 var slidesAll = Array.prototype.slice.call(doc.querySelectorAll('#slideFrame .slide'));
-has(slidesAll.length === 9, 'la lámina contiene los nueve slides');
+has(slidesAll.length === 11, 'la lámina contiene los once slides');
 var logos = Array.prototype.slice.call(doc.querySelectorAll('#slideFrame .slide .slide-logo'));
-has(logos.length === 8, 'los ocho slides de contenido llevan un .slide-logo (la carátula no)');
+has(logos.length === 10, 'los diez slides de contenido llevan un .slide-logo (la carátula no)');
 has(logos.every(function (l) { return l.getAttribute('src') === 'assets/logo.png'; }),
   'todos los logos apuntan a assets/logo.png');
 has(logos.every(function (l) { return l.getAttribute('alt') === 'Logotipo'; }),
@@ -1352,7 +1362,7 @@ has(/\.cacc-abstract\s*\{[^}]*opacity:\s*0?\.5/.test(logoCss),
 
 /* --- el pie institucional (logo-inf.png) solo en pantalla completa ---------- */
 var feet = Array.prototype.slice.call(doc.querySelectorAll('#slideFrame .slide .slide-foot'));
-has(feet.length === 9, 'los nueve slides llevan un .slide-foot (pie)');
+has(feet.length === 11, 'los once slides llevan un .slide-foot (pie)');
 has(feet.every(function (f) {
   var i = f.querySelector('img');
   return i && i.getAttribute('src') === 'assets/logo-inf.png';
@@ -1382,7 +1392,7 @@ has(eptEl.querySelector('.slide-logo') !== null, 'el slide EPT lleva el .slide-l
 has(eptEl.querySelector('.slide-head h2').textContent === 'Estructura de la propuesta de transformación',
   'el título del slide es "Estructura de la propuesta de transformación" (sin "(EPT)")');
 var h2s = Array.prototype.slice.call(doc.querySelectorAll('#slideFrame .slide .slide-head h2'));
-has(h2s.length === 8, 'los ocho slides de contenido (2-9) llevan su título en el encabezado');
+has(h2s.length === 10, 'los diez slides de contenido (2-11) llevan su título en el encabezado');
 has(h2s[0].textContent === 'Problematización' &&
   h2s[1].textContent === 'Objetivos - hipótesis' &&
   h2s[2].textContent === 'Teorías, conceptos y referentes normativos o legales' &&
@@ -1396,6 +1406,9 @@ has(h2s.slice(0, 7).every(function (h) {
   var t = h.textContent;
   return t.charAt(0) === t.charAt(0).toUpperCase() && !/[A-ZÁÉÍÓÚÑÑ]/.test(t.slice(1));
 }), 'slides 2-8: ninguna mayúscula interna en el título');
+has(h2s[8].textContent === 'Proceso de validación de la propuesta' &&
+   h2s[9].textContent === 'CONCLUSIONES',
+  'los títulos de los slides 10 y 11 aparecen en el encabezado');
 has(/Secuencia metodológica orientada al fortalecimiento/.test(eptEl.querySelector('.ept-subtitle').textContent) &&
   /Quito/.test(eptEl.querySelector('.ept-subtitle').textContent),
   'subtítulo: la secuencia metodológica de EPTransf.md (fortalecimiento de la gestión preventiva en Quito)');
@@ -1408,8 +1421,8 @@ var result = eptEl.querySelector('.ept-result');
 var rc = eptEl.querySelector('.ept-rc');
 has(!!logica && !!central && !!result && !!rc,
   'las franjas del diagrama están montadas (lógica, central, resultado, recursos clave)');
-has(/Lógica de transformación/i.test(logica.querySelector('.ept-band-k').textContent),
-  'franja superior rotulada "Lógica de transformación"');
+has(/Secuencia de transformación/i.test(logica.querySelector('.ept-band-k').textContent),
+  'franja superior rotulada "Secuencia de transformación"');
 var logicaNodos = q9('.ept-logica .ept-nodo');
 has(logicaNodos.length === 4, 'cuatro nodos en la lógica de transformación');
 has(logicaNodos.map(function (n) { return n.querySelector('.ept-nodo-t').textContent; }).join('|') ===
@@ -1477,6 +1490,154 @@ has(q9('.ept-rc-it').map(function (it) { return it.textContent; }).join('|') ===
   'recursos clave completos (solo nombrados)');
 has(eptEl.querySelectorAll('.ept-arrow').length === 9, 'nueve flechas en total (3 lógica + 4 central + 2 resultado)');
 
+/* --- clic en las etapas: imagen de detalle (assets/pt1..pt4) en primer plano,
+      con el ghost de la lámina atenuado detrás; clic fuera vuelve a la vista
+      principal. La Etapa 2 despliega el par riesgos1/riesgos2 y la Etapa 3 el
+      par pt3+pt4, ambos con un solo clic. ---------------------------------- */
+var eptBody = eptEl.querySelector('.ept-body');
+function eptFocus() { return eptBody.getAttribute('data-focus'); }
+var eptFigs = Array.prototype.slice.call(eptBody.querySelectorAll('.ept-fig'));
+has(etapas.every(function (e) {
+  return !!e.getAttribute('data-focus') && e.getAttribute('role') === 'button' && e.getAttribute('tabindex') === '0';
+}), 'las tarjetas de etapa son accionables (data-focus + role + tabindex)');
+has(etapas.map(function (e) { return e.getAttribute('data-focus'); }).join(',') === '1,2,3',
+  'data-focus de las etapas: Etapa 1 -> 1, Etapa 2 -> 2, Etapa 3 -> 3');
+has(eptFigs.length === 7, 'siete figuras de detalle en el cuerpo EPT (3 sencillas + dos pares)');
+has(eptFigs.map(function (f) { return f.getAttribute('data-focus'); }).join(',') === '1,2img,2img,2img,3,3,rs',
+  'pt1 cierra sola; pt2 abre el par de riesgos (2img); la Etapa 3 abre su par pt3+pt4 (3); el resultado esperado (rs) lleva pt5');
+has(/assets\/pt1\.png/.test(eptBody.innerHTML) && /assets\/pt2\.png/.test(eptBody.innerHTML) &&
+  /assets\/pt3\.png/.test(eptBody.innerHTML) && /assets\/pt4\.png/.test(eptBody.innerHTML) &&
+  /assets\/pt5\.png/.test(eptBody.innerHTML),
+  'las cinco imágenes de detalle apuntan a assets/ptN.png');
+has(/assets\/riesgos1\.png/.test(eptBody.innerHTML) && /assets\/riesgos2\.png/.test(eptBody.innerHTML),
+  'el segundo nivel de la Etapa 2 apunta a assets/riesgos1.png y assets/riesgos2.png');
+has(eptFigs.every(function (f) { return !!f.querySelector('img'); }), 'cada figura de detalle contiene su imagen');
+has(eptBody.querySelectorAll('.ept-pair').length === 2 &&
+  eptBody.querySelectorAll('.ept-pair .ept-fig').length === 4,
+  'la Etapa 2 y la Etapa 3 colocan sendos pares de figuras en .ept-pair (riesgos y pt3+pt4)');
+
+click(etapas[0]);
+has(eptFocus() === '1' && /ept-body--f1/.test(eptBody.className),
+  'clic en Etapa 1 -> data-focus=1 y clase ept-body--f1');
+has(gcs(eptBody.querySelector('.ept-img--1')).visibility === 'visible', 'Etapa 1: el detalle pt1 se muestra en primer plano');
+has(gcs(eptBody.querySelector('.ept-img--2')).visibility === 'hidden', 'Etapa 1: el resto de detalles permanece oculto');
+has(!!doc.querySelector('.slide.active .scope-ghost.is-on'), 'ghost: la lámina EPT queda atenuada detrás del detalle');
+click(eptBody.querySelector('.ept-img--1 .ept-fig'));
+has(eptFocus() === null, 'clic sobre la imagen pt1 -> pantalla principal');
+has(gcs(eptBody.querySelector('.ept-img--1')).visibility === 'hidden', 'al cerrar, el detalle pt1 vuelve a ocultarse');
+
+click(etapas[1]);
+has(eptFocus() === '2' && /ept-body--f2/.test(eptBody.className), 'clic en Etapa 2 -> data-focus=2');
+has(gcs(eptBody.querySelector('.ept-img--2')).visibility === 'visible', 'Etapa 2: el detalle pt2 se muestra');
+has(gcs(eptBody.querySelector('.ept-img--2b')).visibility === 'hidden', 'Etapa 2: el par de riesgos aún no se muestra');
+click(eptBody.querySelector('.ept-img--2 .ept-fig'));
+has(eptFocus() === '2img' && /ept-body--f2img/.test(eptBody.className),
+  'clic sobre la imagen pt2 -> segundo nivel (2img) con el par de riesgos');
+has(gcs(eptBody.querySelector('.ept-img--2')).visibility === 'hidden' &&
+  gcs(eptBody.querySelector('.ept-img--2b')).visibility === 'visible',
+  'segundo nivel: pt2 pasa atrás y se despliegan riesgos1 y riesgos2 en paralelo');
+has(!!doc.querySelector('.slide.active .scope-ghost.is-on'), 'ghost: atenuado también en el nivel 2 de la Etapa 2');
+click(eptBody.querySelector('.ept-img--2b .ept-fig'));
+has(eptFocus() === null && gcs(eptBody.querySelector('.ept-img--2b')).visibility === 'hidden',
+  'clic fuera de las imágenes de riesgos -> pantalla principal');
+
+click(etapas[2]);
+has(eptFocus() === '3' && /ept-body--f3/.test(eptBody.className), 'clic en Etapa 3 -> data-focus=3');
+has(gcs(eptBody.querySelector('.ept-img--3')).visibility === 'visible',
+  'Etapa 3: un solo clic despliega el par pt3 + pt4 en paralelo');
+has(eptBody.querySelector('.ept-img--3').querySelectorAll('.ept-fig').length === 2,
+  'Etapa 3: el par contiene las dos imágenes (pt3 y pt4) a la vez');
+has(!!doc.querySelector('.slide.active .scope-ghost.is-on'), 'ghost: atenuado también con el par de la Etapa 3');
+click(eptBody.querySelector('.ept-img--3 .ept-fig'));
+has(eptFocus() === null && gcs(eptBody.querySelector('.ept-img--3')).visibility === 'hidden',
+  'clic sobre una imagen de la Etapa 3 -> pantalla principal');
+
+/* --- clic en el resultado esperado: despliega assets/pt5.png ----------------- */
+var resultSec = eptEl.querySelector('.ept-result');
+has(!!resultSec && resultSec.getAttribute('data-focus') === 'rs' &&
+  resultSec.getAttribute('role') === 'button' && resultSec.getAttribute('tabindex') === '0',
+  'el bloque Resultado esperado es accionable (data-focus=rs + role + tabindex)');
+click(resultSec);
+has(eptFocus() === 'rs' && /ept-body--frs/.test(eptBody.className),
+  'clic en Resultado esperado -> data-focus=rs y clase ept-body--frs');
+has(gcs(eptBody.querySelector('.ept-img--5')).visibility === 'visible',
+  'Resultado esperado: se despliega el detalle pt5');
+has(gcs(eptBody.querySelector('.ept-img--1')).visibility === 'hidden',
+  'Resultado esperado: el resto de detalles permanece oculto');
+has(!!doc.querySelector('.slide.active .scope-ghost.is-on'),
+  'ghost: la lámina EPT queda atenuada detrás del detalle pt5');
+click(eptBody.querySelector('.ept-img--5 .ept-fig'));
+has(eptFocus() === null && gcs(eptBody.querySelector('.ept-img--5')).visibility === 'hidden',
+  'clic sobre la imagen pt5 -> pantalla principal');
+click(resultSec);
+has(eptFocus() === 'rs', 'Resultado esperado abierto de nuevo para probar ESC');
+key('Escape');
+has(eptFocus() === null, 'ESC con pt5 abierto -> pantalla principal');
+resultSec.focus();
+has(key('Enter'), 'Enter sobre Resultado esperado -> default evitado');
+has(eptFocus() === 'rs', 'Enter sobre Resultado esperado -> abre el detalle pt5');
+key('Escape');
+has(eptFocus() === null, 'ESC tras Enter sobre Resultado esperado -> pantalla principal');
+
+click(etapas[2]);
+has(eptFocus() === '3', 'desde principal, Etapa 3 abre su par pt3 + pt4');
+key('Escape');
+has(eptFocus() === null, 'ESC con el par de la Etapa 3 abierto -> pantalla principal');
+
+click(etapas[2]);
+key('Escape');
+has(eptFocus() === null, 'ESC con pt3 abierto -> pantalla principal');
+
+click(etapas[0]);
+has(eptFocus() === '1', 'Etapa 1 abierta para probar el clic fuera de la imagen');
+click(eptEl.querySelector('.slide-head h2'));
+has(eptFocus() === null, 'clic fuera de la imagen (sobre la cabecera) -> pantalla principal');
+
+etapas[0].focus();
+has(doc.activeElement === etapas[0], 'la tarjeta Etapa 1 recibe el foco del teclado');
+has(key('Enter'), 'Enter sobre la tarjeta Etapa 1 -> default evitado');
+has(eptFocus() === '1', 'Enter sobre la tarjeta Etapa 1 -> abre su detalle');
+key('Escape');
+has(eptFocus() === null, 'ESC -> pantalla principal');
+var eptFig1 = eptBody.querySelector('.ept-img--1 .ept-fig');
+eptFig1.focus();
+has(key('Enter'), 'Enter sobre la imagen pt1 -> default evitado');
+has(eptFocus() === '1', 'Enter sobre la imagen pt1 -> abre el detalle');
+key('Escape');
+has(eptFocus() === null, 'ESC -> pantalla principal');
+
+/* CSS y motor: overlays, aparición sencilla y registro del scope en app.js. */
+has(/\.ept-body\s*\{[^}]*position:\s*relative/.test(logoCss),
+  'CSS: ept-body relativo como ancla de los detalles');
+has(/\.ept-img\s*\{[^}]*position:\s*absolute[\s\S]{0,140}z-index:\s*3/.test(logoCss),
+  'CSS: el detalle va en primer plano sobre el ghost (absolute, z-index 3)');
+has(/\.ept-img\s*\{[^}]*background:\s*rgba\(240, 240, 242, 0\.72\)/.test(logoCss),
+  'CSS: el panel del detalle es translúcido para ver la lámina atenuada');
+has(/\.ept-img\s*\{[^}]*opacity:\s*0;[\s\S]{0,160}visibility:\s*hidden/.test(logoCss),
+  'CSS: el detalle nace oculto (opacity 0 + visibility hidden)');
+has(/\.ept-fig\s*\{[^}]*transform:\s*scale\(0\.5\);[\s\S]{0,160}opacity:\s*0/.test(logoCss),
+  'CSS: la imagen parte pequeña (escala 0.5) y transparente');
+has(/\.ept-body--f1 \.ept-img--1[\s\S]{0,220}visibility:\s*visible/.test(logoCss) &&
+  /\.ept-body--f2 \.ept-img--2[\s\S]{0,220}visibility:\s*visible/.test(logoCss) &&
+  /\.ept-body--f2img \.ept-img--2b[\s\S]{0,220}visibility:\s*visible/.test(logoCss) &&
+  /\.ept-body--f3 \.ept-img--3[\s\S]{0,220}visibility:\s*visible/.test(logoCss) &&
+  /\.ept-body--frs \.ept-img--5[\s\S]{0,220}visibility:\s*visible/.test(logoCss),
+  'CSS: cada estado de foco muestra su detalle (f1 -> pt1, f2 -> pt2, f2img -> par de riesgos, f3 -> par pt3+pt4, frs -> pt5)');
+has(!/f3img/.test(logoCss) && !/ept-img--4/.test(logoCss),
+  'CSS: retirado el segundo nivel de la Etapa 3 (f3img / .ept-img--4)');
+has(/\.ept-pair\s*\{[^}]*flex-direction:\s*row/.test(logoCss) &&
+  /\.ept-pair \.ept-fig\s*\{[^}]*flex:\s*1\s*1\s*50%/.test(logoCss),
+  'CSS: .ept-pair reparte las dos imágenes al 50% en fila (una al lado de otra)');
+has(/\.ept-body--f1 \.ept-img--1 \.ept-fig[\s\S]{0,360}transform:\s*scale\(1\)/.test(logoCss),
+  'CSS: al abrir, la imagen se proyecta de menos a más (escala .5 -> 1)');
+has(/transition: opacity 0\.28s ease, visibility 0s linear 0\.28s/.test(logoCss),
+  'CSS: al cerrar, la visibilidad se retrasa para ver la salida (de más a menos)');
+has(!/ept-rotate/.test(logoCss), 'CSS: eliminado el giro de 360° (ept-rotate): efecto más sencillo');
+has(/sel: 'ept-body'[\s\S]{0,80}keys: \['1', '2', '2img', '3', 'rs'\]/.test(appJs),
+  'app.js: FOCUS_SCOPES registra ept-body con los focos 1, 2, 2img, 3 y rs');
+has(/'ept-body': \{ nodes: \['\.ept-logica', '\.ept-central', '\.ept-result', '\.ept-rc'\]/.test(appJs),
+  'app.js: GHOST_CFG atenda las cuatro franjas del EPT (lógica, central, resultado, recursos)');
+
 /* CSS: cabecera propia, paleta EPTransf y bandas de la lámina. */
 has(/\.slide-ept \.slide-head\s*\{\s*height:\s*92px/.test(logoCss),
   'CSS: cabecera propia del slide EPT (subtítulo de hasta dos líneas)');
@@ -1495,9 +1656,172 @@ has(/\.ept-rc\s*\{[^}]*background:\s*var\(--ept-gris\)/.test(logoCss),
 has(/\.ept-body\s*\{[^}]*flex:\s*1/.test(logoCss),
   'CSS: la lámina EPT usa el cuerpo flex:1 común para absorger el pie en pantalla completa');
 
+/* ======================= DIAPOSITIVA 10 · VALIDACIÓN ======================= */
+tabGo('10. Validación');
+var vl = doc.querySelector('#slideFrame .slide.active');
+has(!!vl && vl.classList.contains('slide-validacion'),
+  'slide 10: se renderiza .slide-validacion como décima diapositiva');
+has(/Proceso de validación de la propuesta/i.test(vl.querySelector('.slide-head h2').textContent),
+  'slide 10: el encabezado titula «Proceso de validación de la propuesta»');
+has(/Método Delphi/i.test(vl.querySelector('.vl-subtitle').textContent) &&
+   /resultados globales/i.test(vl.querySelector('.vl-subtitle').textContent),
+  'slide 10: el subtítulo sitúa el Método Delphi y los resultados globales');
+has(!!vl.querySelector('.slide-logo') && !!vl.querySelector('.slide-foot'),
+  'slide 10: la lámina lleva logotipo y pie institucional');
+
+/* núcleo central */
+var vlCore = vl.querySelector('.vl-core');
+has(!!vlCore, 'slide 10: el mapa tiene nodo central .vl-core');
+has(/Validación/i.test(vlCore.textContent) && /de la propuesta/i.test(vlCore.textContent),
+  'slide 10: el núcleo rotula «Validación de la propuesta»');
+has(/Método Delphi/i.test(vlCore.textContent) && /3 rondas/i.test(vlCore.textContent) &&
+   /8 expertos/i.test(vlCore.textContent),
+  'slide 10: el núcleo describe el método (Delphi · 3 rondas · 8 expertos)');
+
+/* panel de expertos (rama izquierda, mismo formato que Ronda 2) */
+var vlPanel = vl.querySelector('.vl-panel');
+has(!!vlPanel && /Panel de expertos/i.test(vlPanel.textContent) && /8 expertos/i.test(vlPanel.textContent),
+  'slide 10: a la izquierda, el panel titulado "Panel de expertos" con 8 expertos');
+has(!!vlPanel && !!vlPanel.querySelector('.vl-r-head .vl-r-ico') &&
+   !!vlPanel.querySelector('.vl-r-head .vl-r-num'),
+  'slide 10: el panel reutiliza el encabezado de ronda (icono + título)');
+has(vlPanel.querySelectorAll('.vl-r-props .vl-r-prop').length === 5,
+  'slide 10: el panel lista las cinco áreas de conocimiento como píldoras');
+has(/Consulta estructurada/i.test(vlPanel.querySelector('.vl-r-dic').textContent) &&
+   /Consenso progresivo/i.test(vlPanel.querySelector('.vl-r-dic').textContent),
+  'slide 10: el panel cierra con el chip de apoyo aplicado');
+has(/\.vl-panel\s*\{[^}]*grid-area:\s*panel/.test(logoCss) &&
+   /\.vl-panel\s*\{[^}]*border:\s*1px solid var\(--vl-rojo\)/.test(logoCss) &&
+   /\.vl-panel \.vl-r-ico\s*\{[^}]*background:\s*var\(--vl-rojo\)/.test(logoCss),
+  'CSS: el panel adopta el formato de ronda conservando su rojo (fondo rojo claro, borde e icono rojos)');
+
+/* tres rondas clicables */
+var vlRounds = Array.prototype.slice.call(vl.querySelectorAll('.vl-round'));
+has(vlRounds.length === 3, 'slide 10: el mapa contiene tres rondas (r1, r2, r3)');
+has(vlRounds.every(function (r) {
+  return r.getAttribute('data-focus') && r.getAttribute('role') === 'button' &&
+    r.getAttribute('tabindex') === '0';
+}), 'slide 10: las tres rondas son accionables (data-focus + role + tabindex)');
+has(vl.querySelector('.vl-round[data-focus="r1"]').classList.contains('vl-round--green') &&
+   vl.querySelector('.vl-round[data-focus="r2"]').classList.contains('vl-round--red') &&
+   vl.querySelector('.vl-round[data-focus="r3"]').classList.contains('vl-round--green'),
+  'slide 10: alternancia verde/rojo/verde de las rondas');
+has(/Ronda 1/i.test(vl.querySelector('.vl-round[data-focus="r1"]').textContent) &&
+   /Aceptación inicial/i.test(vl.querySelector('.vl-round[data-focus="r1"]').textContent),
+  'slide 10: ronda 1 «Aceptación inicial»');
+has(/Ronda 2/i.test(vl.querySelector('.vl-round[data-focus="r2"]').textContent) &&
+   /Evaluación técnica/i.test(vl.querySelector('.vl-round[data-focus="r2"]').textContent),
+  'slide 10: ronda 2 «Evaluación técnica»');
+has(/Ronda 3/i.test(vl.querySelector('.vl-round[data-focus="r3"]').textContent) &&
+   /Consenso final/i.test(vl.querySelector('.vl-round[data-focus="r3"]').textContent),
+  'slide 10: ronda 3 «Consenso final»');
+has(vl.querySelectorAll('.vl-round[data-focus="r1"] .vl-r-prop').length === 6 &&
+   vl.querySelectorAll('.vl-round[data-focus="r2"] .vl-r-prop').length === 7 &&
+   vl.querySelectorAll('.vl-round[data-focus="r3"] .vl-r-prop').length === 3,
+  'slide 10: cada ronda lista su propósito (6, 7 y 3 puntos)');
+has(/99,46/.test(vl.querySelector('.vl-round[data-focus="r1"]').textContent) &&
+   /183/.test(vl.querySelector('.vl-round[data-focus="r1"]').textContent),
+  'slide 10: la ronda 1 declara 99,46 % y 183 valoraciones');
+has(/4,958/.test(vl.querySelector('.vl-round[data-focus="r2"]').textContent) &&
+   /4,04/.test(vl.querySelector('.vl-round[data-focus="r2"]').textContent),
+  'slide 10: la ronda 2 declara media 4,958 y CV 4,04 %');
+has(/2,973/.test(vl.querySelector('.vl-round[data-focus="r3"]').textContent) &&
+   /97,32/.test(vl.querySelector('.vl-round[data-focus="r3"]').textContent),
+  'slide 10: la ronda 3 declara media 2,973 y 97,32 % de acuerdo');
+has(vl.querySelectorAll('.vl-round .vl-r-dic').length === 3,
+  'slide 10: las tres rondas muestran su dictamen');
+
+/* banda de síntesis */
+var vlSynth = vl.querySelector('.vl-synth');
+has(!!vlSynth && vlSynth.getAttribute('data-focus') === 'rn' &&
+   vlSynth.getAttribute('role') === 'button',
+  'slide 10: la banda de síntesis es accionable (data-focus rn)');
+has(vl.querySelectorAll('.vl-syn-node').length === 3,
+  'slide 10: la síntesis encadena tres etapas (aceptación → evaluación → consenso)');
+has(vl.querySelectorAll('.vl-cap').length === 3,
+  'slide 10: la síntesis muestra las tres cápsulas (inicial, intermedia, final)');
+has(/Respaldo académico/i.test(vlSynth.textContent) &&
+   /validada en su versión final/i.test(vlSynth.textContent),
+  'slide 10: la síntesis concluye con la validación por triangulación');
+
+/* modales */
+has(vl.querySelectorAll('.vl-modal').length === 4,
+  'slide 10: cuatro modales (r1, r2, r3 y síntesis)');
+has(vl.querySelectorAll('.vl-modal--r1 .vl-card, .vl-modal--r2 .vl-card, ' +
+   '.vl-modal--r3 .vl-card, .vl-modal--rn .vl-card').length === 4,
+  'slide 10: cada modal contiene su tarjeta .vl-card');
+has(vl.querySelectorAll('.vl-modal--r1 .vl-table tr').length === 7 &&
+   vl.querySelectorAll('.vl-modal--r2 .vl-table tr').length === 9 &&
+   vl.querySelectorAll('.vl-modal--r3 .vl-table tr').length === 13,
+  'slide 10: las tablas de ronda detallan sus indicadores');
+has(vl.querySelectorAll('.vl-modal--rn .vl-table--comp thead th').length === 5,
+  'slide 10: la tabla comparativa de la síntesis tiene cinco columnas');
+has(vl.querySelectorAll('.vl-card-x').length === 4,
+  'slide 10: cada tarjeta lleva su botón de cierre');
+
+/* interacción: los modales sólo aparecen con su foco */
+var vlBody = vl.querySelector('.vl-body');
+has(gcs(vl.querySelector('.vl-modal--r1')).visibility === 'hidden',
+  'slide 10: los modales nacen ocultos (visibility hidden)');
+click(vl.querySelector('.vl-round[data-focus="r1"]'));
+has(vlBody.getAttribute('data-focus') === 'r1' && vlBody.classList.contains('vl-body--fr1'),
+  'slide 10: al pulsar la ronda 1 se abre su foco (vl-body--fr1)');
+has(gcs(vl.querySelector('.vl-modal--r1')).visibility === 'visible',
+  'slide 10: el modal de la ronda 1 se hace visible');
+has(gcs(vl.querySelector('.vl-modal--r2')).visibility === 'hidden',
+  'slide 10: los modales de las otras rondas siguen ocultos');
+has(!!vl.querySelector('.scope-ghost.is-on'),
+  'slide 10: la sombra de la lámina (ghost) se activa al enfocar');
+click(vl.querySelector('.vl-modal--r1 .vl-table td'));
+has(vlBody.getAttribute('data-focus') === 'r1',
+  'slide 10: un clic dentro de la tarjeta no cierra el modal');
+click(vl.querySelector('.vl-modal--r1 .vl-card-x'));
+has(!vlBody.getAttribute('data-focus') && gcs(vl.querySelector('.vl-modal--r1')).visibility === 'hidden',
+  'slide 10: el botón de cierre cierra el modal');
+click(vl.querySelector('.vl-round[data-focus="r1"]'));
+has(vlBody.getAttribute('data-focus') === 'r1', 'slide 10: se reabre la ronda 1');
+key('Escape');
+has(!vlBody.getAttribute('data-focus'), 'slide 10: Escape cierra el foco abierto');
+click(vl.querySelector('.vl-round[data-focus="r2"]'));
+has(vlBody.classList.contains('vl-body--fr2') &&
+   gcs(vl.querySelector('.vl-modal--r2')).visibility === 'visible' &&
+   gcs(vl.querySelector('.vl-modal--r1')).visibility === 'hidden',
+  'slide 10: al abrir la ronda 2 se cierra la 1 (foco único)');
+click(vl.querySelector('.vl-modal--r2'));
+has(!vlBody.getAttribute('data-focus'),
+  'slide 10: un clic en el fondo del modal cierra el foco');
+vl.querySelector('.vl-round[data-focus="r3"]').focus();
+key('Enter');
+has(vlBody.classList.contains('vl-body--fr3'),
+  'slide 10: la ronda 3 también se abre con el teclado (Enter)');
+click(vl.querySelector('.vl-round[data-focus="r3"]'));
+
+/* CSS propio */
+has(/\.slide-validacion \.slide-head\s*\{\s*height:\s*92px/.test(logoCss),
+  'CSS: cabecera propia del slide de validación (subtítulo de hasta dos líneas)');
+has(/\.vl-body--fr1 \.vl-modal--r1[\s\S]{0,220}visibility:\s*visible/.test(logoCss) &&
+   /\.vl-body--fr2 \.vl-modal--r2[\s\S]{0,220}visibility:\s*visible/.test(logoCss) &&
+   /\.vl-body--fr3 \.vl-modal--r3[\s\S]{0,220}visibility:\s*visible/.test(logoCss) &&
+   /\.vl-body--frn \.vl-modal--rn[\s\S]{0,220}visibility:\s*visible/.test(logoCss),
+  'CSS: cada estado de foco muestra su modal (fr1/fr2/fr3/frn)');
+has(/\.vl-body--fr1 \.vl-modal--r1 \.vl-card[\s\S]{0,220}transform:\s*scale\(1\)/.test(logoCss),
+  'CSS: al abrir, la tarjeta crece de .86 a 1');
+has(/\.vl-modal\s*\{[^}]*opacity:\s*0;[\s\S]{0,120}visibility:\s*hidden/.test(logoCss),
+  'CSS: el modal nace oculto (opacity 0 + visibility hidden)');
+has(/sel: 'vl-body'[\s\S]{0,80}keys: \['r1', 'r2', 'r3', 'rn'\]/.test(appJs),
+  'app.js: FOCUS_SCOPES registra vl-body con los focos r1, r2, r3 y rn');
+has(/'vl-body': \{ nodes: \['\.vl-map', '\.vl-synth'\]/.test(appJs),
+  'app.js: GHOST_CFG atenda el mapa y la banda de síntesis');
+has(/\.vl-body\s*\{[^}]*flex:\s*1/.test(logoCss),
+  'CSS: la lámina de validación usa el cuerpo flex:1 común para absorger el pie');
+has(/\.vl-body\s*\{[^}]*justify-content:\s*center/.test(logoCss),
+  'CSS: el cuerpo del slide 10 centra verticalmente el conjunto en la lámina');
+has(/\.vl-map\s*\{[^}]*flex:\s*0\s*0\s*auto/.test(logoCss),
+  'CSS: el mapa de validación no se estira (altura natural) y el conjunto queda centrado');
+
 var slideBefore = doc.querySelector('#slideFrame .slide.active');
 var victim = slideBefore ? slideBefore.children[0] : null;
-var bodyEl = slideBefore ? slideBefore.querySelector('.cover-body, .problem-body, .md-body, .rs-body, .rs2-body, .rs3-body, .ept-body') : null;
+var bodyEl = slideBefore ? slideBefore.querySelector('.cover-body, .problem-body, .md-body, .rs-body, .rs2-body, .rs3-body, .ept-body, .vl-body') : null;
 var topBefore = victim ? victim.offsetTop : -1;
 var bodyHBefore = bodyEl ? bodyEl.offsetHeight : -1;
 var fakeFs = doc.createElement('div');
@@ -1517,7 +1841,160 @@ doc.dispatchEvent(new win.Event('fullscreenchange'));
 has(!doc.body.classList.contains('is-fullscreen-presentation'),
   'al salir de pantalla completa se retira la clase y el pie');
 
+/* ======================= DIAPOSITIVA 11 · CONCLUSIONES ===================== */
+tabGo('11. Conclusiones');
+
+var cn = doc.querySelector('#slideFrame .slide.active');
+has(!!cn && cn.classList.contains('slide-conclusiones'),
+  'slide 11: se renderiza .slide-conclusiones como undécima diapositiva');
+has(/CONCLUSIONES/i.test(cn.querySelector('.slide-head h2').textContent),
+  'slide 11: el encabezado titula «CONCLUSIONES»');
+has(/Síntesis de hallazgos/i.test(cn.querySelector('.cn-subtitle').textContent) &&
+   /aporte de la estrategia metodológica/i.test(cn.querySelector('.cn-subtitle').textContent),
+  'slide 11: el subtítulo sintetiza hallazgos, validación y aporte');
+has(!!cn.querySelector('.slide-logo') && !!cn.querySelector('.slide-foot'),
+  'slide 11: la lámina lleva logotipo y pie institucional');
+
+/* seis bloques encadenados clicables (primer clic -> bloque agrandado zbN) */
+var cnCards = Array.prototype.slice.call(cn.querySelectorAll('.cn-flow .cn-card'));
+has(cnCards.length === 6, 'slide 11: el diagrama tiene seis bloques');
+has(cnCards.every(function (c) {
+  return /^zb[1-6]$/.test(c.getAttribute('data-focus') || '') &&
+    c.getAttribute('role') === 'button' && c.getAttribute('tabindex') === '0';
+}), 'slide 11: los seis bloques son accionables (data-focus zbN + role + tabindex)');
+has(cnCards.map(function (c) { return c.getAttribute('data-focus'); }).join(',') === 'zb1,zb2,zb3,zb4,zb5,zb6',
+  'slide 11: los bloques van etiquetados zb1..zb6 en orden');
+has(cn.querySelector('.cn-card[data-focus="zb1"]').classList.contains('cn-card--green') &&
+   cn.querySelector('.cn-card[data-focus="zb2"]').classList.contains('cn-card--red') &&
+   cn.querySelector('.cn-card[data-focus="zb3"]').classList.contains('cn-card--green') &&
+   cn.querySelector('.cn-card[data-focus="zb4"]').classList.contains('cn-card--red') &&
+   cn.querySelector('.cn-card[data-focus="zb5"]').classList.contains('cn-card--green') &&
+   cn.querySelector('.cn-card[data-focus="zb6"]').classList.contains('cn-card--red'),
+  'slide 11: los bloques alternan verde/rojo y el bloque 6 va en rojo');
+has(/SISTEMATIZACIÓN/i.test(cn.querySelector('.cn-card[data-focus="zb1"]').textContent) &&
+   /DIAGNÓSTICO/i.test(cn.querySelector('.cn-card[data-focus="zb2"]').textContent) &&
+   /ESTRATEGIA/i.test(cn.querySelector('.cn-card[data-focus="zb3"]').textContent) &&
+   /APLICACIÓN PILOTO/i.test(cn.querySelector('.cn-card[data-focus="zb4"]').textContent) &&
+   /RESULTADOS CRÍTICOS/i.test(cn.querySelector('.cn-card[data-focus="zb5"]').textContent) &&
+   /CONFIRMACIÓN/i.test(cn.querySelector('.cn-card[data-focus="zb6"]').textContent),
+  'slide 11: cada bloque lleva su rótulo (1..6)');
+has(cn.querySelectorAll('.cn-flow .cn-arrow').length === 5,
+  'slide 11: cinco flechas horizontales encadenan 1→2→3→4→5→6');
+has(cn.querySelectorAll('.cn-links path').length === 6,
+  'slide 11: seis conectores radiales van de las tarjetas al nodo central');
+
+/* copias agrandadas: segundo clic abre la conclusión (foco bN) */
+has(cn.querySelectorAll('.cn-body > .cn-zoom').length === 6,
+  'slide 11: cada bloque tiene su copia agrandada (.cn-zoom)');
+has(Array.prototype.map.call(cn.querySelectorAll('.cn-zoom'), function (z) {
+  return z.getAttribute('data-focus');
+}).join(',') === 'b1,b2,b3,b4,b5,b6',
+  'slide 11: las copias agrandadas llevan el foco b1..b6 (abren la conclusión)');
+has(Array.prototype.every.call(cn.querySelectorAll('.cn-zoom'), function (z) {
+  return z.getAttribute('role') === 'button' && z.getAttribute('tabindex') === '0' &&
+    !!z.querySelector('.cn-zoom-card');
+}), 'slide 11: las copias agrandadas son accionables y clonan la tarjeta');
+
+/* contenido clave por bloque */
+has(cn.querySelectorAll('.cn-card[data-focus="zb4"] .cn-stat').length === 3 &&
+   /189/.test(cn.querySelector('.cn-card[data-focus="zb4"]').textContent) &&
+   /106/.test(cn.querySelector('.cn-card[data-focus="zb4"]').textContent) &&
+   /83/.test(cn.querySelector('.cn-card[data-focus="zb4"]').textContent),
+  'slide 11: el bloque 4 destaca 189 / 106 / 83');
+has(cn.querySelectorAll('.cn-card[data-focus="zb5"] .cn-mini').length === 2 &&
+   /RIESGOS CRÍTICOS/i.test(cn.querySelector('.cn-card[data-focus="zb5"]').textContent) &&
+   /VALIDACIÓN DELPHI/i.test(cn.querySelector('.cn-card[data-focus="zb5"]').textContent) &&
+   /3733/.test(cn.querySelector('.cn-card[data-focus="zb5"]').textContent) &&
+   /2691/.test(cn.querySelector('.cn-card[data-focus="zb5"]').textContent),
+  'slide 11: el bloque 5 se divide en riesgos críticos (3733/2691) y validación Delphi');
+has(cn.querySelectorAll('.cn-card[data-focus="zb6"] .cn-checks li').length === 6 &&
+   /Se confirma la hipótesis/i.test(cn.querySelector('.cn-card[data-focus="zb6"]').textContent),
+  'slide 11: el bloque 6 cierra con las seis confirmaciones');
+
+/* nodo central y aporte */
+has(/CONCLUSIONES/i.test(cn.querySelector('.cn-node').textContent),
+  'slide 11: el nodo central inferior se rotula «CONCLUSIONES»');
+has(/APORTE CENTRAL/i.test(cn.querySelector('.cn-aporte').textContent) &&
+   /Prevención como componente estructural de la dirección de proyectos/i.test(cn.querySelector('.cn-aporte').textContent),
+  'slide 11: la franja inferior destaca el aporte central');
+
+/* un panel por bloque con la conclusión textual del docx */
+has(cn.querySelectorAll('.cn-modal').length === 6 && cn.querySelectorAll('.cn-dialog').length === 6,
+  'slide 11: cada bloque tiene su panel de conclusión');
+has(/sistematización teórica referencial/i.test(cn.querySelector('.cn-dialog--green').textContent) &&
+   /componente estructural de la dirección de proyectos/i.test(cn.querySelector('.cn-modal--b6 .cn-dialog').textContent),
+  'slide 11: las conclusiones transcriben CONCLUSIONES.docx (bloques 1 y 6)');
+
+/* interacción en dos pasos: 1er clic agranda el bloque (zbN), 2º abre la conclusión (bN) */
+var cnBody = cn.querySelector('.cn-body');
+var cnZoom1 = cn.querySelector('.cn-zoom--b1');
+click(cn.querySelector('.cn-card[data-focus="zb1"]'));
+has(cnBody.getAttribute('data-focus') === 'zb1' && /cn-body--fzb1/.test(cnBody.className),
+  'slide 11: primer clic en el bloque 1 -> foco zb1 (bloque agrandado)');
+has(gcs(cnZoom1).visibility === 'visible',
+  'slide 11: el bloque 1 se muestra agrandado y centrado');
+has(gcs(cn.querySelector('.cn-modal--b1')).visibility === 'hidden',
+  'slide 11: la conclusión no se abre todavía con el primer clic');
+has(!!doc.querySelector('.slide.active .scope-ghost.is-on'),
+  'ghost: la lámina de conclusiones queda atenuada tras el bloque agrandado');
+click(cnZoom1.querySelector('.cn-zoom-card'));
+has(cnBody.getAttribute('data-focus') === 'b1' && /cn-body--fb1/.test(cnBody.className) &&
+   gcs(cn.querySelector('.cn-modal--b1')).visibility === 'visible',
+  'slide 11: segundo clic -> se abre la conclusión del bloque 1');
+has(gcs(cnZoom1).visibility === 'hidden',
+  'slide 11: al abrir la conclusión se retira el bloque agrandado');
+click(cn.querySelector('.cn-modal--b1 .cn-dialog-x'));
+has(cnBody.getAttribute('data-focus') === 'zb1' && gcs(cn.querySelector('.cn-modal--b1')).visibility === 'hidden',
+  'slide 11: cerrar la conclusión vuelve al bloque agrandado');
+key('Escape');
+has(!cnBody.getAttribute('data-focus'),
+  'slide 11: Escape desde el bloque agrandado cierra el foco');
+click(cn.querySelector('.cn-card[data-focus="zb3"]'));
+click(cn.querySelector('.cn-zoom--b3 .cn-zoom-card'));
+has(/cn-body--fb3/.test(cnBody.className) &&
+   gcs(cn.querySelector('.cn-modal--b3')).visibility === 'visible' &&
+   gcs(cn.querySelector('.cn-modal--b1')).visibility === 'hidden',
+  'slide 11: al abrir otro bloque se cierra el anterior (foco único)');
+click(cn.querySelector('.cn-modal--b3'));
+has(cnBody.getAttribute('data-focus') === 'zb3',
+  'slide 11: un clic en el fondo de la conclusión vuelve al bloque agrandado');
+key('Escape');
+has(!cnBody.getAttribute('data-focus'), 'slide 11: Escape cierra el bloque agrandado');
+cn.querySelector('.cn-card[data-focus="zb6"]').focus();
+key('Enter');
+has(/cn-body--fzb6/.test(cnBody.className), 'slide 11: el bloque 6 se agranda con Enter');
+cn.querySelector('.cn-zoom--b6').focus();
+key('Enter');
+has(/cn-body--fb6/.test(cnBody.className), 'slide 11: la copia agrandada abre el bloque 6 con Enter');
+key('Escape');
+has(cnBody.getAttribute('data-focus') === 'zb6', 'slide 11: Escape vuelve al bloque 6 agrandado');
+key('Escape');
+has(!cnBody.getAttribute('data-focus'), 'slide 11: Escape final cierra el foco abierto');
+
+/* CSS propio */
+
+has(/\.slide-conclusiones \.slide-head\s*\{\s*height:\s*92px/.test(logoCss),
+  'CSS: cabecera propia del slide de conclusiones');
+has(/\.cn-body--fb1 \.cn-modal--b1[\s\S]{0,220}visibility:\s*visible/.test(logoCss) &&
+   /\.cn-body--fb6 \.cn-modal--b6[\s\S]{0,220}visibility:\s*visible/.test(logoCss),
+  'CSS: cada bloque muestra su panel (fb1..fb6)');
+has(/\.cn-body--fzb1 \.cn-zoom--b1[\s\S]{0,180}visibility:\s*visible/.test(logoCss) &&
+   /\.cn-body--fzb6 \.cn-zoom--b6[\s\S]{0,180}visibility:\s*visible/.test(logoCss),
+  'CSS: cada bloque agranda su copia centrada (fzb1..fzb6)');
+has(/\.cn-zoom-card\s*\{[^}]*transform:\s*scale\(/.test(logoCss),
+  'CSS: la copia agrandada del bloque se escala para centrarse');
+has(/\.cn-card\s*\{[^}]*height:\s*338px/.test(logoCss),
+  'CSS: las tarjetas tienen altura fija (338px) para el esquema doctoral');
+has(/\.cn-node\s*\{[^}]*box-shadow:\s*0 0 0 4px var\(--cn-rojo\)/.test(logoCss),
+  'CSS: el nodo central lleva borde doble verde + rojo');
+has(/sel: 'cn-body'[\s\S]{0,240}'zb1'[\s\S]{0,240}parents: \{ b1: 'zb1'/.test(appJs),
+  'app.js: FOCUS_SCOPES registra los focos zb1..zb6 y b1..b6 (dos niveles)');
+has(/'cn-body': \{ nodes: \['\.cn-flow'/.test(appJs),
+  'app.js: GHOST_CFG atenda el diagrama de conclusiones');
+has(/\.cn-body\s*\{[^}]*flex:\s*1/.test(logoCss),
+  'CSS: la lámina de conclusiones usa el cuerpo flex:1 común');
+
 let fail = 0;
 checks.forEach(function (c) { if (!c[1]) { fail++; console.log('FAIL:', c[0]); } });
-console.log((checks.length - fail) + '/' + checks.length + ' checks ok (foco por clic, slides 1-9)');
+console.log((checks.length - fail) + '/' + checks.length + ' checks ok (foco por clic, slides 1-11)');
 process.exit(fail ? 1 : 0);
