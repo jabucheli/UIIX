@@ -1,9 +1,9 @@
 # Continuidad — Presentación web de tesis doctoral
 
 > Documento de trabajo autónomo para retomar el trabajo **en este computador o en otro**.
-> Alcance actual: **los 11 slides de la presentación** de `presentacion-web` + integración con la app
+> Alcance actual: **los 12 slides de la presentación** de `presentacion-web` + integración con la app
 > de `D:\ejemplo\tesis\0` (desde el bloque Riesgo del slide 7).
-> Última actualización: **2026-10-10**.
+> Última actualización: **2026-10-13**.
 
 ---
 
@@ -11,23 +11,23 @@
 
 | | |
 |---|---|
-| **Reanudar (este equipo)** | `cd tools` y ejecutar **`reanudar.cmd`** → comprueba Node/Chrome/jsdom/app hermana, verifica todo (**54/54 + 712/712**), genera capturas, y muestra el estado git de los dos repos y dónde sigue la doc. Variantes: `reanudar.cmd shot` (además genera los PNG) y `reanudar.cmd app` (además ejecuta las **52/52** pruebas de la app). Ver §17. |
+| **Reanudar (este equipo)** | `cd tools` y ejecutar **`reanudar.cmd`** → comprueba Node/Chrome/jsdom/app hermana, verifica todo (**54/54 + 770/770**), genera capturas, y muestra el estado git de los dos repos y dónde sigue la doc. Variantes: `reanudar.cmd shot` (además genera los PNG) y `reanudar.cmd app` (además ejecuta las **52/52** pruebas de la app). Ver §17. |
 | **Guardar / llevar a otro equipo** | `cd tools` y **`traspaso.cmd paquete`** → comprueba el **inventario** completo (`verificar-inventario.js`, manifiesto en `tools/inventario.json`), avisa de lo que git no ha guardado y genera el zip portable `tools\out\traspaso\presentacion-tesis-AAAAMMDD-HHMM.zip` (presentacion + tesis hermana + respaldos JSON + historial git + LEEME). Procedimiento completo en `TRASPASO.md`. |
 
 **Regla de oro para mover el trabajo:** `presentacion` y `tesis` son carpetas **hermanas**
 (al mismo nivel) y viajan **juntas**: la presentación embebe la app `tesis\0`
 desde el bloque Riesgo del slide 7. El paquete de `traspaso.cmd paquete` lleva
 ambas.
-| Estado | **Los 11 slides están desarrollados y verificados**: carátula (réplica del slide 1 de `Ejemplo.pptx`), problematización, objetivos+hipótesis, marco teórico, metodología (5 fases + mapa circular con zoom por clic), resultados (3 columnas + sub-bloques + nivel 2 de imágenes), resultados (2) (flujograma NTP 330 + cuadros de `ER.docx` + embebido de la app de `tesis/0`), resultados (3) (6 resultados + ART + galería de fotos) y **EPT** (diagrama esquemático de 5 franjas aplicado **muy detalladamente** según `EPTransf.md`: secuencia de transformación arriba, franja central Fundamento → Etapa 1 → Etapa 2 → Etapa 3 → Propósito, resultado esperado y recursos clave, con la paleta verde/rojo del deck; banda central al **75 % de alto (309 px)**, conjunto **centrado verticalmente**, títulos de etapa **+20 %** y flechas centrales **verde → rojo → verde → rojo**, §27-§28; y **clic en cada etapa → imagen de detalle** `pt1..pt4.png` en primer plano con aparición sencilla (proyección de escala `scale(.5→1)` al abrir y de más a menos al cerrar, sin giro), nivel 2 en Etapa 3 (pt3 → pt4) y clic fuera/ESC → pantalla principal, con el slide atenuado detrás, §29; y **nivel 2 en Etapa 2**: clic sobre pt2 → `riesgos1.png` + `riesgos2.png` lado a lado, §33); y **Validación** (slide 10 nuevo, §31: mapa mental del proceso Delphi con núcleo «Validación de la propuesta», panel de 8 expertos, tres rondas —verde/rojo/verde— y banda de síntesis, con **clic en cada ronda o en la síntesis** → modal con su tabla y comparativa final; y mapa a **altura natural con el conjunto centrado en vertical**, §32); y **Conclusiones** (slide 11 nuevo, §34: seis bloques encadenados 1→6 —verde/rojo, **el bloque 6 en rojo**— con conectores radiales hacia el nodo central «CONCLUSIONES» y franja de aporte central, códigos normativos como chips y la validación Delphi como cajas; **interacción en dos pasos**: 1.er clic → el bloque se **agranda y centra**, 2.º clic → pantalla con la conclusión completa del bloque). Ver §18-§34 para la historia reciente. |
+| Estado | **Los 12 slides están desarrollados y verificados**: carátula (réplica del slide 1 de `Ejemplo.pptx`), problematización, objetivos+hipótesis, marco teórico, metodología (5 fases + mapa circular con zoom por clic), resultados (3 columnas + sub-bloques + nivel 2 de imágenes), resultados (2) (flujograma NTP 330 + cuadros de `ER.docx` + embebido de la app de `tesis/0`), resultados (3) (6 resultados + ART + galería de fotos) y **EPT** (diagrama esquemático de 5 franjas aplicado **muy detalladamente** según `EPTransf.md`: secuencia de transformación arriba, franja central Fundamento → Etapa 1 → Etapa 2 → Etapa 3 → Propósito, resultado esperado y recursos clave, con la paleta verde/rojo del deck; banda central al **75 % de alto (309 px)**, conjunto **centrado verticalmente**, títulos de etapa **+20 %** y flechas centrales **verde → rojo → verde → rojo**, §27-§28; y **clic en cada etapa → imagen de detalle** `pt1..pt4.png` en primer plano con aparición sencilla (proyección de escala `scale(.5→1)` al abrir y de más a menos al cerrar, sin giro), nivel 2 en Etapa 3 (pt3 → pt4) y clic fuera/ESC → pantalla principal, con el slide atenuado detrás, §29; y **nivel 2 en Etapa 2**: clic sobre pt2 → `riesgos1.png` + `riesgos2.png` lado a lado, §33); y **Validación** (slide 10 nuevo, §31: mapa mental del proceso Delphi con núcleo «Validación de la propuesta», panel de 8 expertos, tres rondas —verde/rojo/verde— y banda de síntesis, con **clic en cada ronda o en la síntesis** → modal con su tabla y comparativa final; y mapa a **altura natural con el conjunto centrado en vertical**, §32); y **Conclusiones** (slide 11 nuevo, §34: seis bloques encadenados 1→6 —verde/rojo, **el bloque 6 en rojo**— con conectores radiales hacia el nodo central «CONCLUSIONES» y franja de aporte central, códigos normativos como chips y la validación Delphi como cajas; **interacción en dos pasos**: 1.er clic → el bloque se **agranda y centra**, 2.º clic → pantalla con la conclusión completa del bloque, §34); y **Recomendaciones** (slide 12 nuevo, §35: tres columnas de ámbito —metodológico y académico en verde, práctico en rojo— con seis subbloques 1-6 que llevan número, título, palabras clave y franja de cierre, y una banda operacional «Ampliar → Aplicar → Actualizar → Investigar»; **un clic en cualquier subbloque** abre su detalle ampliado). Ver §18-§36 para la historia reciente. |
 | Carátula (slide 1) | **Reescrita en §23**: banda negra `#262626` de 211px con `logocaratula.png` centrado (430px, `aspect-ratio:306/65`), textos del ejemplo ("Presentación Tesis Doctoral", título, "DOCTORADO EN DIRECCIÓN DE PROYECTOS", "Candidato: Jorge Alexander Bucheli García", "Asesora: Dra. Julia Ayuso, Ph.D."), franjas verticales a la izquierda, tira abstracta rojo/verde a la derecha **atenuada al 50%** (`opacity: 0.5`, §24). **Sin** el logotipo de `logo.bmp` y **sin** la etiqueta "ETIQUETA". |
 | Encabezado | Pestañas de navegación con el índice; **retirado el texto** "Tesis Doctoral · Gestión de proyectos…" (`.brand-text`), queda solo el punto verde de la izquierda. |
 | Logo superior | `logo.bmp` convertido a `assets/logo.png` en la **esquina superior derecha de los slides 2-9** (no en la carátula), `top:8px; right:12px; width:140px`. Ver §21. |
 | Pie institucional | `logo-inf.png` → `assets/logo-inf.png` (1316→1119px, −15%) **solo en pantalla completa**: banda de 80px en flujo al pie del marco (720→800px) que NO desplaza el contenido; `align-items:flex-end` lo apoya en el borde inferior. Ver §22. |
 | Paleta | Verde `#006E49` · Rojo `#C0242A` · negros/grises de `Ejemplo.pptx` (banda `#262626`, textos `#4C4A4F`/`#595959`, verde de programa `#006E49`). |
-| Verificación | **`cd tools && reanudar.cmd`** (una orden: entorno + todo + estado git); atajo: `verify-all.cmd shot`. Objetivo actual: **54/54 (map) + 712/712 (focus, los 11 slides) + `TODO OK`**. |
-| Capturas | `tools/out/slide01_cover.png` y `slide01_cover_fs.png` (carátula normal/pantalla completa) · `slide_fs_foot.png` (pie en pantalla completa) · `slide05_map.png`, `md_shot*.png` · `slide06*.png` · `slide07*.png` · `slide08*.png` · `slide09.png` + `slide09_f1/f2/f3/f3img.png` + `slide09_f2img.png` + `slide09_frs.png` (EPT y sus detalles) · `slide10.png` + `slide10_fr1/fr2/fr3/frn.png` (Validación y sus modales) · `slide11.png` + `slide11_zoom1..6.png` (bloque agrandado) + `slide11_fb1..6.png` (conclusión) [Conclusiones] · `res2_shot*.png` · `res3_shot*.png` |
-| Revisar a ojo (no las puede leer el asistente) | `slide01_cover.png` (banda negra + logos + tira al 50%), `slide_fs_foot.png` (pie 1119px al borde), `slide09.png` (esquema EPT) y `slide09_f1/f2/f3/f3img.png` (imágenes de detalle al hacer clic en cada Etapa) + `slide09_f2img.png` (riesgos1 + riesgos2 en paralelo, §33), `slide10.png` (mapa de validación) y `slide10_fr1/fr2/fr3/frn.png` (modales de ronda y tabla comparativa), las capturas de logos en los slides 2-11, más `slide11.png` + `slide11_zoom1..6.png` (el bloque agrandado y centrado) + `slide11_fb1..6.png` (la conclusión) del slide de Conclusiones. El usuario impone el diseño; el asistente mide geometría con Chrome y el usuario valida lo visual. |
-| Pendiente | Nada bloqueado. Próximos pasos típicos: revisión visual del usuario de las capturas (en especial del slide 11: `slide11.png`, `slide11_zoom1..6.png` y `slide11_fb1..6.png`), ajustes de textos/tamaños, nuevos contenidos por slide. Pendiente aparte: transcribir a HTML las imágenes `pt1..pt5` del slide 9 (falta fuente para `pt5`). |
+| Verificación | **`cd tools && reanudar.cmd`** (una orden: entorno + todo + estado git); atajo: `verify-all.cmd shot`. Objetivo actual: **54/54 (map) + 770/770 (focus, los 12 slides) + `TODO OK`**. |
+| Capturas | `tools/out/slide01_cover.png` y `slide01_cover_fs.png` (carátula normal/pantalla completa) · `slide_fs_foot.png` (pie en pantalla completa) · `slide05_map.png`, `md_shot*.png` · `slide06*.png` · `slide07*.png` · `slide08*.png` · `slide09.png` + `slide09_f1/f2/f3/f3img.png` + `slide09_f2img.png` + `slide09_frs.png` (EPT y sus detalles) · `slide10.png` + `slide10_fr1/fr2/fr3/frn.png` (Validación y sus modales) · `slide11.png` + `slide11_zoom1..6.png` (bloque agrandado) + `slide11_fb1..6.png` (conclusión) [Conclusiones] · `slide12.png` + `slide12_frc1..6.png` (Recomendaciones y sus detalles) · `res2_shot*.png` · `res3_shot*.png` |
+| Revisar a ojo (no las puede leer el asistente) | `slide01_cover.png` (banda negra + logos + tira al 50%), `slide_fs_foot.png` (pie 1119px al borde), `slide09.png` (esquema EPT) y `slide09_f1/f2/f3/f3img.png` (imágenes de detalle al hacer clic en cada Etapa) + `slide09_f2img.png` (riesgos1 + riesgos2 en paralelo, §33), `slide10.png` (mapa de validación) y `slide10_fr1/fr2/fr3/frn.png` (modales de ronda y tabla comparativa), las capturas de logos en los slides 2-11, más `slide11.png` + `slide11_zoom1..6.png` (el bloque agrandado y centrado) + `slide11_fb1..6.png` (la conclusión) del slide de Conclusiones, y `slide12.png` + `slide12_frc1..6.png` (las tres columnas de ámbito y el detalle ampliado de cada subbloque) del slide de Recomendaciones. El usuario impone el diseño; el asistente mide geometría con Chrome y el usuario valida lo visual. |
+ | Pendiente | Nada bloqueado. Próximos pasos típicos: revisión visual del usuario de las capturas (en especial del slide 12: `slide12.png` y `slide12_frc1..6.png` — el subbloque 1 es ahora un **diagrama radial** «C. Chequeo» + 5 riesgos + cadena NTP 324→330, §37), ajustes de textos/tamaños, nuevos contenidos por slide. Pendiente aparte: transcribir a HTML las imágenes `pt1..pt5` del slide 9 (falta fuente para `pt5`). |
 
 ---
 
@@ -67,7 +67,7 @@ npm install            # instala jsdom ^24 (única dependencia)
 #    En macOS/Linux (los scripts son .cmd; usa los comandos sueltos):
 node --check ../presentacion-web/js/app.js   # y demás JS (verify-all los lista)
 node map_check.js                            # 54 checks jsdom (slide 5)
-node focus_check.js                          # 712 checks jsdom (los 11 slides)
+node focus_check.js                          # 763 checks jsdom (los 12 slides)
 node gen_map_shot.js && node gen_heights.js  # harness slide 5
 node gen_results_heights.js                  # harness slide 6 (+ copia assets a out/)
 # capturas (opcional): apuntar CHROME a la ruta local y usar
@@ -2240,3 +2240,303 @@ bloques encadenados 1→6, conectores radiales hacia el nodo central
   `cn-zoom--bN=1392×612::213×338`; **0 clip / 0 tx / 0 OVERFLOW**.
 - Capturas: `tools/out/slide11.png`, `slide11_zoom1..6.png`,
   `slide11_fb1..6.png`. **Revisar a ojo**: el bloque agrandado y centrado.
+
+---
+
+## 35. Slide 12 nuevo — Recomendaciones (según `RECOMENDACIONES.docx` / `recomendacion1.md`)
+
+**Pedido.** Añadir la diapositiva **RECOMENDACIONES** (slide 12) siguiendo
+`recomendacion1.md`, con la misma estructura del proyecto, **sin espacios en
+blanco**, con tipografías proporcionadas y conservando la paleta del deck. El
+contenido es obligatorio: sale de `RECOMENDACIONES.docx` (no se inventa nada).
+
+**Diseño (1408×720).**
+- `.slide-head` (92px) con título **RECOMENDACIONES** y subtítulo «Proyección
+  metodológica, aplicación práctica y continuidad académica».
+- `.rc-body` (flex column, `flex:1`): **tres columnas de ámbito** (`.rc-cols` →
+  `.rc-amb--green`, `.rc-amb--red`, `.rc-amb--green`) y **banda operacional**
+  (`.rc-flow`: Ampliar → Aplicar → Actualizar → Investigar, con el último nodo
+  en rojo). **Se eliminó** el antiguo nodo superior verde en cápsula.
+- Cada columna tiene cabecera sólida y subbloques (`flex:1 1 0`, `min-height:0`)
+  que **llenan la altura** (verificado sin huecos). Subbloques 1-2 metodológicos
+  (verde), 3-5 prácticos (**rojo**) y 6 académico (**verde**, `modo:'lista'` con
+  checklist vertical de 7 líneas de proyección).
+- **Interacción por clic (un nivel)**: cada subbloque lleva
+  `data-focus="rc1..rc6"` + `role`/`tabindex`. Al pulsarlo se abre su detalle
+  ampliado (`.rc-modal--rcN` con `.rc-card` que pasa de `scale(.86)` a `1`,
+  espejo del patrón `.vl-*` del slide 10). Cierra con ✕, ESC, clic en el fondo
+  del modal o clic fuera; un clic dentro de la tarjeta no cierra (guarda de
+  propagación en captura, igual que en los slides 10-11).
+
+**Cambios.**
+- `js/data/recomendacionesData.js` (NUEVO): `window.RECOMENDACIONES` con
+  `title`, `subtitle`, tres `ambitos` (con `subs`: `key/num/icono/titulo/
+  modo/kws/sentido/cierre/detalle`) y `flujo` de cuatro nodos.
+- `js/slides/slide12Recomendaciones.js` (NUEVO): renderer
+  `window.slideRenderers.recomendaciones` (helpers `subt()`/`ambito()`; sin
+  logotipo/pie, que los inyecta `app.js`).
+- `js/icons.js`: icono `refresh` (nodo «Actualizar»).
+- `js/data/thesisData.js`: `{ id: 12, key: 'recomendaciones', label:
+  'Recomendaciones' }`.
+- `js/app.js`: `FOCUS_SCOPES` de `rc-body` con `keys:['rc1'..'rc6']` (sin
+  `parents`) y `GHOST_CFG` atenuando `.rc-cols` y `.rc-flow`.
+- `index.html`: enlaza `recomendacionesData.js` (tras `conclusionsData.js`) y
+  `slide12Recomendaciones.js` (tras `slide11Conclusions.js`).
+- `css/styles.css`: sección `.slide-recomendaciones` + clases `.rc-*` (tokens
+  `--rc-verde/--rc-verde-osc/--rc-rojo/--rc-gris/--rc-line`), espejo del modal
+  del slide 10 y reglas `frc1..frc6`.
+- `tools/gen_slide12_shot.js` (NUEVO): genera `rc_shot.html` (informe reposo +
+  `rc1..rc6`) y `rc_shot_frc1..6.html`.
+- `tools/verify-all.cmd`: `node --check` de `recomendacionesData.js` /
+  `slide12Recomendaciones.js`, `node gen_slide12_shot.js` y capturas
+  `slide12.png` + `slide12_frc1..6.png`; anotación (12 slides, focus 770).
+- `tools/focus_check.js`: checks del slide 12 (DOM, foco único, CSS, `app.js`),
+  conteos 11→12 slides / logos 10→11 / pies 11→12 / títulos 10→11; total
+  **712 → 758 → 759 → 760 → 761 → 762 → 763**.
+- `tools/inventario.json`: añadidos los archivos de los slides 9-12 que faltaban
+  en el manifiesto (`validationData.js`, `conclusionsData.js`,
+  `recomendacionesData.js`, `slide10..12*.js`, `gen_slide10..12_shot.js`,
+  `pt2..pt5.png`, `iniciar.cmd` y fuentes `.md`/`.docx`); mínimos de
+  `js/data` 10→13 y `js/slides` 9→15.
+
+**Verificación.**
+- **54/54 (map) + 770/770 (focus 1-12) + `TODO OK`** con `reanudar.cmd shot`.
+- Auditoría Chrome (`rc_shot.html`, `--dump-dom`) en reposo y `rc1..rc6`:
+  cabecera 1408×92, cuerpo 1408×628 (llenan los 720), columnas 449×577 cada una,
+  subbloques 258/170/523 de alto, banda 1372×29, modales 1392×612::600×179;
+  **0 clip / 0 tx / 0 OVERFLOW**.
+- Capturas: `tools/out/slide12.png` + `slide12_frc1..6.png`. **Revisar a ojo**:
+  las tres columnas de ámbito y el detalle ampliado de cada subbloque.
+
+---
+
+## 36. Pestañas de navegación abreviadas (12 slides) + intercambio de color en el slide 12
+
+**Pedido.** (a) Quitar el bloque superior verde en cápsula del slide 12. (b) Que
+la barra de pestañas superior **se vea entera** con los 12 slides, abreviando las
+palabras. (c) Que los bloques **3-5 (Ámbito práctico)** pasen a **rojo** y el
+bloque **6 (Ámbito académico)** a **verde**.
+
+**Cambios.**
+- `js/slides/slide12Recomendaciones.js`: **eliminado** el nodo superior
+  `.rc-node` (y `js/data/recomendacionesData.js` sin el objeto `nodo`);
+  `js/app.js` `GHOST_CFG` de `rc-body` ya no atenúa `.rc-node`.
+- `js/data/thesisData.js`: etiquetas de pestaña abreviadas → `Carátula`,
+  `Problematización`, `Objetivos`, `Teorías`, `Metodología`, `Resultados (1)`,
+  `Resultados (2)`, `Resultados (3)`, `P. Transformación`, `Validación`, `Conclusiones`, `Recomendaciones`.
+- `css/styles.css`: el encabezado pasa de `height:54px` a `min-height:54px`;
+  `.tabs` con `flex-wrap:wrap` (a anchos estrechos baja a dos líneas y el
+  encabezado crece, **nada queda cortado**); `.tab` a `font-size:11px`,
+  `padding:6px 9px`, `gap:4px`. Medido en Chrome: **una línea a ≥1366 px** y
+  **dos líneas a 1280/1152** con `tabs scroll == client` (overflow 0) en todos.
+- `js/data/recomendacionesData.js`: ámbito **práctico `color:'red'`** (bloques
+  3-5) y ámbito **académico `color:'green'`** (bloque 6); el metodológico sigue
+  `green`. Los modales heredan el acento por `--rc-accent`.
+- `tools/focus_check.js`: checks de color del slide 12 actualizados (práctico
+  rojo, académico verde) y `tabGo('6. Resultados (1)'/'7. Resultados (2)'/'8. Resultados (3)'/
+  '9. P. Transformación')`; total **770**.
+- `tools/gen_slide12_shot.js`: retirado `.rc-node` del informe de geometría.
+
+**Verificación.**
+- **54/54 (map) + 770/770 (focus 1-12) + `TODO OK`** con `reanudar.cmd shot`.
+- Auditoría Chrome (`rc_shot.html`) sin nodo: columnas 1372×577, subbloques
+  258/170/523 de alto, banda 1372×29; **0 clip / 0 tx / 0 OVERFLOW**.
+
+## 37. Slide 12: subbloque 1 como diagrama radial (C. Chequeo + NTP)
+
+**Pedido.** El subbloque 1 («Ampliación de instrumentos») ya no muestra los
+minibloques en fila, sino un **diagrama radial/circular**: arriba la cápsula
+**«C. Chequeo»**, alrededor los cinco tipos de riesgo —**Físicos, Químicos,
+Biológicos, Ergonómicos, Psicosociales**— y al pie, enlazados con una flecha,
+**NTP 324 → NTP 330**.
+
+**Cambios.**
+- `js/data/recomendacionesData.js`: subbloque `rc1` con `modo:'radial'` y nuevos
+  campos `hub:'C. Chequeo'`, `radios:[…5 riesgos…]`, `ntp:['NTP 324','NTP 330']`
+  (se retira la lista `kws`); se conservan `sentido` y `cierre`.
+- `js/slides/slide12Recomendaciones.js`: `subt()` gana la rama `radial` que
+  emite `.rc-radial > .rc-radial-canvas` (hub, anillo `.rc-radial-ring` y cinco
+  `.rc-radial-node--n1..n5`) más `.rc-radial-ntp` con los dos `.rc-ntp` y la
+  flecha `.rc-radial-arrow` (`Icons.svg('chevRight',11)`).
+- `css/styles.css`: bloque `.rc-radial*` (canvas `position:relative`; hub
+  absoluto arriba centrado; anillo de elipse `84%×66%` centrado al 60%; nodos
+  absolutos por porcentajes: n1 12%/50%, n2 30%/80%, n3 50%/88%, n4 70%/80%,
+  n5 88%/50%; pie NTP centrado). Todo con `min-height:0`.
+- `tools/focus_check.js`: check del radial (hub + anillo + 5 nodos + 2 NTP);
+  total **770**.
+- `tools/gen_slide12_shot.js`: se añaden `.rc-radial`/`.rc-radial-canvas` al
+  control de recorte, `.rc-radial-hub`/`.rc-radial-node`/`.rc-ntp` al de texto
+  volado y `.rc-radial`/`.rc-radial-node` al de desbordamiento de lámina; el
+  informe lista la caja de cada nodo y del pie NTP.
+
+**Geometría medida (Chrome, `rc_shot.html`).** cuerpo radial 417×166; hub
+«C. Chequeo» 94×20; nodos de 16 px de alto (Físicos 45, Químicos 54, Biológicos
+57, Ergonómicos 68, Psicosociales 70) sin salir del canvas; chips NTP 63×17;
+**0 clip / 0 tx / 0 OVERFLOW** en reposo y en `frc1..frc6`.
+
+**Verificación.** **54/54 (map) + 770/770 (focus 1-12) + `TODO OK`** con
+`reanudar.cmd shot`.
+
+## 38. Slide 12: el detalle del subbloque 1 incorpora el radial agrandado
+
+**Pedido.** Al pulsar el subbloque 1, además del texto de su detalle, debe
+mostrarse **de forma agrandada** el mismo **diagrama radial** que ya se ve en el
+subbloque.
+
+**Cambios.**
+- `js/slides/slide12Recomendaciones.js`: el diagrama se extrae a la función
+  `radial(sub, big)` (reutilizada por el subbloque y por el detalle). El detalle
+  pasa a `<div class="rc-card-body">` con `.rc-card-txt` (párrafos + cierre) y,
+  solo si `modo==='radial'`, `.rc-card-fig` con `radial(sub, true)`
+  (`.rc-radial--big`).
+- `css/styles.css`: `.rc-card--radial` más ancho (`min(940px,94%)`);
+  `.rc-card--radial .rc-card-body` en fila (texto 42 % / figura 58 %),
+  `.rc-card-fig` 330 px de alto y `.rc-radial--big` con hub/nodos/NTP mayores.
+  El resto de tarjetas no cambia (`.rc-card-body{display:block}`).
+- `tools/focus_check.js`: check del radial agrandado dentro del detalle;
+  total **770**.
+- `tools/gen_slide12_shot.js`: `.rc-card-body`/`.rc-card-fig` al control de
+  recorte y `.rc-card--radial`/`.rc-card-fig` al de desbordamiento.
+
+**Geometría medida (Chrome, `rc_shot.html`, foco rc1).** tarjeta del detalle
+**940×423**; canvas del radial grande 512×301; nodos de 24 px de alto
+(Físicos 64 … Psicosociales 99) sin salir del canvas; chips NTP 89×25;
+**0 clip / 0 tx / 0 OVERFLOW**.
+
+**Verificación.** **54/54 (map) + 770/770 (focus 1-12) + `TODO OK`** con
+`reanudar.cmd shot`.
+
+## 39. Slide 12: subbloque 2 como flujo de dos niveles
+
+**Pedido.** El subbloque 2 pasa de chips a un **diagrama de flujo en dos
+niveles**: arriba **Objetividad → Trazabilidad**, bajando a **Comparabilidad**,
+a la izquierda **Menor subjetividad** y subiendo de nuevo a **Objetividad**
+(ciclo cerrado); además **subir el tamaño del texto**.
+
+**Cambios.**
+- `js/data/recomendacionesData.js`: subbloque `rc2` con `modo:'flujo2'` (los
+  cuatro rótulos siguen en `kws`, en orden TL, TR, BR, BL).
+- `js/slides/slide12Recomendaciones.js`: `subt()` gana la rama `flujo2` que
+  emite `.rc-flujo2` con cuatro `.rc-f2-node--tl|tr|br|bl` y cuatro flechas
+  `.rc-f2-arrow--r|d|l|u` (icono `chevRight` girado).
+- `css/styles.css`: `.rc-flujo2` como rejilla `1fr auto 1fr` × `auto 1fr auto`
+  con las celdas de nodo/flecha asignadas por `grid-area`; nodos a `11px` (frente
+  a los 8.8px de los chips).
+- `tools/focus_check.js`: check del flujo (4 nodos + 4 flechas y rótulos
+  correctos); total **770**.
+- `tools/gen_slide12_shot.js`: `.rc-flujo2` al control de recorte y al de
+  desbordamiento y `.rc-f2-node` al de texto volado.
+
+**Geometría medida (Chrome, `rc_shot.html`).** `.rc-flujo2` 429×193 dentro del
+subbloque; **0 clip / 0 tx / 0 OVERFLOW**.
+
+**Verificación.** **54/54 (map) + 770/770 (focus 1-12) + `TODO OK`** con
+`reanudar.cmd shot`.
+
+## 40. Slide 12: ajustes del bloque 2 (flechas, márgenes y detalle) y texto del bloque 6
+
+**Pedido.** (a) Dar **más cuerpo** a las flechas del flujo del bloque 2.
+(b) Separar los cuatro subbloques de los **bordes superior e inferior**.
+(c) Al pulsar el bloque 2, mostrar **también el flujo agrandado** junto al texto
+(como el bloque 1). (d) Corregir en el bloque 6 el rótulo a
+**«Aplicaciones longitudinales en obra»**.
+
+**Cambios.**
+- `css/styles.css`: las flechas pasan a **insignia circular** (24 px, fondo
+  `--rc-claro`, borde y color de acento) y `.rc-flujo2` cambia a filas
+  `1fr auto 1fr` con `padding:14px 8px`, de modo que los nodos quedan
+  centrados y **separados de los bordes**. Se añade `.rc-flujo2--big`
+  (nodos a 15 px, flechas/insignias a 34 px).
+- `js/slides/slide12Recomendaciones.js`: el flujo se extrae a `flujo2(sub, big)`
+  (reutilizado por el subbloque y su detalle); la tarjeta ancha con figura pasa
+  a `.rc-card--fig` y sirve a los bloques 1 y 2.
+- `js/data/recomendacionesData.js`: rótulo del bloque 6
+  `Aplicaciones longitudinales en obra`.
+- `tools/focus_check.js`: check del flujo agrandado en el detalle del bloque 2;
+  total **770**.
+- `tools/gen_slide12_shot.js`: `.rc-card--fig` (antes `.rc-card--radial`).
+
+**Geometría medida (Chrome, `rc_shot.html`, foco rc2).** tarjeta del detalle
+**940×423**; **0 clip / 0 tx / 0 OVERFLOW**.
+
+**Verificación.** **54/54 (map) + 770/770 (focus 1-12) + `TODO OK`** con
+`reanudar.cmd shot`.
+
+## 41. Slide 12: bloque 6 como flujo vertical + pestaña «P. Transformación»
+
+**Pedido.** (a) El bloque 6 (académico, el más alto) pasa a un **diagrama de
+flujo vertical** que aproveche la altura, uniendo sus siete líneas con flechas.
+(b) Al agrandarlo, la tarjeta debe crecer para que **todo el flujo se vea**.
+(c) La pestaña del slide 9 pasa a **«P. Transformación»**.
+
+**Cambios.**
+- `js/data/recomendacionesData.js`: subbloque `rc6` con `modo:'flujoV'` (los
+  siete rótulos siguen en `kws`).
+- `js/slides/slide12Recomendaciones.js`: `flujoV(sub, big)` encadena los nodos en
+  columna con flecha `chevRight` girada; se usa en el subbloque y, agrandado, en
+  su detalle (`.rc-card--fig` cubre ya radial, flujo 2 niveles y flujo vertical).
+- `css/styles.css`: `.rc-fv` (columna, `justify-content:space-evenly`),
+  `.rc-fv-node` (11 px), `.rc-fv-arrow` (90°) y `.rc-fv--big` (13 px); para el
+  detalle, `.rc-modal--rc6 .rc-card--fig` se agranda a `min(1040px,96%)` con
+  figura de **468 px** de alto.
+- `js/data/thesisData.js`: pestaña del slide 9 `P. Transformación`.
+- `tools/focus_check.js`: rc6 pasa a comprobar el flujo (7 nodos + 6 flechas) y
+  el detalle agrandado; pestaña del slide 9 `P. Transformación`; total **770**.
+- `tools/gen_slide12_shot.js`: `.rc-fv`/`.rc-fv-node` a los controles de
+  recorte, texto volado y desbordamiento.
+
+**Geometría medida (Chrome, `rc_shot.html`).** `.rc-fv` 429×458 en el subbloque;
+tarjeta del detalle **1040×561** (figura 468 px) sin recorte; **0 clip / 0 tx /
+0 OVERFLOW**.
+
+**Verificación.** **54/54 (map) + 770/770 (focus 1-12) + `TODO OK`** con
+`reanudar.cmd shot`.
+
+
+## 42. Slide 12: bloques 3 y 5 como flujo de dos niveles, bloque 4 radial (verde) y pestañas finales
+
+**Pedido.** (a) Los bloques 3 y 5 adoptan el diagrama de dos niveles del bloque 2;
+el bloque 4 el radial del bloque 1, y al pulsarlos su detalle conserva esa misma
+estructura. (b) El bloque 4 toma el color verde del bloque 1 (subbloque y
+detalle) pese a vivir en el ámbito práctico. (c) Pestañas finales:
+`6. Resultados (1)`, `7. Resultados (2)`, `8. Resultados (3)`,
+`9. P. Transformación`. (d) Ajustes de tamaño en los detalles: texto izquierdo
++20 %, texto del gráfico -10 %.
+
+**Cambios.**
+- `js/data/recomendacionesData.js`: `rc3` y `rc5` con `modo:'flujo2'` (cuatro
+  nodos: actores de la socialización / cambios del ciclo de actualización);
+  `rc4` con `modo:'radial'` (`hub`, `radios`, `ntp`).
+- `js/data/thesisData.js`: pestañas `Resultados (2)`, `Resultados (3)` y
+  `P. Transformación`.
+- `css/styles.css`: el texto izquierdo de los detalles rc1-rc5 al +20 %
+  (`.rc-modal--rcN .rc-card-k/p/c`); radial agrandado al -10 %
+  (`.rc-radial--big`); flujo de dos niveles agrandado al -10 %
+  (`.rc-flujo2--big`); el bloque 4 y su detalle en verde
+  (`.rc-sub[data-focus="rc4"]` y `.rc-modal--rc4 .rc-card`).
+- `tools/focus_check.js`: estructura de rc3/rc5 (4 nodos + 4 flechas) y rc4
+  (anillo + 5 nodos + cadena), detalles agrandados de rc3/rc4/rc5 y color verde
+  del bloque 4; total **770**.
+
+**Geometría medida (Chrome, `rc_shot.html`).** subbloques rc3/rc4/rc5 431x170;
+radial de rc4 en 417x74 sin solapes; detalles 940x423; **0 clip / 0 tx /
+0 OVERFLOW**.
+
+**Verificación.** **54/54 (map) + 770/770 (focus 1-12) + `TODO OK`** con
+`reanudar.cmd shot`.
+
+## 43. Slide 12: ajuste fino del detalle del bloque 6
+
+**Pedido.** En el detalle ampliado del bloque 6, subir el texto de la izquierda
+un 20 % y el texto del gráfico (flujo vertical) un 5 %.
+
+**Cambios.**
+- `css/styles.css`: `rc6` se une a la lista de detalles con texto izquierdo al
+  +20 % (`.rc-modal--rc6 .rc-card-k/p/c`); `.rc-fv--big .rc-fv-node` sube a
+  13.65 px (`padding: 6px 19px`) y la flecha a 19 px.
+
+**Geometría medida (Chrome, `rc_shot.html`, foco rc6).** tarjeta **1040x561**
+(figura 468 px) sin recorte; **0 clip / 0 tx / 0 OVERFLOW**.
+
+**Verificación.** **54/54 (map) + 770/770 (focus 1-12) + `TODO OK`** con
+`reanudar.cmd shot`.

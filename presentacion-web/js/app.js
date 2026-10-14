@@ -120,7 +120,9 @@
       keys: ['r1', 'r2', 'r3', 'rn'] },
     { sel: 'cn-body', cls: 'cn-body--f',
       keys: ['zb1', 'zb2', 'zb3', 'zb4', 'zb5', 'zb6', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6'],
-      parents: { b1: 'zb1', b2: 'zb2', b3: 'zb3', b4: 'zb4', b5: 'zb5', b6: 'zb6' } }
+      parents: { b1: 'zb1', b2: 'zb2', b3: 'zb3', b4: 'zb4', b5: 'zb5', b6: 'zb6' } },
+    { sel: 'rc-body', cls: 'rc-body--f',
+      keys: ['rc1', 'rc2', 'rc3', 'rc4', 'rc5', 'rc6'] }
   ];
 
   /* Niveles anidados: al cerrar un nivel con `parents[key]`, se vuelve a ese
@@ -151,7 +153,8 @@
     'rs3-body': { nodes: ['.rs3-cols'], pad: '4px 20px 12px', gap: '8px' },
     'ept-body': { nodes: ['.ept-logica', '.ept-central', '.ept-result', '.ept-rc'], pad: '6px 22px 8px', gap: '7px' },
     'vl-body': { nodes: ['.vl-map', '.vl-synth'], pad: '6px 22px 8px', gap: '8px' },
-    'cn-body': { nodes: ['.cn-flow', '.cn-strata', '.cn-node-row', '.cn-aporte'], pad: '6px 22px 8px', gap: '6px' }
+    'cn-body': { nodes: ['.cn-flow', '.cn-strata', '.cn-node-row', '.cn-aporte'], pad: '6px 22px 8px', gap: '6px' },
+    'rc-body': { nodes: ['.rc-cols', '.rc-flow'], pad: '6px 18px 8px', gap: '8px' }
   };
 
   function ghostSlide(el) {

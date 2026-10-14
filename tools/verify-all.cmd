@@ -1,7 +1,7 @@
 @echo off
 REM ============================================================
-REM Verificación completa de la presentación (11 slides):
-REM   sintaxis + map_check (54) + focus_check (712) + harness + capturas.
+REM Verificación completa de la presentación (12 slides):
+REM   sintaxis + map_check (54) + focus_check (770) + harness + capturas.
 REM Uso:  verify-all.cmd   (sin Screenshot)
 REM       verify-all.cmd shot   (con screenshots en tools\out\)
 REM Requisitos: Node.js + npm install en tools/
@@ -28,6 +28,8 @@ node --check "..\presentacion-web\js\data\validationData.js" || goto :err
 node --check "..\presentacion-web\js\slides\slide10Validation.js" || goto :err
 node --check "..\presentacion-web\js\data\conclusionsData.js" || goto :err
 node --check "..\presentacion-web\js\slides\slide11Conclusions.js" || goto :err
+node --check "..\presentacion-web\js\data\recomendacionesData.js" || goto :err
+node --check "..\presentacion-web\js\slides\slide12Recomendaciones.js" || goto :err
 node --check "..\presentacion-web\js\data\erTables.js" || goto :err
 node --check "..\presentacion-web\js\app.js" || goto :err
 echo OK
@@ -45,6 +47,7 @@ node gen_slide8_shot.js || goto :err
 node gen_ept_shot.js || goto :err
 node gen_slide10_shot.js || goto :err
 node gen_slide11_shot.js || goto :err
+node gen_slide12_shot.js || goto :err
 
 if /I "%~1"=="shot" (
   echo [4/4] Screenshot con Chrome headless...
@@ -120,7 +123,14 @@ if /I "%~1"=="shot" (
     call :shot slide11_fb4.png cn_shot_fb4.html
     call :shot slide11_fb5.png cn_shot_fb5.html
     call :shot slide11_fb6.png cn_shot_fb6.html
-    echo Screenshots: out\slide05_map.png, out\slide06.png, out\slide06_foco1-3.png, out\slide06_foco1a-1b.png, out\slide06_foco2a-2b.png, out\slide06_foco3a-3b.png, out\slide06_foco3aimg.png, out\slide06_foco3bimg.png, out\slide07.png, out\slide07_fne-fni.png, out\slide07_ff1.png, out\slide08.png, out\slide08_fp1-fp6.png, out\slide08_fp1i-fp6i.png [nivel 2], out\slide08_fp1z.png, out\slide08_fp2z.png [acercado], out\slide08_foto1.png, out\slide08_foto2.png [galería], out\slide08_art1.png, out\slide08_art2.png [ART], out\slide09.png [EPT], out\slide09_f1-f2.png [pt1/pt2], out\slide09_f2img.png [riesgos en paralelo], out\slide09_f3.png [pt3+pt4 en paralelo], out\slide09_frs.png [resultado esperado], out\slide10.png [Validación], out\slide10_fr1-fr3.png, out\slide10_frn.png, out\slide11.png [Conclusiones], out\slide11_zoom1-6.png [bloque agrandado], out\slide11_fb1-fb6.png [conclusión], out\md_shot*.png
+    call :shot slide12.png rc_shot.html
+    call :shot slide12_frc1.png rc_shot_frc1.html
+    call :shot slide12_frc2.png rc_shot_frc2.html
+    call :shot slide12_frc3.png rc_shot_frc3.html
+    call :shot slide12_frc4.png rc_shot_frc4.html
+    call :shot slide12_frc5.png rc_shot_frc5.html
+    call :shot slide12_frc6.png rc_shot_frc6.html
+    echo Screenshots: out\slide05_map.png, out\slide06.png, out\slide06_foco1-3.png, out\slide06_foco1a-1b.png, out\slide06_foco2a-2b.png, out\slide06_foco3a-3b.png, out\slide06_foco3aimg.png, out\slide06_foco3bimg.png, out\slide07.png, out\slide07_fne-fni.png, out\slide07_ff1.png, out\slide08.png, out\slide08_fp1-fp6.png, out\slide08_fp1i-fp6i.png [nivel 2], out\slide08_fp1z.png, out\slide08_fp2z.png [acercado], out\slide08_foto1.png, out\slide08_foto2.png [galería], out\slide08_art1.png, out\slide08_art2.png [ART], out\slide09.png [EPT], out\slide09_f1-f2.png [pt1/pt2], out\slide09_f2img.png [riesgos en paralelo], out\slide09_f3.png [pt3+pt4 en paralelo], out\slide09_frs.png [resultado esperado], out\slide10.png [Validación], out\slide10_fr1-fr3.png, out\slide10_frn.png, out\slide11.png [Conclusiones], out\slide11_zoom1-6.png [bloque agrandado], out\slide11_fb1-fb6.png [conclusión], out\slide12.png [Recomendaciones], out\slide12_frc1-frc6.png [detalle ampliado], out\md_shot*.png
   ) else (
     echo Chrome no encontrado en la ruta por defecto; omitiendo screenshot.
   )

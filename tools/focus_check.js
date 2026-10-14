@@ -46,6 +46,7 @@ load('js/data/resultsData3.js');
 load('js/data/transformationData.js');
 load('js/data/validationData.js');
 load('js/data/conclusionsData.js');
+load('js/data/recomendacionesData.js');
 load('js/data/erTables.js');
 load('js/components/justificationCard.js');
 load('js/slides/slide01Cover.js');
@@ -62,6 +63,7 @@ load('js/slides/slide08Art.js');
 load('js/slides/slide09EPT.js');
 load('js/slides/slide10Validation.js');
 load('js/slides/slide11Conclusions.js');
+load('js/slides/slide12Recomendaciones.js');
 load('js/app.js');
 
 /* app.js arranca con DOMContentLoaded; en jsdom ya paso, lo disparamos a mano */
@@ -91,7 +93,7 @@ function tabGo(label) {
     }
   });
 }
-function goRs6() { tabGo('6. Resultados'); }
+function goRs6() { tabGo('6. Resultados (1)'); }
 
 /* --- ir al slide 6 --- */
 goRs6();
@@ -917,21 +919,24 @@ function arrastreDe(marco, x0, y0, x1, y1) {
   doc.dispatchEvent(raton('mouseup', x1, y1));
 }
 
-has(win.SLIDES.length === 11 && win.SLIDES[7].key === 'resultados3',
+has(win.SLIDES.length === 12 && win.SLIDES[7].key === 'resultados3',
   'el slide 8 (Resultados 3) está en la lista de láminas');
 has(win.SLIDES[8].id === 9 && win.SLIDES[8].key === 'ept',
   'el slide 9 (EPT) está en la lista de láminas como { id: 9, key: ept }');
-has(win.SLIDES[8].label === 'Transformación',
-  'la pestaña del slide 9 se titula solo "Transformación"');
+has(win.SLIDES[8].label === 'P. Transformación',
+  'la pestaña del slide 9 se titula "P. Transformación"');
 has(win.SLIDES[9].id === 10 && win.SLIDES[9].key === 'validacion' &&
    win.SLIDES[9].label === 'Validación',
   'el slide 10 (Validación) está en la lista de láminas como { id: 10, key: validacion }');
 has(win.SLIDES[10].id === 11 && win.SLIDES[10].key === 'conclusiones' &&
    win.SLIDES[10].label === 'Conclusiones',
   'el slide 11 (Conclusiones) está en la lista de láminas como { id: 11, key: conclusiones }');
+has(win.SLIDES[11].id === 12 && win.SLIDES[11].key === 'recomendaciones' &&
+   win.SLIDES[11].label === 'Recomendaciones',
+  'el slide 12 (Recomendaciones) está en la lista de láminas como { id: 12, key: recomendaciones }');
 has(win.SLIDES.slice(1).every(function (s) {
-  return /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ0-9() ]*$/.test(s.label);
-}), 'las pestañas 2-11 van en minúsculas salvo la primera letra');
+  return /^[A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÑáéíóúñ0-9(). ]*$/.test(s.label);
+}), 'las pestañas 2-12 van en minúsculas salvo la primera letra (abreviaturas 6-9)');
 has(pasos8.length === 6, 'RESULTADOS3 lleva los seis pasos de la secuencia');
 has(pasos8.map(function (p) { return p.key; }).join(',') === 'p1,p2,p3,p4,p5,p6',
   'las claves de los pasos son p1 a p6');
@@ -954,7 +959,7 @@ has(/infraestructura/.test(w3.RESULTADOS3.subtitle) &&
   /toma de decisiones/.test(w3.RESULTADOS3.subtitle),
   'el subtítulo anuncia la prueba piloto y la toma de decisiones');
 
-tabGo('8. Resultados');
+tabGo('8. Resultados (3)');
 has(!!rs3Body(), 'slide 8 (Resultados 3) activo');
 has(doc.querySelector('.slide.active h2').textContent === 'Resultados (3)',
   'el título de la lámina es Resultados (3)');
@@ -1305,9 +1310,9 @@ has(rs3Focus() === null, 'reposo tras la secuencia del ART');
 
 /* --- el logo va en la esquina superior derecha de todos los slides -------- */
 var slidesAll = Array.prototype.slice.call(doc.querySelectorAll('#slideFrame .slide'));
-has(slidesAll.length === 11, 'la lámina contiene los once slides');
+has(slidesAll.length === 12, 'la lámina contiene los doce slides');
 var logos = Array.prototype.slice.call(doc.querySelectorAll('#slideFrame .slide .slide-logo'));
-has(logos.length === 10, 'los diez slides de contenido llevan un .slide-logo (la carátula no)');
+has(logos.length === 11, 'los once slides de contenido llevan un .slide-logo (la carátula no)');
 has(logos.every(function (l) { return l.getAttribute('src') === 'assets/logo.png'; }),
   'todos los logos apuntan a assets/logo.png');
 has(logos.every(function (l) { return l.getAttribute('alt') === 'Logotipo'; }),
@@ -1362,7 +1367,7 @@ has(/\.cacc-abstract\s*\{[^}]*opacity:\s*0?\.5/.test(logoCss),
 
 /* --- el pie institucional (logo-inf.png) solo en pantalla completa ---------- */
 var feet = Array.prototype.slice.call(doc.querySelectorAll('#slideFrame .slide .slide-foot'));
-has(feet.length === 11, 'los once slides llevan un .slide-foot (pie)');
+has(feet.length === 12, 'los doce slides llevan un .slide-foot (pie)');
 has(feet.every(function (f) {
   var i = f.querySelector('img');
   return i && i.getAttribute('src') === 'assets/logo-inf.png';
@@ -1384,7 +1389,7 @@ has(gcs(doc.querySelector('#slideFrame .slide .slide-foot')).display === 'none',
   'sin pantalla completa el pie permanece oculto');
 
 /* --- diapositiva 9 · EPT (diagrama EPTransf.md, cinco franjas) ------------- */
-tabGo('9. Transformación');
+tabGo('9. P. Transformación');
 var eptEl = doc.querySelector('#slideFrame .slide-ept');
 has(eptEl !== null, 'el slide 9 (EPT) existe como .slide-ept');
 has(eptEl.getAttribute('data-slide') === '9', 'data-slide="9" en el slide EPT');
@@ -1392,7 +1397,7 @@ has(eptEl.querySelector('.slide-logo') !== null, 'el slide EPT lleva el .slide-l
 has(eptEl.querySelector('.slide-head h2').textContent === 'Estructura de la propuesta de transformación',
   'el título del slide es "Estructura de la propuesta de transformación" (sin "(EPT)")');
 var h2s = Array.prototype.slice.call(doc.querySelectorAll('#slideFrame .slide .slide-head h2'));
-has(h2s.length === 10, 'los diez slides de contenido (2-11) llevan su título en el encabezado');
+has(h2s.length === 11, 'los once slides de contenido (2-12) llevan su título en el encabezado');
 has(h2s[0].textContent === 'Problematización' &&
   h2s[1].textContent === 'Objetivos - hipótesis' &&
   h2s[2].textContent === 'Teorías, conceptos y referentes normativos o legales' &&
@@ -1407,8 +1412,9 @@ has(h2s.slice(0, 7).every(function (h) {
   return t.charAt(0) === t.charAt(0).toUpperCase() && !/[A-ZÁÉÍÓÚÑÑ]/.test(t.slice(1));
 }), 'slides 2-8: ninguna mayúscula interna en el título');
 has(h2s[8].textContent === 'Proceso de validación de la propuesta' &&
-   h2s[9].textContent === 'CONCLUSIONES',
-  'los títulos de los slides 10 y 11 aparecen en el encabezado');
+   h2s[9].textContent === 'CONCLUSIONES' &&
+   h2s[10].textContent === 'RECOMENDACIONES',
+  'los títulos de los slides 10, 11 y 12 aparecen en el encabezado');
 has(/Secuencia metodológica orientada al fortalecimiento/.test(eptEl.querySelector('.ept-subtitle').textContent) &&
   /Quito/.test(eptEl.querySelector('.ept-subtitle').textContent),
   'subtítulo: la secuencia metodológica de EPTransf.md (fortalecimiento de la gestión preventiva en Quito)');
@@ -1994,7 +2000,199 @@ has(/'cn-body': \{ nodes: \['\.cn-flow'/.test(appJs),
 has(/\.cn-body\s*\{[^}]*flex:\s*1/.test(logoCss),
   'CSS: la lámina de conclusiones usa el cuerpo flex:1 común');
 
+/* ======================= DIAPOSITIVA 12 · RECOMENDACIONES ================== */
+tabGo('12. Recomendaciones');
+
+var rc = doc.querySelector('#slideFrame .slide.active');
+has(!!rc && rc.classList.contains('slide-recomendaciones'),
+  'slide 12: se renderiza .slide-recomendaciones como duodécima diapositiva');
+has(/RECOMENDACIONES/i.test(rc.querySelector('.slide-head h2').textContent),
+  'slide 12: el encabezado titula «RECOMENDACIONES»');
+has(/Proyección metodológica/i.test(rc.querySelector('.rc-subtitle').textContent) &&
+   /continuidad académica/i.test(rc.querySelector('.rc-subtitle').textContent),
+  'slide 12: el subtítulo anuncia proyección, aplicación práctica y continuidad académica');
+has(!!rc.querySelector('.slide-logo') && !!rc.querySelector('.slide-foot'),
+  'slide 12: la lámina lleva logotipo y pie institucional');
+has(!rc.querySelector('.rc-node'),
+  'slide 12: el bloque superior verde (nodo) fue eliminado');
+
+/* tres ámbitos en columnas */
+var rcAmbs = Array.prototype.slice.call(rc.querySelectorAll('.rc-cols .rc-amb'));
+has(rcAmbs.length === 3, 'slide 12: tres columnas de ámbito');
+has(rcAmbs[0].classList.contains('rc-amb--green') &&
+   rcAmbs[1].classList.contains('rc-amb--red') &&
+   rcAmbs[2].classList.contains('rc-amb--green'),
+  'slide 12: metodológico y académico en verde; práctico (3-5) en rojo');
+has(/ÁMBITO METODOLÓGICO/i.test(rcAmbs[0].textContent) &&
+   /Fortalecer instrumentos y enfoques/i.test(rcAmbs[0].textContent) &&
+   /ÁMBITO PRÁCTICO/i.test(rcAmbs[1].textContent) &&
+   /Aplicación operativa en obra/i.test(rcAmbs[1].textContent) &&
+   /ÁMBITO ACADÉMICO/i.test(rcAmbs[2].textContent) &&
+   /Proyección investigativa/i.test(rcAmbs[2].textContent),
+  'slide 12: cada ámbito lleva su título y subtítulo');
+
+/* seis subbloques clicables */
+var rcSubs = Array.prototype.slice.call(rc.querySelectorAll('.rc-sub'));
+has(rcSubs.length === 6, 'slide 12: seis subbloques (1-6)');
+has(rcSubs.every(function (s) {
+  return s.getAttribute('data-focus') && s.getAttribute('role') === 'button' &&
+    s.getAttribute('tabindex') === '0';
+}), 'slide 12: los seis subbloques son accionables (data-focus + role + tabindex)');
+has(rcSubs.map(function (s) { return s.getAttribute('data-focus'); }).join(',') ===
+  'rc1,rc2,rc3,rc4,rc5,rc6',
+  'slide 12: los subbloques van etiquetados rc1..rc6 en orden');
+has(rcAmbs[0].querySelectorAll('.rc-sub').length === 2 &&
+   rcAmbs[1].querySelectorAll('.rc-sub').length === 3 &&
+   rcAmbs[2].querySelectorAll('.rc-sub').length === 1,
+  'slide 12: 2 subbloques metodológicos, 3 prácticos y 1 académico');
+ has(/AMPLIACIÓN DE INSTRUMENTOS/i.test(rc.querySelector('.rc-sub[data-focus="rc1"]').textContent) &&
+   /Cuestionario de chequeo/i.test(rc.querySelector('.rc-sub[data-focus="rc1"]').textContent) &&
+   /NTP 324/i.test(rc.querySelector('.rc-sub[data-focus="rc1"]').textContent) &&
+   /Herramienta más integral/i.test(rc.querySelector('.rc-sub[data-focus="rc1"]').textContent),
+   'slide 12: subbloque 1 amplía instrumentos (NTP 324/330) con su franja de cierre');
+ has(rc.querySelector('.rc-sub[data-focus="rc1"] .rc-radial-ring') &&
+   rc.querySelectorAll('.rc-sub[data-focus="rc1"] .rc-radial-node').length === 5 &&
+   /Físicos/.test(rc.querySelector('.rc-sub[data-focus="rc1"] .rc-radial').textContent) &&
+   /Psicosociales/.test(rc.querySelector('.rc-sub[data-focus="rc1"] .rc-radial').textContent) &&
+   rc.querySelectorAll('.rc-sub[data-focus="rc1"] .rc-radial-ntp .rc-ntp').length === 2,
+   'slide 12: subbloque 1 diagrama radial (Cuestionario de chequeo + 5 riesgos + cadena NTP 324/330)');
+ has(/ENFOQUE CUANTITATIVO O MIXTO/i.test(rc.querySelector('.rc-sub[data-focus="rc2"]').textContent) &&
+    /Menor subjetividad/i.test(rc.querySelector('.rc-sub[data-focus="rc2"]').textContent),
+   'slide 12: subbloque 2 sostiene el enfoque cuantitativo o mixto');
+has(rc.querySelectorAll('.rc-sub[data-focus="rc2"] .rc-flujo2 .rc-f2-node').length === 4 &&
+   rc.querySelectorAll('.rc-sub[data-focus="rc2"] .rc-flujo2 .rc-f2-arrow').length === 4 &&
+   rc.querySelector('.rc-sub[data-focus="rc2"] .rc-f2-node--tl').textContent === 'Objetividad' &&
+   rc.querySelector('.rc-sub[data-focus="rc2"] .rc-f2-node--bl').textContent === 'Menor subjetividad',
+  'slide 12: subbloque 2 en flujo de dos niveles (Objetividad->Trazabilidad->Comparabilidad->Menor subjetividad)');
+has(rc.querySelectorAll('.rc-sub[data-focus="rc3"] .rc-flujo2 .rc-f2-node').length === 4 &&
+   rc.querySelectorAll('.rc-sub[data-focus="rc3"] .rc-flujo2 .rc-f2-arrow').length === 4 &&
+   rc.querySelector('.rc-sub[data-focus="rc3"] .rc-f2-node--tl').textContent === 'Trabajadores',
+  'slide 12: subbloque 3 en flujo de dos niveles (actores de la socialización de los ART)');
+has(rc.querySelector('.rc-sub[data-focus="rc4"] .rc-radial-ring') &&
+   rc.querySelectorAll('.rc-sub[data-focus="rc4"] .rc-radial-node').length === 5 &&
+   rc.querySelectorAll('.rc-sub[data-focus="rc4"] .rc-radial-ntp .rc-ntp').length === 2 &&
+   /Entidades públicas/.test(rc.querySelector('.rc-sub[data-focus="rc4"] .rc-radial').textContent),
+  'slide 12: subbloque 4 en diagrama radial (alineación normativa + 5 elementos + cadena)');
+has(rc.querySelectorAll('.rc-sub[data-focus="rc5"] .rc-flujo2 .rc-f2-node').length === 4 &&
+   rc.querySelectorAll('.rc-sub[data-focus="rc5"] .rc-flujo2 .rc-f2-arrow').length === 4 &&
+   /Cambios normativos/.test(rc.querySelector('.rc-sub[data-focus="rc5"] .rc-flujo2').textContent),
+  'slide 12: subbloque 5 en flujo de dos niveles (actualización permanente)');
+has(/SOCIALIZACIÓN DE LOS ART/i.test(rc.querySelector('.rc-sub[data-focus="rc3"]').textContent) &&
+   /Difusión sistemática/i.test(rc.querySelector('.rc-sub[data-focus="rc3"]').textContent),
+  'slide 12: subbloque 3 socializa los ART entre los actores de obra');
+has(/ALINEACIÓN NORMATIVA/i.test(rc.querySelector('.rc-sub[data-focus="rc4"]').textContent) &&
+   /Gestión preventiva verificable/i.test(rc.querySelector('.rc-sub[data-focus="rc4"]').textContent),
+  'slide 12: subbloque 4 alinea la gestión con la normativa');
+has(/ACTUALIZACIÓN PERMANENTE/i.test(rc.querySelector('.rc-sub[data-focus="rc5"]').textContent) &&
+   /Cambios normativos/i.test(rc.querySelector('.rc-sub[data-focus="rc5"]').textContent),
+  'slide 12: subbloque 5 mantiene la actualización permanente');
+ has(/BASE PARA FUTURAS INVESTIGACIONES/i.test(rc.querySelector('.rc-sub[data-focus="rc6"]').textContent) &&
+    rc.querySelectorAll('.rc-sub[data-focus="rc6"] .rc-fv .rc-fv-node').length === 7 &&
+    rc.querySelectorAll('.rc-sub[data-focus="rc6"] .rc-fv .rc-fv-arrow').length === 6 &&
+    /Aplicaciones longitudinales en obra/i.test(rc.querySelector('.rc-sub[data-focus="rc6"]').textContent),
+   'slide 12: subbloque 6 (académico) encadena en flujo vertical las siete líneas de proyección');
+
+/* banda operacional inferior */
+var rcFlow = rc.querySelector('.rc-flow');
+has(rcFlow.querySelectorAll('.rc-fn').length === 4 &&
+   rcFlow.querySelectorAll('.rc-arrow').length === 3,
+  'slide 12: la banda inferior encadena cuatro nodos con tres flechas');
+has(Array.prototype.map.call(rcFlow.querySelectorAll('.rc-fn'), function (n) {
+  return n.textContent.replace(/\s+/g, ' ').trim();
+}).join('|') === 'Ampliar|Aplicar|Actualizar|Investigar',
+  'slide 12: la secuencia es Ampliar -> Aplicar -> Actualizar -> Investigar');
+has(!!rcFlow.querySelector('.rc-fn--red') &&
+   /Investigar/.test(rcFlow.querySelector('.rc-fn--red').textContent),
+  'slide 12: el nodo Investigar va en rojo (cierre del deck)');
+
+/* detalle ampliado por subbloque */
+has(rc.querySelectorAll('.rc-modal').length === 6 && rc.querySelectorAll('.rc-card').length === 6,
+  'slide 12: cada subbloque tiene su detalle ampliado');
+ has(/NTP 324 \+ NTP 330/i.test(rc.querySelector('.rc-modal--rc1 .rc-card').textContent) &&
+   /Eficacia de controles/i.test(rc.querySelector('.rc-modal--rc6 .rc-card').textContent),
+   'slide 12: los detalles amplían el contenido del documento (bloques 1 y 6)');
+ has(rc.querySelector('.rc-modal--rc1 .rc-card-fig .rc-radial--big .rc-radial-ring') &&
+   rc.querySelectorAll('.rc-modal--rc1 .rc-card-fig .rc-radial-node').length === 5 &&
+   rc.querySelectorAll('.rc-modal--rc1 .rc-card-fig .rc-radial-ntp .rc-ntp').length === 2,
+   'slide 12: el detalle del subbloque 1 incluye el diagrama radial agrandado');
+ has(rc.querySelectorAll('.rc-modal--rc2 .rc-card-fig .rc-flujo2--big .rc-f2-node').length === 4 &&
+   rc.querySelectorAll('.rc-modal--rc2 .rc-card-fig .rc-flujo2--big .rc-f2-arrow').length === 4,
+   'slide 12: el detalle del subbloque 2 incluye el flujo agrandado');
+ has(rc.querySelectorAll('.rc-modal--rc3 .rc-card-fig .rc-flujo2--big .rc-f2-node').length === 4 &&
+   rc.querySelectorAll('.rc-modal--rc3 .rc-card-fig .rc-flujo2--big .rc-f2-arrow').length === 4,
+   'slide 12: el detalle del subbloque 3 incluye el flujo agrandado');
+ has(rc.querySelectorAll('.rc-modal--rc4 .rc-card-fig .rc-radial--big .rc-radial-node').length === 5 &&
+   rc.querySelectorAll('.rc-modal--rc4 .rc-card-fig .rc-radial--big .rc-radial-ntp .rc-ntp').length === 2,
+   'slide 12: el detalle del subbloque 4 incluye el diagrama radial agrandado');
+ has(rc.querySelectorAll('.rc-modal--rc5 .rc-card-fig .rc-flujo2--big .rc-f2-node').length === 4 &&
+   rc.querySelectorAll('.rc-modal--rc5 .rc-card-fig .rc-flujo2--big .rc-f2-arrow').length === 4,
+   'slide 12: el detalle del subbloque 5 incluye el flujo agrandado');
+ has(rc.querySelectorAll('.rc-modal--rc6 .rc-card-fig .rc-fv--big .rc-fv-node').length === 7 &&
+   rc.querySelectorAll('.rc-modal--rc6 .rc-card-fig .rc-fv--big .rc-fv-arrow').length === 6,
+   'slide 12: el detalle del subbloque 6 incluye el flujo vertical agrandado');
+
+/* interacción: un foco único abre el detalle */
+var rcBody = rc.querySelector('.rc-body');
+has(gcs(rc.querySelector('.rc-modal--rc1')).visibility === 'hidden',
+  'slide 12: los detalles nacen ocultos (visibility hidden)');
+click(rc.querySelector('.rc-sub[data-focus="rc1"]'));
+has(rcBody.getAttribute('data-focus') === 'rc1' && rcBody.classList.contains('rc-body--frc1'),
+  'slide 12: al pulsar el subbloque 1 se abre su foco (rc-body--frc1)');
+has(gcs(rc.querySelector('.rc-modal--rc1')).visibility === 'visible' &&
+   gcs(rc.querySelector('.rc-modal--rc2')).visibility === 'hidden',
+  'slide 12: solo se abre el detalle del subbloque pulsado');
+has(!!rc.querySelector('.scope-ghost.is-on'),
+  'ghost: la lámina de recomendaciones queda atenuada al abrir un detalle');
+click(rc.querySelector('.rc-modal--rc1 .rc-card-p'));
+has(rcBody.getAttribute('data-focus') === 'rc1',
+  'slide 12: un clic dentro de la tarjeta no cierra el detalle');
+click(rc.querySelector('.rc-modal--rc1 .rc-card-x'));
+has(!rcBody.getAttribute('data-focus') && gcs(rc.querySelector('.rc-modal--rc1')).visibility === 'hidden',
+  'slide 12: el botón de cierre cierra el detalle');
+click(rc.querySelector('.rc-sub[data-focus="rc3"]'));
+has(rcBody.classList.contains('rc-body--frc3') &&
+   gcs(rc.querySelector('.rc-modal--rc3')).visibility === 'visible' &&
+   gcs(rc.querySelector('.rc-modal--rc1')).visibility === 'hidden',
+  'slide 12: al abrir otro subbloque se cierra el anterior (foco único)');
+click(rc.querySelector('.rc-modal--rc3'));
+has(!rcBody.getAttribute('data-focus'),
+  'slide 12: un clic en el fondo del detalle cierra el foco');
+key('Escape');
+has(!rcBody.getAttribute('data-focus'), 'slide 12: Escape deja la lámina en reposo');
+rc.querySelector('.rc-sub[data-focus="rc6"]').focus();
+has(key('Enter'), 'slide 12: Enter sobre el subbloque 6 -> default evitado');
+has(rcBody.classList.contains('rc-body--frc6'), 'slide 12: el subbloque 6 también se abre con Enter');
+key('Escape');
+has(!rcBody.getAttribute('data-focus'), 'slide 12: Escape tras Enter cierra el foco');
+click(rc.querySelector('.rc-sub[data-focus="rc2"]'));
+has(rcBody.getAttribute('data-focus') === 'rc2', 'slide 12: foco abierto antes del clic fuera');
+click(rc.querySelector('.rc-flow'));
+has(!rcBody.getAttribute('data-focus'), 'slide 12: clic fuera (banda operacional) cierra el foco');
+
+/* CSS y motor */
+has(/\.slide-recomendaciones \.slide-head\s*\{\s*height:\s*92px/.test(logoCss),
+  'CSS: cabecera propia del slide de recomendaciones');
+has(/\.rc-body--frc1 \.rc-modal--rc1[\s\S]{0,220}visibility:\s*visible/.test(logoCss) &&
+   /\.rc-body--frc6 \.rc-modal--rc6[\s\S]{0,220}visibility:\s*visible/.test(logoCss),
+  'CSS: cada subbloque muestra su detalle (frc1..frc6)');
+has(/\.rc-body--frc1 \.rc-modal--rc1 \.rc-card[\s\S]{0,220}transform:\s*scale\(1\)/.test(logoCss),
+  'CSS: al abrir, la tarjeta crece de .86 a 1');
+has(/\.rc-modal\s*\{[^}]*opacity:\s*0;[\s\S]{0,120}visibility:\s*hidden/.test(logoCss),
+  'CSS: el detalle nace oculto (opacity 0 + visibility hidden)');
+has(/\.rc-sub\[data-focus="rc4"\][\s\S]{0,180}--rc-accent:\s*#006e49/.test(logoCss) &&
+   /\.rc-modal--rc4 \.rc-card[\s\S]{0,140}--rc-accent:\s*var\(--rc-verde\)/.test(logoCss),
+  'CSS: el bloque 4 toma el verde del bloque 1 (subbloque y detalle)');
+has(/\.rc-amb--green \{ --rc-accent: #006e49/.test(logoCss) &&
+   /\.rc-amb--red \{ --rc-accent: #c0242a/.test(logoCss),
+  'CSS: los ámbitos usan el verde y el rojo de la paleta del deck');
+has(/sel: 'rc-body'[\s\S]{0,80}keys: \['rc1', 'rc2', 'rc3', 'rc4', 'rc5', 'rc6'\]/.test(appJs),
+  'app.js: FOCUS_SCOPES registra rc-body con los focos rc1..rc6');
+has(/'rc-body': \{ nodes: \['\.rc-cols', '\.rc-flow'\]/.test(appJs),
+  'app.js: GHOST_CFG atenda las columnas y la banda operacional');
+has(/\.rc-body\s*\{[^}]*flex:\s*1/.test(logoCss),
+  'CSS: la lámina de recomendaciones usa el cuerpo flex:1 común');
+
 let fail = 0;
 checks.forEach(function (c) { if (!c[1]) { fail++; console.log('FAIL:', c[0]); } });
-console.log((checks.length - fail) + '/' + checks.length + ' checks ok (foco por clic, slides 1-11)');
+console.log((checks.length - fail) + '/' + checks.length + ' checks ok (foco por clic, slides 1-12)');
 process.exit(fail ? 1 : 0);

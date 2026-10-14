@@ -22,7 +22,7 @@ reanudar.cmd shot         # además genera las capturas PNG en tools\out\
 reanudar.cmd app          # además ejecuta las 52/52 pruebas de la app hermana
 ```
 
-Objetivo de verificación: **54/54 (map) + 712/712 (focus) + `TODO OK`**. Tras
+Objetivo de verificación: **54/54 (map) + 770/770 (focus) + `TODO OK`**. Tras
 cada cambio de DOM/clases/CSS hay que actualizar los `has(…)` de
 `tools/focus_check.js` y el total (nº de `has()`).
 
@@ -90,7 +90,7 @@ D:\ejemplo\presentacion\
   (medir /2). Pantalla completa: marco 800px, pie institucional 80px al fondo.
 - Iconos: solo los definidos en `Icons.svg` — no inventar nombres (dibuja vacío).
 
-## 5. Foco/interacción por clic (slides 5-11)
+## 5. Foco/interacción por clic (slides 5-12)
 
 El motor vive en `js/app.js`: lista `FOCUS_SCOPES`, `setScopeFocus`,
 `toggleFocus`, `onFrameClick`, `onKey`, más el `ghost` (sombra de la pantalla
@@ -107,7 +107,7 @@ Reglas que no hay que romper:
 ## 6. Verificación antes de entregar cualquier cambio
 
 1. `cd tools && reanudar.cmd` (o `verify-all.cmd shot`): debe terminar con
-   `54/54 + 712/712 + 0 clip/0 textx-overflow + TODO OK`. Nunca terminar al rojo.
+   `54/54 + 770/770 + 0 clip/0 textx-overflow + TODO OK`. Nunca terminar al rojo.
 2. Si el cambio afecta a geometría: crear `presentacion-web/_probe.html`
    temporal, medir con Chrome headless (`--window-size=2816,1440`,
    `--force-device-scale-factor=1`, contando `zoom:2`), y **borrarlo después**.
@@ -143,13 +143,14 @@ Referencia de los harness (`tools/`): `map_check.js`, `focus_check.js`,
 
 ## 8. Estado actual (resumen)
 
-Los **11 slides** están desarrollados y verificados: carátula (réplica del slide 1
+Los **12 slides** están desarrollados y verificados: carátula (réplica del slide 1
 de `Ejemplo.pptx`), problematización, objetivos+hipótesis, marco teórico,
 metodología (5 fases + mapa circular con zoom por clic), resultados, resultados
 (2) (flujograma NTP 330 + cuadros de `ER.docx` + app embebida de `tesis/0`),
 resultados (3) (6 resultados + ART + galería de fotos), **EPT** (esquema de 5
 franjas según `EPTransf.md`), **validación** (Delphi: rondas + síntesis según
-`Validacion.docx`) y **conclusiones** (hallazgos + aporte según `Conclusiones.md`).
+`Validacion.docx`), **conclusiones** (hallazgos + aporte según `Conclusiones.md`)
+y **recomendaciones** (tres ámbitos + seis subbloques según `RECOMENDACIONES.docx`).
 Pendientes típicos: revisión visual del usuario, ajustes de textos/tamaños, nuevos
 contenidos por slide. Detalles y capturas en `CONTINUIDAD.md` (secciones
 numeradas, `## 0. TL;DR`).
