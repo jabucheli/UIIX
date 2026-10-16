@@ -15,8 +15,8 @@
     var specificLabel = '<div class="oe-label">' + o.specificHeader + '</div>';
 
     var cells = o.specific.map(function (s, i) {
-      var last = i >= o.specific.length - 2;
-      return '<div class="oe-card' + (last ? ' oe-card--last' : '') + '">' +
+      var red = i === 1 || i === 2;
+      return '<div class="oe-card oe-card--' + (red ? 'r' : 'g') + '">' +
         '<div class="oe-meta">' +
           '<span class="oe-num">' + s.num + '</span>' +
           '<span class="oe-main">' + s.main + '</span>' +

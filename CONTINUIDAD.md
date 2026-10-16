@@ -3,7 +3,7 @@
 > Documento de trabajo autónomo para retomar el trabajo **en este computador o en otro**.
 > Alcance actual: **los 12 slides de la presentación** de `presentacion-web` + integración con la app
 > de `D:\ejemplo\tesis\0` (desde el bloque Riesgo del slide 7).
-> Última actualización: **2026-10-13**.
+> Última actualización: **2026-10-16**.
 
 ---
 
@@ -11,7 +11,7 @@
 
 | | |
 |---|---|
-| **Reanudar (este equipo)** | `cd tools` y ejecutar **`reanudar.cmd`** → comprueba Node/Chrome/jsdom/app hermana, verifica todo (**54/54 + 770/770**), genera capturas, y muestra el estado git de los dos repos y dónde sigue la doc. Variantes: `reanudar.cmd shot` (además genera los PNG) y `reanudar.cmd app` (además ejecuta las **52/52** pruebas de la app). Ver §17. |
+| **Reanudar (este equipo)** | `cd tools` y ejecutar **`reanudar.cmd`** → comprueba Node/Chrome/jsdom/app hermana, verifica todo (**54/54 + 888/888**), genera capturas, y muestra el estado git de los dos repos y dónde sigue la doc. Variantes: `reanudar.cmd shot` (además genera los PNG) y `reanudar.cmd app` (además ejecuta las **52/52** pruebas de la app). Ver §17. |
 | **Guardar / llevar a otro equipo** | `cd tools` y **`traspaso.cmd paquete`** → comprueba el **inventario** completo (`verificar-inventario.js`, manifiesto en `tools/inventario.json`), avisa de lo que git no ha guardado y genera el zip portable `tools\out\traspaso\presentacion-tesis-AAAAMMDD-HHMM.zip` (presentacion + tesis hermana + respaldos JSON + historial git + LEEME). Procedimiento completo en `TRASPASO.md`. |
 
 **Regla de oro para mover el trabajo:** `presentacion` y `tesis` son carpetas **hermanas**
@@ -24,9 +24,9 @@ ambas.
 | Logo superior | `logo.bmp` convertido a `assets/logo.png` en la **esquina superior derecha de los slides 2-9** (no en la carátula), `top:8px; right:12px; width:140px`. Ver §21. |
 | Pie institucional | `logo-inf.png` → `assets/logo-inf.png` (1316→1119px, −15%) **solo en pantalla completa**: banda de 80px en flujo al pie del marco (720→800px) que NO desplaza el contenido; `align-items:flex-end` lo apoya en el borde inferior. Ver §22. |
 | Paleta | Verde `#006E49` · Rojo `#C0242A` · negros/grises de `Ejemplo.pptx` (banda `#262626`, textos `#4C4A4F`/`#595959`, verde de programa `#006E49`). |
-| Verificación | **`cd tools && reanudar.cmd`** (una orden: entorno + todo + estado git); atajo: `verify-all.cmd shot`. Objetivo actual: **54/54 (map) + 770/770 (focus, los 12 slides) + `TODO OK`**. |
-| Capturas | `tools/out/slide01_cover.png` y `slide01_cover_fs.png` (carátula normal/pantalla completa) · `slide_fs_foot.png` (pie en pantalla completa) · `slide05_map.png`, `md_shot*.png` · `slide06*.png` · `slide07*.png` · `slide08*.png` · `slide09.png` + `slide09_f1/f2/f3/f3img.png` + `slide09_f2img.png` + `slide09_frs.png` (EPT y sus detalles) · `slide10.png` + `slide10_fr1/fr2/fr3/frn.png` (Validación y sus modales) · `slide11.png` + `slide11_zoom1..6.png` (bloque agrandado) + `slide11_fb1..6.png` (conclusión) [Conclusiones] · `slide12.png` + `slide12_frc1..6.png` (Recomendaciones y sus detalles) · `res2_shot*.png` · `res3_shot*.png` |
-| Revisar a ojo (no las puede leer el asistente) | `slide01_cover.png` (banda negra + logos + tira al 50%), `slide_fs_foot.png` (pie 1119px al borde), `slide09.png` (esquema EPT) y `slide09_f1/f2/f3/f3img.png` (imágenes de detalle al hacer clic en cada Etapa) + `slide09_f2img.png` (riesgos1 + riesgos2 en paralelo, §33), `slide10.png` (mapa de validación) y `slide10_fr1/fr2/fr3/frn.png` (modales de ronda y tabla comparativa), las capturas de logos en los slides 2-11, más `slide11.png` + `slide11_zoom1..6.png` (el bloque agrandado y centrado) + `slide11_fb1..6.png` (la conclusión) del slide de Conclusiones, y `slide12.png` + `slide12_frc1..6.png` (las tres columnas de ámbito y el detalle ampliado de cada subbloque) del slide de Recomendaciones. El usuario impone el diseño; el asistente mide geometría con Chrome y el usuario valida lo visual. |
+| Verificación | **`cd tools && reanudar.cmd`** (una orden: entorno + todo + estado git); atajo: `verify-all.cmd shot`. Objetivo actual: **54/54 (map) + 888/888 (focus, los 12 slides) + `TODO OK`**. |
+| Capturas | `tools/out/slide01_cover.png` y `slide01_cover_fs.png` (carátula normal/pantalla completa) · `slide_fs_foot.png` (pie en pantalla completa) · `slide02.png` + `slide02_fev.png` (Problematización y bloque Evidencia agrandado) + `slide02_fjf.png` (Justificación agrandada) + `slide02_q7.png` (pregunta científica ampliada) · `slide03.png` (Objetivos) · `slide04.png` (Marco teórico) + `slide04_hist.png` (bloque «Marco histórico» ampliado) + `slide04_apl.png` / `slide04_legal.png` / `slide04_ctx.png` (técnicas aplicadas, marco legal y **marco contextual ampliados**) · `slide05_map.png`, `md_shot*.png` · `slide06*.png` · `slide07*.png` · `slide08*.png` · `slide09.png` + `slide09_f1/f2/f3/f3img.png` + `slide09_f2img.png` + `slide09_frs.png` (EPT y sus detalles) · `slide10.png` + `slide10_fr1/fr2/fr3/frn.png` (Validación y sus modales) · `slide11.png` + `slide11_zoom1..6.png` (bloque agrandado) + `slide11_fb1..6.png` (conclusión) [Conclusiones] · `slide12.png` + `slide12_frc1..6.png` (Recomendaciones y sus detalles) · `res2_shot*.png` · `res3_shot*.png` |
+| Revisar a ojo (no las puede leer el asistente) | `slide01_cover.png` (banda negra + logos + tira al 50%), `slide_fs_foot.png` (pie 1119px al borde), `slide04.png` (Marco teórico en reposo: el «Marco histórico» solo con los años y el «Marco contextual actual» en **óvalo radial con solo los títulos**) y `slide04_hist.png` (Marco histórico ampliado y centrado, resto atenuado) + `slide04_ctx.png` (marco contextual ampliado: 8 tarjetas en el óvalo, resto atenuado), `slide09.png` (esquema EPT) y `slide09_f1/f2/f3/f3img.png` (imágenes de detalle al hacer clic en cada Etapa) + `slide09_f2img.png` (riesgos1 + riesgos2 en paralelo, §33), `slide10.png` (mapa de validación) y `slide10_fr1/fr2/fr3/frn.png` (modales de ronda y tabla comparativa), las capturas de logos en los slides 2-11, más `slide11.png` + `slide11_zoom1..6.png` (el bloque agrandado y centrado) + `slide11_fb1..6.png` (la conclusión) del slide de Conclusiones, y `slide12.png` + `slide12_frc1..6.png` (las tres columnas de ámbito y el detalle ampliado de cada subbloque) del slide de Recomendaciones. El usuario impone el diseño; el asistente mide geometría con Chrome y el usuario valida lo visual. |
  | Pendiente | Nada bloqueado. Próximos pasos típicos: revisión visual del usuario de las capturas (en especial del slide 12: `slide12.png` y `slide12_frc1..6.png` — el subbloque 1 es ahora un **diagrama radial** «C. Chequeo» + 5 riesgos + cadena NTP 324→330, §37), ajustes de textos/tamaños, nuevos contenidos por slide. Pendiente aparte: transcribir a HTML las imágenes `pt1..pt5` del slide 9 (falta fuente para `pt5`). |
 
 ---
@@ -2540,3 +2540,479 @@ un 20 % y el texto del gráfico (flujo vertical) un 5 %.
 
 **Verificación.** **54/54 (map) + 770/770 (focus 1-12) + `TODO OK`** con
 `reanudar.cmd shot`.
+
+## 44. Slide 2: el bloque «Evidencia» adopta el formato del panel de Justificación y se agranda al clic (centrado, 50 %)
+
+**Pedido.** (a) El bloque izquierdo «Evidencia» del slide 2 debe tener el mismo
+formato que el panel «Justificación» (verde/rojo). (b) Al hacer clic en ese bloque
+debe **agrandarse en el mismo lugar** como en los demás slides (estilo slide 5-6,
+no modal). (c) Conservar **todo** su contenido. (d) El bloque agrandado debe ocupar
+**solo el 50 %** de la lámina y quedar **centrado horizontal y verticalmente**,
+manteniendo la forma horizontal (rejilla de dos columnas) del contenido.
+
+**Cambios.**
+- `js/slides/slide02Problematization.js`: la columna `aside.ev-column` ahora envuelve
+  un `.ev-panel` con `.accent` (barra degradada verde→rojo), `.ev-header` (cabecera
+  oscura «EVIDENCIA» con borde inferior rojo) y `.ev-cards` (histórico, bloque dona,
+  barras y fuentes). Lleva `data-focus="ev"`, `role="button"` y `tabindex="0"`.
+- `js/app.js`: `FOCUS_SCOPES` registra `problem-body` con el foco `ev`
+  (`problem-body--fev`); `GHOST_CFG['problem-body']` clona `.ev-column`, `.flow` y
+  `.just-column` con `dir:'row'` (nuevo soporte de dirección del ghost).
+- `css/styles.css`: `.ev-panel/.ev-header/.ev-cards` replican el panel de
+  Justificación (contenido reajustado para caber en reposo); estado de foco
+  `.problem-body--fev` → `justify-content/align-items:center`, `.ev-column` al
+  **50 %**, `.ev-panel` con alto automático y `.ev-cards` en **rejilla 1fr 1fr**
+  (histórico/dona arriba, barras/fuentes abajo y nota a todo el ancho) con el texto
+  agrandado; el flujo y Justificación se ocultan y queda la sombra atenuada detrás.
+- `tools/gen_slide2_shot.js` (**nuevo**): audita `pb_shot.html` (reposo, foco `ev`
+  y restaurado) con controles de recorte, texto volado y desbordamiento; genera las
+  capturas `pb_shot.html`, `pb_shot_fev.html` → `slide02.png`, `slide02_fev.png`.
+- `tools/focus_check.js`: sección del slide 2 (19 comprobaciones: estructura del
+  panel, accionable, contenido conservado, foco por clic/Enter/Escape, ghost en fila
+  y motor CSS/app.js); **total 770 → 790**.
+- `tools/verify-all.cmd`: comprueba la sintaxis de `slide02Problematization.js`,
+  ejecuta `gen_slide2_shot.js` y saca `slide02.png` / `slide02_fev.png`; anotación
+  `focus_check (790)`.
+
+**Geometría medida (Chrome, `pb_shot.html`).** Reposo: `.ev-panel` 250×638 sin
+recorte. Foco `ev`: `.ev-column`/`.ev-panel` **682×613** (50 %), centrado, contenido
+en rejilla de dos columnas; **0 clip / 0 tx / 0 OVERFLOW** en ambos estados.
+
+**Verificación.** **54/54 (map) + 790/790 (focus 1-12) + `TODO OK`** con
+`reanudar.cmd shot`.
+
+## 45. Slide 2: colores del flujo central, textos de la Evidencia y centrado del subbloque «Accidentalidad»
+
+**Pedido.** (a) En el flujo central del slide 2, los números y marcas de cada
+subbloque alternan verde/rojo (el «Problema central» conserva fondo negro y letras
+blancas). (b) En el recuadro del 64 % corregir el texto a «corresponde a obreros
+con lesiones graves y muy graves con incapacidad laboral, en estos 6 años murieron
+167 obreros». (c) Bajo las cifras 508 y 20 añadir «De un total de 16.067 accidentes
+laborales reportados». (d) En las tarjetas de periodo («2014–2019» y «2024»)
+invertir el verde y el rojo, en reposo y agrandado. (e) Al agrandar Evidencia,
+centrar el contenido del subbloque «Accidentalidad en obra».
+
+**Cambios.**
+- `js/slides/slide02Problematization.js`: el color de cada nodo del flujo se
+  asigna por posición (impar verde `#006E49`, par rojo `#C0242A`); el central se
+  fuerza a rojo pero conserva `.central`. La tarjeta de periodo puede llevar una
+  nota (`.ev-period-note`).
+- `js/data/problematizationData.js`: texto del 64 % actualizado; campo `note` en el
+  periodo 2024 («De un total de 16.067 accidentes laborales reportados»).
+- `css/styles.css`: `.ev-period-label` en rojo y `.ev-period .ev-tile .ev-value`
+  en verde (inversión, válida también en `.problem-body--fev`); `.ev-period-note`;
+  ajuste de barras (`gap` 4 px, `hbar-track` 4 px) para que siga cabiendo; en el
+  foco, `.ev-donut-block` y `.ev-donut` con `justify-content:center` (contenido
+  centrado).
+- `tools/focus_check.js`: +1 comprobación de la inversión de color y +1 del centrado
+  del subbloque «Accidentalidad»; **total 790 → 792**.
+
+**Geometría medida (Chrome, `pb_shot.html`).** Reposo: tarjeta 2014-2019 53 px y
+2024 69 px (nota en una línea), panel 250×638 sin recorte; foco `ev` 682×613 con el
+subbloque «Accidentalidad» centrado; **0 clip / 0 tx / 0 OVERFLOW** en ambos estados.
+
+**Verificación.** **54/54 (map) + 792/792 (focus 1-12) + `TODO OK`** con
+`reanudar.cmd shot`.
+
+## 46. Slide 2: bloque Justificación ampliable y colores alternos (justificaciones y pirámide)
+
+**Pedido.** (a) Hacer el bloque Justificación ampliable al clic «de la misma
+manera» que Evidencia (mismo lugar, 50 % centrado). (b) Alternar verde/rojo/verde/
+rojo los colores de las figuras y las sombras de los recuadros Teórica, Práctica,
+Social y Personal. (c) En los recuadros de la jerarquía de controles, poner
+tonalidades verde, rojo, verde (como el actual «Controles de ingeniería»), rojo y
+verde.
+
+**Cambios.**
+- `js/data/problematizationData.js`: justificaciones con `color` green, red, green,
+  red (antes green, dark, red, light).
+- `js/slides/slide02Problematization.js`: `.just-column` pasa a
+  `data-focus="jf"` + `role="button"` + `tabindex="0"` + `aria-label`; los niveles
+  de la pirámide llevan `p-level--green`/`p-level--red` alternos (el central,
+  «Controles de ingeniería», conserva además `p-active`).
+- `js/app.js`: `FOCUS_SCOPES` de `problem-body` pasa a `keys: ['ev', 'jf']`.
+- `css/styles.css`: las tarjetas de justificación adoptan el **estilo del nodo del
+  flujo central** (fondo blanco/gradiente muy claro, borde izquierdo fino de color,
+  icono en tinte claro `rgba(...,.12)` con glifo de color saturado, sombra neutra);
+  `.p-level--green`/`--red` mantienen el verde y rojo **sólidos** (`var(--green)`/
+  `var(--red)`, sin degradado a tono oscuro) —colores previos a la última
+  instrucción—; bloque `.problem-body--fjf` (centrado, `.just-column` al 50 %, panel
+  `height:auto`, rejilla de dos columnas para las tarjetas, textos y pirámide
+  agrandados) y regla `display:none` para `.ev-column`/`.flow` colocada tras
+  `.flow`/`.just-column` (pitfall jsdom).
+- `tools/gen_slide2_shot.js`: audita también el estado `jf` y genera
+  `out/pb_shot_jf.html`; reporta niveles `p-level` y tarjetas `just-card`.
+- `tools/verify-all.cmd`: captura `slide02_fjf.png`; anotación `focus_check (805)`.
+- `tools/focus_check.js`: +13 comprobaciones (accionable, foco clic/Enter/Escape,
+  ocultado de las otras columnas, CSS de centrado/50 %, colores alternos de las
+  tarjetas y de la pirámide); **total 792 → 805**.
+
+**Geometría medida (Chrome, `pb_shot_jf.html`).** Foco `jf`: `.just-column`/
+`.just-panel` **682×616** (50 %), centrado, tarjetas en rejilla de dos columnas,
+5 niveles de pirámide (656/538/420/302/184 × 23, el central 25);
+**0 clip / 0 tx / 0 OVERFLOW**.
+
+**Verificación.** **54/54 (map) + 805/805 (focus 1-12) + `TODO OK`** con
+`reanudar.cmd shot`.
+
+## 47. Slide 2: etiqueta de la barra principal de la Evidencia
+
+**Pedido.** En el cuadro de barras («Acciones que más exponen al trabajador»),
+etiquetar la barra principal como «No señalar o advertir el peligro - Evaluar
+riesgos».
+
+**Cambios.**
+- `js/data/problematizationData.js`: `bars.items[0].label` pasa a
+  «No señalar o advertir el peligro - Evaluar riesgos».
+- `css/styles.css`: la etiqueta más larga obligaba a una línea extra; `.ev-bars`
+  reduce su `gap` de 4 px a 2 px para que el panel siga cabiendo en reposo.
+
+**Verificación.** **54/54 (map) + 805/805 (focus 1-12) + `TODO OK`**, 0 clip / 0 tx /
+0 OVERFLOW en reposo, foco `ev` y foco `jf`.
+
+## 48. Slide 2: centrado de «Fuentes de consulta» al agrandar Evidencia
+
+**Pedido.** Al agrandar el bloque Evidencia, centrar el contenido del subbloque
+«Fuentes de consulta».
+
+**Cambios.**
+- `css/styles.css`: en `.problem-body--fev`, `.ev-sources` pasa a
+  `align-items:center`, el título del bloque a `text-align:center` y `.src-item` a
+  `justify-content:center`/`text-align:center` con `.src-text` en `flex:0 1 auto`,
+  de modo que cada fuente queda centrada.
+- `tools/focus_check.js`: +1 comprobación del centrado; **total 805 → 806**.
+- `AGENTS.md`, `TRASPASO.md`, `CONTINUIDAD.md` (§0) y `tools/verify-all.cmd`:
+  conteo **806**.
+
+**Verificación.** **54/54 (map) + 806/806 (focus 1-12) + `TODO OK`**, 0 clip / 0 tx /
+0 OVERFLOW en reposo, foco `ev` y foco `jf`.
+
+## 49. Slide 2: bloque de la pregunta (flujo) — extras, formato de panel y realce
+
+**Pedido (varias iteraciones).** (a) Añadir textos extra a las justificaciones y un
+objeto del estudio largo solo al agrandar; (b) quitar «(público/privado)» del campo;
+(c) reescribir los bloques 6 y 7 del flujo central; (d) atenuar el verde del bloque
+7, poner su etiqueta en negro en reposo y replicar el realce al pasar el ratón;
+(e) al pulsar el bloque 7, desplegar un recuadro **superpuesto** con el **mismo
+formato** de panel de Evidencia/Justificación (accent + cabecera oscura) y del
+**tamaño del bloque de la pregunta**; (f) atenuar el fondo al ampliarlo **igual que
+Evidencia/Justificación** (ghost), en vez del recuadro oscuro.
+
+**Cambios.**
+- `js/data/problematizationData.js`: `extra` en las cuatro justificaciones; `studyObject`
+  (corto, reposo) + `studyObjectFull` (largo, agrandado); `actionField` sin público/privado;
+  flujo nodo 6 («BRECHA») añade la estrategia metodológica; nodo 7 pasa a
+  `tag: 'PREGUNTA CIENTÍFICA'`, `title: ''` y la pregunta científica en el cuerpo.
+- `js/components/justificationCard.js` y `slide02Problematization.js`: render de
+  `.just-card-extra`, `.obj-short`/`.obj-full` y del overlay `.q7-overlay`/`.q7-card`
+  con `.accent` + `.q7-header` + `.q7-content` + `.q7-body` + `.q7-hint`.
+- `css/styles.css`: tamaños del estado `--fjf` para que quepa todo (header 20px,
+  tarjetas `gap 9px 16px`, cuerpo 11.5px, pirámide compacta); `.obj-full{display:none}`
+  y variantes `--fjf`; pirámide pegada a las tarjetas (sin `flex:1` en `.just-cards`);
+  `.flow-node.green` con verde atenuado (`#2f8f6b`/`#1f6b4d`), etiqueta negra;
+  `.flow-arrow{height:15px}`; `.flow-node[data-focus="q7"]:hover{translateY(-1px)}`;
+  `.q7-card` al 50% con panel; **`.q7-overlay` con fondo transparente** y
+  **`.problem-body--fq7` oculta las tres columnas** para que se revele el *ghost*
+  atenuado (mismo efecto que `--fev`/`--fjf`).
+- `js/app.js`: `FOCUS_SCOPES` de `problem-body` pasa a `keys:['ev','jf','q7']` (el
+  ghost lo aporta el motor al enfocar cualquier clave, incluida `q7`).
+- `tools/focus_check.js`: +20 comprobaciones; **total 806 → 833**; `verify-all.cmd`,
+  `AGENTS.md`, `TRASPASO.md` y §0 actualizados a **833**; captura `out/slide02_q7.png`.
+
+**Verificación.** **54/54 (map) + 833/833 (focus 1-12) + `TODO OK`**, 0 clip / 0 tx /
+0 OVERFLOW en reposo, focos `ev`, `jf` y `q7`.
+
+## 50. Slide 3: realce al pasar el ratón y recuadros del alcance en verde/rojo
+
+**Pedido.** (a) Al pasar el ratón por cada bloque del slide 3, generar un efecto de
+movimiento. (b) En el contenido del bloque «Alcance temático», poner los recuadros
+1-5 con fondos verde/rojo alternos y letras blancas, atenuando la intensidad del color.
+
+**Cambios.**
+- `css/styles.css` (sección del slide 3, antes del `@media`): `.og-block`, `.oe-card`,
+  `.photo`, `.hyp-card`, `.alc-card` y `.delim-card` pasan a `position: relative` con
+  `transition: transform .16s ease, box-shadow .16s ease`; al `:hover` se desplazan
+  `translateY(-2px)` con sombra `0 10px 20px rgba(31,36,48,.16)` y `z-index: 3`
+  (mismo tipo de realce que las tarjetas del slide 2, algo más acusado).
+- `css/styles.css` (bloque del alcance): los recuadros 1-5 vuelven al fondo
+  blanco; el **número** de cada recuadro va en una **caja** (`.alc-num` con
+  `border-radius: 4px`) que alterna verde/rojo según el recuadro
+  (`:nth-child(odd) → var(--green)`, `:nth-child(even) → var(--red)`, ambos con
+  letra blanca); los títulos van en negrilla (`.alc-title { font-weight: bold }`).
+- La **separación** entre los recuadros alterna líneas verde/roja
+  (`:nth-child(odd) → border-bottom: 1.5px solid var(--green)`,
+  `:nth-child(even) → var(--red)`, y el último recuadro sin línea).
+- **Objetivos específicos** (`.oe-card`): el renderer (`slide03Objectives.js`) añade
+  una clase `oe-card--g` / `oe-card--r` por tarjeta (verde, rojo, rojo, verde,
+  `grrg`). Cada tarjeta lleva un fondo **muy atenuado** (`rgba(0,110,73,.08)` verde / `rgba(192,36,42,.08)` rojo) con el
+  borde superior, el número (`.oe-num`, fondo sólido, letra **blanca**) y el
+  subtítulo (`.oe-sub`) en el color de su nivel; el texto principal (`.oe-main`)
+  queda en **negro** (`var(--ink)`) porque el fondo es muy claro (negro sobre el
+  tinte claro, blanco sobre el cuadro sólido del número).
+- `tools/gen_slide3_shot.js` (**nuevo**): harness de captura + auditoría de geometría
+  del slide 3 (`out/sl3_shot.html`); registrado en `verify-all.cmd` (genera
+  `out/slide03.png`).
+- `tools/focus_check.js`: +7 comprobaciones (bloques del slide 3, transición, hover,
+  caja del número y separación verde/roja del alcance, y fondo verde/rojo alterno de
+  los objetivos específicos con su contraste); **total 826 → 833**;
+  `verify-all.cmd`, `AGENTS.md`, `TRASPASO.md` y §0 a **833**.
+
+**Verificación.** **54/54 (map) + 833/833 (focus 1-12) + `TODO OK`**; auditoría del
+slide 3 (`sl3_shot.html`): 0 clip / 0 tx / 0 OVERFLOW.
+
+## 51. Slide 4: «Marco histórico» y «Aplicación» ampliables con el clic
+
+**Pedido.** (a) En el slide 4 (Marco teórico), al pulsar el bloque «Marco histórico»
+debe agrandarse centrado, atenuando el resto de la lámina; al ampliarlo se ve todo
+su contenido y, en reposo, **solo los años**. (b) Hacer **lo mismo** con el bloque
+**«Aplicación»**: al pulsarlo se agranda centrado, el resto de la lámina se atenúa y,
+en reposo, solo se ven sus **palabras clave**.
+
+**Cambios.**
+- `js/data/theoriesData.js`: las cajas «Marco histórico» y «Aplicación» de la galería
+  reciben `focus: 'hist'` y `focus: 'apl'` respectivamente.
+- `js/slides/slide04Theories.js`: cuando la caja lleva `focus`, el renderer añade la
+  clase `th-box--<focus>` y los atributos `data-focus="<focus>" role="button"
+  tabindex="0" aria-label="Ampliar <título>"` (no hubo que tocar el renderer: ya era
+  genérico, así que «Aplicación» salió con `th-box--apl`/`data-focus="apl"`).
+- `js/app.js`: `FOCUS_SCOPES` gana `{ sel: 'th-body', cls: 'th-body--f',
+  keys: ['hist', 'apl'] }` y `GHOST_CFG` gana `'th-body': { nodes: ['.th-intro',
+  '.th-grid'], pad: '0 18px 4px', gap: '0px' }` (el *ghost* clona la cabecera de
+  conceptos y la rejilla tal como están en reposo y los muestra al 12 % detrás del
+  bloque ampliado; es el mismo *ghost* para las dos claves).
+- `css/styles.css`:
+  - `.th-body` pasa a `position: relative; z-index: 1` (contenedor de referencia para
+    centrar la caja y para quedar por encima del *ghost*, que va a `z-index: 0`).
+  - En **reposo**, cada bloque enseña solo su resumen: `.th-box--hist p`,
+    `.th-box--hist .th-milestone span` y `.th-box--apl .th-bflow-item span` quedan
+    `display: none`; el hito va compactado (`.th-milestone { min-height:0;
+    padding:7px 4px 8px }`, año `13.5px` centrado), el paso de «Aplicación» sin
+    `margin-bottom` y ambos con `cursor: pointer`.
+  - Al ampliar (`.th-body--fhist` / `.th-body--fapl`): `.th-intro` y `.th-grid` quedan
+    `visibility: hidden` (se conserva el sitio, para que el *ghost* encaje), el bloque
+    pasa a `visibility: visible; position: absolute; left:50%; top:50%;
+    transform: translate(-50%,-50%); width:1000px; max-width:calc(100% - 36px);
+    max-height:calc(100% - 26px); z-index:2` con sombra y borde izquierdo de 8px, y se
+    revelan el detalle (párrafo/descripciones/referencia del histórico y los párrafos
+    de cada paso de «Aplicación») con el texto escalado (h3 25px; histórico p 15.5px,
+    `.th-ref` 13.5px, hitos 15.5/12.5px; aplicación pasos 15.5/12.5px). Las reglas de
+    los dos bloques comparten selector (`… , .th-body--fapl .th-box--apl …`).
+  - **Arreglo de desborde preexistente**: `.th-legal-img` recibe `max-height: 176px`.
+    El slide 4 desbordaba ~15 px *desde antes* de este cambio (bloque ya presente en
+    `HEAD`): la columna derecha (panel 374 + marco normativo 237 + gap 7 = 618 px)
+    superaba los 602 px que deja la rejilla, y el marco normativo se salía del marco.
+    Recortar la imagen a 176 px deja la columna en 599 px. Comprobado con el CSS/JS de
+    `HEAD` (mismo `grid scrollH 617` y `OVERFLOW th-legal`) y con el actual (limpio).
+- `tools/gen_slide4_shot.js` (**nuevo**): harness de auditoría y captura del slide 4.
+  Genera `out/sl4_report.html` (informe de los tres estados: reposo, histórico y
+  aplicación), `out/sl4_shot.html` (reposo), `out/sl4_shot_hist.html` y
+  `out/sl4_shot_apl.html`. Reproduce a mano lo que hace `app.js` al abrir el foco (no
+  incluye `app.js`: pone la clase, el `data-focus` y clona el *ghost*); `abrirHist()` y
+  `abrirApl()` abren cada bloque y `cerrarFoco()` los cierra. Mide el centrado con
+  `getBoundingClientRect` (no `offsetLeft`, que ignora el `translate`). Registrado en
+  `verify-all.cmd` con las capturas `out/slide04.png` (reposo), `out/slide04_hist.png`
+  y `out/slide04_apl.png`.
+- `tools/focus_check.js`: +29 comprobaciones (19 del histórico + 10 de la aplicación:
+  bloque accionable, los 5 hitos + referencia, solo los años en reposo, `th-body--fhist`
+  + `data-focus` al pulsar, *ghost* con la rejilla y sin heredar la ampliación, ocultado
+  del contenido real, revelado del detalle, reglas CSS de centrado/z-index/ocultado,
+  `max-height` del marco normativo, cierre con segundo clic y con Escape; y lo mismo
+  para «Aplicación»: accionable, tres pasos, solo palabras clave en reposo,
+  `th-body--fapl`, *ghost* que además cierra el foco anterior, rejilla oculta + detalle
+  visible, cierre con clic/Enter/Escape y reglas CSS compartidas); **total 833 → 862**;
+  `verify-all.cmd`, `AGENTS.md`, `TRASPASO.md` y §0 a **862**.
+
+**Verificación.** **54/54 (map) + 862/862 (focus 1-12) + `TODO OK`**; auditoría del
+slide 4 (`sl4_report.html`) en reposo, histórico **y** aplicación: 0 clip / 0 tx /
+0 OVERFLOW; cada bloque ampliado queda centrado exactamente en el cuerpo (histórico
+1000×261 y aplicación 1000×184, ambos en el centro `704,319`); en reposo el detalle está
+oculto (`display:none`) y al ampliar se ve
+(`display:block`).
+## 52. Slide 4: «Marco Legal y Normativo» (2.4) ampliable + pirámide de anchos proporcionales
+
+**Pedido.** (a) Ampliar **igual que los otros dos** el bloque «Marco Legal y Normativo»
+(2.4): al pulsarlo se agranda centrado y el resto de la lámina se atenúa. (b) Sustituir
+la imagen de `Imagen1.png` por la **jerarquía de instrumentos** aplicable en Ecuador, con
+bandas **verde/rojo alternas y atenuadas**. (c) Después, «haz que el diagrama guarde la
+misma proporción en sus longitudes tal como está en la imagen agrandada; corregir la no
+agrandada».
+
+**Cambios.**
+- `js/data/theoriesData.js`: se elimina `legalImage` y pasan a existir `legalHint`
+  («Jerarquía de instrumentos aplicables en Ecuador») y `legalHierarchy` (6 niveles con
+  `n` / `name` / `det`): `1 Constitución de la República del Ecuador / Art. 326, num. 5`;
+  `2 Convenios internacionales — OIT / Convenio 155`; `3 Leyes orgánicas y ordinarias /
+  Código del Trabajo · LOSEP`; `4 Decretos ejecutivos / D.E. 255-2024`; `5 Acuerdos
+  ministeriales / AM-MDT-2024-196 · AM-MDT-2025-122`; `6 Resoluciones y normas técnicas /
+  IESS / SGRT`.
+- `js/slides/slide04Theories.js`: `legalRows` (fila con clase alterna `th-lh--g` /
+  `th-lh--r`, `i % 2 === 0 ? "g" : "r"`) y `legalFig` (`.th-legal-fig` = `.th-lh-cap` +
+  `.th-lh` con las filas); el `.th-legal` lleva `data-focus="leg" role="button"
+  tabindex="0" aria-label="Ampliar Marco Legal y Normativo"`. **No oculta nada en reposo**
+  (se ve la jerarquía antes y después).
+- `js/app.js`: `FOCUS_SCOPES` de `th-body` pasa a `keys: ["hist", "apl", "leg"]` (el
+  *ghost* es el mismo, de `.th-intro` + `.th-grid`).
+- `css/styles.css`: `.th-legal[data-focus] { cursor: pointer }`; ocultar `.th-intro` /
+  `.th-grid` solo en `--fleg`; el bloque se centra con las **mismas reglas** que hist/apl
+  (`position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:2`), y
+  escalado `--fleg` (h4 25px, párrafo 15.5px, filas/badges/tipos al doble).
+- **Anchos de la pirámide (pedido c).** `.th-lh-row` pasa de `width: fit-content` +
+  `min-width` en las filas 2-6 a **ancho fijo por fila**, tomado del estado ampliado:
+  `nth-child(1) 48%` · `(2) 55%` · `(3) 66%` · `(4) 77%` · `(5) 89%` · `(6) 100%`.
+  Antes la fila 1 era `fit-content`, con lo que valía ~38 % en reposo y ~48 % ampliada
+  (el texto crece 1,94× pero el contenedor 1,48×): ahora **ambos estados conservan la
+  misma proporción**.
+- `tools/focus_check.js`: **+11 comprobaciones** (862 → **873**): accionable, 6 filas +
+  rótulo, alternancia `grgrgr`, contenido visible en reposo, ampliación con
+  `th-body--fleg` + `data-focus=leg`, *ghost*, `--fleg` oculta la rejilla y conserva el
+  bloque, 2.º clic cierra, Enter, Escape, y CSS (centrado + anchos 48 %→100 % + bandas).
+  `verify-all.cmd` y los cuatro documentos de conteo a **873**.
+- `tools/gen_slide4_shot.js`: **4.º estado** `sl4_shot_legal.html` (`abrirLeg()`), auditoría
+  de `fig` / `filas` / `lh-tonos` / `anchos`, y captura `out/slide04_legal.png` en
+  `verify-all.cmd`.
+
+**Verificación.** **54/54 (map) + 873/873 (focus 1-12) + `TODO OK`**; auditoría del
+slide 4 en los cuatro estados: 0 clip / 0 tx / 0 OVERFLOW, columnas 602/602, y **anchos**
+reposo `310, 355, 426, 497, 574, 645` (48,1 / 55 / 66 / 77,1 / 89 / 100 %) frente a
+ampliada `458, 525, 630, 735, 849, 954` (48 / 55 / 66 / 77 / 89 / 100 %): **la proporción
+es idéntica en ambos estados**. El bloque ampliado mide 1000×430 centrado en `704,319`.
+Captura `tools/out/slide04_legal.png` para revisión a ojo.
+## 53. Slide 4: el recuadro «Marco contextual actual» pasa a panel de 8 tarjetas
+
+**Pedido.** «Reemplaza el bloque marco contextual actual, en el mismo espacio, con lo
+desarrollado en el archivo `Marco_Contextual_Actual.md`.»
+
+**Fuente.** `Marco_Contextual_Actual.md` (raíz del proyecto, sin versionar): 8 tarjetas
+en **dos filas de cuatro**, dos filas (fila 1 = contexto → desempeño → PIB → empleo;
+fila 2 = siniestralidad → regulación → responsabilidad → perspectiva), tarjeta con
+**número en círculo, título en negrita, 3 líneas de palabras clave, línea superior de
+color, borde redondeado, fondo blanco**, subtítulo «Condiciones económicas y políticas»
+y la misma referencia al pie que ya tenía la caja. Los colores quedan en **cuadro de
+ajedrez**, según instrucciones posteriores del usuario: fila 1 = verde, rojo, verde, rojo;
+fila 2 = rojo, verde, rojo, verde (tonos `grgrrgrg`, alternando también por columna). El
+documento `.md` sólo marcaba en rojo los bloques 6 y 8.
+
+**Cambios.**
+- `js/data/theoriesData.js` (la 3.ª caja de la galería): se sustituye `mc:` (8 pasos con
+  `t`/`s`) por `ctxSub:` + `ctx:` con 8 objetos `{ n, t, tone, lines[] }`. El `ref` es
+  idéntico al del documento.
+- `js/slides/slide04Theories.js`: nueva rama `if (b.ctx)` que pinta
+  `<p class="th-ctx-sub">` + `<div class="th-ctx">` con 8 `.th-ccard--g/--r`
+  (círculo `.th-ccard-n` + bloque `.th-ccard-b` con `<b>` y 3 `<span>`); `content`
+  decide `flow → ctx → mc → p`. **Se conserva la rama `mc`** (y su CSS `.th-steps`)
+  para poder volver con un solo cambio de datos.
+- `css/styles.css`: `.th-ctx-sub` (11.5px, `--mid`), `.th-ctx` (
+  `grid-template-columns: repeat(4, 1fr); gap: 4px 3px`) y `.th-ccard*`
+  (fondo `#fff`, borde `#d7dbd9`, **línea superior 4px** verde/rojo, `border-radius: 5px`,
+  círculo 14px verde/rojo, título 9.3px negrita `--ink`, líneas 8.2px `--mid`).
+  *Decisión*: se usan los **tokens de la paleta del deck** (`--green #006e49` /
+  `--red #c0242a`), no los `#087A59`/`#C9252D` del `.md`, y el número se coloca **en
+  línea con el título** (no absoluto con `padding-left: 108px` como en el ejemplo del
+  documento): la caja mide 697px (≈164px por tarjeta), así que el círculo de 58px del
+  original no cabría. Mantiene todas las «reglas visuales obligatorias» (§11 del .md).
+- `tools/gen_slide4_shot.js`: `.th-ctx`/`.th-ccard` entran en las listas de *clip*,
+  *tx* y *frame overflow*; nueva línea de auditoría `ctx` (nº de tarjetas, tonos,
+  subtítulo, nº de líneas y anchos).
+- `tools/focus_check.js`: **+3 comprobaciones** (873 → **876**): 8 tarjetas / 24 líneas /
+  subtítulo; numeración 1-8 con tonos `grgrrgrg` (fila 1 grgr, fila 2 rgrg); CSS de la rejilla de 4 columnas y de
+  la tarjeta blanca con línea superior. `verify-all.cmd` y los cuatro documentos de
+  conteo a **876**.
+
+**Geometría.** La caja pasó de **127 → 211 px** de alto; las cinco cajas de la columna
+izquierda suman 502 + 4 huecos = **530 de 602** (holgura 72). Las 8 tarjetas miden 164px
+de ancho. **Verificación: 54/54 (map) + 888/888 (focus) + `TODO OK`**, con **0 clip /
+0 tx / 0 OVERFLOW** en los cuatro estados del `sl4_report.html`. Captura renovada en
+`tools/out/slide04.png`.
+
+---
+
+## 54. Slide 4 — numerales retirados, títulos unificados y «Marco contextual actual» radial (reposo y ampliado)
+
+**a) Numerales retirados** (`js/data/theoriesData.js` + `js/slides/slide04Theories.js`):
+`2.1 Estado del Arte` → `Estado del Arte`; `2.2 Marco Teórico — Técnicas aplicadas` →
+`Marco Teórico — Técnicas aplicadas`; `legalTitle: 2.4 Marco Legal y Normativo` →
+`Marco Legal y Normativo`; y el título del panel derecho
+`2.2 Marco teórico — TEORÍAS BASE` → `Marco teórico — TEORÍAS BASE`. También se
+retiran `2.2.1…2.2.4` de las técnicas aplicadas.
+
+**b) Técnicas aplicadas (`nflow`): contenido en 2 líneas y +25 %.** Los cuatro
+elementos pasan de `[numeral, etiqueta]` a **pares de líneas** en el propio dato:
+`['Principios de Seguridad','y Salud']`, `['Estrategias de Control','de Ingeniería']`,
+`['Identificación y Evaluación','de Riesgos']`, `['Gestión Integrada','de SST']`.
+El renderer pinta cada línea en su `<span>` y desaparece el `<b>` del numeral.
+CSS: `.th-ncell span { font-size: 10.25px; line-height: 1.18 }` — **8.2 × 1.25 = 10.25**
+(el 8.2 original y `.th-ncell b` de 9.8px se eliminan).
+
+**c) Títulos de bloque estandarizados al tamaño del panel derecho.** Referencia
+`«Marco teórico — TEORÍAS BASE»` = **`.th-panel-title h3 { font-size: 16.5px }`**.
+Se igualan: `.th-box h3` **18.5 → 16.5px** y `.th-legal h4` **10.2 → 16.5px**.
+*Sobre c*: el `.th-legal h4` es el del bloque «Marco Legal y Normativo» (2.4), que
+también era uno de los numerales retirados; se sube a 16.5 para que **todos** los
+títulos de bloque midan lo mismo. Si se prefiere dejarlo pequeño (columna derecha),
+es un solo cambio en `styles.css`.
+
+**d) «Marco contextual actual» en reposo: disposición radial ovalada, solo títulos.**
+Sustituye la rejilla `repeat(4, 1fr)`:
+- `.th-ctx` → lienzo `position: relative; height: 186px`.
+- `.th-ccard` → `position: absolute; transform: translate(-50%,-50%); width: 128px;
+  height: 44px` con posiciones `.th-ccard--p1…p8` (50 %/74.37 %/87 %/74.37 %/50 %/
+  25.63 %/13 %/25.63 % y top 28/38/93/148/158/148/93/38 px).
+- `.th-ctx-sub` («Condiciones económicas y políticas») se **descentra y se vuelve el
+  óvalo oscuro del centro**: `position:absolute; left/top 50%; translate(-50%,-50%);
+  width:150px; height:56px; border-radius:50%; background:#121216; color:#fff`.
+  Para eso **se mueve dentro de `.th-ctx`** en el renderer (antes era hermano y se
+  habría anclado al recuadro equivocado).
+- El detalle sigue oculto en reposo: `.th-ccard-b span { display: none }` →
+  **solo los 8 títulos**, como pide el enunciado.
+
+**e) Colores: alternancia estricta 1-verde, 2-rojo … 8-rojo** = `tone` **`grgrgrgr`**
+(antes el cuadro de ajedrez `grgrrgrg`): tarjetas 5→g, 6→r, 7→g, 8→r.
+
+**f) Estado ampliado: sin intersecciones.** Se midieron primero las alturas reales
+de las 8 tarjetas en Chrome (**77, 90, 89, 102, 89, 77, 126, 102 px** — la 7 es la más
+alta porque su detalle ocupa 3 líneas de 2). Con alturas variables el óvalo de 340px
+daba solapes (`6x7`, `7x8`). Se corrió:
+- lienzo `.th-ctx` **340 → 460px** (la caja pasa a **1000×548**, sigue centrada en
+  704,319 y `≤ 638` del cuerpo);
+- **p3 → `left: 87%`** y **p7 → `left: 13%`** (los extremos, como se pidió);
+- reubicación vertical de todas las tarjetas en función de su altura real:
+  p1 78.5 · p2 130 · p3 230 · p4 336 · p5 414.5 · p6 339.5 · p7 230 · p8 108 px;
+- anillo `69%×69%` → **`74% × 65.9%`** (pasa por p1 y p3) y **los 8 radios se
+  recalcularon** (`lk1…lk8`, anchos 100/158/227/162/100/165/227/175px con sus ángulos).
+- Nueva auditoría permanente **`ctx-overlap`** en `gen_slide4_shot.js`: comprueba
+  solape tarjeta-tarjeta, tarjeta-óvalo central y tarjeta fuera del lienzo,
+  **excluyendo el ghost** (usa el helper `q()`). Resultado: **`0`** en reposo y ampliado.
+
+**g) Atenuado igual que «Marco histórico».** Faltaba la regla que oculta el contenido
+real al ampliar: se añade `.th-body--fctx .th-intro, .th-body--fctx .th-grid {
+visibility: hidden; }`. Con eso el `ghost` del motor (misma clave `th-body` de
+`GHOST_CFG`, mismo `.scope-ghost.is-on` con `opacity: .12`) se ve **exactamente igual**
+que en `hist`. Audit: `CTX box0..box4 vis hidden` + `ghost presente foco ctx`.
+
+**h) Herramientas.**
+- `js/app.js`: `FOCUS_SCOPES` de `th-body` → `keys: ['hist','apl','leg','ctx']`.
+- `tools/gen_slide4_shot.js`: `abrirCtx()`, **5.º estado `CTX`**, ficha de salida
+  `out/sl4_shot_ctx.html`, líneas de auditoría `ctx-rad` (hub/anillo/radios/líneas
+  visibles/centro/caja) y `ctx-overlap`; `.th-ctxrad-hub`, `.th-ctxrad-ring` y
+  `.th-ccard` en las listas de *clip* y *overflow*.
+- `tools/focus_check.js`: se **reescribe** el bloque `ctx` → **+12 comprobaciones
+  (876 → 888)**: panel/subtítulo · colores `grgrgrgr` · CSS radial de reposo
+  (p3/p7 a 87 %/13 %, óvalo del subtítulo) · solo títulos · caja accionable ·
+  ampliación · ghost · ghost con la rejilla · contenido real oculto · texto completo ·
+  óvalo+anillo+8 radios · CSS del ampliado · 2.º clic / Enter / Escape.
+
+**Verificación: 54/54 (map) + 888/888 (focus) + `TODO OK`**, con **0 clip /
+0 tx / 0 OVERFLOW** en los cinco estados del `sl4_report.html`
+(REPOSO, HIST, APL, LEGAL, CTX). Capturas renovadas en `tools/out/slide04*.png`.
+
+**i) Subtítulo «Condiciones económicas y políticas» en blanco (corrección de
+especificidad CSS).** El óvalo central del reposo salía con el texto **gris
+`#595959` sobre `#121216`** (casi invisible) y a **13px**, aunque `.th-ctx-sub`
+declaraba `color:#fff; font-size:9.4px`. Motivo: **`.th-box p`** (líneas 1932-1937:
+`margin:0; font-size:13px; line-height:1.2; color:var(--mid)`) tiene especificidad
+`0-0-1-1` y le ganaba a `.th-ctx-sub` (`0-0-1-0`), al ser el subtítulo un `<p>` dentro
+del recuadro. Solución: **subir el selector a `.th-box .th-ctx-sub`** (`0-0-2-0`).
+Comprobado en Chrome: `color=rgb(255,255,255) bg=rgb(18,18,22) fs=9.4px fw=700`
+(rect 150×56, centrado). *Lección*: **el harness embebe el CSS en un `<style>` al
+generarse**, así que tras tocar `styles.css` hay que volver a lanzar
+`node gen_slide4_shot.js` antes de medir o capturar; si no se mide la copia vieja.

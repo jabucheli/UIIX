@@ -1,0 +1,195 @@
+========================================================================
+AYUDA MEMORIA — DIAPOSITIVA 2: PROBLEMATIZACIÓN
+Sustentación de tesis doctoral
+========================================================================
+
+Cómo usar este guion:
+  - El orden sigue la lámina: EVIDENCIA (izquierda) -> FLUJO (centro) ->
+    JUSTIFICACIÓN (derecha).
+  - La lámina tiene dos bloques ampliables con un clic:
+      * EVIDENCIA  (tecla E)  -> se expande a 50% y oculta el flujo.
+      * JUSTIFICACIÓN (tecla J) -> se expande a 50% y oculta EVIDENCIA/flujo.
+    Al pulsar Escape o en el fondo se vuelve al estado normal.
+  - Los textos entre [ ] son para decir en voz alta; los que están entre
+    ( ) son datos de apoyo por si te preguntan.
+
+
+------------------------------------------------------------------------
+1. ENTRADA (5-10 segundos)
+------------------------------------------------------------------------
+La construcción es un pilar de la economía, pero sigue concentrando
+accidentes graves y mortales. La legislación existe; el problema es que
+no se materializa de forma sistemática en obra.
+
+Pregunta guía que va a conducir todo el desarrollo:
+  "¿Por qué, teniendo normativa vigente, seguimos registrando fatalidades
+   en obra? Porque falta una metodología que articule identificación,
+   evaluación y control de riesgos con un enfoque de ingeniería."
+
+
+------------------------------------------------------------------------
+2. BLOQUE EVIDENCIA (izquierda)
+------------------------------------------------------------------------
+2.1 Periodo 2014-2019:
+    - 5.927 accidentes laborales en construcción.
+    - 167 trabajadores fallecidos en obra.
+
+2.2 Dona: 64%
+    "El 64% corresponde a obreros con lesiones graves y muy graves con
+     incapacidad laboral; en estos 6 años murieron 167 obreros."
+    (Base: 3.807 de 5.927)
+
+2.3 Periodo 2024 (de un total de 16.067 accidentes laborales reportados):
+    - 508 accidentes del sector construcción.
+    - 20 casos mortales en obra.
+
+2.4 Barras — "Acciones que más exponen al trabajador" (CAMICON):
+    - 45,3%  No señalar o advertir el peligro - Evaluar riesgos
+    - 10,6%  Falla en asegurar adecuadamente
+    - 5,1%   Falta de coordinación en operaciones
+    - 4,5%   Adoptar una posición inadecuada
+    - 4,0%   Colocar la carga de manera incorrecta
+    - 2,4%   Usar mal o no usar el EPP
+
+    Mensaje: la causa dominante no es técnica, es de GESTIÓN del riesgo
+    (no señalar el peligro y no evaluarlo) -> esto justifica la
+    metodología propuesta.
+
+2.5 Nota al pie:
+    2024 = 3,16% de los accidentes nacionales (508 de 16.067);
+    27,17% concentrados en Pichincha.
+
+2.6 Fuentes:
+    1) 5.927 accidentes, 167 fallecidos, 64% obreros (2014-2019) -
+       P. González (2023) · SGRT-IESS
+    2) 508 accidentes, 20 mortales, 27,17% en Pichincha (2024) -
+       DAIE-IESS (2026)
+    3) Acciones que más exponen al trabajador — CAMICON (2020)
+
+    Si amplías EVIDENCIA, estas tres fuentes quedan centradas
+    verticalmente en su recuadro.
+
+
+------------------------------------------------------------------------
+3. BLOQUE CENTRAL — FLUJO DEL PROBLEMA (7 nodos)
+------------------------------------------------------------------------
+Se lee de izquierda a derecha; el nodo negro es el problema central.
+
+  CONTEXTO      Pilar de la economía — 7,9% del PIB · 6.206 empresas ·
+                158.303 empleos.
+  CAUSAS        Mano de obra no calificada · gestión reactiva · altura,
+                excavación e izaje.
+  DEFICIENCIAS  Prevención como requisito legal, no como cultura ·
+                evaluación cualitativa y fragmentada.
+  PROBLEMA      [CENTRAL] Ausencia de una metodología integral que
+                articule la identificación, evaluación y control de
+                riesgos desde un enfoque de ingeniería.
+  EFECTOS       Accidentes, incapacidades y fatalidades · costo humano y
+                económico — 2,78 M muertes/año (OIT).
+  BRECHA        Marco normativo vigente sin materialización efectiva en
+                obra — D.E. 255-2024 · AM-MDT-2025-122 · AM-MDT-2024-196
+                (Anexo 3) · C.D. 513 (IESS).
+  NECESIDAD     Estrategia metodológica de gestión de proyectos basada
+                en controles de ingeniería.
+
+Frase puente al cerrar el flujo:
+  "La norma existe y está actualizada; lo que falta es el mecanismo que
+   la lleve a la práctica en cada proyecto. Esa es la brecha que aborda
+   esta tesis."
+
+
+------------------------------------------------------------------------
+4. BLOQUE JUSTIFICACIÓN (derecha)
+------------------------------------------------------------------------
+Cuatro dimensiones (verde/rojo alternos):
+
+  TEÓRICA   Aporta conocimiento científico a la prevención de riesgos en
+            construcción — producción académica, estudios de seguridad
+            y programas de seguridad.
+  PRÁCTICA  Controles de ingeniería aplicables en obra — AM-MDT-2025-122
+            · AM-MDT-2024-196 (Anexo 3) y NTP 330, como parte de la
+            estrategia metodológica de dirección de proyectos basada en
+            controles de ingeniería.
+  SOCIAL    Protege la vida y salud de trabajadores, familias y comunidad
+            — reducción de accidentalidad.
+  PERSONAL  Compromiso profesional del investigador con la seguridad
+            laboral — propuesta de una metodología que integre principios
+            de la Dirección de Proyectos P-E-S-C.
+
+Nota: al ampliar el bloque aparecen los textos ampliados de cada
+dimensión (el que está en este guion es el ampliado).
+
+
+------------------------------------------------------------------------
+5. JERARQUÍA DE CONTROLES
+------------------------------------------------------------------------
+Cinco niveles, de más a menos eficaz:
+  1. Eliminación
+  2. Sustitución
+  3. Controles de ingeniería   <--- FOCO DE LA TESIS (nivel destacado)
+  4. Controles administrativos
+  5. EPP
+
+Frase: "La tesis se sitúa deliberadamente en el nivel 3 — controles de
+ingeniería — porque es el que evita el riesgo en origen y no depende
+solo del comportamiento del trabajador."
+(Fuente: C.D. 513 art. 53 · D.E. 255)
+
+
+------------------------------------------------------------------------
+6. OBJETO DEL ESTUDIO
+------------------------------------------------------------------------
+Versión corta (estado normal, léela tal cual):
+  "Diseño de cuestionarios de chequeo NTP 324 basados en normativa local
+   (2024-2026) para la generación de ART como mecanismo de prevención."
+
+Versión completa (al ampliar el bloque):
+  "Estructurar una estrategia metodológica de gestión de proyectos
+   basada en controles de ingeniería en la construcción de proyectos de
+   edificaciones e infraestructura en Quito, a través del diseño de
+   cuestionarios de chequeo acorde a la NTP 324, basados en normativa
+   vigente entre 2024 y 2026 para la generación de ART como mecanismo
+   de prevención."
+
+Palabras clave que no deben faltar: NTP 324 (chequeo), NTP 330 (evaluación),
+ART, Quito 2024-2026, controles de ingeniería.
+
+
+------------------------------------------------------------------------
+7. CAMPO DE ESTUDIO
+------------------------------------------------------------------------
+  "Proyectos de edificaciones e infraestructura básica en Quito."
+
+
+------------------------------------------------------------------------
+8. CIERRE (5 segundos)
+------------------------------------------------------------------------
+"En síntesis: la evidencia muestra que la causa dominante es de gestión
+del riesgo, la norma existe pero no se aplica de forma sistemática, y la
+jerarquía de controles nos indica que el enfoque debe ser de ingeniería.
+De ahí nace el objeto de esta tesis."
+
+
+------------------------------------------------------------------------
+9. CIFRAS A TENER A MANO (por si hay pregunta)
+------------------------------------------------------------------------
+  5.927  accidentes 2014-2019 (construcción)
+  167    fallecidos 2014-2019
+  64%    obreros con lesiones graves/muy graves
+  3.807  de 5.927 (base del 64%)
+  16.067 accidentes laborales reportados en 2024
+  508    accidentes de construcción en 2024 (3,16% nacional)
+  20     casos mortales en obra en 2024
+  27,17% concentrados en Pichincha
+  45,3%  "no señalar o advertir el peligro / evaluar riesgos"
+  7,9%   participación en el PIB
+  6.206  empresas del sector
+  158.303 empleos
+  2,78 M muertes/año en el mundo (OIT)
+
+
+========================================================================
+Ficheros de referencia: presentacion-web/js/data/problematizationData.js
+                        presentacion-web/css/styles.css
+Capturas de apoyo: tools/out/slide2.png, slide2_fev.png, slide2_fjf.png
+========================================================================

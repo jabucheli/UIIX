@@ -9,9 +9,9 @@ window.TEORIAS = {
     ['GESTIÓN PREVENTIVA ÉTICA · TÉCNICA · SOSTENIBLE']
   ],
   gallery: [
-    { cls: '', h: '2.1 Estado del Arte', lines: '<b>EVOLUCIÓN:</b> obligación legal → prevención → gestión sistémica → control de ingeniería.', ref: '' },
+    { cls: '', h: 'Estado del Arte', lines: '<b>EVOLUCIÓN:</b> obligación legal → prevención → gestión sistémica → control de ingeniería.', ref: '' },
     {
-      cls: 'red', h: 'Marco histórico', lines: '<b>Secuencia normativa clave en Ecuador</b>', ref: '(Chancusi et al., 2018; Reglamento de Seguridad y Salud en el Trabajo, 2024; Ministerio de Trabajo, 2025)',
+      cls: 'red', h: 'Marco histórico', focus: 'hist', lines: '<b>Secuencia normativa clave en Ecuador</b>', ref: '(Chancusi et al., 2018; Reglamento de Seguridad y Salud en el Trabajo, 2024; Ministerio de Trabajo, 2025)',
       timeline: [
         { y: '1921–1929', t: 'Ley de Accidentes de Trabajo → Ley de Prevención de Accidentes → Ley de Responsabilidad por Accidentes.' },
         { y: '1978', t: 'Decreto Supremo No. 2213: prestaciones por accidentes de trabajo y enfermedades profesionales.' },
@@ -21,28 +21,29 @@ window.TEORIAS = {
       ]
     },
     {
-      cls: '', h: 'Marco contextual actual',
-      mc: [
-        { t: 'Contexto del sector', s: 'Quito, Ecuador' },
-        { t: 'Presión regulatoria', s: 'Normativa vigente' },
-        { t: 'Gestión del riesgo laboral', s: 'Sector construcción' },
-        { t: 'Perspectiva técnica y cuantitativa', s: 'Suárez Sánchez (2021)' },
-        { t: 'Variables de riesgo', s: 'Datos de entrada' },
-        { t: 'Simulación de variables', s: 'Modelo predictivo' },
-        { t: 'Predicción de accidentalidad', s: 'Análisis sistemático' },
-        { t: 'Fortalecimiento', s: 'Toma de decisiones' }
+      cls: '', h: 'Marco contextual actual', focus: 'ctx',
+      ctxSub: 'Condiciones económicas y políticas',
+      ctx: [
+        { n: '1', t: 'Contexto del sector', tone: 'g', lines: ['Pilar de la economía', 'Contribuye al PIB', 'Generador de empleo'] },
+        { n: '2', t: 'Desempeño económico', tone: 'r', lines: ['Economía 2023: 1,5 %', 'Construcción 2022: 1,1 %', 'Construcción 2024: 1,7 %'] },
+        { n: '3', t: 'PIB construcción', tone: 'g', lines: ['USD 10.887 millones (2023)', 'USD 11.179 millones (2024)', 'Fuente: BCE / EKOS'] },
+        { n: '4', t: 'Empleo y concentración', tone: 'r', lines: ['6,3 % del empleo nacional', '521.599 contrataciones', 'Guayas 36,2 % · Pichincha 33,4 %'] },
+  { n: '5', t: 'Siniestralidad laboral', tone: 'g', lines: ['PEA 2017: 8.084.382', '22.405 accidentes', '1.044 enfermedades profesionales'] },
+  { n: '6', t: 'Marco regulatorio', tone: 'r', lines: ['SGRT – IESS', 'Ministerio del Trabajo', 'Normativa obligatoria'] },
+  { n: '7', t: 'Responsabilidad patronal', tone: 'g', lines: ['Auditoría técnico-administrativa', 'Indemnizaciones y sanciones', 'Prevención como obligación'] },
+  { n: '8', t: 'Perspectiva técnica y sistémica', tone: 'r', lines: ['Suárez Sánchez (2021)', 'Nørgaard (2018)', 'Prevención integrada a la dirección de proyectos'] }
       ],
       ref: '(Zabala & Guamán, 2024; Toro et al., 2021; Suárez Sánchez, 2021; Nørgaard, 2018)'
     },
     {
-      cls: 'dark', h: 'Aplicación',
+      cls: 'dark', h: 'Aplicación', focus: 'apl',
       flow: [
         { kw: 'DISEÑO DE ESTRATEGIAS DE INGENIERÍA', det: 'mecanismo requerido por proyectos públicos y privados existentes y proyectados → dinamiza la economía del Ecuador' },
         { kw: 'INTERÉS REGIONAL Y MUNDIAL', det: 'antecedente: tesis doctoral Suárez Sánchez (2021) — simulación y predicción aplicada a edificios' },
         { kw: 'APORTE PRINCIPAL', det: 'accidentalidad en obra analizada sistemáticamente → fortalece la toma de decisiones en SST' }
       ]
     },
-    { cls: '', h: '2.2 Marco Teórico — Técnicas aplicadas', nflow: true }
+    { cls: '', h: 'Marco Teórico — Técnicas aplicadas', nflow: true }
   ],
   theories: [
     { num: 'TEORÍA 01', name: 'Gestión basada en riesgo', key: '<b>IDENTIFICAR</b> → <b>EVALUAR</b> → <b>CONTROLAR</b>', accent: false, text: '<b>Criterios cuantificables</b> · toma de decisiones · reducción de siniestros · <b>OSH-PRM</b> · criticidad · asignación de recursos preventivos.', apa: '(Ganiyev et al., 2024; Sousa et al., 2015)' },
@@ -58,12 +59,20 @@ window.TEORIAS = {
     { name: 'Propuesta metodológica', text: 'Técnica · sistémica · mejora continua · estándares + normativa vigente', red: true }
   ],
   numerals: [
-    ['2.2.1', 'Principios de Seguridad y Salud'],
-    ['2.2.2', 'Estrategias de Control de Ingeniería'],
-    ['2.2.3', 'Identificación y Evaluación de Riesgos'],
-    ['2.2.4', 'Gestión Integrada de SST']
+    ['Principios de Seguridad', 'y Salud'],
+    ['Estrategias de Control', 'de Ingeniería'],
+    ['Identificación y Evaluación', 'de Riesgos'],
+    ['Gestión Integrada', 'de SST']
   ],
-  legalTitle: '2.4 Marco Legal y Normativo',
+  legalTitle: 'Marco Legal y Normativo',
   legalText: '<b>D.E. 255-2024</b> · <b>AM-MDT-2024-196</b> · <b>AM-MDT-2025-122</b> · IESS / SGRT',
-  legalImage: '<img src="assets/Imagen1.png" alt="Jerarquía de instrumentos aplicables en Ecuador">'
+  legalHint: 'Jerarquía de instrumentos aplicables en Ecuador',
+  legalHierarchy: [
+    { n: '1', name: 'Constitución de la República del Ecuador', det: 'Art. 326, num. 5' },
+    { n: '2', name: 'Convenios internacionales — OIT', det: 'Convenio 155' },
+    { n: '3', name: 'Leyes orgánicas y ordinarias', det: 'Código del Trabajo · LOSEP' },
+    { n: '4', name: 'Decretos ejecutivos', det: 'D.E. 255-2024' },
+    { n: '5', name: 'Acuerdos ministeriales', det: 'AM-MDT-2024-196 · AM-MDT-2025-122' },
+    { n: '6', name: 'Resoluciones y normas técnicas', det: 'IESS / SGRT' }
+  ]
 };

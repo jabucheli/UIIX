@@ -2101,9 +2101,10 @@ has(Array.prototype.map.call(rcFlow.querySelectorAll('.rc-fn'), function (n) {
   return n.textContent.replace(/\s+/g, ' ').trim();
 }).join('|') === 'Ampliar|Aplicar|Actualizar|Investigar',
   'slide 12: la secuencia es Ampliar -> Aplicar -> Actualizar -> Investigar');
-has(!!rcFlow.querySelector('.rc-fn--red') &&
-   /Investigar/.test(rcFlow.querySelector('.rc-fn--red').textContent),
-  'slide 12: el nodo Investigar va en rojo (cierre del deck)');
+has(Array.prototype.map.call(rcFlow.querySelectorAll('.rc-fn'), function (n) {
+  return (n.classList.contains('rc-fn--red') ? 'r' : n.classList.contains('rc-fn--green') ? 'g' : '?');
+}).join('') === 'grgr',
+  'slide 12: la banda inferior alterna verde/rojo (Ampliar, Aplicar, Actualizar, Investigar)');
 
 /* detalle ampliado por subbloque */
 has(rc.querySelectorAll('.rc-modal').length === 6 && rc.querySelectorAll('.rc-card').length === 6,
@@ -2191,6 +2192,458 @@ has(/'rc-body': \{ nodes: \['\.rc-cols', '\.rc-flow'\]/.test(appJs),
   'app.js: GHOST_CFG atenda las columnas y la banda operacional');
 has(/\.rc-body\s*\{[^}]*flex:\s*1/.test(logoCss),
   'CSS: la lámina de recomendaciones usa el cuerpo flex:1 común');
+
+/* ======================= DIAPOSITIVA 3 · OBJETIVOS ================= */
+tabGo('3. Objetivos');
+var ob = doc.querySelector('#slideFrame .slide.active');
+has(!!ob && ob.classList.contains('slide-objectives') &&
+  !!ob.querySelector('.og-block') && ob.querySelectorAll('.oe-card').length === 4 &&
+  ob.querySelectorAll('.photo').length === 2 &&
+  !!ob.querySelector('.hyp-card') && !!ob.querySelector('.alc-card') && !!ob.querySelector('.delim-card'),
+  'slide 3: existen los bloques (general, 4 específicos, fotos, hipótesis, alcance y delimitación)');
+has(/\.og-block,[\s\S]{0,160}\.delim-card\s*\{\s*position:\s*relative;\s*transition:\s*transform[^}]*box-shadow/.test(logoCss),
+  'CSS: los bloques del slide 3 declaran transición de movimiento y sombra');
+has(/\.og-block:hover,[\s\S]{0,160}\.delim-card:hover\s*\{[^}]*transform:\s*translateY\(-2px\)/.test(logoCss),
+  'CSS: cada bloque del slide 3 se desplaza al pasar el ratón (translateY -2px + sombra)');
+has(/\.alc-item:nth-child\(odd\) \.alc-num\s*\{[^}]*background:\s*var\(--green\)/.test(logoCss) &&
+  /\.alc-item:nth-child\(even\) \.alc-num\s*\{[^}]*background:\s*var\(--red\)/.test(logoCss) &&
+  /\.alc-title\s*\{[^}]*font-weight:\s*bold/.test(logoCss),
+  'CSS: el número de cada recuadro del alcance va en caja verde/roja alterna y los títulos en negrilla');
+has(/\.alc-item:nth-child\(odd\)\s*\{\s*border-bottom:\s*1\.5px solid var\(--green\)/.test(logoCss) &&
+  /\.alc-item:nth-child\(even\)\s*\{\s*border-bottom:\s*1\.5px solid var\(--red\)/.test(logoCss),
+  'CSS: la separación entre los recuadros del alcance alterna líneas verde/roja');
+has(ob && ob.querySelectorAll('.oe-card').length === 4 &&
+  Array.prototype.slice.call(ob.querySelectorAll('.oe-card')).map(function (c) {
+    return c.classList.contains('oe-card--r') ? 'r' : (c.classList.contains('oe-card--g') ? 'g' : '?');
+  }).join('') === 'grrg',
+  'slide 3: los objetivos específicos alternan la clase verde/rojo (grrg)');
+has(/\.oe-card--g\s*\{[^}]*background:\s*rgba\(0,\s*110,\s*73,\s*\.08\)/.test(logoCss) &&
+  /\.oe-card--r\s*\{[^}]*background:\s*rgba\(192,\s*36,\s*42,\s*\.08\)/.test(logoCss) &&
+  /\.oe-main\s*\{[^}]*color:\s*var\(--ink\)/.test(logoCss) &&
+  /\.oe-num\s*\{[^}]*color:\s*#fff/.test(logoCss),
+  'CSS: los objetivos específicos llevan fondo verde/rojo muy atenuado con texto negro y número en blanco');
+
+/* ======================= DIAPOSITIVA 2 · PROBLEMATIZACIÓN ================= */
+tabGo('2. Problematización');
+var pb = doc.querySelector('#slideFrame .slide.active');
+has(!!pb && pb.classList.contains('slide-problem'),
+  'slide 2: se renderiza .slide-problem como segunda diapositiva');
+var pbBody = pb.querySelector('.problem-body');
+var evCol = pb.querySelector('.ev-column');
+has(!!pbBody && pbBody.children.length === 4 &&
+  !!pbBody.querySelector('.ev-column') && !!pbBody.querySelector('.flow') &&
+  !!pbBody.querySelector('.just-column') && !!pbBody.querySelector('.q7-overlay'),
+  'slide 2: el cuerpo tiene las tres columnas (Evidencia, flujo, Justificación) y el overlay de la pregunta');
+has(!!evCol && evCol.getAttribute('data-focus') === 'ev' &&
+  evCol.getAttribute('role') === 'button' && evCol.getAttribute('tabindex') === '0',
+  'slide 2: el bloque Evidencia es accionable (data-focus=ev + role + tabindex)');
+has(!!evCol.querySelector('.ev-panel .accent') &&
+  /EVIDENCIA/i.test(evCol.querySelector('.ev-header').textContent),
+  'slide 2: Evidencia lleva el formato del panel de Justificación (accent + cabecera oscura)');
+has(gcs(evCol.querySelector('.ev-panel')).overflow === 'hidden' && !!evCol.querySelector('.ev-cards'),
+  'slide 2: el panel de Evidencia recorta su contenido (overflow hidden)');
+has(evCol.querySelectorAll('.ev-cards .ev-hist .ev-period').length === 2 &&
+  evCol.querySelectorAll('.ev-cards .ev-block').length === 3 &&
+  !!evCol.querySelector('.ev-cards .ev-sources-block') &&
+  !!evCol.querySelector('.ev-cards .ev-footnote'),
+  'slide 2: Evidencia conserva todo su contenido (histórico, bloques y fuentes)');
+
+/* foco por clic sobre el bloque de la izquierda */
+click(evCol);
+has(pbBody.classList.contains('problem-body--fev') && pbBody.getAttribute('data-focus') === 'ev',
+  'slide 2: al pulsar Evidencia se agranda en el mismo lugar (problem-body--fev)');
+has(!!pb.querySelector('.scope-ghost.is-on'),
+  'ghost: la lámina original queda atenuada al agrandar Evidencia');
+var pbGhost = pb.querySelector('.scope-ghost .scope-ghost-inner');
+has(pbGhost && pbGhost.style.flexDirection === 'row' &&
+  !!pbGhost.querySelector('.ev-column') && !!pbGhost.querySelector('.flow') &&
+  !!pbGhost.querySelector('.just-column'),
+  'slide 2: el ghost conserva las tres columnas en fila');
+has(gcs(pbBody.querySelector('.flow')).display === 'none' &&
+  gcs(pbBody.querySelector('.just-column')).display === 'none',
+  'slide 2: al agrandar Evidencia, el flujo y Justificación se ocultan');
+click(evCol);
+has(!pbBody.getAttribute('data-focus') && !pbBody.classList.contains('problem-body--fev'),
+  'slide 2: segundo clic en Evidencia vuelve al reposo');
+evCol.focus();
+has(key('Enter'), 'slide 2: Enter sobre Evidencia -> default evitado');
+has(pbBody.classList.contains('problem-body--fev'), 'slide 2: Evidencia también se agranda con Enter');
+key('Escape');
+has(!pbBody.getAttribute('data-focus'), 'slide 2: Escape devuelve la lámina al reposo');
+
+/* CSS y motor */
+has(/\.problem-body--fev \.ev-column\s*\{\s*flex:\s*0 0 50%/.test(logoCss) &&
+  /\.problem-body--fev \.flow,[\s\S]{0,60}\.just-column\s*\{\s*display:\s*none/.test(logoCss),
+  'CSS: el foco de Evidencia ocupa el 50% del ancho y oculta las otras columnas');
+has(/\.problem-body--fev \.ev-cards\s*\{[^}]*grid-template-columns:\s*1fr 1fr/.test(logoCss),
+  'CSS: la Evidencia agrandada reordena su contenido en una rejilla de dos columnas');
+has(/\.problem-body--fev \{\s*justify-content:\s*center;\s*align-items:\s*center;\s*\}/.test(logoCss) &&
+  /\.problem-body--fev \.ev-panel\s*\{\s*height:\s*auto;\s*max-height:\s*100%/.test(logoCss),
+  'CSS: la Evidencia agrandada se centra horizontal y verticalmente en la lámina');
+has(/\.ev-period-label\s*\{[^}]*color:\s*var\(--red\)/.test(logoCss) &&
+  /\.ev-period \.ev-tile \.ev-value\s*\{[^}]*color:\s*var\(--green\)/.test(logoCss),
+  'CSS: en las tarjetas de periodo el verde y el rojo están invertidos (cabecera roja, cifras verdes)');
+has(/\.problem-body--fev \.ev-donut-block\s*\{[^}]*justify-content:\s*center/.test(logoCss) &&
+  /\.problem-body--fev \.ev-donut\s*\{[^}]*justify-content:\s*center/.test(logoCss),
+  'CSS: el subbloque «Accidentalidad» centra su contenido al agrandar Evidencia');
+has(/\.problem-body--fev \.ev-sources-block\s*\{[^}]*justify-content:\s*center/.test(logoCss),
+  'CSS: al agrandar Evidencia, «Fuentes de consulta» se centra verticalmente');
+has(/\.ev-panel \.accent\s*\{[^}]*linear-gradient\(180deg, var\(--green\), var\(--red\)\)/.test(logoCss) &&
+  /\.ev-header\s*\{[^}]*border-bottom:\s*3px solid var\(--red\)/.test(logoCss),
+  'CSS: el panel de Evidencia usa el verde y el rojo de la paleta (accent y cabecera)');
+has(/sel: 'problem-body'[\s\S]{0,60}keys: \['ev', 'jf', 'q7'\]/.test(appJs),
+  "app.js: FOCUS_SCOPES registra problem-body con los focos 'ev', 'jf' y 'q7'");
+has(/'problem-body': \{ nodes: \['\.ev-column', '\.flow', '\.just-column'\][^}]*dir: 'row'/.test(appJs),
+  'app.js: GHOST_CFG clona las tres columnas en fila (dir row)');
+
+/* foco por clic sobre el bloque Justificación */
+var jfCol = pb.querySelector('.just-column');
+has(!!jfCol && jfCol.getAttribute('data-focus') === 'jf' &&
+  jfCol.getAttribute('role') === 'button' && jfCol.getAttribute('tabindex') === '0',
+  'slide 2: el bloque Justificación es accionable (data-focus=jf + role + tabindex)');
+click(jfCol);
+has(pbBody.classList.contains('problem-body--fjf') && pbBody.getAttribute('data-focus') === 'jf',
+  'slide 2: al pulsar Justificación se agranda en el mismo lugar (problem-body--fjf)');
+has(gcs(pbBody.querySelector('.ev-column')).display === 'none' &&
+  gcs(pbBody.querySelector('.flow')).display === 'none',
+  'slide 2: al agrandar Justificación, Evidencia y el flujo se ocultan');
+click(jfCol);
+has(!pbBody.getAttribute('data-focus') && !pbBody.classList.contains('problem-body--fjf'),
+  'slide 2: segundo clic en Justificación vuelve al reposo');
+jfCol.focus();
+has(key('Enter'), 'slide 2: Enter sobre Justificación -> default evitado');
+has(pbBody.classList.contains('problem-body--fjf'), 'slide 2: Justificación también se agranda con Enter');
+key('Escape');
+has(!pbBody.getAttribute('data-focus'), 'slide 2: Escape devuelve la Justificación al reposo');
+
+has(/\.problem-body--fjf \.just-column\s*\{\s*flex:\s*0 0 50%/.test(logoCss) &&
+  /\.problem-body--fjf \.ev-column,[\s\S]{0,40}\.flow\s*\{\s*display:\s*none/.test(logoCss),
+  'CSS: el foco de Justificación ocupa el 50% del ancho y oculta Evidencia y el flujo');
+has(/\.problem-body--fjf \.just-cards\s*\{[^}]*grid-template-columns:\s*1fr 1fr/.test(logoCss) &&
+  /\.problem-body--fjf \{\s*justify-content:\s*center;\s*align-items:\s*center;\s*\}/.test(logoCss),
+  'CSS: la Justificación agrandada se centra y reordena su contenido en dos columnas');
+
+/* colores alternos verde/rojo en justificaciones y pirámide */
+has(pb.querySelectorAll('.just-card--green').length === 2 &&
+  pb.querySelectorAll('.just-card--red').length === 2 &&
+  !!pb.querySelector('.just-card--red .just-card-icon.red') &&
+  !!pb.querySelector('.just-card--green .just-card-icon.green'),
+  'slide 2: las tarjetas de justificación alternan verde/rojo/verde/rojo (borde e icono)');
+has(/\.just-card--green\s*\{[^}]*border-left-color:\s*var\(--green\)/.test(logoCss) &&
+  /\.just-card--red\s*\{[^}]*border-left-color:\s*var\(--red\)/.test(logoCss) &&
+  /\.just-card-icon\.green\s*\{[^}]*background:\s*rgba\(0, 110, 73, \.12\)[^}]*color:\s*var\(--green\)/.test(logoCss) &&
+  /\.just-card-icon\.red\s*\{[^}]*background:\s*rgba\(192, 36, 42, \.12\)[^}]*color:\s*var\(--red\)/.test(logoCss),
+  'CSS: las tarjetas de justificación usan el estilo del nodo central (borde fino + icono en tinte claro)');
+var plevels = pb.querySelectorAll('.p-level');
+has(plevels.length === 5 &&
+  plevels[0].classList.contains('p-level--green') && plevels[1].classList.contains('p-level--red') &&
+  plevels[2].classList.contains('p-level--green') && plevels[2].classList.contains('p-active') &&
+  plevels[3].classList.contains('p-level--red') && plevels[4].classList.contains('p-level--green'),
+  'slide 2: la jerarquía de controles alterna verde/rojo/verde/rojo/verde');
+has(/\.p-level--green\s*\{[^}]*background:\s*var\(--green\)/.test(logoCss) &&
+  /\.p-level--red\s*\{[^}]*background:\s*var\(--red\)/.test(logoCss),
+  'CSS: los niveles de la pirámide usan el verde y el rojo sólidos (colores previos)');
+var jextras = pb.querySelectorAll('.just-card-extra');
+has(jextras.length === 4 &&
+  Array.prototype.every.call(jextras, function (e) { return (e.textContent || '').trim().length > 0; }),
+  'slide 2: cada tarjeta de justificación añade su contenido extra (Teórica/Práctica/Social/Personal)');
+has(/\.just-card-extra\s*\{\s*display:\s*none;\s*\}/.test(logoCss) &&
+  /\.problem-body--fjf \.just-card-extra\s*\{\s*display:\s*inline;/.test(logoCss),
+  'CSS: el contenido extra de las justificaciones solo se muestra al agrandar el bloque');
+has(!!pb.querySelector('.obj-text .obj-short') && !!pb.querySelector('.obj-text .obj-full') &&
+  /\.obj-full\s*\{\s*display:\s*none;\s*\}/.test(logoCss) &&
+  /\.problem-body--fjf \.obj-short\s*\{\s*display:\s*none;\s*\}/.test(logoCss) &&
+  /\.problem-body--fjf \.obj-full\s*\{\s*display:\s*inline;/.test(logoCss),
+  'CSS: el «Objeto del estudio» usa un texto corto en reposo y el completo al agrandarlo');
+var fnodes = pb.querySelectorAll('.flow-node');
+has(fnodes.length === 7 &&
+  /Estrategia metodológica de gestión de proyectos basada en controles de ingeniería/.test(fnodes[5].querySelector('.node-body').textContent) &&
+  fnodes[5].querySelector('.node-tag').textContent.trim() === 'BRECHA',
+  'slide 2: el bloque 6 (Brecha) añade la estrategia metodológica basada en controles de ingeniería');
+has(fnodes[6].querySelector('.node-tag').textContent.trim() === 'PREGUNTA CIENTÍFICA' &&
+  !/Necesidad/i.test(fnodes[6].textContent) &&
+  /^¿Cómo contribuir a la mejora de condiciones de seguridad laboral/.test(fnodes[6].querySelector('.node-body').textContent.trim()) &&
+  fnodes[6].querySelector('.node-title').textContent.trim() === '',
+  'slide 2: el bloque 7 pasa a «Pregunta científica» con la pregunta de investigación');
+var q7node = fnodes[6];
+has(q7node.getAttribute('data-focus') === 'q7' && q7node.getAttribute('role') === 'button' &&
+  q7node.getAttribute('tabindex') === '0',
+  'slide 2: el bloque 7 (pregunta científica) es accionable (data-focus=q7 + role + tabindex)');
+var q7ov = pb.querySelector('.q7-overlay');
+has(!!q7ov && q7ov.getAttribute('data-focus') === 'q7' && !!q7ov.querySelector('.q7-card'),
+  'slide 2: existe el overlay de la pregunta ampliada (data-focus=q7 con su tarjeta)');
+has(!!q7ov.querySelector('.q7-card .accent') && !!q7ov.querySelector('.q7-card .q7-header') &&
+  !!q7ov.querySelector('.q7-card .q7-content .q7-body'),
+  'slide 2: el recuadro de la pregunta usa el formato de panel (accent + cabecera + cuerpo)');
+click(q7node);
+has(pbBody.classList.contains('problem-body--fq7') && pbBody.getAttribute('data-focus') === 'q7' &&
+  gcs(q7ov).display === 'flex',
+  'slide 2: al pulsar el bloque 7 se muestra el overlay ampliado (problem-body--fq7)');
+has(gcs(pbBody.querySelector('.flow')).display === 'none' && !!pb.querySelector('.scope-ghost.is-on'),
+  'slide 2: al ampliar la pregunta se oculta el contenido real y queda el fondo atenuado (ghost)');
+click(q7ov);
+has(!pbBody.getAttribute('data-focus') && gcs(q7ov).display === 'none',
+  'slide 2: un clic sobre el overlay ampliado lo cierra');
+q7node.focus();
+has(key('Enter'), 'slide 2: Enter sobre el bloque 7 -> default evitado');
+has(pbBody.classList.contains('problem-body--fq7'), 'slide 2: el bloque 7 también se amplía con Enter');
+key('Escape');
+has(!pbBody.getAttribute('data-focus') && gcs(q7ov).display === 'none',
+  'slide 2: Escape cierra la pregunta ampliada');
+has(/\.problem-body--fq7 \.q7-overlay\s*\{\s*display:\s*flex;\s*\}/.test(logoCss),
+  'CSS: el overlay de la pregunta solo aparece con problem-body--fq7');
+has(/\.problem-body--fq7 \.ev-column,[\s\S]{0,80}\.just-column\s*\{\s*display:\s*none/.test(logoCss),
+  'CSS: al ampliar la pregunta se ocultan las tres columnas y se revela el fondo atenuado');
+has(/\.q7-overlay\s*\{[^}]*background:\s*transparent/.test(logoCss),
+  'CSS: el overlay de la pregunta no oscurece; deja ver el fondo atenuado como Evidencia/Justificación');
+has(/\.q7-card\s*\{[^}]*width:\s*50%/.test(logoCss) &&
+  /\.q7-card \.accent\s*\{[^}]*width:\s*4px/.test(logoCss) &&
+  /\.q7-header\s*\{[^}]*linear-gradient\(135deg, #4c4a4f, #262626\)[^}]*border-bottom:\s*4px solid var\(--green\)/.test(logoCss),
+  'CSS: el recuadro de la pregunta replica el panel de Evidencia/Justificación (50% + accent + cabecera oscura)');
+has(/\.green \.node-tag\s*\{[^}]*color:\s*#000/.test(logoCss),
+  'CSS: en reposo, la etiqueta «Pregunta científica» del bloque 7 va en negro');
+has(/\.flow-node\[data-focus="q7"\]\s*\{[^}]*transition:\s*box-shadow[^}]*transform/.test(logoCss) &&
+  /\.flow-node\[data-focus="q7"\]:hover\s*\{[^}]*transform:\s*translateY\(-1px\)/.test(logoCss),
+  'CSS: el bloque 7 replica el realce al pasar el ratón (translateY -1px + sombra)');
+
+/* ========================= DIAPOSITIVA 4 · MARCO TEÓRICO ==================== */
+tabGo('4. Teorías');
+var th = doc.querySelector('#slideFrame .slide.active');
+has(!!th && th.classList.contains('slide-teorias') && !!th.querySelector('.th-grid') &&
+  !!th.querySelector('.th-legal-fig'),
+  'slide 4: se renderiza .slide-teorias con la galería y el marco normativo');
+var thBody = th ? th.querySelector('.th-body') : null;
+var thHist = th ? th.querySelector('.th-box--hist') : null;
+has(!!thHist && thHist.getAttribute('data-focus') === 'hist' &&
+  thHist.getAttribute('role') === 'button' && thHist.getAttribute('tabindex') === '0',
+  'slide 4: el bloque «Marco histórico» es accionable (data-focus=hist + role + tabindex)');
+has(!!thHist && thHist.querySelectorAll('.th-milestone').length === 5 &&
+  !!thHist.querySelector('.th-timeline') && !!thHist.querySelector('p.th-ref'),
+  'slide 4: el bloque «Marco histórico» trae los 5 hitos, la línea de tiempo y la referencia');
+has(gcs(thHist.querySelector('p')).display === 'none' &&
+  Array.prototype.slice.call(thHist.querySelectorAll('.th-milestone span')).every(function (s) {
+    return gcs(s).display === 'none';
+  }),
+  'slide 4: en reposo el bloque solo enseña los años (p y descripciones ocultas)');
+has(gcs(thHist.querySelector('p.th-ref')).display === 'none' &&
+  Array.prototype.slice.call(thHist.querySelectorAll('.th-milestone b')).every(function (b) {
+    return gcs(b).display !== 'none' && b.textContent.length > 0;
+  }),
+  'slide 4: en reposo la referencia queda oculta y los años siguen visibles');
+
+click(thHist);
+has(!!thBody && thBody.classList.contains('th-body--fhist') &&
+  thBody.getAttribute('data-focus') === 'hist',
+  'slide 4: al pulsar «Marco histórico» se amplía (th-body--fhist + data-focus=hist)');
+has(!!th.querySelector('.scope-ghost.is-on'),
+  'ghost: la lámina original queda atenuada al ampliar el «Marco histórico»');
+var thGhost = th.querySelector('.scope-ghost .scope-ghost-inner');
+has(!!thGhost && !!thGhost.querySelector('.th-intro') && !!thGhost.querySelector('.th-grid'),
+  'slide 4: el ghost conserva la cabecera de conceptos y la rejilla en reposo');
+has(!!thGhost && !/th-body--fhist/.test(thGhost.className) &&
+  gcs(thGhost.querySelector('.th-box--hist')).visibility !== 'hidden',
+  'slide 4: el ghost no hereda la ampliación y muestra la rejilla atenuada');
+has(!!thBody && gcs(thBody.querySelector('.th-intro')).visibility === 'hidden' &&
+  gcs(thBody.querySelector('.th-grid')).visibility === 'hidden',
+  'slide 4: al ampliar se oculta el contenido real (se conserva el sitio del ghost)');
+has(gcs(thHist.querySelector('p')).display === 'block' &&
+  Array.prototype.slice.call(thHist.querySelectorAll('.th-milestone span')).every(function (s) {
+    return gcs(s).display === 'block';
+  }),
+  'slide 4: al ampliar se muestra el detalle completo (párrafo y descripciones)');
+has(/\.th-body--fhist \.th-box--hist,\s*\.th-body--fapl \.th-box--apl\s*\{[^}]*position:\s*absolute[^}]*left:\s*50%[^}]*top:\s*50%[^}]*transform:\s*translate\(-50%,\s*-50%\)[^}]*z-index:\s*2/.test(logoCss),
+  'CSS: cada bloque ampliable se centra sobre el cuerpo (absolute + translate) y va sobre el ghost');
+has(/\.th-body\s*\{[^}]*position:\s*relative[^}]*z-index:\s*1/.test(logoCss),
+  'CSS: el cuerpo del slide 4 es el contenedor de referencia y queda sobre el ghost');
+has(/\.th-box--hist p,\s*\.th-box--hist \.th-milestone span,\s*\.th-box--apl \.th-bflow-item span\s*\{\s*display:\s*none/.test(logoCss) &&
+  /\.th-body--fhist \.th-box--hist p,\s*\.th-body--fhist \.th-box--hist \.th-milestone span,\s*\.th-body--fapl \.th-box--apl \.th-bflow-item span\s*\{\s*display:\s*block/.test(logoCss),
+  'CSS: el detalle de los bloques ampliables se oculta en reposo y se muestra al ampliar');
+has(/\.th-body--fhist \.th-intro,\s*\.th-body--fhist \.th-grid,\s*\.th-body--fapl \.th-intro,\s*\.th-body--fapl \.th-grid\s*\{\s*visibility:\s*hidden/.test(logoCss),
+  'CSS: la ampliación esconde (visibility) la cabecera de conceptos y la rejilla');
+has(/\.th-legal-fig\s*\{[^}]*display:\s*flex/.test(logoCss) &&
+  /\.th-lh-row:nth-child\(1\)\s*\{\s*width:\s*48%/.test(logoCss) &&
+  /\.th-lh-row:nth-child\(6\)\s*\{\s*width:\s*100%/.test(logoCss),
+  'CSS: la jerarquía es una pirámide de anchos proporcionales (48% → 100%)');
+
+click(thHist);
+has(!!thBody && !thBody.getAttribute('data-focus') &&
+  !thBody.classList.contains('th-body--fhist') && !th.querySelector('.scope-ghost'),
+  'slide 4: un segundo clic cierra el «Marco histórico» y retira el ghost');
+thHist.focus();
+has(key('Enter') && !!thBody && thBody.classList.contains('th-body--fhist'),
+  'slide 4: Enter sobre «Marco histórico» también lo amplía');
+key('Escape');
+has(!!thBody && !thBody.getAttribute('data-focus') &&
+  !thBody.classList.contains('th-body--fhist'),
+  'slide 4: Escape cierra el «Marco histórico» ampliado');
+
+/* --- bloque «Aplicación»: mismo comportamiento --- */
+var thApl = th ? th.querySelector('.th-box--apl') : null;
+has(!!thApl && thApl.getAttribute('data-focus') === 'apl' &&
+  thApl.getAttribute('role') === 'button' && thApl.getAttribute('tabindex') === '0' &&
+  thApl.classList.contains('th-box--dark'),
+  'slide 4: el bloque «Aplicación» es accionable (data-focus=apl + role + tabindex)');
+has(!!thApl && thApl.querySelectorAll('.th-bflow-item').length === 3 &&
+  thApl.querySelectorAll('.th-bflow-item b').length === 3,
+  'slide 4: el bloque «Aplicación» trae su cadena de tres pasos (keywords + detalle)');
+has(!!thApl && Array.prototype.slice.call(thApl.querySelectorAll('.th-bflow-item span')).every(function (s) {
+  return gcs(s).display === 'none';
+}) && Array.prototype.slice.call(thApl.querySelectorAll('.th-bflow-item b')).every(function (b) {
+  return gcs(b).display !== 'none' && b.textContent.length > 0;
+}),
+  'slide 4: en reposo «Aplicación» solo enseña las palabras clave (detalle oculto)');
+
+click(thApl);
+has(!!thBody && thBody.classList.contains('th-body--fapl') &&
+  thBody.getAttribute('data-focus') === 'apl',
+  'slide 4: al pulsar «Aplicación» se amplía (th-body--fapl + data-focus=apl)');
+has(!!th.querySelector('.scope-ghost.is-on') &&
+  !thBody.classList.contains('th-body--fhist'),
+  'ghost: al ampliar «Aplicación» se atenúa la lámina y se cierra el foco anterior');
+has(!!thBody && gcs(thBody.querySelector('.th-grid')).visibility === 'hidden' &&
+  Array.prototype.slice.call(thApl.querySelectorAll('.th-bflow-item span')).every(function (s) {
+    return gcs(s).display === 'block';
+  }),
+  'slide 4: al ampliar «Aplicación» se oculta la rejilla y se muestra el detalle completo');
+click(thApl);
+has(!!thBody && !thBody.getAttribute('data-focus') &&
+  !thBody.classList.contains('th-body--fapl') && !th.querySelector('.scope-ghost'),
+  'slide 4: un segundo clic cierra «Aplicación» y retira el ghost');
+thApl.focus();
+has(key('Enter') && !!thBody && thBody.classList.contains('th-body--fapl'),
+  'slide 4: Enter sobre «Aplicación» también lo amplía');
+key('Escape');
+has(!!thBody && !thBody.getAttribute('data-focus') &&
+  !thBody.classList.contains('th-body--fapl'),
+  'slide 4: Escape cierra «Aplicación» ampliada');
+has(/\.th-box--hist,\s*\.th-box--apl\s*\{\s*cursor:\s*pointer;\s*\}/.test(logoCss) &&
+  /\.th-box--apl \.th-bflow-item b\s*\{\s*margin-bottom:\s*0/.test(logoCss) &&
+  /\.th-body--fapl \.th-box--apl \.th-bflow-item span\s*\{\s*font-size:\s*12\.5px/.test(logoCss),
+  'CSS: «Aplicación» comparte el realce de cursor y el escalado del bloque ampliado');
+
+/* --- bloque «Marco Legal y Normativo» (2.4): ampliable y con la jerarquía
+   generada en bloques verde/rojo alternos atenuados --- */
+var thLeg = th ? th.querySelector('.th-legal') : null;
+has(!!thLeg && thLeg.getAttribute('data-focus') === 'leg' &&
+  thLeg.getAttribute('role') === 'button' && thLeg.getAttribute('tabindex') === '0',
+  'slide 4: el bloque «Marco Legal y Normativo» es accionable (data-focus=leg + role + tabindex)');
+has(!!thLeg && thLeg.querySelectorAll('.th-lh-row').length === 6 &&
+  !!thLeg.querySelector('.th-legal-fig') && !!thLeg.querySelector('.th-lh-cap'),
+  'slide 4: el marco legal trae el diagrama generado, con su rótulo y la jerarquía de 6 niveles');
+has(!!thLeg && thLeg.querySelectorAll('.th-lh--g').length === 3 &&
+  thLeg.querySelectorAll('.th-lh--r').length === 3 &&
+  Array.prototype.slice.call(thLeg.querySelectorAll('.th-lh-row')).every(function (r, i) {
+    return i % 2 === 0 ? /th-lh--g/.test(r.className) : /th-lh--r/.test(r.className);
+  }),
+  'slide 4: los niveles de la jerarquía alternan verde/rojo (g-r-g-r-g-r)');
+has(!!thLeg && gcs(thLeg.querySelector('h4')).display !== 'none' &&
+  gcs(thLeg.querySelector('p')).display !== 'none' &&
+  Array.prototype.slice.call(thLeg.querySelectorAll('.th-lh-row')).every(function (r) {
+    return gcs(r).display !== 'none' && gcs(r.querySelector('.th-lh-name')).display !== 'none';
+  }),
+  'slide 4: en reposo el marco legal ya enseña todo su contenido (título, párrafo y jerarquía)');
+
+click(thLeg);
+has(!!thBody && thBody.classList.contains('th-body--fleg') &&
+  thBody.getAttribute('data-focus') === 'leg',
+  'slide 4: al pulsar el marco legal se amplía (th-body--fleg + data-focus=leg)');
+has(!!th.querySelector('.scope-ghost.is-on') &&
+  !thBody.classList.contains('th-body--fhist') && !thBody.classList.contains('th-body--fapl'),
+  'ghost: al ampliar el marco legal se atenúa la lámina y se cierran los focos anteriores');
+has(!!thBody && gcs(thBody.querySelector('.th-grid')).visibility === 'hidden' &&
+  gcs(thLeg).visibility === 'visible' &&
+  Array.prototype.slice.call(thLeg.querySelectorAll('.th-lh-row')).every(function (r) {
+    return gcs(r).visibility !== 'hidden';
+  }),
+  'slide 4: al ampliar el marco legal se oculta la rejilla y se conserva todo el contenido');
+click(thLeg);
+has(!!thBody && !thBody.getAttribute('data-focus') &&
+  !thBody.classList.contains('th-body--fleg') && !th.querySelector('.scope-ghost'),
+  'slide 4: un segundo clic cierra el marco legal y retira el ghost');
+thLeg.focus();
+has(key('Enter') && !!thBody && thBody.classList.contains('th-body--fleg'),
+  'slide 4: Enter sobre el marco legal también lo amplía');
+key('Escape');
+has(!!thBody && !thBody.getAttribute('data-focus') &&
+  !thBody.classList.contains('th-body--fleg'),
+  'slide 4: Escape cierra el marco legal ampliado');
+has(/\.th-legal\[data-focus\]\s*\{\s*cursor:\s*pointer;\s*\}/.test(logoCss) &&
+  /\.th-body--fleg \.th-legal\s*\{[^}]*position:\s*absolute[^}]*left:\s*50%[^}]*top:\s*50%[^}]*transform:\s*translate\(-50%,\s*-50%\)[^}]*z-index:\s*2/.test(logoCss) &&
+  /\.th-lh-row\s*\{[^}]*background:\s*rgba\(0,\s*110,\s*73,\s*\.09\)/.test(logoCss) &&
+  /\.th-lh--r\s*\{[^}]*background:\s*rgba\(192,\s*36,\s*42,\s*\.08\)/.test(logoCss),
+  'CSS: el marco legal comparte el centrado y sus bandas van en verde/rojo atenuados');
+
+/* --- recuadro «Marco contextual actual»: panel contextual de 8 tarjetas --- */
+has(!!th && th.querySelectorAll('.th-ccard').length === 8 &&
+  th.querySelectorAll('.th-ccard-b span').length === 24 &&
+  !!th.querySelector('.th-ctx-sub') &&
+  /Condiciones económicas y políticas/.test(th.querySelector('.th-ctx-sub').textContent),
+  'slide 4: el marco contextual actual trae su panel de 8 tarjetas (3 líneas c/u) + subtítulo');
+has(!!th && Array.prototype.slice.call(th.querySelectorAll('.th-ccard')).map(function (c) {
+  return /th-ccard--r/.test(c.className) ? 'r' : 'g';
+}).join('') === 'grgrgrgr' &&
+  Array.prototype.slice.call(th.querySelectorAll('.th-ccard-n')).map(function (n) {
+    return n.textContent;
+  }).join('') === '12345678',
+  'slide 4: el panel contextual numera 1-8 en alternancia verde/rojo (1v, 2r … 8r)');
+has(/\.th-ctx\s*\{[^}]*position:\s*relative[^}]*height:\s*186px/.test(logoCss) &&
+  /\.th-ccard\s*\{[^}]*position:\s*absolute[^}]*transform:\s*translate\(-50%,\s*-50%\)[^}]*width:\s*128px/.test(logoCss) &&
+  /\.th-ccard--p3\s*\{\s*left:\s*87%;\s*top:\s*93px/.test(logoCss) &&
+  /\.th-ccard--p7\s*\{\s*left:\s*13%;\s*top:\s*93px/.test(logoCss) &&
+  /\.th-ctx-sub\s*\{[^}]*position:\s*absolute[^}]*border-radius:\s*50%/.test(logoCss),
+  'CSS: en reposo el marco contextual es un óvalo radial con el subtítulo al centro (p3/p7 a 87 %/13 %)');
+has(!!th && Array.prototype.slice.call(th.querySelectorAll('.th-ccard-b span')).every(function (s) {
+    return gcs(s).display === 'none';
+  }) &&
+  Array.prototype.slice.call(th.querySelectorAll('.th-ccard-b b')).every(function (b) {
+    return gcs(b).display !== 'none' && b.textContent.length > 0;
+  }),
+  'slide 4: en reposo el marco contextual enseña solo los 8 títulos (detalle oculto)');
+var thCtx = th ? th.querySelector('.th-box--ctx') : null;
+has(!!thCtx && thCtx.getAttribute('data-focus') === 'ctx' &&
+  thCtx.getAttribute('role') === 'button' && thCtx.getAttribute('tabindex') === '0',
+  'slide 4: el bloque «Marco contextual actual» es accionable (data-focus=ctx + role + tabindex)');
+
+click(thCtx);
+has(!!thBody && thBody.classList.contains('th-body--fctx') &&
+  thBody.getAttribute('data-focus') === 'ctx',
+  'slide 4: al pulsar «Marco contextual actual» se amplía (th-body--fctx + data-focus=ctx)');
+has(!!th.querySelector('.scope-ghost.is-on'),
+  'ghost: la lámina original queda atenuada al ampliar el «Marco contextual actual»');
+var thCtxG = th.querySelector('.scope-ghost .scope-ghost-inner');
+has(!!thCtxG && !!thCtxG.querySelector('.th-grid .th-box--ctx') &&
+  gcs(thCtxG.querySelector('.th-box--ctx')).visibility !== 'hidden',
+  'slide 4: el ghost conserva el marco contextual en reposo, atenuado');
+has(gcs(th.querySelector('.th-intro')).visibility === 'hidden' &&
+  gcs(th.querySelector('.th-grid')).visibility === 'hidden',
+  'slide 4: al ampliar el marco contextual se oculta el contenido real (sitio del ghost)');
+has(!!thCtx && Array.prototype.slice.call(thCtx.querySelectorAll('.th-ccard-b span')).every(function (s) {
+    return gcs(s).display === 'block';
+  }),
+  'slide 4: al ampliar se muestra el texto completo de las 8 tarjetas');
+has(!!thCtx && gcs(thCtx.querySelector('.th-ctxrad-hub')).display === 'flex' &&
+  gcs(thCtx.querySelector('.th-ctxrad-ring')).display === 'block' &&
+  thCtx.querySelectorAll('.th-ctxrad-lk').length === 8 &&
+  Array.prototype.slice.call(thCtx.querySelectorAll('.th-ctxrad-lk')).every(function (l) {
+    return gcs(l).display === 'block';
+  }),
+  'slide 4: al ampliar el diagrama muestra el óvalo central, el anillo y los 8 radios');
+has(/\.th-body--fctx \.th-ccard--p3\s*\{\s*left:\s*87%;\s*top:\s*230px/.test(logoCss) &&
+  /\.th-body--fctx \.th-ccard--p7\s*\{\s*left:\s*13%;\s*top:\s*230px/.test(logoCss) &&
+  /\.th-body--fctx \.th-ctxrad-ring\s*\{[^}]*width:\s*74%[^}]*height:\s*65\.9%/.test(logoCss) &&
+  /\.th-body--fctx \.th-box--ctx\s*\{[^}]*position:\s*absolute[^}]*left:\s*50%[^}]*top:\s*50%[^}]*transform:\s*translate\(-50%,\s*-50%\)[^}]*z-index:\s*2/.test(logoCss),
+  'CSS: el marco contextual ampliado se centra sobre el ghost con p3/p7 en los extremos (87 %/13 %)');
+click(thCtx);
+has(!!thBody && !thBody.getAttribute('data-focus') &&
+  !thBody.classList.contains('th-body--fctx') && !th.querySelector('.scope-ghost'),
+  'slide 4: un segundo clic cierra el «Marco contextual actual» y retira el ghost');
+thCtx.focus();
+has(key('Enter') && !!thBody && thBody.classList.contains('th-body--fctx'),
+  'slide 4: Enter sobre «Marco contextual actual» también lo amplía');
+key('Escape');
+has(!!thBody && !thBody.getAttribute('data-focus') &&
+  !thBody.classList.contains('th-body--fctx'),
+  'slide 4: Escape cierra el «Marco contextual actual» ampliado');
 
 let fail = 0;
 checks.forEach(function (c) { if (!c[1]) { fail++; console.log('FAIL:', c[0]); } });

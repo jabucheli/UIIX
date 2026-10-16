@@ -104,9 +104,11 @@
   /* Foco por clic: bloques 1-2 y ramas del mapa (slide 5), bloques 1-3 (slide 6),
      la Fase 3 (slide 7: bloques NE, NP, NC, NR y NI, que abren el
      cuadro de ER.docx que les corresponde, y la Fotografía 1, que aloja la
-     aplicación web de evaluación) y la secuencia de resultados de la prueba
+     aplicación web de evaluación), la secuencia de resultados de la prueba
      piloto (slide 8: seis pasos que abren su gráfico, tabla o figura, y un
-     segundo clic sobre la imagen la proyecta a máximo tamaño) */
+     segundo clic sobre la imagen la proyecta a máximo tamaño) y el bloque
+     «Marco histórico» del slide 4, que en reposo solo enseña los años y al
+     ampliarlo se centra con todo su contenido. */
   var FOCUS_SCOPES = [
     { sel: 'md-body', cls: 'md-body--f', keys: ['1', '2', 'lt', 'lb', 'rt', 'rb', 'cb'] },
     { sel: 'rs-body', cls: 'rs-body--f', keys: ['1', '1a', '1b', '2', '3', '2a', '2b', '3a', '3b', '3aimg', '3bimg'], parents: { '3aimg': '3a', '3bimg': '3b' } },
@@ -122,7 +124,11 @@
       keys: ['zb1', 'zb2', 'zb3', 'zb4', 'zb5', 'zb6', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6'],
       parents: { b1: 'zb1', b2: 'zb2', b3: 'zb3', b4: 'zb4', b5: 'zb5', b6: 'zb6' } },
     { sel: 'rc-body', cls: 'rc-body--f',
-      keys: ['rc1', 'rc2', 'rc3', 'rc4', 'rc5', 'rc6'] }
+      keys: ['rc1', 'rc2', 'rc3', 'rc4', 'rc5', 'rc6'] },
+    { sel: 'problem-body', cls: 'problem-body--f',
+      keys: ['ev', 'jf', 'q7'] },
+    { sel: 'th-body', cls: 'th-body--f',
+      keys: ['hist', 'apl', 'leg', 'ctx'] }
   ];
 
   /* Niveles anidados: al cerrar un nivel con `parents[key]`, se vuelve a ese
@@ -154,7 +160,9 @@
     'ept-body': { nodes: ['.ept-logica', '.ept-central', '.ept-result', '.ept-rc'], pad: '6px 22px 8px', gap: '7px' },
     'vl-body': { nodes: ['.vl-map', '.vl-synth'], pad: '6px 22px 8px', gap: '8px' },
     'cn-body': { nodes: ['.cn-flow', '.cn-strata', '.cn-node-row', '.cn-aporte'], pad: '6px 22px 8px', gap: '6px' },
-    'rc-body': { nodes: ['.rc-cols', '.rc-flow'], pad: '6px 18px 8px', gap: '8px' }
+    'rc-body': { nodes: ['.rc-cols', '.rc-flow'], pad: '6px 18px 8px', gap: '8px' },
+    'problem-body': { nodes: ['.ev-column', '.flow', '.just-column'], pad: '10px 22px 16px', gap: '16px', dir: 'row' },
+    'th-body': { nodes: ['.th-intro', '.th-grid'], pad: '0 18px 4px', gap: '0px' }
   };
 
   function ghostSlide(el) {
@@ -180,6 +188,7 @@
     inner.className = 'scope-ghost-inner';
     inner.style.padding = cfg.pad;
     inner.style.gap = cfg.gap;
+    if (cfg.dir) { inner.style.flexDirection = cfg.dir; }
     cfg.nodes.forEach(function (sel) {
       var node = el.querySelector(sel);
       if (!node) return;

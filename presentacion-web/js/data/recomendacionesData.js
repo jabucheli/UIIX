@@ -134,7 +134,7 @@ window.RECOMENDACIONES = {
   /* Banda inferior: síntesis operacional que cierra la presentación. */
   flujo: [
     { t: 'Ampliar', icono: 'wrench', color: 'green' },
-    { t: 'Aplicar', icono: 'hardhat', color: 'soft' },
+    { t: 'Aplicar', icono: 'hardhat', color: 'red' },
     { t: 'Actualizar', icono: 'refresh', color: 'green' },
     { t: 'Investigar', icono: 'trend', color: 'red' }
   ]

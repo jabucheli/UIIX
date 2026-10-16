@@ -29,7 +29,7 @@
       if (b.nflow) {
         boxNflow = '<div class="th-nflow">' + t.numerals.map(function (c, i) {
           return (i > 0 ? '<span class="th-narr">&#10132;</span>' : '') +
-            '<span class="th-ncell"><b>' + c[0] + '</b>' + c[1] + '</span>';
+            '<span class="th-ncell">' + c.map(function (l) { return '<span>' + l + '</span>'; }).join('') + '</span>';
         }).join('') + '</div>';
       }
       var mc = '';
@@ -42,8 +42,33 @@
           '</div>';
         }).join('') + '</div>';
       }
-      var content = b.flow ? flow : (b.mc ? mc : '<p>' + (b.lines || '') + '</p>');
-      return '<div class="th-box' + cls + '">' +
+      var ctx = '';
+      if (b.ctx) {
+        var ctxCards = b.ctx.map(function (c) {
+          return '<div class="th-ccard th-ccard--' + c.tone + ' th-ccard--p' + c.n + '">' +
+            '<span class="th-ccard-n">' + c.n + '</span>' +
+            '<div class="th-ccard-b">' +
+              '<b>' + c.t + '</b>' +
+              c.lines.map(function (l) { return '<span>' + l + '</span>'; }).join('') +
+            '</div></div>';
+        }).join('');
+        var ctxLinks = b.ctx.map(function (c) {
+          return '<i class="th-ctxrad-lk lk' + c.n + '"></i>';
+        }).join('');
+        ctx = '<div class="th-ctx">' +
+            '<p class="th-ctx-sub">' + b.ctxSub + '</p>' +
+            '<div class="th-ctxrad-ring"></div>' +
+            '<div class="th-ctxrad-hub"><b>' + b.ctxSub + '</b></div>' +
+            ctxLinks +
+            ctxCards +
+          '</div>';
+      }
+      var content = b.flow ? flow : (b.ctx ? ctx : (b.mc ? mc : '<p>' + (b.lines || '') + '</p>'));
+      var fcls = b.focus ? ' th-box--' + b.focus : '';
+      var fattr = b.focus
+        ? ' data-focus="' + b.focus + '" role="button" tabindex="0" aria-label="Ampliar ' + b.h + '"'
+        : '';
+      return '<div class="th-box' + cls + fcls + '"' + fattr + '>' +
         '<h3>' + b.h + '</h3>' +
         content +
         timeline +
@@ -75,6 +100,20 @@
         '</div>';
     }).join('');
 
+    var legalRows = t.legalHierarchy.map(function (l, i) {
+      var tone = i % 2 === 0 ? 'g' : 'r';
+      return '<div class="th-lh-row th-lh--' + tone + '">' +
+        '<span class="th-lh-n">' + l.n + '</span>' +
+        '<span class="th-lh-name">' + l.name + '</span>' +
+        '<span class="th-lh-det">' + l.det + '</span>' +
+      '</div>';
+    }).join('');
+
+    var legalFig = '<div class="th-legal-fig">' +
+      '<div class="th-lh-cap">' + t.legalHint + '</div>' +
+      '<div class="th-lh">' + legalRows + '</div>' +
+    '</div>';
+
     return '<section class="slide slide-teorias" data-slide="4">' +
       '<header class="slide-head">' +
         '<span class="th-tag">' + t.tag + '</span>' +
@@ -88,17 +127,17 @@
           '<div class="th-left">' + gallery + '</div>' +
           '<div class="th-right">' +
             '<div class="th-panel">' +
-              '<div class="th-panel-title"><h3>2.2 Marco teórico — TEORÍAS BASE</h3></div>' +
+              '<div class="th-panel-title"><h3>Marco teórico — TEORÍAS BASE</h3></div>' +
               '<div class="th-theories">' + theories + '</div>' +
               '<div class="th-flow">' +
                 '<div class="th-flow-title">' + t.flowTitle + '</div>' +
                 '<div class="th-flow-row">' + flow + '</div>' +
               '</div>' +
             '</div>' +
-            '<div class="th-legal">' +
+            '<div class="th-legal" data-focus="leg" role="button" tabindex="0" aria-label="Ampliar Marco Legal y Normativo">' +
               '<h4>' + t.legalTitle + '</h4>' +
               '<p>' + t.legalText + '</p>' +
-              '<div class="th-legal-img">' + t.legalImage + '</div>' +
+              legalFig +
             '</div>' +
           '</div>' +
         '</div>' +

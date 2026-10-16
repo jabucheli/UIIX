@@ -16,6 +16,7 @@
             '</div>';
           }).join('') +
         '</div>' +
+        (g.note ? '<div class="ev-period-note">' + g.note + '</div>' : '') +
       '</div>';
     }).join('') + '</div>';
 
@@ -39,27 +40,32 @@
       '</div>' +
     '</div>';
 
-    var evPanel = '<aside class="ev-column">' +
-      '<div class="ev-label">' + p.evidenceLabel + '</div>' +
-      tilesHtml +
-      '<div class="ev-footnote">' + p.footnote + '</div>' +
-      '<div class="ev-block ev-donut-block">' +
-        '<div class="ev-block-title">Accidentalidad en obra</div>' + donutHtml +
-      '</div>' +
-      '<div class="ev-block ev-bars-block">' +
-        '<div class="ev-block-title">' + p.bars.title + '</div>' +
-        '<div class="ev-bars">' + bars + '</div>' +
-        '<div class="ev-source">Fuente: ' + p.bars.source + '</div>' +
-      '</div>' +
-      '<div class="ev-block ev-sources-block">' +
-        '<div class="ev-block-title">Fuentes de consulta</div>' +
-        '<div class="ev-sources">' +
-          p.sources.map(function (s) {
-            return '<div class="src-item">' +
-              '<span class="src-num">' + s.n + '</span>' +
-              '<span class="src-text">' + s.text + '</span>' +
-            '</div>';
-          }).join('') +
+    var evPanel = '<aside class="ev-column" data-focus="ev" role="button" tabindex="0" aria-label="Ampliar la evidencia">' +
+      '<div class="ev-panel">' +
+        '<div class="accent"></div>' +
+        '<div class="ev-header">' + p.evidenceLabel + '</div>' +
+        '<div class="ev-cards">' +
+          tilesHtml +
+          '<div class="ev-footnote">' + p.footnote + '</div>' +
+          '<div class="ev-block ev-donut-block">' +
+            '<div class="ev-block-title">Accidentalidad en obra</div>' + donutHtml +
+          '</div>' +
+          '<div class="ev-block ev-bars-block">' +
+            '<div class="ev-block-title">' + p.bars.title + '</div>' +
+            '<div class="ev-bars">' + bars + '</div>' +
+            '<div class="ev-source">Fuente: ' + p.bars.source + '</div>' +
+          '</div>' +
+          '<div class="ev-block ev-sources-block">' +
+            '<div class="ev-block-title">Fuentes de consulta</div>' +
+            '<div class="ev-sources">' +
+              p.sources.map(function (s) {
+                return '<div class="src-item">' +
+                  '<span class="src-num">' + s.n + '</span>' +
+                  '<span class="src-text">' + s.text + '</span>' +
+                '</div>';
+              }).join('') +
+            '</div>' +
+          '</div>' +
         '</div>' +
       '</div>' +
     '</aside>';
@@ -71,11 +77,20 @@
       }
       var n = p.flow[i];
       var cls = 'flow-node';
-      if (n.central) cls += ' central';
-      if (n.green) cls += ' green';
-      else if (n.tall) cls += ' tall';
       var nc = n.color || '#4c4a4f';
-      flowHtml += '<div class="' + cls + '" style="--nc:' + nc + ';--nc-soft:' + nc + '26">' +
+      var pos = i + 1;
+      if (n.central) {
+        cls = 'flow-node central';
+        nc = '#C0242A';
+      } else if (n.green) {
+        cls = 'flow-node green';
+        nc = '#006E49';
+      } else {
+        if (n.tall) cls = 'flow-node tall';
+        nc = (pos % 2 === 1) ? '#006E49' : '#C0242A';
+      }
+      var fattr = (i === 6) ? ' data-focus="q7" role="button" tabindex="0" aria-label="Ampliar la pregunta científica"' : '';
+      flowHtml += '<div class="' + cls + '" style="--nc:' + nc + ';--nc-soft:' + nc + '26"' + fattr + '>' +
         '<div class="tnode-dot">' + (i + 1) + '</div>' +
         '<div class="node-icon">' + window.Icons.svg(n.icon, 21) + '</div>' +
         '<div class="node-text">' +
@@ -88,13 +103,14 @@
 
     var objBlock = '<div class="obj-block">' +
       '<div class="obj-head">' + p.studyObjectHeader + '</div>' +
-      '<div class="obj-text">' + p.studyObject + '</div>' +
+      '<div class="obj-text"><span class="obj-short">' + p.studyObject + '</span><span class="obj-full">' + p.studyObjectFull + '</span></div>' +
     '</div>';
 
     var lvlWidths = [100, 82, 64, 46, 28];
+    var lvlColors = ['green', 'red', 'green', 'red', 'green'];
     var pyramid = p.hierarchy.levels.map(function (lv, i) {
       var active = i === 2;
-      return '<div class="p-level' + (active ? ' p-active' : '') + '" style="width:' + lvlWidths[i] + '%">' +
+      return '<div class="p-level p-level--' + lvlColors[i] + (active ? ' p-active' : '') + '" style="width:' + lvlWidths[i] + '%">' +
         '<span>' + lv + '</span>' +
       '</div>';
     }).join('');
@@ -127,7 +143,7 @@
           flowHtml +
           '<div class="flow-link">' + window.Icons.svg('chevRight', 13) + '</div>' +
         '</div>' +
-        '<aside class="just-column">' +
+        '<aside class="just-column" data-focus="jf" role="button" tabindex="0" aria-label="Ampliar la justificación">' +
           '<div class="just-panel">' +
             '<div class="accent"></div>' +
             '<div class="just-header">' + p.justHeader + '</div>' +
@@ -137,6 +153,16 @@
             campoBlock +
           '</div>' +
         '</aside>' +
+        '<div class="q7-overlay" data-focus="q7" role="button" tabindex="0" aria-label="Cerrar la pregunta científica ampliada">' +
+          '<div class="q7-card">' +
+            '<div class="accent"></div>' +
+            '<div class="q7-header">' + p.flow[6].tag + '</div>' +
+            '<div class="q7-content">' +
+              '<div class="q7-body">' + p.flow[6].body + '</div>' +
+              '<div class="q7-hint">Clic o Escape para cerrar</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
     '</section>';
   };

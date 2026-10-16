@@ -22,7 +22,7 @@ reanudar.cmd shot         # además genera las capturas PNG en tools\out\
 reanudar.cmd app          # además ejecuta las 52/52 pruebas de la app hermana
 ```
 
-Objetivo de verificación: **54/54 (map) + 770/770 (focus) + `TODO OK`**. Tras
+Objetivo de verificación: **54/54 (map) + 888/888 (focus) + `TODO OK`**. Tras
 cada cambio de DOM/clases/CSS hay que actualizar los `has(…)` de
 `tools/focus_check.js` y el total (nº de `has()`).
 
@@ -107,7 +107,7 @@ Reglas que no hay que romper:
 ## 6. Verificación antes de entregar cualquier cambio
 
 1. `cd tools && reanudar.cmd` (o `verify-all.cmd shot`): debe terminar con
-   `54/54 + 770/770 + 0 clip/0 textx-overflow + TODO OK`. Nunca terminar al rojo.
+   `54/54 + 888/888 + 0 clip/0 textx-overflow + TODO OK`. Nunca terminar al rojo.
 2. Si el cambio afecta a geometría: crear `presentacion-web/_probe.html`
    temporal, medir con Chrome headless (`--window-size=2816,1440`,
    `--force-device-scale-factor=1`, contando `zoom:2`), y **borrarlo después**.

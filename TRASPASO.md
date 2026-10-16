@@ -98,7 +98,7 @@ Con el `presentacion-tesis-*.zip` en el equipo nuevo:
    ```bash
    cd presentacion\tools
    npm install
-   reanudar.cmd            # entorno + verificación completa (54/54 + 770/770)
+   reanudar.cmd            # entorno + verificación completa (54/54 + 888/888)
    ```
 
    Si Chrome no está en `C:\Program Files\Google\Chrome\Application\chrome.exe`,
