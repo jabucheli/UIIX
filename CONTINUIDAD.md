@@ -13,6 +13,7 @@
 |---|---|
 | **Reanudar (este equipo)** | `cd tools` y ejecutar **`reanudar.cmd`** → comprueba Node/Chrome/jsdom/app hermana, verifica todo (**54/54 + 888/888**), genera capturas, y muestra el estado git de los dos repos y dónde sigue la doc. Variantes: `reanudar.cmd shot` (además genera los PNG) y `reanudar.cmd app` (además ejecuta las **52/52** pruebas de la app). Ver §17. |
 | **Guardar / llevar a otro equipo** | `cd tools` y **`traspaso.cmd paquete`** → comprueba el **inventario** completo (`verificar-inventario.js`, manifiesto en `tools/inventario.json`), avisa de lo que git no ha guardado y genera el zip portable `tools\out\traspaso\presentacion-tesis-AAAAMMDD-HHMM.zip` (presentacion + tesis hermana + respaldos JSON + historial git + LEEME). Procedimiento completo en `TRASPASO.md`. |
+| **Guardar sin pérdidas (automático)** | `cd tools` y **`respaldo.cmd`** → verificación (nunca se salta aunque salga en rojo) + **commit git automático** de las dos carpetas + zip en `D:\ejemplo\respaldos\` (fuera del proyecto, rota a los últimos 14) + log. **`respaldo.cmd estado`** enseña el resumen; **`respaldo.cmd agendar`** crea la tarea programada diaria a las 18:00 (ver §55 y `RESPALDO.md`). |
 
 **Regla de oro para mover el trabajo:** `presentacion` y `tesis` son carpetas **hermanas**
 (al mismo nivel) y viajan **juntas**: la presentación embebe la app `tesis\0`
@@ -3016,3 +3017,72 @@ Comprobado en Chrome: `color=rgb(255,255,255) bg=rgb(18,18,22) fs=9.4px fw=700`
 (rect 150×56, centrado). *Lección*: **el harness embebe el CSS en un `<style>` al
 generarse**, así que tras tocar `styles.css` hay que volver a lanzar
 `node gen_slide4_shot.js` antes de medir o capturar; si no se mide la copia vieja.
+
+---
+
+## 55. Respaldo automático: `tools\respaldo.cmd` (2026-10-16)
+
+**Objetivo**: que no se pueda perder trabajo por olvidarse de guardarlo. Una sola
+orden deja verificado, commiteado y empaquetado, y hay una tarea diaria que lo
+hace sola. Procedimiento completo en **`RESPALDO.md`**.
+
+**a) Comandos** (desde `tools`):
+
+```bash
+respaldo.cmd              # verificación + commit git + zip rotativo  (alias: ahora)
+respaldo.cmd estado       # cambios sin commitear, zips, log y tarea programada
+respaldo.cmd agendar      # tarea programada diaria a las 18:00  (agendar 20:30, otra hora)
+respaldo.cmd quitar       # elimina la tarea programada
+```
+
+**b) Las 5 fases** de `respaldo.cmd`:
+
+1. **Verificación rápida** `map_check.js` + `focus_check.js`. Si salen en rojo se
+   avisa… pero **no se aborta**: se respalda igualmente (guardar trabajo malo es
+   mejor que perder trabajo bueno). *Decisión del usuario*.
+2. **Git commit automático** en `presentacion` y en `tesis` con su propio mensaje
+   `Respaldo automatico AAAAMMDD-HHMM (N archivo(s))`. *Decisión del usuario:
+   sí, automático en cada respaldo*.
+3. **Copia** con `robocopy` a `%TEMP%\respaldo\tree`, excluyendo `.git`,
+   `node_modules`, `tools\out` y temporales de Office (`~$*`, `*.tmp`).
+4. **Empaquetado** con el mismo `traspaso-empaquetar.ps1` que ya usaba
+   `traspaso.cmd paquete` → raíces `presentacion\`, `tesis\`, `LEEME.txt`,
+   `historial-presentacion.bundle`, `historial-tesis.bundle`, `datos-respaldo\`.
+5. **Rotación**: se conservan los **últimos 14** zips (decisión del usuario) y se
+   añade una línea de resumen a `respaldo.log`.
+
+**c) Dónde**: `D:\ejemplo\respaldos\` — **fuera** de las carpetas del proyecto, para
+que un fallo en `presentacion\` o en `tesis\` no se lleve también los respaldos.
+Sobreescribible con la variable `RESPALDO_DIR`. Primer zip real: 91 MB, 228
+entradas, 6 raíces.
+
+**d) Git: identidad inline.** La identidad global está **vacía** en esta máquina, y
+tampoco se quiso tocar la config. Se resuelve pasándola por comando:
+`git -C … -c user.name="…" -c user.email="…" commit`. Identidades: `BUCHELI
+GARCIA JORGE ALEXANDER / JABUCHELI@puce.edu.ec` (presentacion) y `Tesis NTP 330 /
+tesis@local` (tesis).
+
+**e) La regla de «no hacer commits» queda acotada** (§7 de `AGENTS.md`): el
+único commit que hace el asistente por su cuenta es el de `respaldo.cmd`,
+porque así lo autorizó el usuario. Los cambios de trabajo siguen sin commitear.
+
+**f) Tarea programada.** `respaldo.cmd agendar` crea **«Respaldo Presentacion
+Tesis»** (diaria, 18:00, ejecuta `respaldo.cmd ahora`), `quitar` la borra y
+`estado` muestra su estado y la **próxima ejecución**. Probadas las tres rutas.
+
+**g) Pruebas ejecutadas**: `estado` (21 cambios pendientes en `presentacion`, 0 en
+`tesis`, zips, log y tarea), `respaldo.cmd` completo dos veces (commit de 21
+archivos y luego de 1 —el propio script—, ambos zips OK, `map=OK foco=OK`),
+`agendar 20:30` → `proxima ejecucion: 20:30`, `quitar` → `NO creada`, `agendar`
+→ `proxima ejecucion: 18:00`. Contenido del zip verificado con
+`System.IO.Compression`: 6 raíces, sin `.git` ni `node_modules`.
+
+**h) Dos lecciones de `cmd` anotadas en `RESPALDO.md` §7**:
+- **No usar `find /c /v ""` para contar líneas**: en esta máquina el `find` de PATH
+  puede ser el de MSYS y barre el disco entero (`/c/$Recycle.Bin`, permisos…).
+  Se cambió a contadores puros `for /f … do set /a N+=1`.
+- **No usar bloques parentizados `( … )`** con saltos de línea dentro: convención
+  ya heredada de `traspaso.cmd`. `:estado` se reescribió con etiquetas (`goto`).
+
+**i) Sin cambios en el código de la presentación.** Verificación de cierre:
+**54/54 (map) + 888/888 (focus) + `TODO OK`**, git limpio tras el respaldo.

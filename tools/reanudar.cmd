@@ -96,5 +96,9 @@ echo   Verificar despues de cada cambio:
 echo     verify-all.cmd shot          ^(presentacion^)
 echo     node app_cdp.js out\x.png --tab=pruebas --run   ^(app^)
 echo.
+echo   Al dejar de trabajar (guardar sin perdidas):
+echo     respaldo.cmd                 ^(commit git + zip en D:\ejemplo\respaldos^)
+echo     respaldo.cmd estado          ^(que queda sin commitear y donde van^)
+echo.
 echo REANUDACION COMPLETA
 exit /b 0

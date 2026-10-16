@@ -42,6 +42,13 @@ que todo lo de la columna «Va» está físicamente presente.
 
 Tarda menos de un minuto. Se puede encadenar; los pasos 1 y 2 son el mínimo.
 
+> **Atajo automático:** `respaldo.cmd` hace de corrido el paso 1, el paso 2
+> (commit en las dos carpetas) y el paso 3, pero guarda el zip en
+> `D:\ejemplo\respaldos\` con rotación a 14 copias y lo puede hacer **solo cada
+> día** si creas la tarea (`respaldo.cmd agendar`). Ver `RESPALDO.md`.
+> Este proceso de traspaso sigue siendo el que se usa para **entregar** el
+> trabajo a otro equipo (con inventario y con el zip dentro de `tools\out\`).
+
 ```bash
 cd tools
 traspaso.cmd               # 1. inventario + estado git

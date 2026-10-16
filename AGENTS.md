@@ -33,6 +33,14 @@ traspaso.cmd              # inventario + estado git
 traspaso.cmd paquete      # además genera tools\out\traspaso\presentacion-tesis-AAAAMMDD-HHMM.zip
 ```
 
+Guardado sin perdidas (respaldo automático, **`RESPALDO.md`**):
+
+```bash
+respaldo.cmd              # verificación + commit git + zip en D:\ejemplo\respaldos (rota a 14)
+respaldo.cmd estado       # cambios sin commitear, respaldos, log y tarea programada
+respaldo.cmd agendar      # crea tarea programada diaria a las 18:00 (respaldo.cmd quitar, para eliminarla)
+```
+
 ## 2. Regla de oro: `presentacion` y `tesis` viajan juntas
 
 `presentacion` (esta presentación) y `tesis` (la app de evaluación NTP 330) son **carpetas
@@ -48,6 +56,7 @@ D:\ejemplo\presentacion\
 ├── AGENTS.md                  este archivo
 ├── CONTINUIDAD.md             guía de continuidad (proceso de trabajo, §1a) — LÉELO
 ├── TRASPASO.md                procedimiento de guardado/traspaso
+├── RESPALDO.md                respaldo automático (tools\respaldo.cmd)
 ├── EPTransf.md                especificación del slide 9 (EPT)
 ├── Ejemplo.pptx               referencia visual obligatoria (no copiar texto)
 ├── *.docx / *.md / *.png      fuentes de contenido (no editar los .docx)
@@ -130,6 +139,11 @@ Referencia de los harness (`tools/`): `map_check.js`, `focus_check.js`,
 ## 7. Reglas de trabajo heredadas
 
 - **No se hacen commits git** salvo que el usuario lo pida explícitamente.
+  Única excepción: `respaldo.cmd` hace un commit automático con su propio
+  mensaje (`Respaldo automatico AAAAMMDD-HHMM (N archivo(s))`) y con
+  identidad inline (`-c user.name=… -c user.email=…`), porque el usuario
+  autorizó que el respaldo no dependa de que alguien recuerde commitear.
+  Para cambios de trabajo normal, sigue sin commitear.
 - El asistente **no puede leer imágenes**: mide geometría con Chrome y deja
   capturas (`tools/out/`) para la revisión visual del usuario. El usuario
   impone el diseño; el asistente verifica geometría.
