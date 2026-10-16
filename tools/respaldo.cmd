@@ -191,7 +191,8 @@ set CR_N=0
 if not exist "%CR_PATH%\.git" goto :cr_sin_git
 for /f "delims=" %%c in ('git -C "%CR_PATH%" status --porcelain 2^>nul') do set /a CR_N+=1
 if "%CR_N%"=="0" goto :cr_sin_cambios
-git -C "%CR_PATH%" add -A
+git -C "%CR_PATH%" add -A 2>nul
+if errorlevel 1 goto :cr_err
 git -C "%CR_PATH%" -c user.name="%CR_NAME%" -c user.email="%CR_MAIL%" commit -q -m "Respaldo automatico %STAMP% (%CR_N% archivo(s))"
 if errorlevel 1 goto :cr_err
 echo    %CR_ETIQ%: commit con %CR_N% archivo(s)
@@ -277,7 +278,7 @@ powershell -NoProfile -Command "Get-Content '%RESPALDO_DIR%\respaldo.log' -Tail 
 :est_tarea
 echo.
 echo  -- tarea programada -------------------------------------------
-powershell -NoProfile -Command "$t=Get-ScheduledTask -TaskName 'Respaldo Presentacion Tesis' -ErrorAction SilentlyContinue; if ($t) { Write-Output ('    activa, estado: ' + $t.State) } else { Write-Output '    NO creada - lanzar: respaldo.cmd agendar' }"
+powershell -NoProfile -Command "$t=Get-ScheduledTask -TaskName 'Respaldo Presentacion Tesis' -ErrorAction SilentlyContinue; if ($t) { $i=Get-ScheduledTaskInfo -TaskName 'Respaldo Presentacion Tesis' -ErrorAction SilentlyContinue; Write-Output ('    ' + $t.State + ' - proxima ejecucion: ' + $i.NextRunTime) } else { Write-Output '    NO creada - lanzar: respaldo.cmd agendar' }"
 exit /b 0
 
 REM ============================================================
