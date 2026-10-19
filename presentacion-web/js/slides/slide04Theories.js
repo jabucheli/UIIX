@@ -126,7 +126,7 @@
         '<div class="th-grid">' +
           '<div class="th-left">' + gallery + '</div>' +
           '<div class="th-right">' +
-            '<div class="th-panel">' +
+            '<div class="th-panel" data-focus="teo" role="button" tabindex="0" aria-label="Ampliar Marco teórico — Teorías base">' +
               '<div class="th-panel-title"><h3>Marco teórico — TEORÍAS BASE</h3></div>' +
               '<div class="th-theories">' + theories + '</div>' +
               '<div class="th-flow">' +

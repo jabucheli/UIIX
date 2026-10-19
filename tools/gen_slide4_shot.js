@@ -59,7 +59,8 @@ const abrirFoco = [
   'function abrirHist(){abrirFoco(".th-box--hist","hist");}',
   'function abrirApl(){abrirFoco(".th-box--apl","apl");}',
   'function abrirLeg(){abrirFoco(".th-legal","leg");}',
-  'function abrirCtx(){abrirFoco(".th-box--ctx","ctx");}'
+  'function abrirCtx(){abrirFoco(".th-box--ctx","ctx");}',
+  'function abrirTeo(){abrirFoco(".th-panel","teo");}'
 ].join('');
 
 const audit = [
@@ -73,7 +74,7 @@ const audit = [
   'var intro=document.querySelector(".th-intro");',
   'var grid=document.querySelector(".th-grid");',
   'var key=body.getAttribute("data-focus");',
-  'var fsel=key==="leg"?".th-legal":".th-box--"+key;',
+  'var fsel=key==="leg"?".th-legal":(key==="teo"?".th-panel":".th-box--"+key);',
   'var hist=key?document.querySelector(fsel):document.querySelector(".th-box--hist");',
   'o+=tag+" cabecera "+(head?head.offsetWidth+"x"+head.offsetHeight:"-")+NL;',
   'o+=tag+" cuerpo "+(body?body.offsetWidth+"x"+body.offsetHeight:"-")+NL;',
@@ -124,7 +125,10 @@ const report = [
   'o+=audit("LEGAL")+NL;',
   'cerrarFoco();',
   'abrirCtx();',
-  'o+=audit("CTX");',
+  'o+=audit("CTX")+NL;',
+  'cerrarFoco();',
+  'abrirTeo();',
+  'o+=audit("TEO");',
   'var pre=document.createElement("pre");pre.id="report";pre.textContent=o;document.body.appendChild(pre);'
 ].join('');
 
@@ -168,3 +172,7 @@ console.log('ok sl4_shot_legal.html');
 fs.writeFileSync(path.join(OUT, 'sl4_shot_ctx.html'),
   shell + boot + audit + abrirFoco + 'setTimeout(function(){abrirCtx();},60);</script></body></html>');
 console.log('ok sl4_shot_ctx.html');
+
+fs.writeFileSync(path.join(OUT, 'sl4_shot_teo.html'),
+  shell + boot + audit + abrirFoco + 'setTimeout(function(){abrirTeo();},60);</script></body></html>');
+console.log('ok sl4_shot_teo.html');

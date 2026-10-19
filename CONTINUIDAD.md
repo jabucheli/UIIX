@@ -3086,3 +3086,28 @@ archivos y luego de 1 —el propio script—, ambos zips OK, `map=OK foco=OK`),
 
 **i) Sin cambios en el código de la presentación.** Verificación de cierre:
 **54/54 (map) + 888/888 (focus) + `TODO OK`**, git limpio tras el respaldo.
+
+## 56. Slide 4: el bloque «Aplicación» adopta el formato rojo de «Marco histórico» (2026-10-18)
+
+**Petición del usuario**: el bloque «Aplicación» (slide 4, marco teórico) debe
+tener el **mismo fondo y color** que el bloque «Marco histórico».
+
+**Cambios realizados**:
+
+1. **`js/data/theoriesData.js`**: en la entrada «Aplicación» de `gallery`, la
+   clase pasó de `cls: 'dark'` a `cls: 'red'` → el bloque usa `th-box--red`
+   (fondo `#faf6f6`, borde izquierdo rojo, textos ink/mid), idéntico a
+   «Marco histórico».
+2. **`css/styles.css`**:
+   - `.th-bflow-item` (las 3 casillas del flujo de «Aplicación») dejaron el
+     estilo de fondo oscuro (`rgba(255,255,255,.06)` + textos blancos) y pasaron
+     a **fondo blanco con textos ink/mid** (`.th-milestone`), conservando el
+     borde superior verde/rojo alterno.
+   - Reglas muertas de `.th-box--dark` (caja, h3, p, p b) eliminadas: ya no
+     queda ningún bloque oscuro en el slide 4.
+3. **`tools/focus_check.js`**: el check «el bloque Aplicación es accionable»
+   esperaba `th-box--dark`; ahora espera `th-box--red` (total sigue en 888).
+
+**Verificación**: `verify-all.cmd` → **54/54 + 888/888 + TODO OK**. Capturas
+regeneradas: `tools/out/slide04.png` y `slide04_apl.png` (bloque ampliado).
+Pendiente de revisión visual del usuario.

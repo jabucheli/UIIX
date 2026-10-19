@@ -71,6 +71,7 @@ if /I "%~1"=="shot" (
     call :shot slide04_apl.png sl4_shot_apl.html
     call :shot slide04_legal.png sl4_shot_legal.html
     call :shot slide04_ctx.png sl4_shot_ctx.html
+    call :shot slide04_teo.png sl4_shot_teo.html
     call :shot slide05_map.png map_shot.html
     call :shot slide06.png results_shot.html
     call :shot slide06_foco1.png results_shot_f1.html

@@ -128,7 +128,7 @@
     { sel: 'problem-body', cls: 'problem-body--f',
       keys: ['ev', 'jf', 'q7'] },
     { sel: 'th-body', cls: 'th-body--f',
-      keys: ['hist', 'apl', 'leg', 'ctx'] }
+      keys: ['hist', 'apl', 'leg', 'ctx', 'teo'] }
   ];
 
   /* Niveles anidados: al cerrar un nivel con `parents[key]`, se vuelve a ese

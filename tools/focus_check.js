@@ -2481,7 +2481,7 @@ has(!!thBody && !thBody.getAttribute('data-focus') &&
 var thApl = th ? th.querySelector('.th-box--apl') : null;
 has(!!thApl && thApl.getAttribute('data-focus') === 'apl' &&
   thApl.getAttribute('role') === 'button' && thApl.getAttribute('tabindex') === '0' &&
-  thApl.classList.contains('th-box--dark'),
+  thApl.classList.contains('th-box--red'),
   'slide 4: el bloque «Aplicación» es accionable (data-focus=apl + role + tabindex)');
 has(!!thApl && thApl.querySelectorAll('.th-bflow-item').length === 3 &&
   thApl.querySelectorAll('.th-bflow-item b').length === 3,
@@ -2644,6 +2644,39 @@ key('Escape');
 has(!!thBody && !thBody.getAttribute('data-focus') &&
   !thBody.classList.contains('th-body--fctx'),
   'slide 4: Escape cierra el «Marco contextual actual» ampliado');
+
+/* --- panel «Marco teórico — TEORÍAS BASE»: mismo comportamiento --- */
+var thTeo = th ? th.querySelector('.th-panel') : null;
+has(!!thTeo && thTeo.getAttribute('data-focus') === 'teo' &&
+  thTeo.getAttribute('role') === 'button' && thTeo.getAttribute('tabindex') === '0',
+  'slide 4: el panel «Teorías base» es accionable (data-focus=teo + role + tabindex)');
+has(!!thTeo && thTeo.querySelectorAll('.th-theory').length === 4 &&
+  thTeo.querySelectorAll('.th-fnode').length === 4,
+  'slide 4: el panel «Teorías base» trae sus 4 teorías y los 4 nodos del enfoque');
+click(thTeo);
+has(!!thBody && thBody.classList.contains('th-body--fteo') &&
+  thBody.getAttribute('data-focus') === 'teo',
+  'slide 4: al pulsar «Teorías base» se amplía (th-body--fteo + data-focus=teo)');
+has(!!th.querySelector('.scope-ghost.is-on'),
+  'ghost: la lámina original queda atenuada al ampliar «Teorías base»');
+has(gcs(th.querySelector('.th-intro')).visibility === 'hidden' &&
+  gcs(th.querySelector('.th-grid')).visibility === 'hidden' &&
+  gcs(thTeo).visibility !== 'hidden',
+  'slide 4: al ampliar «Teorías base» se oculta el contenido real y el panel queda visible');
+has(/\.th-body--fteo \.th-panel\s*\{[^}]*position:\s*absolute[^}]*left:\s*50%[^}]*top:\s*50%[^}]*transform:\s*translate\(-50%,\s*-50%\)[^}]*z-index:\s*2/.test(logoCss) &&
+  /\.th-panel\[data-focus\]\s*\{\s*cursor:\s*pointer/.test(logoCss),
+  'CSS: el panel «Teorías base» se centra sobre el ghost y anuncia cursor pointer');
+click(thTeo);
+has(!!thBody && !thBody.getAttribute('data-focus') &&
+  !thBody.classList.contains('th-body--fteo') && !th.querySelector('.scope-ghost'),
+  'slide 4: un segundo clic cierra «Teorías base» y retira el ghost');
+thTeo.focus();
+has(key('Enter') && !!thBody && thBody.classList.contains('th-body--fteo'),
+  'slide 4: Enter sobre «Teorías base» también lo amplía');
+key('Escape');
+has(!!thBody && !thBody.getAttribute('data-focus') &&
+  !thBody.classList.contains('th-body--fteo'),
+  'slide 4: Escape cierra «Teorías base» ampliado');
 
 let fail = 0;
 checks.forEach(function (c) { if (!c[1]) { fail++; console.log('FAIL:', c[0]); } });

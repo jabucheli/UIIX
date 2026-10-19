@@ -36,7 +36,7 @@ window.TEORIAS = {
       ref: '(Zabala & Guamán, 2024; Toro et al., 2021; Suárez Sánchez, 2021; Nørgaard, 2018)'
     },
     {
-      cls: 'dark', h: 'Aplicación', focus: 'apl',
+      cls: 'red', h: 'Aplicación', focus: 'apl',
       flow: [
         { kw: 'DISEÑO DE ESTRATEGIAS DE INGENIERÍA', det: 'mecanismo requerido por proyectos públicos y privados existentes y proyectados → dinamiza la economía del Ecuador' },
         { kw: 'INTERÉS REGIONAL Y MUNDIAL', det: 'antecedente: tesis doctoral Suárez Sánchez (2021) — simulación y predicción aplicada a edificios' },
