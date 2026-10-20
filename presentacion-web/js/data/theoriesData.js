@@ -25,10 +25,10 @@ window.TEORIAS = {
       ctxSub: 'Condiciones económicas y políticas',
       ctx: [
         { n: '1', t: 'Contexto del sector', tone: 'g', lines: ['Pilar de la economía', 'Contribuye al PIB', 'Generador de empleo'] },
-        { n: '2', t: 'Desempeño económico', tone: 'r', lines: ['Economía 2023: 1,5 %', 'Construcción 2022: 1,1 %', 'Construcción 2024: 1,7 %'] },
+        { n: '2', t: 'Desempeño económico', tone: 'r', lines: ['Economía 2023: 1,5 %', 'Crecimiento: Construcción 2022: 1,1 %', 'Crecimiento: Construcción 2024: 1,7 %'] },
         { n: '3', t: 'PIB construcción', tone: 'g', lines: ['USD 10.887 millones (2023)', 'USD 11.179 millones (2024)', 'Fuente: BCE / EKOS'] },
-        { n: '4', t: 'Empleo y concentración', tone: 'r', lines: ['6,3 % del empleo nacional', '521.599 contrataciones', 'Guayas 36,2 % · Pichincha 33,4 %'] },
-  { n: '5', t: 'Siniestralidad laboral', tone: 'g', lines: ['PEA 2017: 8.084.382', '22.405 accidentes', '1.044 enfermedades profesionales'] },
+        { n: '4', t: 'Empleo y concentración', tone: 'r', lines: ['6,3 % del empleo nacional', '521.599 contrataciones', 'Empresas constructoras: Guayas 36,2 % · Pichincha 33,4 %'] },
+  { n: '5', t: 'Siniestralidad laboral', tone: 'g', lines: ['PEA 2017: 8.084.382', '22.405 accidentes', '1.044 enfermedades profesionales', 'Entre 2020 y 2024 aumentó 57,20 %'] },
   { n: '6', t: 'Marco regulatorio', tone: 'r', lines: ['SGRT – IESS', 'Ministerio del Trabajo', 'Normativa obligatoria'] },
   { n: '7', t: 'Responsabilidad patronal', tone: 'g', lines: ['Auditoría técnico-administrativa', 'Indemnizaciones y sanciones', 'Prevención como obligación'] },
   { n: '8', t: 'Perspectiva técnica y sistémica', tone: 'r', lines: ['Suárez Sánchez (2021)', 'Nørgaard (2018)', 'Prevención integrada a la dirección de proyectos'] }

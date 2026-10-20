@@ -11,7 +11,7 @@
 
 | | |
 |---|---|
-| **Reanudar (este equipo)** | `cd tools` y ejecutar **`reanudar.cmd`** → comprueba Node/Chrome/jsdom/app hermana, verifica todo (**54/54 + 888/888**), genera capturas, y muestra el estado git de los dos repos y dónde sigue la doc. Variantes: `reanudar.cmd shot` (además genera los PNG) y `reanudar.cmd app` (además ejecuta las **52/52** pruebas de la app). Ver §17. |
+| **Reanudar (este equipo)** | `cd tools` y ejecutar **`reanudar.cmd`** → comprueba Node/Chrome/jsdom/app hermana, verifica todo (**54/54 + 897/897**), genera capturas, y muestra el estado git de los dos repos y dónde sigue la doc. Variantes: `reanudar.cmd shot` (además genera los PNG) y `reanudar.cmd app` (además ejecuta las **52/52** pruebas de la app). Ver §17. |
 | **Guardar / llevar a otro equipo** | `cd tools` y **`traspaso.cmd paquete`** → comprueba el **inventario** completo (`verificar-inventario.js`, manifiesto en `tools/inventario.json`), avisa de lo que git no ha guardado y genera el zip portable `tools\out\traspaso\presentacion-tesis-AAAAMMDD-HHMM.zip` (presentacion + tesis hermana + respaldos JSON + historial git + LEEME). Procedimiento completo en `TRASPASO.md`. |
 | **Guardar sin pérdidas (automático)** | `cd tools` y **`respaldo.cmd`** → verificación (nunca se salta aunque salga en rojo) + **commit git automático** de las dos carpetas + zip en `D:\ejemplo\respaldos\` (fuera del proyecto, rota a los últimos 14) + log. **`respaldo.cmd estado`** enseña el resumen; **`respaldo.cmd agendar`** crea la tarea programada diaria a las 18:00 (ver §55 y `RESPALDO.md`). |
 
@@ -25,7 +25,7 @@ ambas.
 | Logo superior | `logo.bmp` convertido a `assets/logo.png` en la **esquina superior derecha de los slides 2-9** (no en la carátula), `top:8px; right:12px; width:140px`. Ver §21. |
 | Pie institucional | `logo-inf.png` → `assets/logo-inf.png` (1316→1119px, −15%) **solo en pantalla completa**: banda de 80px en flujo al pie del marco (720→800px) que NO desplaza el contenido; `align-items:flex-end` lo apoya en el borde inferior. Ver §22. |
 | Paleta | Verde `#006E49` · Rojo `#C0242A` · negros/grises de `Ejemplo.pptx` (banda `#262626`, textos `#4C4A4F`/`#595959`, verde de programa `#006E49`). |
-| Verificación | **`cd tools && reanudar.cmd`** (una orden: entorno + todo + estado git); atajo: `verify-all.cmd shot`. Objetivo actual: **54/54 (map) + 888/888 (focus, los 12 slides) + `TODO OK`**. |
+| Verificación | **`cd tools && reanudar.cmd`** (una orden: entorno + todo + estado git); atajo: `verify-all.cmd shot`. Objetivo actual: **54/54 (map) + 897/897 (focus, los 12 slides) + `TODO OK`**. |
 | Capturas | `tools/out/slide01_cover.png` y `slide01_cover_fs.png` (carátula normal/pantalla completa) · `slide_fs_foot.png` (pie en pantalla completa) · `slide02.png` + `slide02_fev.png` (Problematización y bloque Evidencia agrandado) + `slide02_fjf.png` (Justificación agrandada) + `slide02_q7.png` (pregunta científica ampliada) · `slide03.png` (Objetivos) · `slide04.png` (Marco teórico) + `slide04_hist.png` (bloque «Marco histórico» ampliado) + `slide04_apl.png` / `slide04_legal.png` / `slide04_ctx.png` (técnicas aplicadas, marco legal y **marco contextual ampliados**) · `slide05_map.png`, `md_shot*.png` · `slide06*.png` · `slide07*.png` · `slide08*.png` · `slide09.png` + `slide09_f1/f2/f3/f3img.png` + `slide09_f2img.png` + `slide09_frs.png` (EPT y sus detalles) · `slide10.png` + `slide10_fr1/fr2/fr3/frn.png` (Validación y sus modales) · `slide11.png` + `slide11_zoom1..6.png` (bloque agrandado) + `slide11_fb1..6.png` (conclusión) [Conclusiones] · `slide12.png` + `slide12_frc1..6.png` (Recomendaciones y sus detalles) · `res2_shot*.png` · `res3_shot*.png` |
 | Revisar a ojo (no las puede leer el asistente) | `slide01_cover.png` (banda negra + logos + tira al 50%), `slide_fs_foot.png` (pie 1119px al borde), `slide04.png` (Marco teórico en reposo: el «Marco histórico» solo con los años y el «Marco contextual actual» en **óvalo radial con solo los títulos**) y `slide04_hist.png` (Marco histórico ampliado y centrado, resto atenuado) + `slide04_ctx.png` (marco contextual ampliado: 8 tarjetas en el óvalo, resto atenuado), `slide09.png` (esquema EPT) y `slide09_f1/f2/f3/f3img.png` (imágenes de detalle al hacer clic en cada Etapa) + `slide09_f2img.png` (riesgos1 + riesgos2 en paralelo, §33), `slide10.png` (mapa de validación) y `slide10_fr1/fr2/fr3/frn.png` (modales de ronda y tabla comparativa), las capturas de logos en los slides 2-11, más `slide11.png` + `slide11_zoom1..6.png` (el bloque agrandado y centrado) + `slide11_fb1..6.png` (la conclusión) del slide de Conclusiones, y `slide12.png` + `slide12_frc1..6.png` (las tres columnas de ámbito y el detalle ampliado de cada subbloque) del slide de Recomendaciones. El usuario impone el diseño; el asistente mide geometría con Chrome y el usuario valida lo visual. |
  | Pendiente | Nada bloqueado. Próximos pasos típicos: revisión visual del usuario de las capturas (en especial del slide 12: `slide12.png` y `slide12_frc1..6.png` — el subbloque 1 es ahora un **diagrama radial** «C. Chequeo» + 5 riesgos + cadena NTP 324→330, §37), ajustes de textos/tamaños, nuevos contenidos por slide. Pendiente aparte: transcribir a HTML las imágenes `pt1..pt5` del slide 9 (falta fuente para `pt5`). |
@@ -3111,3 +3111,39 @@ tener el **mismo fondo y color** que el bloque «Marco histórico».
 **Verificación**: `verify-all.cmd` → **54/54 + 888/888 + TODO OK**. Capturas
 regeneradas: `tools/out/slide04.png` y `slide04_apl.png` (bloque ampliado).
 Pendiente de revisión visual del usuario.
+
+## 57. Slide 4: textos del marco contextual ampliado + ajuste de las tarjetas 2 y 5 (2026-10-20)
+
+**Peticiones del usuario** (bloque «Marco contextual actual» ampliado):
+1. En «Empleo y concentración», anteponer «Empresas constructoras: » a la línea
+   de Guayas/Pichincha.
+2. En «Desempeño económico», anteponer «Crecimiento: » a las dos líneas de
+   Construcción.
+3. En «Siniestralidad laboral», añadir una cuarta línea:
+   «Entre 2020 y 2024 aumentó 57,20 %».
+4. Comprobar que las tarjetas **2 y 5** no se cruzan con otros bloques ni con
+   texto inferior; ajustar lo necesario.
+
+**Cambios realizados**:
+
+1. **`js/data/theoriesData.js`** (`ctx`):
+   - tarjeta 2: `Crecimiento: Construcción 2022: 1,1 %` y
+     `Crecimiento: Construcción 2024: 1,7 %`;
+   - tarjeta 4: `Empresas constructoras: Guayas 36,2 % · Pichincha 33,4 %`;
+   - tarjeta 5: nueva línea `Entre 2020 y 2024 aumentó 57,20 %` (pasa de 3 a 4
+     líneas; el panel suma **25** `span` en vez de 24).
+2. **`css/styles.css`** (solo modo `.th-body--fctx`, reposo intacto):
+   - `.th-ccard--p2` sube de `top: 130px` a `top: 126px`;
+   - `.th-ccard--p5` sube de `top: 414.5px` a `top: 402px`.
+   Motivo medido con Chrome (`.th-ctx` = 951×460): al hacer wrap los textos
+   largos, la tarjeta 2 creció a **114 px** y solapaba 58×1 px con la 3; la 5
+   (4 líneas, 114 px) sobresalía 12 px por debajo del contenedor.
+   Tras el ajuste: tarjeta 2 termina en y=183 (la 3 empieza en 186) y la 5 en
+   y=459 (contenedor 460). **`ctx-overlap 0`, sin `fuera`, sin `clip`**.
+3. **`tools/focus_check.js`**: el check del panel contextual pasa de exigir
+   24 líneas a **25** (texto de la aserción actualizado); total sigue **897**.
+
+**Verificación**: `map_check.js` 54/54 · `focus_check.js` **897/897** ·
+`node gen_slide4_shot.js` + Chrome `--dump-dom` del informe → `CTX
+ctx-overlap 0`, sin clips ni overflow de marco. Captura para revisión visual:
+`tools/out/slide04_ctx.png` (regenerar con `verify-all.cmd shot`).

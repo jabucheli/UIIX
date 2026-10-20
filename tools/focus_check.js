@@ -2575,10 +2575,10 @@ has(/\.th-legal\[data-focus\]\s*\{\s*cursor:\s*pointer;\s*\}/.test(logoCss) &&
 
 /* --- recuadro «Marco contextual actual»: panel contextual de 8 tarjetas --- */
 has(!!th && th.querySelectorAll('.th-ccard').length === 8 &&
-  th.querySelectorAll('.th-ccard-b span').length === 24 &&
+  th.querySelectorAll('.th-ccard-b span').length === 25 &&
   !!th.querySelector('.th-ctx-sub') &&
   /Condiciones económicas y políticas/.test(th.querySelector('.th-ctx-sub').textContent),
-  'slide 4: el marco contextual actual trae su panel de 8 tarjetas (3 líneas c/u) + subtítulo');
+  'slide 4: el marco contextual actual trae su panel de 8 tarjetas (24 líneas + la 4ª de la tarjeta 5) + subtítulo');
 has(!!th && Array.prototype.slice.call(th.querySelectorAll('.th-ccard')).map(function (c) {
   return /th-ccard--r/.test(c.className) ? 'r' : 'g';
 }).join('') === 'grgrgrgr' &&
