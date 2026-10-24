@@ -2343,10 +2343,9 @@ has(plevels.length === 5 &&
 has(/\.p-level--green\s*\{[^}]*background:\s*var\(--green\)/.test(logoCss) &&
   /\.p-level--red\s*\{[^}]*background:\s*var\(--red\)/.test(logoCss),
   'CSS: los niveles de la pirámide usan el verde y el rojo sólidos (colores previos)');
-var jextras = pb.querySelectorAll('.just-card-extra');
-has(jextras.length === 4 &&
-  Array.prototype.every.call(jextras, function (e) { return (e.textContent || '').trim().length > 0; }),
-  'slide 2: cada tarjeta de justificación añade su contenido extra (Teórica/Práctica/Social/Personal)');
+has(pb.querySelectorAll('.just-card-body').length === 4 &&
+  Array.prototype.every.call(pb.querySelectorAll('.just-card-body'), function (e) { return (e.textContent || '').trim().length > 0; }),
+  'slide 2: las tarjetas de justificación muestran su contenido');
 has(/\.just-card-extra\s*\{\s*display:\s*none;\s*\}/.test(logoCss) &&
   /\.problem-body--fjf \.just-card-extra\s*\{\s*display:\s*inline;/.test(logoCss),
   'CSS: el contenido extra de las justificaciones solo se muestra al agrandar el bloque');

@@ -51,13 +51,13 @@ window.PROBLEMA = {
   justHeader: 'JUSTIFICACIÓN',
   studyObjectHeader: 'OBJETO DEL ESTUDIO',
   studyObject: 'Diseño de cuestionarios de chequeo NTP 324 basados en normativa local (2024-2026) para la generación de ART como mecanismo de prevención.',
-  studyObjectFull: 'Estructurar una estrategia metodológica de gestión de proyectos basada en controles de ingeniería en la construcción de proyectos de edificaciones e infraestructura en Quito, a través del diseño de cuestionarios de chequeo acorde a la NTP 324, basados en normativa vigente entre 2024 y 2026 para la generación de ART como mecanismo de prevención.',
+  studyObjectFull: 'El objeto de estudio es una estrategia metodológica de gestión de proyectos basada en controles de ingeniería, que integra NTP 324 para determinar deficiencias, NTP 330 para evaluar riesgos y generación de ART para definir controles sobre actividades críticas',
   actionFieldHeader: 'CAMPO DE ESTUDIO',
   actionField: 'Proyectos de edificaciones e infraestructura básica en Quito.',
   justifications: [
-    { icon: 'book', title: 'TEÓRICA', body: 'Aporta conocimiento científico a la prevención de riesgos en construcción', extra: ' · Producción académica - Estudios de seguridad - programas de seguridad', color: 'green' },
+    { icon: 'book', title: 'TEÓRICA', body: 'La investigación integra normativa, evaluación técnica del riesgo y controles de ingeniería en una sola metodología', color: 'green' },
     { icon: 'wrench', title: 'PRÁCTICA', body: 'Controles de ingeniería aplicables en obra — AM-MDT-2025-122 · AM-MDT-2024-196 (Anexo 3) y NTP 330', extra: ', como parte de la estrategia metodológica de dirección de proyectos basada en controles de ingeniería', color: 'red' },
     { icon: 'users', title: 'SOCIAL', body: 'Protege la vida y salud de trabajadores, familias y comunidad', extra: ' · reducción de accidentalidad', color: 'green' },
-    { icon: 'user', title: 'PERSONAL', body: 'Compromiso profesional del investigador con la seguridad laboral', extra: ' · propuesta de una metodología que integre principios de la Dirección de Proyectos P-E-S-C', color: 'red' }
+    { icon: 'user', title: 'PERSONAL', body: 'Experiencia profesional en proyectos de construcción e identificación de una brecha entre exigencias normativas y su aplicación efectiva en obra', color: 'red' }
   ]
 };

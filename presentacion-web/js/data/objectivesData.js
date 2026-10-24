@@ -30,7 +30,7 @@ window.OBJETIVOS = {
   delimitationIcon: 'pin',
   delimitation: '<strong>Ciudad de Quito, Ecuador:</strong> proyectos públicos y privados de <strong>edificación e infraestructura básica</strong>, considerando sus procesos constructivos, condiciones de trabajo, peligros y riesgos laborales de seguridad.',
   photos: [
-    { label: 'FOTOGRAFÍA 01', caption: 'Evaluación de condiciones de seguridad · actividad constructiva' },
-    { label: 'FOTOGRAFÍA 02', caption: 'Aplicación de controles de ingeniería · proyecto piloto' }
+    { src: 'assets/not1.png' },
+    { src: 'assets/not2.png' }
   ]
 };

@@ -94,11 +94,17 @@
   }
 
   function toggleFullscreen() {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen();
-    }
+    document.body.classList.add('is-fullscreen-presentation');
+    fit();
+    try {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(function(){
+          if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen().catch(function(){});
+          }
+        });
+      }
+    } catch (e) {}
   }
 
   /* Foco por clic: bloques 1-2 y ramas del mapa (slide 5), bloques 1-3 (slide 6),
@@ -341,7 +347,16 @@
     fsBtn.addEventListener('click', toggleFullscreen);
     document.addEventListener('keydown', onKey);
     frame.addEventListener('click', onFrameClick);
-    window.addEventListener('resize', fit);
+    document.addEventListener('fullscreenchange', function(){
+    if (!document.fullscreenElement) {
+      document.body.classList.remove('is-fullscreen-presentation');
+      fit();
+    } else {
+      document.body.classList.add('is-fullscreen-presentation');
+      fit();
+    }
+  });
+  window.addEventListener('resize', fit);
     document.addEventListener('fullscreenchange', onFullscreen);
   }
 

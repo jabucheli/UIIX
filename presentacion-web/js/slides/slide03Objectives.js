@@ -36,8 +36,7 @@
 
     var photoTiles = o.photos.map(function (f) {
       return '<div class="photo">' +
-        '<span class="photo-label">' + f.label + '</span>' +
-        '<span class="photo-caption">' + f.caption + '</span>' +
+        (f.src ? '<img class="photo-img" src="' + f.src + '" alt="Fotografía">' : '') +
       '</div>';
     }).join('');
 
@@ -88,8 +87,8 @@
       '<div class="delim-text">' + o.delimitation + '</div>' +
     '</div>';
 
-    return '<section class="slide slide-objectives" data-slide="3">' +
-      '<header class="slide-head"><h2>' + o.title + '</h2><div class="head-rule"></div></header>' +
+    var html = '<section class="slide slide-objectives" data-slide="3">' +
+      '<div class="slide-head"><h2>' + o.title + '</h2></div>' +
       '<div class="obj-body">' +
         '<div class="obj-main">' +
           generalBlock +
@@ -98,12 +97,67 @@
           specificGrid +
           photoRow +
         '</div>' +
-        '<aside class="obj-side">' +
+        '<div class="obj-side">' +
           hypBlock +
-          alcBlock +
-          delimBlock +
-        '</aside>' +
+          '<div class="obj-side-row">' +
+            alcBlock +
+            delimBlock +
+          '</div>' +
+        '</div>' +
       '</div>' +
     '</section>';
+    setTimeout(function(){
+      try{
+        var slide = document.querySelector('.slide.slide-objectives.active') || document.querySelector('.slide.slide-objectives');
+        if(!slide) return;
+        var body = slide.querySelector('.obj-body');
+        if(!body) return;
+        var photos = body.querySelectorAll('.photo');
+        photos.forEach(function(p){
+          p.setAttribute('role','button');
+          p.tabIndex = 0;
+          p.setAttribute('aria-label','Ampliar fotografías');
+        });
+        function closePhotos(){
+          body.classList.remove('obj-body--fphoto');
+          photos.forEach(function(x){x.removeAttribute('data-focus');});
+        }
+        function togglePhoto(e){
+          if(body.classList.contains('obj-body--fphoto')){
+            closePhotos();
+          }else{
+            body.classList.add('obj-body--fphoto');
+            photos.forEach(function(x){x.setAttribute('data-focus','photo');});
+          }
+          e.stopPropagation();
+        }
+        photos.forEach(function(p){
+          p.setAttribute('role','button');
+          p.tabIndex = 0;
+          p.setAttribute('aria-label','Ampliar fotografías');
+          p.addEventListener('click', togglePhoto);
+          p.addEventListener('keydown', function(e){
+            if(e.key === 'Enter' || e.key === ' '){
+              e.preventDefault();
+              togglePhoto(e);
+            }
+          });
+        });
+        document.addEventListener('click', function(e){
+          if(!slide.classList.contains('active')) return;
+          if(body.classList.contains('obj-body--fphoto') && !e.target.closest('.photo')){
+            closePhotos();
+          }
+        });
+        document.addEventListener('keydown', function(e){
+          if(e.key === 'Escape'){
+            if(slide.classList.contains('active') && body.classList.contains('obj-body--fphoto')){
+              closePhotos();
+            }
+          }
+        });
+      }catch(err){}
+    }, 0);
+    return html;
   };
 })();

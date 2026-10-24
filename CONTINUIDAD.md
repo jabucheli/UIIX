@@ -3147,3 +3147,18 @@ Pendiente de revisión visual del usuario.
 `node gen_slide4_shot.js` + Chrome `--dump-dom` del informe → `CTX
 ctx-overlap 0`, sin clips ni overflow de marco. Captura para revisión visual:
 `tools/out/slide04_ctx.png` (regenerar con `verify-all.cmd shot`).
+
+## 58. Slide 3: fotografías con `not1.png` / `not2.png` (2026-10-20)
+
+**Petición del usuario**: en el slide 3, en el bloque «Fotografía 1» poner `not1.png`, y en «Fotografía 2» poner `not2.png`.
+
+**Cambios realizados**:
+
+1. **`assets/`**: copiados `not1.png` (841×875) y `not2.png` (835×843) a
+   `presentacion-web/assets/`.
+2. **`js/data/objectivesData.js`**: `photos[]` ahora incluye `src: 'assets/not1.png'`
+   y `src: 'assets/not2.png'`.
+3. **`js/slides/slide03Objectives.js`**: si `f.src` existe, se inserta `<img class="photo-img" ...>` dentro de cada `.photo`.
+4. **`css/styles.css`**: `.photo` pasa a `border: 1px solid #d7dbd9`, `overflow: hidden` y `position: relative`. Se añade `.photo-img { position: absolute; inset: 0; width:100%; height:100%; object-fit: cover; z-index:0; }`. Las etiquetas/captions se pasan a `position: relative; z-index:1` con ligero `text-shadow` para legibilidad sobre la foto. Se retira el estilo punteado y el centrado exclusivamente en texto.
+
+**Verificación**: `map_check.js` 54/54 · `focus_check.js` **897/897** (no hay cambios en tests). Captura regenerada: `tools/out/slide03.png`. Las fotos se ajustan por `cover` al recuadro 340×212 (16/10).

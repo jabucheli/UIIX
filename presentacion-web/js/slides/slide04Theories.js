@@ -79,9 +79,10 @@
 
     var theories = t.theories.map(function (th) {
       var r = th.accent ? ' red' : '';
+      var numStr = th.num.replace('TEORÍA ', '').trim();
       return '<div class="th-theory">' +
         '<div class="th-lvl1' + r + '">' +
-          '<span class="th-n">' + th.num + '</span>' +
+          '<span class="th-n">' + numStr + '</span>' +
           '<strong>' + th.name + '</strong>' +
           '<div class="th-key">' + th.key + '</div>' +
         '</div>' +

@@ -5,20 +5,25 @@
   function dec(v) { return String(v).replace('.', ','); }
 
   window.slideRenderers.problematizacion = function (thesis, p) {
-    var tilesHtml = '<div class="ev-hist">' + p.historical.map(function (g) {
-      return '<div class="ev-period">' +
-        '<div class="ev-period-label">' + g.period + '</div>' +
-        '<div class="ev-period-stats">' +
-          g.stats.map(function (s) {
-            return '<div class="ev-tile">' +
-              '<div class="ev-value">' + s.value + '</div>' +
-              '<div class="ev-caption">' + s.caption + '</div>' +
-            '</div>';
-          }).join('') +
-        '</div>' +
-        (g.note ? '<div class="ev-period-note">' + g.note + '</div>' : '') +
-      '</div>';
-    }).join('') + '</div>';
+    var hist = p.historical || [];
+    function histHtml(groups){
+      return '<div class="ev-hist">' + groups.map(function (g) {
+        return '<div class="ev-period">' +
+          '<div class="ev-period-label">' + g.period + '</div>' +
+          '<div class="ev-period-stats">' +
+            g.stats.map(function (s) {
+              return '<div class="ev-tile">' +
+                '<div class="ev-value">' + s.value + '</div>' +
+                '<div class="ev-caption">' + s.caption + '</div>' +
+              '</div>';
+            }).join('') +
+          '</div>' +
+          (g.note ? '<div class="ev-period-note">' + g.note + '</div>' : '') +
+        '</div>';
+      }).join('') + '</div>';
+    }
+    var tilesA = histHtml(hist.slice(0,1));
+    var tilesB = histHtml(hist.slice(1));
 
     var max = p.bars.items[0].value;
     var bars = p.bars.items.map(function (b) {
@@ -45,16 +50,17 @@
         '<div class="accent"></div>' +
         '<div class="ev-header">' + p.evidenceLabel + '</div>' +
         '<div class="ev-cards">' +
-          tilesHtml +
-          '<div class="ev-footnote">' + p.footnote + '</div>' +
+          tilesA +
           '<div class="ev-block ev-donut-block">' +
             '<div class="ev-block-title">Accidentalidad en obra</div>' + donutHtml +
           '</div>' +
+          tilesB +
           '<div class="ev-block ev-bars-block">' +
             '<div class="ev-block-title">' + p.bars.title + '</div>' +
             '<div class="ev-bars">' + bars + '</div>' +
             '<div class="ev-source">Fuente: ' + p.bars.source + '</div>' +
           '</div>' +
+          '<div class="ev-footnote">' + p.footnote + '</div>' +
           '<div class="ev-block ev-sources-block">' +
             '<div class="ev-block-title">Fuentes de consulta</div>' +
             '<div class="ev-sources">' +
