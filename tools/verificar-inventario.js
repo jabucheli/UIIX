@@ -18,7 +18,7 @@
  * Notas:
  * - Los directorios/carpetas "generadas" (tools/node_modules, tools/out, ...)
  *   NO son requeridas: se regeneran y no viajan entre equipos.
- * - La carpeta hermanna ../tesis DEBE existir al lado de presentacion.
+ * - La app NTP 330 y sus fuentes forman parte del mismo arbol presentacion.
  * - Lo que git tenga sin commitear se informa como aviso: no rompe la
  *   verificación de "presencia física", pero sin commit el código no viaja en
  *   git (sí viaja en el paquete de tools/traspaso.cmd).
@@ -65,20 +65,6 @@ for (const d of inventario.directoriosReq) {
   else ok.push(d.ruta + '/ (' + n + ' elementos)');
 }
 
-/* 3. Carpeta hermana ../tesis */
-const tesis = path.resolve(tes, inventario.hermana.carpeta);
-if (!fs.existsSync(tesis)) {
-  falta.push('[hermana] ' + inventario.hermana.carpeta + '  (carpeta NO existe)');
-} else if (!fs.statSync(tesis).isDirectory()) {
-  falta.push('[hermana] ' + inventario.hermana.carpeta + '  (no es una carpeta)');
-} else {
-  for (const r of inventario.hermana.archivos) {
-    const p = path.join(tesis, r);
-    try { if (fs.statSync(p).isFile()) ok.push('[hermana] ' + r); else falta.push('[hermana] ' + r); }
-    catch (e) { falta.push('[hermana] ' + r + '  (no existe)'); }
-  }
-}
-
 /* 4. Generados: se informa pero NO son requeridos */
 for (const g of inventario.generados) {
   const p = path.resolve(tes, g);
@@ -97,6 +83,7 @@ function esBasuraOGenerado(q) {
   if (/\.tmp$/.test(q)) return true;
   if (q.indexOf('tools/node_modules/') === 0) return true;
   if (q.indexOf('tools/out/') === 0) return true;
+  if (q.indexOf('presentacion-web/ntp330/0/pruebas/out/') === 0) return true;
   return false;
 }
 
@@ -158,10 +145,11 @@ if (!hayGit) {
     console.log('    * ' + s.q + suf);
   }
   for (const b of borrados) console.log('    - (borrado) ' + b);
-  console.log('  Para guardarlos en git:  cd ' + tes + ' && git add -A && git commit -m "..."');
+  console.log('  guardar.cmd conserva estos archivos en el ZIP junto con el historial Git existente.');
 }
 
 console.log('\n[PROXIMO PASO]');
+console.log('  guardar.cmd                  respaldo verificado del proyecto integrado');
 console.log('  tools\\traspaso.cmd            verificacion solo (igual que esto)');
 console.log('  tools\\traspaso.cmd paquete     ademas genera el .zip portable para otro equipo');
 

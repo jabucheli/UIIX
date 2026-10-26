@@ -30,7 +30,7 @@
       return fn ? fn(window.THESIS, window.PROBLEMA, window.OBJETIVOS, window.TEORIAS, window.METODOLOGIA, window.RESULTADOS) : '<section class="slide"><div style="padding:40px">Sin contenido</div></section>';
     }).join('');
 /* Logotipo en la esquina superior derecha de las láminas
-       (assets/logo.png, logo.bmp renderizado); en la carátula se omite por
+       (assets/logo.png, copia de logo1.png); en la carátula se omite por
        llevar su propio logocaratula.png dentro de la banda negra. */
     Array.prototype.forEach.call(frame.children, function (slide) {
       if (!slide.classList.contains('slide-cover')) {
@@ -87,14 +87,28 @@
        institucional, 720 -> 800), así que el área de proyección también. */
     var H = document.body.classList.contains('is-fullscreen-presentation') ? 1600 : 1440;
     var stage = document.getElementById('stage');
-    var s = Math.min(stage.clientWidth / W, stage.clientHeight / H);
+    var stageStyle = window.getComputedStyle(stage);
+    var width = Math.max(0, stage.clientWidth - (parseFloat(stageStyle.paddingLeft) || 0) - (parseFloat(stageStyle.paddingRight) || 0));
+    var height = Math.max(0, stage.clientHeight - (parseFloat(stageStyle.paddingTop) || 0) - (parseFloat(stageStyle.paddingBottom) || 0));
+    var s = Math.min(width / W, height / H);
     frame.style.transform = 'scale(' + s + ')';
     wrap.style.width = (W * s) + 'px';
     wrap.style.height = (H * s) + 'px';
   }
 
   function toggleFullscreen() {
+    if (document.fullscreenElement) {
+      if (document.exitFullscreen) document.exitFullscreen().catch(function () {});
+      return;
+    }
+    if (document.body.classList.contains('is-fullscreen-presentation')) {
+      document.body.classList.remove('is-fullscreen-presentation');
+      fsBtn.innerHTML = window.Icons.svg('expand', 18);
+      fit();
+      return;
+    }
     document.body.classList.add('is-fullscreen-presentation');
+    fsBtn.innerHTML = window.Icons.svg('compress', 18);
     fit();
     try {
       if (document.documentElement.requestFullscreen) {
@@ -132,7 +146,7 @@
     { sel: 'rc-body', cls: 'rc-body--f',
       keys: ['rc1', 'rc2', 'rc3', 'rc4', 'rc5', 'rc6'] },
     { sel: 'problem-body', cls: 'problem-body--f',
-      keys: ['ev', 'jf', 'q7'] },
+      keys: ['ev', 'jf', 'p4', 'q7'] },
     { sel: 'th-body', cls: 'th-body--f',
       keys: ['hist', 'apl', 'leg', 'ctx', 'teo'] }
   ];

@@ -70,7 +70,8 @@ window.RESULTADOS3 = {
       sub: 'ND máximo · 10,00 · vibración',
       detalle: 'El nivel Muy Deficiente domina en los cinco procesos del proyecto de infraestructura (obras preliminares, movimiento de tierras, obras complementarias, trabajos en zanjas y relleno). Los ND más altos se concentran en vibración (10,00), sobreesfuerzos (8,93), ruido (8,44) y contactos eléctricos (8,17).',
       pie: 'Resultados.docx · gráficas 10 a 14 · cinco procesos',
-      imagen: 'assets/nd-res1.png',
+      imagen: 'assets/barras.png',
+      mostrarPie: false,
       color: 'green'
     },
     {

@@ -1,8 +1,8 @@
 # AGENTS.md — Presentación web de la tesis doctoral (presentacion)
 
 Presentación académica interactiva en formato página web (HTML + CSS + JavaScript
-sin framework ni build) para la sustentación de la tesis doctoral, con **11
-diapositivas** que replican el estilo de `Ejemplo.pptx`.
+sin framework ni build) para la sustentación de la tesis doctoral, con **12
+diapositivas** que replican el estilo de `Ejemplo.pptx` y la **app NTP 330 integrada**.
 
 Este archivo es el punto de entrada para cualquier sesión de trabajo (incluido
 opencode). Léelo antes de tocar código.
@@ -13,16 +13,16 @@ opencode). Léelo antes de tocar código.
 
 La rutina de inicio está en **`CONTINUIDAD.md`** (guía completa de continuidad).
 Atajo en esta computadora: doble clic en **`iniciar.cmd`** (raíz del proyecto) =
-entorno (Node/Chrome/jsdom + `npm install` si falta) + verificación completa +
+entorno (Node/Chrome/jsdom + `npm ci` si falta) + inventario + verificación completa +
 abre la presentación. En corto, desde `tools`:
 
 ```bash
 reanudar.cmd              # entorno + verificación completa + estado git + dónde seguir
 reanudar.cmd shot         # además genera las capturas PNG en tools\out\
-reanudar.cmd app          # además ejecuta las 52/52 pruebas de la app hermana
+reanudar.cmd app          # además verifica la app integrada: 52/52 + recorrido completo
 ```
 
-Objetivo de verificación: **54/54 (map) + 888/888 (focus) + `TODO OK`**. Tras
+Objetivo de verificación: **54/54 (map) + 920/920 (focus) + `TODO OK`**. Tras
 cada cambio de DOM/clases/CSS hay que actualizar los `has(…)` de
 `tools/focus_check.js` y el total (nº de `has()`).
 
@@ -30,29 +30,44 @@ Cierre de sesión / traspaso a otro equipo (**`TRASPASO.md`**):
 
 ```bash
 traspaso.cmd              # inventario + estado git
-traspaso.cmd paquete      # además genera tools\out\traspaso\presentacion-tesis-AAAAMMDD-HHMM.zip
+traspaso.cmd paquete      # además genera tools\out\traspaso\presentacion-tesis-FECHA-ID.zip
 ```
 
 Guardado sin perdidas (respaldo automático, **`RESPALDO.md`**):
 
 ```bash
-respaldo.cmd              # verificación + commit git + zip en D:\ejemplo\respaldos (rota a 14)
-respaldo.cmd estado       # cambios sin commitear, respaldos, log y tarea programada
+respaldo.cmd              # archivos actuales + historial Git + ZIP con SHA256 (rota a 14)
+respaldo.cmd estado       # cambios pendientes, última copia, log y tarea programada
+respaldo.cmd verificar    # relee y verifica todos los archivos de la última copia
 respaldo.cmd agendar      # crea tarea programada diaria a las 18:00 (respaldo.cmd quitar, para eliminarla)
 ```
 
-## 2. Regla de oro: `presentacion` y `tesis` viajan juntas
+Desde la raíz: **`guardar.cmd`** (doble clic), `guardar.cmd estado` y
+**`recuperar.cmd`** (ayuda de recuperación en carpeta nueva). El respaldo guarda
+también archivos sin commit; no modifica el índice ni crea commits. La tarea
+diaria recupera horarios omitidos con la sesión iniciada y funciona con batería.
+La app NTP 330 requiere exportar los datos reales del navegador como JSON:
+ver `RESPALDO.md` §6. El JSON de ejemplo no equivale a un respaldo de datos reales.
 
-`presentacion` (esta presentación) y `tesis` (la app de evaluación NTP 330) son **carpetas
-hermanas** al mismo nivel (`D:\ejemplo\presentacion` y `D:\ejemplo\tesis`). El bloque
-Riesgo del **slide 7** embebe la app desde `..\..\tesis\0\index.html`, y
-`reanudar.cmd` comprueba que exista todo el tiempo. No moverlas por separado.
+## 2. Proyecto único: presentación y NTP 330
+
+Todo el trabajo vive en **`presentacion`**, con un único repositorio Git. La app,
+sus fuentes y sus pruebas están en **`presentacion-web/ntp330/`**. El bloque Riesgo
+del **slide 7** abre **`ntp330/0/index.html`**, dentro del mismo árbol web, tanto
+con `file://` como servido por HTTP. Para trasladar el trabajo basta esta carpeta.
+
+Al modificar la app, leer también **`presentacion-web/ntp330/AGENTS.md`**.
+Su historial anterior se conserva como `ntp330/historial-origen.bundle`; el
+historial de trabajo vigente es el del repositorio principal. Las bibliotecas
+de PDF están incluidas en `ntp330/0/vendor/` y funcionan sin conexión.
 
 ## 3. Estructura del repositorio
 
 ```text
 D:\ejemplo\presentacion\
 ├── iniciar.cmd                atajo: entorno + verificación + abrir (doble clic)
+├── guardar.cmd                respaldo verificado del proyecto integrado (doble clic)
+├── recuperar.cmd              recuperación comprobada en una carpeta nueva
 ├── AGENTS.md                  este archivo
 ├── CONTINUIDAD.md             guía de continuidad (proceso de trabajo, §1a) — LÉELO
 ├── TRASPASO.md                procedimiento de guardado/traspaso
@@ -63,6 +78,10 @@ D:\ejemplo\presentacion\
 ├── fotos\                     galería del slide 8
 ├── presentacion-web\          LA PRESENTACIÓN
 │   ├── index.html             carga icons + data + slides + app.js (scripts planos)
+│   ├── ntp330\                app NTP 330, fuentes, documentación e historial de origen
+│   │   ├── AGENTS.md          reglas específicas de la app
+│   │   ├── 330.pdf, nd.xlsx…  originales metodológicos
+│   │   └── 0\                index.html + js + css + vendor + docs + pruebas
 │   ├── assets\                imágenes (ref-norm.png, c-cheq.png, procesos1/2.png, riesgos1/2.png…)
 │   ├── css\styles.css         tokens + todas las reglas visuales (un bloque por slide)
 │   └── js\
@@ -97,9 +116,12 @@ D:\ejemplo\presentacion\
 - Textos en español; clases BEM-ish; tipografías `calc(Npx * var(--k, 1))`.
 - Lámina base **1408×720 CSS**, marco con `zoom: 2` → capturas a **2816×1440**
   (medir /2). Pantalla completa: marco 800px, pie institucional 80px al fondo.
+- La navegación con las **12 pestañas permanece visible en pantalla completa**.
+  La escala se calcula con el espacio útil bajo la barra, descontando el padding
+  del escenario. Verificación de navegador: `node tools/nav_check.js`.
 - Iconos: solo los definidos en `Icons.svg` — no inventar nombres (dibuja vacío).
 
-## 5. Foco/interacción por clic (slides 5-12)
+## 5. Foco/interacción por clic (slides 2 y 4-12)
 
 El motor vive en `js/app.js`: lista `FOCUS_SCOPES`, `setScopeFocus`,
 `toggleFocus`, `onFrameClick`, `onKey`, más el `ghost` (sombra de la pantalla
@@ -116,7 +138,7 @@ Reglas que no hay que romper:
 ## 6. Verificación antes de entregar cualquier cambio
 
 1. `cd tools && reanudar.cmd` (o `verify-all.cmd shot`): debe terminar con
-   `54/54 + 888/888 + 0 clip/0 textx-overflow + TODO OK`. Nunca terminar al rojo.
+   `54/54 + 920/920 + 0 clip/0 textx-overflow + TODO OK`. Nunca terminar al rojo.
 2. Si el cambio afecta a geometría: crear `presentacion-web/_probe.html`
    temporal, medir con Chrome headless (`--window-size=2816,1440`,
    `--force-device-scale-factor=1`, contando `zoom:2`), y **borrarlo después**.
@@ -134,16 +156,26 @@ Referencia de los harness (`tools/`): `map_check.js`, `focus_check.js`,
 `gen_slide8_shot.js` (slide 8), `gen_ept_shot.js` (slide 9),
 `gen_slide10_shot.js` (slide 10), `gen_slide11_shot.js` (slide 11),
 `png_stats.js` (leo PNG para comprobar que el iframe cargó),
-`app_cdp.js` (Chrome/CDP para la app hermana).
+`app_cdp.js` (acceso al driver Chrome/CDP de la app integrada) e
+`integration_check.js` (copia independiente, slide 7 en file/HTTP y PDF sin red).
+
+Al cambiar la app o su integración: **`tools\reanudar.cmd app`** y
+**`node tools/integration_check.js`**. Al cambiar respaldo/recuperación:
+**`powershell -NoProfile -ExecutionPolicy Bypass -File tools\probar-respaldo.ps1`**.
+
+Publicación: **`https://github.com/jabucheli/UIIX`**, sitio
+**`https://jabucheli.github.io/UIIX/`**. El workflow `.github/workflows/pages.yml`
+verifica y publica los cambios de `main`. `node tools/prepare-pages.js` prepara
+el sitio en `tools/out/pages/`. Ver `CONTINUIDAD.md` §71. Comprobación del artefacto:
+`node tools/integration_check.js --site=tools/out/pages --base-path=/UIIX/`.
+En Git Bash, anteponer `MSYS_NO_PATHCONV=1` para mantener literal `/UIIX/`.
 
 ## 7. Reglas de trabajo heredadas
 
 - **No se hacen commits git** salvo que el usuario lo pida explícitamente.
-  Única excepción: `respaldo.cmd` hace un commit automático con su propio
-  mensaje (`Respaldo automatico AAAAMMDD-HHMM (N archivo(s))`) y con
-  identidad inline (`-c user.name=… -c user.email=…`), porque el usuario
-  autorizó que el respaldo no dependa de que alguien recuerde commitear.
-  Para cambios de trabajo normal, sigue sin commitear.
+  Desde §59 de `CONTINUIDAD.md`, el respaldo conserva el árbol actual y el
+  historial existente sin commitear ni cambiar el índice. El proceso anterior
+  con commits automáticos queda sustituido por el respaldo verificado.
 - El asistente **no puede leer imágenes**: mide geometría con Chrome y deja
   capturas (`tools/out/`) para la revisión visual del usuario. El usuario
   impone el diseño; el asistente verifica geometría.
@@ -160,7 +192,7 @@ Referencia de los harness (`tools/`): `map_check.js`, `focus_check.js`,
 Los **12 slides** están desarrollados y verificados: carátula (réplica del slide 1
 de `Ejemplo.pptx`), problematización, objetivos+hipótesis, marco teórico,
 metodología (5 fases + mapa circular con zoom por clic), resultados, resultados
-(2) (flujograma NTP 330 + cuadros de `ER.docx` + app embebida de `tesis/0`),
+(2) (flujograma NTP 330 + cuadros de `ER.docx` + app integrada de `ntp330/0`),
 resultados (3) (6 resultados + ART + galería de fotos), **EPT** (esquema de 5
 franjas según `EPTransf.md`), **validación** (Delphi: rondas + síntesis según
 `Validacion.docx`), **conclusiones** (hallazgos + aporte según `Conclusiones.md`)

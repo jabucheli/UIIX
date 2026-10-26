@@ -1,0 +1,204 @@
+{
+  "integradoEn": "2026-10-26T00:59:52.536Z",
+  "modulo": "NTP 330",
+  "commitOrigen": "aaf2c3441a3af6bfaac0b9257e9e2ed7e31cb9d9",
+  "historialOrigen": "historial-origen.bundle",
+  "archivosOriginales": [
+    {
+      "ruta": ".gitattributes",
+      "sha256": "cc3ca43eb836fdee9128727293906619657b732900e73c751cea28df7ee51793"
+    },
+    {
+      "ruta": ".gitignore",
+      "sha256": "506fa3cea1d8cb4d98a8bb5fb91bd1c8ee4a50fc8befa955b156bedb945f397c"
+    },
+    {
+      "ruta": "0/README.md",
+      "sha256": "9b1135ce3390cb680a3bc5db9abbbec784c16f767f1accaa19ed819c669677fa"
+    },
+    {
+      "ruta": "0/css/style.css",
+      "sha256": "f1c86155113bd4fae57994f81ae2caa44a562ec0586c3faa5aaf00b3102b7510"
+    },
+    {
+      "ruta": "0/docs/ESTADO.md",
+      "sha256": "4a994692eb68f93374bd629f33d4f5788cce619fd18cff5eae1ffbc520995bfd"
+    },
+    {
+      "ruta": "0/docs/adaptaciones.md",
+      "sha256": "6aebcc3ba70d22b911bc9bb67f3975775867b1edabc5d4caea873179e4d881e7"
+    },
+    {
+      "ruta": "0/docs/continuidad.md",
+      "sha256": "7d5b22a46a65662129188f345e9f4bd2d98fdd9965e30b193c63a049912b3dba"
+    },
+    {
+      "ruta": "0/index.html",
+      "sha256": "d59d33a1d62ae969f7eedb27676ef0063ce1d7929abccb2f0c2b2830b4e14da4"
+    },
+    {
+      "ruta": "0/js/app.admin.js",
+      "sha256": "e1baf9bc3388d50183a8f3c566ded455b2fbf48151bd0322891731fb8a0613e5"
+    },
+    {
+      "ruta": "0/js/app.backup.js",
+      "sha256": "f6eb27f184a5e8cbb41a91189f2fd92568f9e3f2f63674c7683f23a5e5f29e5e"
+    },
+    {
+      "ruta": "0/js/app.controles.js",
+      "sha256": "5e98e53aa6406d4581b32a9478c91ec91ba58d5321c5137f7746f8de9044a955"
+    },
+    {
+      "ruta": "0/js/app.data.catalogo.js",
+      "sha256": "150e7827272d32954c20e4bc778c95038d7ece798be92721f5623cafa89e9b51"
+    },
+    {
+      "ruta": "0/js/app.data.controles.js",
+      "sha256": "c31c940a87d29d1c9e525bb00095ee970a4250e9d4d27070234609e9e706b9e9"
+    },
+    {
+      "ruta": "0/js/app.data.controles.json",
+      "sha256": "d362694ddc0af4b86825c264b9ba28dad18fe029ee99c6311dc1e94a113f5580"
+    },
+    {
+      "ruta": "0/js/app.data.legal.js",
+      "sha256": "56d4bb5ae0cef2b5ee9854af804cc7b43b35612d0f5459ba5e90177e03a70c57"
+    },
+    {
+      "ruta": "0/js/app.data.procesos.js",
+      "sha256": "dbefb456124c76bbfb3d6e154b52d7fa55f8755c025e14b778e9f598dd27b261"
+    },
+    {
+      "ruta": "0/js/app.data.referencia.js",
+      "sha256": "c7eb35a98c6244a9c3628391f0690498fffec62f96d0afe1d8185fcd3bceaea2"
+    },
+    {
+      "ruta": "0/js/app.db.js",
+      "sha256": "4717486d923d31cbca9e2b177e9f89f95d3c07df997fecbf7df8831abbc7bbff"
+    },
+    {
+      "ruta": "0/js/app.metodologia.js",
+      "sha256": "56255eceeb5dff7b41b6334dec61e58d86a28a69ab5241970c74bee22bb9df4a"
+    },
+    {
+      "ruta": "0/js/app.motor.js",
+      "sha256": "0aae2fecc0864b517ef9a8e8e37a7cb8a886e6a935b61e5799af15396b5b3b4a"
+    },
+    {
+      "ruta": "0/js/app.pruebas.js",
+      "sha256": "6de32c786658577a126244f606813148eb5753ed3c51592c74ad88dfb5cf44ca"
+    },
+    {
+      "ruta": "0/js/app.reportes.js",
+      "sha256": "e5272e2860113e20ca563a8091c446d2f307ccc5ddfe038386f9776ab22fd10c"
+    },
+    {
+      "ruta": "0/js/app.ui.js",
+      "sha256": "854c36d8c26e8db9d31e44e200cecf14e03f751f4c6d0fe18c1340e7f0b2ccb4"
+    },
+    {
+      "ruta": "0/legacy/index_original.html",
+      "sha256": "0a24356e2c863169b04171bdfbfcb5b29562a0810d327f06e832d432f8f6bf54"
+    },
+    {
+      "ruta": "0/legacy/script_original.js",
+      "sha256": "4868e5de0828a4dc3e372382ac3f149b7f950939bc431bb719666363c73045e1"
+    },
+    {
+      "ruta": "0/legacy/style_original.css",
+      "sha256": "03cb62242a14c2a7c621118ed719da5d16bf1897b61d7957b669c54a33bd55e2"
+    },
+    {
+      "ruta": "0/pruebas/generar-respaldo-ejemplo.js",
+      "sha256": "056eb2fffb5c9a7ee3751b919dccdf1370388d3b88b651e359f93f7aa026f4cd"
+    },
+    {
+      "ruta": "0/pruebas/prueba-bloque2.js",
+      "sha256": "353eeeafaf097db97604e019e2715815835c24be2d1deedd4ee37f857f34c9fd"
+    },
+    {
+      "ruta": "0/pruebas/verificar-cdp.js",
+      "sha256": "9af53084f7eb2944ebb536d7280390243bfa3fc26d2512469c4644838746390f"
+    },
+    {
+      "ruta": "0/pruebas/verificar-respaldo.js",
+      "sha256": "e1b0df4d92aa9f4cbcf65e764048c3f21c4fbdbc02dfccb7b80426ac2520438a"
+    },
+    {
+      "ruta": "0/pruebas/verificar.js",
+      "sha256": "a1f6fdef58ffbd1d2e09a4df9104f556054657dc5a9a05f4ca82d5bf54da3cfa"
+    },
+    {
+      "ruta": "0/script.js",
+      "sha256": "4868e5de0828a4dc3e372382ac3f149b7f950939bc431bb719666363c73045e1"
+    },
+    {
+      "ruta": "0/style.css",
+      "sha256": "03cb62242a14c2a7c621118ed719da5d16bf1897b61d7957b669c54a33bd55e2"
+    },
+    {
+      "ruta": "330.pdf",
+      "sha256": "27eed1ce1c9a863de55aa6b3134b6208fecc6aa4a5fe5a130586be87cb0c8a33"
+    },
+    {
+      "ruta": "AGENTS.md",
+      "sha256": "c41431fc80f25150e411c471038d330f3e3c06f19fcb923c1024ba55215fac13"
+    },
+    {
+      "ruta": "ER.docx",
+      "sha256": "9362da2aa9599567b73cd4824497120dbe452f20f237fcb99aefc722b7f82565"
+    },
+    {
+      "ruta": "Ejemplo.pptx",
+      "sha256": "77a77eb57cb8f48fd36b699ff3f48e1681b84bfb9de5da3a9f06a79daf19d22d"
+    },
+    {
+      "ruta": "correcciones.md",
+      "sha256": "a789d8982f1bb9dbe7d01cc426e9c445405e5a9051dc1dc40c6c2bdf3d2eacc9"
+    },
+    {
+      "ruta": "correcciones1.md",
+      "sha256": "54d047d93f1a82186728a47bdabf91e84d4d8a2f7c6cb6f458809762b562cd1b"
+    },
+    {
+      "ruta": "correcciones2.md",
+      "sha256": "5eb44fb024db28bc26730f99dd1b88b90685e38a004569ff124be083c26512dc"
+    },
+    {
+      "ruta": "correcciones3.md",
+      "sha256": "c640f700c921bec8e06e9f9f5cb01d34fbc2911b2ef013f862d92d7400eef2be"
+    },
+    {
+      "ruta": "correcciones4.md",
+      "sha256": "a89ff5874976b4bc3a6b66d22e3db7398da1fe60da6ae82b6044a484ddcf36d0"
+    },
+    {
+      "ruta": "correcciones5.md",
+      "sha256": "52833ca9aef1a818d6e112aee5dc55e0e0bfce77128ebd1964023e0949a61004"
+    },
+    {
+      "ruta": "correcciones6.md",
+      "sha256": "efeb2ce51af0f6dfd968f69bd6089488830c2f6673ca718ad00b867ccb69c42d"
+    },
+    {
+      "ruta": "instrucciones.md",
+      "sha256": "a0b2aa667930efa25548ddc1fd142f89633dab211a3d5f4439800a54d9653f71"
+    },
+    {
+      "ruta": "legal.docx",
+      "sha256": "7c111753dd4abd455d036dc531f1f9eaa7cff167ee2c66d6d3ac95a1a72048ae"
+    },
+    {
+      "ruta": "matriz.xlsx",
+      "sha256": "1ba4636eb4c9e1bf97de6a3b7022cc912e631c0dcbdeb674b2173abd6b878da6"
+    },
+    {
+      "ruta": "nd.xlsx",
+      "sha256": "aaa1fe59c2074fcd6d91f238326034e0ad8fb10372262a4d0374663899398dd5"
+    },
+    {
+      "ruta": "procesos.docx",
+      "sha256": "4888f881853ce8abf9d69e67c2bd5e4f78c3a2c6055de166fad8430a90dc8860"
+    }
+  ]
+}

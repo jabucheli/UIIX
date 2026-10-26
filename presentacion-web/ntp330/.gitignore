@@ -1,0 +1,19 @@
+# Archivos de bloqueo de Office (~$*.xlsx, ~$*.docx)
+~$*.xlsx
+~$*.docx
+~$*.pdf
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores / herramientas
+.vscode/
+.idea/
+*.tmp
+*.log
+
+# Salidas de las herramientas de 0/pruebas/: capturas, informes y respaldos.
+# Se regeneran con node 0/pruebas/verificar.js; no aportan al código.
+0/pruebas/out/

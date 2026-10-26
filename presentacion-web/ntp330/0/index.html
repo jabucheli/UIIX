@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evaluación de riesgos laborales · NTP 330 · Proyectos de construcción</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script src="vendor/jspdf.umd.min.js"></script>
+  <script src="vendor/jspdf.plugin.autotable.min.js"></script>
+
+  <!-- Datos (se cargan en este orden) -->
+  <script src="js/app.data.catalogo.js"></script>
+  <script src="js/app.data.legal.js"></script>
+  <script src="js/app.data.controles.js"></script>
+  <script src="js/app.data.referencia.js"></script>
+  <script src="js/app.data.procesos.js"></script>
+
+  <!-- Núcleo -->
+  <script src="js/app.metodologia.js"></script>
+  <script src="js/app.motor.js"></script>
+  <script src="js/app.db.js"></script>
+  <script src="js/app.controles.js"></script>
+
+  <!-- Interfaz -->
+  <script src="js/app.ui.js"></script>
+  <script src="js/app.reportes.js"></script>
+  <script src="js/app.admin.js"></script>
+  <script src="js/app.backup.js"></script>
+  <script src="js/app.pruebas.js"></script>
+</head>
+
+<body>
+  <!-- Cabecera institucional: verde y rojo de Ejemplo.pptx -->
+  <header class="cabecera">
+    <div class="cabecera-banda" aria-hidden="true">
+      <span class="cabecera-bloque"></span>
+      <span class="cabecera-bloque cabecera-bloque--rojo"></span>
+    </div>
+    <div class="cabecera-texto">
+      <h1>Evaluación de riesgos laborales · NTP 330</h1>
+      <p>Proyectos de construcción</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="tabs" id="tabs">
+      <button class="tab-btn activo" data-tab="evaluacion">Evaluación</button>
+      <button class="tab-btn" data-tab="matriz-unificada">Matriz unificada y análisis</button>
+      <button class="tab-btn" data-tab="arts">ARTs generados</button>
+      <button class="tab-btn" data-tab="catalogo">Catálogo</button>
+      <button class="tab-btn" data-tab="pruebas">Pruebas</button>
+      <button class="tab-btn" data-tab="ayuda">Metodología NTP 330</button>
+    </nav>
+
+    <!-- ============ PESTAÑA EVALUACIÓN ============ -->
+    <section id="tab-evaluacion" class="tab-panel activo">
+
+      <!-- Flujograma horizontal del proceso de evaluación -->
+      <div class="flujograma" id="flujo-evaluacion">
+        <div class="flujo-paso">
+          <div class="flujo-icono" title="Identificación del proyecto">🏗️</div>
+          <div class="flujo-texto">Identificación del proyecto</div>
+        </div>
+        <div class="flujo-flecha">➜</div>
+        <div class="flujo-paso">
+          <div class="flujo-icono" title="Proceso constructivo">🛠️</div>
+          <div class="flujo-texto">Proceso constructivo</div>
+        </div>
+        <div class="flujo-flecha">➜</div>
+        <div class="flujo-paso">
+          <div class="flujo-icono" title="Aplicación de lista de chequeo diseñada NTP 324">📋</div>
+          <div class="flujo-texto">Aplicación de lista de chequeo diseñada<br>NTP 324</div>
+        </div>
+        <div class="flujo-flecha">➜</div>
+        <div class="flujo-paso">
+          <div class="flujo-icono" title="Evaluación de riesgos identificados NTP 330">⚠️</div>
+          <div class="flujo-texto">Evaluación de riesgos identificados<br>NTP 330</div>
+        </div>
+        <div class="flujo-flecha">➜</div>
+        <div class="flujo-paso">
+          <div class="flujo-icono" title="Determinación de estrategias de control">🛡️</div>
+          <div class="flujo-texto">Determinación de estrategias de control ART</div>
+        </div>
+      </div>
+
+      <!-- 1. Identificación del proyecto (correcciones4 §3: solo 3 campos) -->
+      <div class="zona" id="zona-id">
+        <h3 class="zona-titulo"><span class="zona-num">1</span> Identificación del proyecto / Proceso constructivo</h3>
+        <div class="campo-acciones" style="margin-bottom:10px">
+          <button id="btnCrearProyecto" class="btn btn-primario">+ Crear nuevo proyecto</button>
+        </div>
+        <div class="panel-selectores panel-selectores--tres">
+          <div class="campo">
+            <label for="selTipoProyecto">Tipo de proyecto:</label>
+            <select id="selTipoProyecto">
+              <option value="">-- Seleccione tipo de proyecto --</option>
+            </select>
+          </div>
+          <div class="campo campo-combo">
+            <label for="inpProyecto">Nombre del proyecto:</label>
+            <div class="combo" id="comboProyecto">
+              <input type="text" id="inpProyecto" autocomplete="off"
+                     aria-expanded="false" aria-haspopup="listbox"
+                     placeholder="Ej. Edificio Administrativo Quito" />
+              <button type="button" class="combo-flecha" id="btnComboProyecto"
+                      title="Ver proyectos anteriores del tipo seleccionado"
+                      aria-label="Ver proyectos anteriores">&#9662;</button>
+              <ul class="combo-lista oculto" id="listaProyectosSugeridos" role="listbox"
+                  aria-label="Proyectos anteriores"></ul>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="selProceso">Proceso constructivo:</label>
+            <select id="selProceso">
+              <option value="">-- Seleccione proceso --</option>
+            </select>
+          </div>
+          <small id="notaProyectoSugerido" class="nota-campo"></small>
+        </div>
+
+        <!-- §4.4 Evaluaciones del proyecto -->
+        <div id="zona-evals-proyecto" class="oculto">
+          <div class="campo-acciones" style="margin:10px 0 8px">
+            <button id="btnNuevaEvaluacion" class="btn btn-primario">+ Nueva evaluación de proceso</button>
+          </div>
+          <table class="tabla-riesgos tabla-evals" id="tabla-evals-proyecto">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Proyecto</th>
+                <th>Tipo</th>
+                <th>Proceso constructivo</th>
+                <th>Riesgos incluidos</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <p id="zona2-nota" class="nota"></p>
+      </div>
+
+      <!-- 2. Aplicación de Cuestionarios de chequeo / Evaluación de Riesgos -->
+      <div class="zona oculto" id="zona-riesgos">
+        <h3 class="zona-titulo"><span class="zona-num">2</span> Aplicación de Cuestionarios de chequeo / Evaluación de Riesgos</h3>
+        <p class="nota" style="margin-top:0" id="riesgo-breadcrumb"></p>
+        <div class="campo-acciones" style="margin-bottom:8px">
+          <button id="btnAgregarRiesgo" class="btn btn-primario">+ Agregar riesgo</button>
+          <button id="btnAgregarRiesgoManual" class="btn btn-secundario">+ Riesgo fuera del catálogo del proceso</button>
+        </div>
+        <div id="riesgo-tab-panel" class="riesgo-tab-panel">
+          <p class="nota">Seleccione un proceso constructivo para identificar y evaluar sus riesgos.</p>
+        </div>
+
+        <!-- Formulario de adición de riesgos adicionales -->
+        <div id="form-riesgo-manual" class="panel-selectores oculto">
+          <h4 style="flex:1 1 100%;margin:0 0 8px">Agregar un riesgo adicional (no generado automáticamente)</h4>
+          <div class="campo"><label>Nombre del riesgo *</label><input type="text" id="rm-nombre" placeholder="Ej. Exposición a polvo de sílice"></div>
+          <div class="campo"><label>Tipo de peligro</label><input type="text" id="rm-tipo" placeholder="Ej. Químico"></div>
+          <div class="campo"><label>Descripción</label><textarea id="rm-descripcion" rows="2"></textarea></div>
+          <div class="campo"><label>Proceso relacionado</label><input type="text" id="rm-proceso" placeholder="Ej. Estructura de hormigón armado"></div>
+          <div class="campo"><label>Fuente generadora</label><input type="text" id="rm-fuente" placeholder="Ej. Corte de hormigón"></div>
+          <div class="campo"><label>Posibles consecuencias</label><textarea id="rm-consecuencias" rows="2"></textarea></div>
+          <div class="campo"><label>Lista de chequeo</label>
+            <select id="rm-lista"><option value="">-- Sin lista (pendiente de configuración) --</option></select>
+          </div>
+          <div class="campo"><label>Justificación de la inclusión *</label><textarea id="rm-justificacion" rows="2"></textarea></div>
+          <div class="campo-acciones">
+            <button id="btnGuardarRiesgoManual" class="btn btn-primario">Agregar riesgo</button>
+          </div>
+          <p class="nota" style="flex:1 1 100%">Si no existe una lista adecuada puede crearla o copiar una similar en la pestaña
+            Catálogo, o dejar el riesgo pendiente de configuración (no se calculará ND sin lista validada).</p>
+        </div>
+
+        <div class="campo-acciones" style="margin-top:18px">
+          <button id="btnVolverZona1" class="btn btn-secundario">↑ Volver al numeral 1 (sin guardar)</button>
+          <button id="btnVerMatrizUnificada" class="btn btn-primario">✓ Guardar y ver en Matriz unificada</button>
+        </div>
+        <p class="nota" id="zona2-cierre-nota">
+          Al concluir la evaluación use <b>Guardar y ver en Matriz unificada</b>: la matriz queda
+          consolidada por proceso constructivo en la pestaña <i>Matriz unificada y análisis</i>,
+          desde donde puede guardarla en PDF o imprimirla. La matriz se reinicia al elegir un
+          nuevo tipo de proyecto en el numeral 1.
+        </p>
+      </div>
+
+      <!-- 4. Determinación de estrategias de control ART -->
+      <div class="zona oculto" id="zona-articulo">
+        <h3 class="zona-titulo"><span class="zona-num">4</span> Determinación de estrategias de control ART</h3>
+        <p class="nota" style="margin-top:0">
+          Una vez evaluados los riesgos del proceso, descargue el ART con las estrategias de control determinadas.
+        </p>
+        <div class="resumen-acciones">
+          <button id="btnDescargarPDF" class="btn btn-primario">Descargar ART (A4 horizontal)</button>
+          <button id="btnART_A3" class="btn btn-secundario">Descargar ART (A3 horizontal)</button>
+          <button id="btnARTPreview" class="btn btn-secundario">Vista previa ART</button>
+          <button id="btnExportarExcel" class="btn btn-secundario">Exportar a Excel</button>
+          <button id="btnExportarCSV" class="btn btn-secundario">Exportar CSV</button>
+          <button id="btnExportarJSON" class="btn btn-secundario">Exportar JSON</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PESTAÑA MATRIZ UNIFICADA Y ANÁLISIS ============ -->
+    <section id="tab-matriz-unificada" class="tab-panel">
+      <div class="zona">
+        <h3 class="zona-titulo"><span class="zona-num">5</span> Matriz unificada y análisis</h3>
+        <div class="campo-acciones" style="margin-bottom:10px">
+          <button id="btnCrearProyecto2" class="btn btn-primario">+ Crear nuevo proyecto</button>
+        </div>
+        <div class="panel-selectores">
+          <div class="campo">
+            <label for="selProyectoUnificado">Proyecto de la matriz consolidada:</label>
+            <select id="selProyectoUnificado">
+              <option value="">-- Seleccione proyecto --</option>
+            </select>
+          </div>
+          <div class="campo-acciones" style="flex:1 1 100%">
+            <button id="btnVincularMatriz" class="btn btn-secundario">↔ Vincular al proyecto del numeral 2</button>
+            <button id="btnInicializarMatriz" class="btn btn-secundario">⟲ Inicializar matriz</button>
+          </div>
+          <p id="estadoVinculoMatriz" class="nota" style="flex:1 1 100%;margin:0"></p>
+        </div>
+
+        <!-- Matriz consolidada -->
+        <div id="matriz-unificada-contenido" class="oculto">
+          <div class="tabla-matrix-wrapper" style="margin-top:12px">
+            <table class="tabla-riesgos tabla-matrix tabla-unificada" id="tabla-unificada">
+              <thead>
+                <tr>
+                  <th>ID evaluación</th>
+                  <th>Tipo</th>
+                  <th>Proyecto</th>
+                  <th>Proceso constructivo</th>
+                  <th>Riesgo</th>
+                  <th>ND</th>
+                  <th>NE</th>
+                  <th>NP</th>
+                  <th>NC</th>
+                  <th>NR</th>
+                  <th>Nivel de intervención</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <!-- Análisis estadístico §9 -->
+          <div style="margin-top:18px">
+            <h4 class="seccion-num">Análisis estadístico por proceso constructivo</h4>
+            <div id="stats-tabla-procesos"></div>
+            <div id="stats-graficos" class="cuadros-graficos">
+              <figure class="cuadro-grafico cuadro-grafico--verde">
+                <figcaption>Riesgos evaluados por proceso</figcaption>
+                <canvas id="chart-riesgos-proceso" width="400" height="260"></canvas>
+              </figure>
+              <figure class="cuadro-grafico cuadro-grafico--rojo">
+                <figcaption>NR promedio por proceso</figcaption>
+                <canvas id="chart-nr-promedio" width="400" height="260"></canvas>
+              </figure>
+              <figure class="cuadro-grafico cuadro-grafico--verde">
+                <figcaption>Distribución de niveles de intervención</figcaption>
+                <canvas id="chart-ni-distribucion" width="400" height="260"></canvas>
+              </figure>
+              <figure class="cuadro-grafico cuadro-grafico--rojo">
+                <figcaption>Riesgos críticos por proceso (NI I y II)</figcaption>
+                <canvas id="chart-riesgos-criticos" width="400" height="260"></canvas>
+              </figure>
+              <figure class="cuadro-grafico cuadro-grafico--verde">
+                <figcaption>Matriz de calor: frecuencia ND × NP</figcaption>
+                <canvas id="chart-matriz-calor" width="400" height="260"></canvas>
+              </figure>
+            </div>
+          </div>
+
+          <div class="resumen-acciones" style="margin-top:14px">
+            <button id="btnExportarUnificadoPDF" class="btn btn-primario">Guardar matriz en PDF</button>
+            <button id="btnImprimirUnificado" class="btn btn-primario">Imprimir matriz</button>
+            <button id="btnExportarUnificadoExcel" class="btn btn-secundario">Exportar a Excel</button>
+            <button id="btnExportarUnificadoCSV" class="btn btn-secundario">Exportar CSV</button>
+          </div>
+          <p class="nota">
+            El PDF se genera en horizontal y agrupado por proceso constructivo; la impresión abre
+            la misma matriz en una vista imprimible y permite «Guardar como PDF» desde el
+            diálogo del navegador, incluso sin conexión al CDN de jsPDF.
+          </p>
+        </div>
+
+        <div id="matriz-unificada-vacio">
+          <p class="nota" style="text-align:center;margin-top:20px">
+            Seleccione un proyecto para ver la matriz consolidada y el análisis estadístico.
+          </p>
+          <p class="nota" style="text-align:center">
+            Mientras la matriz esté <b>vinculada</b>, sigue automáticamente al proyecto del
+            numeral 2: cada riesgo que se agregue o evalúe allí se replica aquí, clasificado
+            por proceso constructivo, con su análisis estadístico. Use
+            <b>Inicializar matriz</b> para dejarla en blanco y seguir evaluando en el numeral 2
+            sin consolidar, y <b>Vincular</b> para retomarla.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PESTAÑA ARTs GENERADOS ============ -->
+    <section id="tab-arts" class="tab-panel">
+      <div class="zona">
+        <h3 class="zona-titulo">ARTs generados</h3>
+        <p class="nota" style="margin-top:0">
+          Los ART se generan automáticamente conforme guarda la evaluación de cada proceso constructivo de un proyecto.
+          Seleccione primero el proyecto para visualizar sus ARTs; cada fila indica el proceso al que se refiere y
+          únicamente ofrece los enlaces de descarga.
+        </p>
+        <div class="panel-selectores">
+          <div class="campo">
+            <label for="selProyectoARTs">Proyecto:</label>
+            <select id="selProyectoARTs">
+              <option value="">-- Seleccione proyecto --</option>
+            </select>
+          </div>
+        </div>
+        <div id="arts-lista">
+          <p class="nota" style="text-align:center;margin-top:20px">Seleccione un proyecto para ver sus ARTs generados.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PESTAÑA CATÁLOGO ============ -->
+    <section id="tab-catalogo" class="tab-panel">
+      <div id="proyectos-admin"></div>
+      <div class="panel-selectores">
+        <div class="campo">
+          <label for="catActividad">Proyecto (tipo):</label>
+          <select id="catActividad"><option value="">-- Todos --</option></select>
+        </div>
+        <div class="campo">
+          <label for="catBuscar">Buscar riesgo / código:</label>
+          <input type="text" id="catBuscar" placeholder="Ej. Ruido, 330, 010-E ..." />
+        </div>
+        <div class="campo-acciones">
+          <button id="btnRestaurarCatalogo" class="btn btn-peligro">Restaurar catálogo original</button>
+        </div>
+      </div>
+      <div id="catalogo-lista"></div>
+
+      <!-- Copia de seguridad de los datos del navegador (localStorage) -->
+      <div class="zona" style="margin-top:18px">
+        <h3 class="zona-titulo">Copia de seguridad de los datos</h3>
+        <p class="nota" style="margin-top:0">
+          Las evaluaciones, los proyectos y la configuración del catálogo se guardan en el navegador de este
+          equipo, no en los archivos del proyecto. Exporta un respaldo antes de cambiar de computador, de
+          navegador o de perfil, y restáuralo en el equipo de destino.
+        </p>
+        <div class="resumen-acciones">
+          <button id="btnBackupExportar" class="btn btn-primario">Exportar respaldo (JSON)</button>
+          <button id="btnBackupRestaurar" class="btn btn-peligro">Restaurar respaldo (reemplaza todo)</button>
+          <button id="btnBackupCombinar" class="btn btn-secundario">Restaurar y combinar con lo actual</button>
+        </div>
+        <p class="nota" id="backup-resumen"></p>
+      </div>
+    </section>
+
+    <!-- ============ PESTAÑA PRUEBAS ============ -->
+    <section id="tab-pruebas" class="tab-panel">
+      <div class="panel-selectores">
+        <div class="campo-acciones">
+          <button id="btnEjecutarPruebas" class="btn btn-primario">Ejecutar pruebas de validación</button>
+        </div>
+        <p class="nota">
+          Valida el motor de cálculo contra el dataset de referencia de la tesis
+          (189 riesgos, 12 procesos), contra la fórmula del Excel nd.xlsx (ΣNDP = 10.00;
+          "No" aumenta el ND) y contra los casos de la solicitud de correcciones §22-§23.
+        </p>
+      </div>
+      <div id="resultado-pruebas">
+        <div id="resumen-pruebas" class="oculto"></div>
+        <div id="detalle-pruebas"></div>
+      </div>
+    </section>
+
+    <!-- ============ PESTAÑA METODOLOGÍA ============ -->
+    <section id="tab-ayuda" class="tab-panel">
+      <div id="ayuda-contenido" class="ayuda"></div>
+    </section>
+  </main>
+
+  <!-- Ventana auxiliar de trazabilidad -->
+  <div class="modal-overlay oculto" id="modal-traza-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="traza-titulo">Trazabilidad del riesgo</h3>
+        <button class="btn modal-cerrar" id="traza-cerrar" title="Cerrar">×</button>
+      </div>
+      <div class="modal-body" id="traza-contenido"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secundario" id="traza-cerrar2">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal justificación de exclusión -->
+  <div class="modal-overlay oculto" id="modal-justif-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Justificación de exclusión</h3>
+        <button class="btn modal-cerrar" id="justif-cerrar" title="Cerrar">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="nota">Seleccione o escriba la razón por la que este riesgo se excluye de la evaluación:</p>
+        <div id="justif-opciones">
+          <label class="chk"><input type="radio" name="justif-motivo" value="El riesgo no está presente"> El riesgo no está presente</label>
+          <label class="chk"><input type="radio" name="justif-motivo" value="La actividad no se ejecuta"> La actividad no se ejecuta</label>
+          <label class="chk"><input type="radio" name="justif-motivo" value="El riesgo corresponde a otra fase"> El riesgo corresponde a otra fase</label>
+          <label class="chk"><input type="radio" name="justif-motivo" value="No existen trabajadores expuestos"> No existen trabajadores expuestos</label>
+          <label class="chk"><input type="radio" name="justif-motivo" value="Otro"> Otro</label>
+        </div>
+        <div class="campo" style="margin-top:8px">
+          <label for="justif-texto">Detalle adicional:</label>
+          <textarea id="justif-texto" rows="2" placeholder="Escriba un detalle adicional si es necesario"></textarea>
+        </div>
+        <input type="hidden" id="justif-riesgo-id" />
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secundario" id="justif-cancelar">Cancelar</button>
+        <button class="btn btn-primario" id="justif-guardar">Guardar justificación</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal crear nuevo proyecto -->
+  <div class="modal-overlay oculto" id="modal-proyecto-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Crear nuevo proyecto</h3>
+        <button class="btn modal-cerrar" id="proyecto-cerrar" title="Cerrar">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="campo">
+          <label for="inpNuevoProyectoNombre">Nombre del proyecto *</label>
+          <input type="text" id="inpNuevoProyectoNombre" placeholder="Ej. Edificio Administrativo Quito" />
+        </div>
+        <div class="campo">
+          <label for="selNuevoProyectoTipo">Tipo de proyecto *</label>
+          <select id="selNuevoProyectoTipo">
+            <option value="">-- Seleccione --</option>
+            <option value="Estructura">Estructura</option>
+            <option value="Infraestructura">Infraestructura</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secundario" id="proyecto-cancelar">Cancelar</button>
+        <button class="btn btn-primario" id="proyecto-guardar">Crear proyecto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal cuestionario de chequeo -->
+  <div class="modal-overlay oculto" id="modal-checklist-overlay">
+    <div class="modal modal-checklist">
+      <div class="modal-header">
+        <h3 id="checklist-titulo">Cuestionario de chequeo</h3>
+        <button class="btn modal-cerrar" id="checklist-cerrar" title="Cerrar">×</button>
+      </div>
+      <div class="modal-body" id="checklist-contenido"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secundario" id="checklist-cancelar">Cancelar</button>
+        <button class="btn btn-primario" id="checklist-guardar">Guardar ND</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal nivel de exposición NE -->
+  <div class="modal-overlay oculto" id="modal-ne-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Nivel de Exposición (NE)</h3>
+        <button class="btn modal-cerrar" id="ne-cerrar" title="Cerrar">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="nota">Seleccione el nivel de exposición del trabajador al riesgo:</p>
+        <div id="ne-opciones"></div>
+        <div class="campo" style="margin-top:12px">
+          <label for="ne-justificacion">Justificación del NE (obligatoria):</label>
+          <textarea id="ne-justificacion" rows="2" placeholder="Ej. El trabajador permanece varias horas junto a la fuente"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secundario" id="ne-cancelar">Cancelar</button>
+        <button class="btn btn-primario" id="ne-guardar">Guardar NE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal nivel de consecuencia NC -->
+  <div class="modal-overlay oculto" id="modal-nc-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Nivel de Consecuencia (NC)</h3>
+        <button class="btn modal-cerrar" id="nc-cerrar" title="Cerrar">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="nota">Seleccione el nivel de consecuencia del riesgo:</p>
+        <div id="nc-opciones"></div>
+        <div class="campo" style="margin-top:12px">
+          <label for="nc-justificacion">Justificación del NC (obligatoria):</label>
+          <textarea id="nc-justificacion" rows="2" placeholder="Ej. Posibles fracturas con baja temporal"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secundario" id="nc-cancelar">Cancelar</button>
+        <button class="btn btn-primario" id="nc-guardar">Guardar NC</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>
+      Método NTP 330 (INSST, 1991) · Adaptación a la normativa ecuatoriana de seguridad y salud en el trabajo ·
+      Documento de investigación doctoral
+    </p>
+  </footer>
+
+  <script>
+    // Gestión de pestañas
+    document.getElementById('tabs').addEventListener('click', function (e) {
+      var btn = e.target.closest('.tab-btn');
+      if (!btn) return;
+      document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('activo'); });
+      document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('activo'); });
+      btn.classList.add('activo');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('activo');
+      if (btn.dataset.tab === 'matriz-unificada' && typeof AppUI !== 'undefined' && AppUI.refreshMatrizUnificada) {
+        AppUI.refreshMatrizUnificada();
+      }
+      if (btn.dataset.tab === 'arts' && typeof AppUI !== 'undefined' && AppUI.refreshARTs) {
+        AppUI.refreshARTs();
+      }
+    });
+  </script>
+</body>
+
+</html>

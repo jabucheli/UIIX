@@ -1,0 +1,52 @@
+name: Publicar presentación en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Obtener el proyecto
+        uses: actions/checkout@v4
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: tools/package-lock.json
+      - name: Instalar herramientas de verificación
+        run: npm ci --prefix tools
+      - name: Verificar la presentación
+        run: |
+          node tools/map_check.js
+          node tools/focus_check.js
+      - name: Preparar el sitio estático
+        run: node tools/prepare-pages.js
+      - name: Verificar el sitio y la app integrada
+        env:
+          CHROME: /usr/bin/google-chrome
+        run: node tools/integration_check.js --site=tools/out/pages --base-path=/UIIX/
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Subir el sitio
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: tools/out/pages
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v5

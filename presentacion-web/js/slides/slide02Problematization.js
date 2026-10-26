@@ -6,6 +6,7 @@
 
   window.slideRenderers.problematizacion = function (thesis, p) {
     var hist = p.historical || [];
+    var question = p.flow[p.flow.length - 1];
     function histHtml(groups){
       return '<div class="ev-hist">' + groups.map(function (g) {
         return '<div class="ev-period">' +
@@ -88,14 +89,15 @@
       if (n.central) {
         cls = 'flow-node central';
         nc = '#C0242A';
-      } else if (n.green) {
-        cls = 'flow-node green';
-        nc = '#006E49';
+      } else if (n === question) {
+        cls = 'flow-node flow-node--question';
+        nc = '#C0242A';
       } else {
         if (n.tall) cls = 'flow-node tall';
         nc = (pos % 2 === 1) ? '#006E49' : '#C0242A';
       }
-      var fattr = (i === 6) ? ' data-focus="q7" role="button" tabindex="0" aria-label="Ampliar la pregunta científica"' : '';
+      var fattr = (i === p.flow.length - 1) ? ' data-focus="q7" role="button" tabindex="0" aria-label="Ampliar la pregunta científica"' : '';
+      if (i === 3) fattr = ' data-focus="p4" role="button" tabindex="0" aria-label="Ampliar el problema central y la jerarquía de controles de riesgos"';
       flowHtml += '<div class="' + cls + '" style="--nc:' + nc + ';--nc-soft:' + nc + '26"' + fattr + '>' +
         '<div class="tnode-dot">' + (i + 1) + '</div>' +
         '<div class="node-icon">' + window.Icons.svg(n.icon, 21) + '</div>' +
@@ -141,6 +143,16 @@
       return window.JustificationCard.render(j);
     }).join('');
 
+    var problem = p.flow[3];
+    var problemSummary = '<div class="hierarchy-problem">' +
+      '<div class="node-icon">' + window.Icons.svg(problem.icon, 28) + '</div>' +
+      '<div class="hierarchy-problem-text">' +
+        '<div class="hierarchy-problem-tag">' + problem.tag + '</div>' +
+        '<div class="hierarchy-problem-title">' + problem.title + '</div>' +
+        '<div class="hierarchy-problem-body">' + problem.body + '</div>' +
+      '</div>' +
+    '</div>';
+
     return '<section class="slide slide-problem" data-slide="2">' +
       '<header class="slide-head"><h2>' + p.title + '</h2><div class="head-rule"></div></header>' +
       '<div class="problem-body">' +
@@ -159,12 +171,20 @@
             campoBlock +
           '</div>' +
         '</aside>' +
+        '<div class="hierarchy-overlay" data-focus="p4" role="button" tabindex="0" aria-label="Cerrar el problema central y la jerarquía de controles de riesgos ampliados">' +
+          '<div class="hierarchy-card">' +
+            '<div class="accent"></div>' +
+            problemSummary +
+            pyramidBlock +
+            '<div class="hierarchy-hint">Clic o Escape para cerrar</div>' +
+          '</div>' +
+        '</div>' +
         '<div class="q7-overlay" data-focus="q7" role="button" tabindex="0" aria-label="Cerrar la pregunta científica ampliada">' +
           '<div class="q7-card">' +
             '<div class="accent"></div>' +
-            '<div class="q7-header">' + p.flow[6].tag + '</div>' +
+            '<div class="q7-header">' + question.tag + '</div>' +
             '<div class="q7-content">' +
-              '<div class="q7-body">' + p.flow[6].body + '</div>' +
+              '<div class="q7-body">' + question.body + '</div>' +
               '<div class="q7-hint">Clic o Escape para cerrar</div>' +
             '</div>' +
           '</div>' +

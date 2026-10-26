@@ -4,39 +4,43 @@ param(
     [string]$Stamp = ''
 )
 
-# Empaqueta el arbol de staging (presentacion + tesis + respaldos + historial + LEEME)
-# en un unico .zip. Lo llama tools/traspaso.cmd paquete.
-# Uso:
-#   powershell -NoProfile -ExecutionPolicy Bypass -File traspaso-empaquetar.ps1 `
-#       -Tree "C:\...\tree" -Out "D:\...\out\traspaso" -Stamp "20261007-1850"
-
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'paquete-integridad.ps1')
 
-if ($Stamp -eq '') { $Stamp = Get-Date -Format 'yyyyMMdd-HHmm' }
+if ($Stamp -eq '') { $Stamp = (Get-Date -Format 'yyyyMMdd-HHmmss-fff') + '-' + [guid]::NewGuid().ToString('N').Substring(0, 8) }
 if ($Out -eq '')   { $Out = Join-Path $PSScriptRoot 'out\traspaso' }
+if ($Stamp -notmatch '^[0-9a-zA-Z-]+$') { throw 'Identificador de paquete no valido.' }
 
-if (-not (Test-Path $Tree) -or -not (Test-Path (Join-Path $Tree 'presentacion'))) {
-    throw "No existe el arbol de staging en: $Tree"
+foreach ($required in @('presentacion', 'LEEME.txt', 'ESTADO.json')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $Tree $required))) { throw "Falta en staging: $required" }
 }
 
-$items = @()
-foreach ($n in @('presentacion', 'tesis', 'LEEME.txt')) {
-    $p = Join-Path $Tree $n
-    if (Test-Path $p) { $items += , $p }
-}
-foreach ($n in @('datos-respaldo', 'historial-presentacion.bundle', 'historial-tesis.bundle')) {
-    $p = Join-Path $Tree $n
-    if (Test-Path $p) { $items += , $p }
-}
-
-if ($items.Count -eq 0) { throw 'No hay nada que empaquetar en el arbol de staging' }
-
-if (-not (Test-Path $Out)) { New-Item -ItemType Directory -Path $Out -Force | Out-Null }
+if (-not (Test-Path -LiteralPath $Out)) { New-Item -ItemType Directory -Path $Out -Force | Out-Null }
 $zip = Join-Path $Out ("presentacion-tesis-" + $Stamp + ".zip")
+$partial = $zip + '.partial'
+if ((Test-Path -LiteralPath $zip) -or (Test-Path -LiteralPath $partial)) { throw "Ya existe: $zip" }
 
-Compress-Archive -Path $items -DestinationPath $zip -Force
-
-$len = (Get-Item $zip).Length
-Write-Output ("PAQUETE: " + $zip)
-Write-Output ("TAMANO : " + $len + " bytes")
-Write-Output ("ITEMS  : " + $items.Count)
+try {
+    New-PackageManifest $Tree
+    # Entradas con / en todas las versiones de .NET; incluye archivos ocultos como .gitignore.
+    $archive = [IO.Compression.ZipFile]::Open($partial, [IO.Compression.ZipArchiveMode]::Create)
+    try {
+        foreach ($file in Get-ChildItem -LiteralPath $Tree -Recurse -File -Force) {
+            [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $file.FullName,
+                (Get-RelativeFile $Tree $file.FullName), [IO.Compression.CompressionLevel]::Optimal) | Out-Null
+        }
+    }
+    finally { $archive.Dispose() }
+    $checked = Test-ProjectPackage $partial
+    Write-Utf8 ($partial + '.sha256') ($checked.sha256 + '  ' + [IO.Path]::GetFileName($zip) + "`r`n")
+    Move-Item -LiteralPath $partial -Destination $zip
+    Move-Item -LiteralPath ($partial + '.sha256') -Destination ($zip + '.sha256')
+    Write-Output ("PAQUETE: " + $zip)
+    Write-Output ("TAMANO : " + (Get-Item -LiteralPath $zip).Length + " bytes")
+    Write-Output ("INTEGRIDAD OK: " + $checked.archivos + " archivos; SHA256 " + $checked.sha256)
+}
+finally {
+    foreach ($p in @($partial, ($partial + '.sha256'))) {
+        if (Test-Path -LiteralPath $p) { Remove-Item -LiteralPath $p -Force }
+    }
+}

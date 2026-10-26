@@ -1,11 +1,12 @@
-/* Harness de auditoría y captura para la diapositiva 4 (Marco teórico): los
-   bloques «Marco histórico», «Aplicación» y «Marco Legal y Normativo»
-   ampliables con el clic. Genera:
-     out/sl4_report.html     -> informe de los cuatro estados (reposo, hist, apl, legal)
+/* Harness de auditoría y captura para la diapositiva 4 (Marco teórico):
+   Marco histórico, Aplicación, Marco Legal, Marco contextual y Teorías base.
+   Genera:
+     out/sl4_report.html     -> informe de los seis estados
      out/sl4_shot.html       -> captura en reposo (solo años / palabras clave)
      out/sl4_shot_hist.html  -> «Marco histórico» centrado y el fondo atenuado
      out/sl4_shot_apl.html   -> «Aplicación» centrada y el fondo atenuado
-     out/sl4_shot_legal.html -> «Marco Legal y Normativo» ampliado con su jerarquía */
+     out/sl4_shot_legal.html -> «Marco Legal y Normativo» ampliado con su jerarquía
+     out/sl4_shot_teo.html   -> Teorías base y diagrama legal a la derecha */
 const fs = require('fs');
 const path = require('path');
 
@@ -83,7 +84,8 @@ const audit = [
   'o+=tag+" izq "+(document.querySelector(".th-left")?document.querySelector(".th-left").offsetHeight:"-")+" der "+(document.querySelector(".th-right")?document.querySelector(".th-right").offsetHeight:"-")+NL;',
   'o+=tag+" panel "+(document.querySelector(".th-panel")?document.querySelector(".th-panel").offsetHeight:"-")+" teorias "+(document.querySelector(".th-theories")?document.querySelector(".th-theories").offsetHeight:"-")+" flow "+(document.querySelector(".th-flow")?document.querySelector(".th-flow").offsetHeight:"-")+NL;',
   'o+=tag+" legal "+(document.querySelector(".th-legal")?document.querySelector(".th-legal").offsetHeight:"-")+" fig "+(document.querySelector(".th-legal-fig")?document.querySelector(".th-legal-fig").offsetHeight:"-")+" filas "+q(".th-lh-row").length+" vis "+q(".th-lh-row").map(function(r){return live(r)?"1":"0";}).join("")+NL;',
-  'o+=tag+" lh-tonos "+q(".th-lh-row").map(function(r){return /th-lh--r/.test(r.className)?"r":"g";}).join("")+" anchos "+q(".th-lh-row").map(function(r){return r.offsetWidth;}).join(",")+NL;',
+   'o+=tag+" lh-tonos "+q(".th-lh-row").map(function(r){return /th-lh--r/.test(r.className)?"r":"g";}).join("")+" anchos "+q(".th-lh-row").map(function(r){return r.offsetWidth;}).join(",")+NL;',
+   'if(key==="teo"){var t=document.querySelector(".th-panel").getBoundingClientRect(),l=document.querySelector(".th-legal").getBoundingClientRect(),fg=document.querySelector(".th-legal-fig").getBoundingClientRect();o+="TEO legal real "+l.width.toFixed(2)+"x"+l.height.toFixed(2)+" diagrama "+fg.width.toFixed(2)+"x"+fg.height.toFixed(2)+" separacion "+(l.left-t.right).toFixed(2)+NL;if(l.left<t.right)o+="  panel OVERLAP"+NL;}',
   'q(".th-box").forEach(function(b,i){o+=tag+" box"+i+" "+b.offsetWidth+"x"+b.offsetHeight+" vis "+d(b,"visibility")+" data-focus "+(b.getAttribute("data-focus")||"-")+NL;});',
   'o+=tag+" texto intro "+d(q(".th-box--hist p")[0],"display")+" ref "+d(q(".th-box--hist .th-ref")[0],"display")+NL;',
   'o+=tag+" años "+q(".th-box--hist .th-milestone b").map(function(b){return b.textContent;}).join(" | ")+NL;',
@@ -99,12 +101,13 @@ const audit = [
   'o+=tag+" ampliado caja "+Math.round(hr.width)+"x"+Math.round(hr.height)+" centro "+Math.round(cx)+","+Math.round(cy)+" (cuerpo "+Math.round(br.width/2)+","+Math.round(br.height/2)+")"+NL;',
   '}',
   'o+=tag+" ghost "+(document.querySelector(".scope-ghost.is-on")?"presente":"-")+" foco "+(body.getAttribute("data-focus")||"-")+" clase "+body.className+NL;',
-  '[".slide-head",".th-body",".th-intro",".th-grid",".th-left",".th-right",".th-box",".th-timeline",".th-milestone",".th-steps",".th-bflow",".th-nflow",".th-ctx",".th-ccard",".th-ctxrad-hub",".th-ctxrad-ring",".th-panel",".th-legal",".th-legal-fig",".th-lh-row",".th-lh-name",".th-lh-det"].forEach(function(cn){',
-  'q(cn).filter(live).forEach(function(el,i){var c=el.scrollHeight-el.clientHeight;var w=el.scrollWidth-el.clientWidth;if(c>0||w>0)o+="  clip "+cn+"["+i+"] h"+c+" w"+w+NL;});});',
+   '[".slide-head",".th-body",".th-intro",".th-grid",".th-left",".th-right",".th-box",".th-timeline",".th-milestone",".th-steps",".th-bflow",".th-nflow",".th-ctx",".th-ccard",".th-ctxrad-hub",".th-ctxrad-ring",".th-panel",".th-theories",".th-flow",".th-flow-row",".th-fnode",".th-legal",".th-legal-fig",".th-lh-row",".th-lh-name",".th-lh-det"].forEach(function(cn){',
+   // La flecha exterior del panel teo no es contenido recortado; se auditan sus bloques internos.
+   'q(cn).filter(live).forEach(function(el,i){var c=el.scrollHeight-el.clientHeight;var w=el.scrollWidth-el.clientWidth;if(key==="teo"&&cn===".th-panel")w=0;if(c>0||w>0)o+="  clip "+cn+"["+i+"] h"+c+" w"+w+NL;});});',
   'q(".th-box h3,.th-box p,.th-ref,.th-milestone b,.th-milestone span,.th-step b,.th-step span,.th-bflow-item b,.th-bflow-item span,.th-ncell,.th-ctx-sub,.th-ccard-n,.th-ccard-b b,.th-ccard-b span,.th-lvl1 strong,.th-key,.th-lvl2 p,.th-legal h4,.th-legal>p,.th-lh-cap,.th-lh-name,.th-lh-det").filter(live).forEach(function(e,i){',
   'if(e.scrollWidth>e.clientWidth+1)o+="  tx "+i+" <"+e.className+"> w"+e.clientWidth+"/"+e.scrollWidth+NL;});',
   'var fr=document.querySelector(".slide-frame").getBoundingClientRect();',
-  'q(".slide-head,.th-body,.th-intro,.th-grid,.th-box,.th-panel,.th-legal,.th-legal-fig,.th-lh-row,.th-ctx,.th-ccard,.th-ctxrad-hub,.th-ctxrad-ring").forEach(function(e,i){var r=e.getBoundingClientRect();if(!r.width)return;var ov=[];',
+   'q(".slide-head,.th-body,.th-intro,.th-grid,.th-box,.th-panel,.th-theories,.th-flow,.th-fnode,.th-legal,.th-legal-fig,.th-lh-row,.th-ctx,.th-ccard,.th-ctxrad-hub,.th-ctxrad-ring").forEach(function(e,i){var r=e.getBoundingClientRect();if(!r.width)return;var ov=[];',
   'if(r.left<fr.left-1)ov.push("left");if(r.right>fr.right+1)ov.push("right");if(r.top<fr.top-1)ov.push("top");if(r.bottom>fr.bottom+1)ov.push("bottom");',
   'if(ov.length)o+="  frame OVERFLOW "+i+" <"+e.className+"> "+ov.join(",")+NL;});',
   'o+=tag+" logo "+(document.querySelector(".slide-logo")?"presente":"MISSING")+NL;',

@@ -20,7 +20,7 @@ window.RESULTADOS2 = {
   /* Banda inferior. La Fotografía 1 muestra en reposo la foto de la zanja
      (`imagen`) y, al pulsar el bloque «Riesgo» del flujograma, se aloja en
      ese hueco la aplicación web de evaluación de riesgos, la que está en la
-     carpeta hermana `tesis/0` (D:\ejemplo\tesis\0). Se carga con un <iframe>
+      módulo integrado `ntp330/0`. Se carga con un <iframe>
      en vivo —no se copia nada— y su pestaña inicial es «Evaluación», que es la
      que la app abre por defecto. La ruta va aquí, en un solo sitio, por si hay
      que corregirla. */
@@ -31,12 +31,12 @@ window.RESULTADOS2 = {
       nota: 'Aplicación de evaluación de riesgos NTP 330',
       imagen: 'assets/zanja.jpeg',
       app: {
-        src: '../../tesis/0/index.html',
+        src: 'ntp330/0/index.html',
         etiqueta: 'Evaluación de riesgos laborales · NTP 330',
         pestana: 'evaluacion',
-        aviso: 'Aplicación web de tesis/0 · clic en el título o fuera para volver'
+        aviso: 'Evaluación NTP 330 integrada · clic en el título o fuera para volver'
       }
     },
-    { key: 'f2', titulo: 'Fotografía 2', nota: 'Espacio reservado · derecha' }
+    { key: 'f2', titulo: 'Fotografía 2', nota: '', imagen: 'assets/th.png', imagen2: 'assets/th1.png' }
   ]
 };

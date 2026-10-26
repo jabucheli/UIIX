@@ -1,0 +1,1511 @@
+/* ============================================================
+   Evaluación de riesgos laborales · NTP 330
+   Hoja de estilos de la aplicación (sin dependencias externas)
+
+   Tema visual alineado con la paleta de Ejemplo.pptx:
+   fondo gris claro, tinta casi negra, acentos verde y rojo y
+   tipografía Arial. Los colores de los niveles de intervención
+   (NI I a IV) son semánticos, no decorativos, y se mantienen tal
+   cual aunque no pertenezcan a la paleta de la presentación.
+   ============================================================ */
+
+:root {
+  --fuente: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+  /* Escala neutra */
+  --tinta: #262626;          /* texto y títulos */
+  --tinta-media: #4c4a4f;    /* texto secundario */
+  --tinta-suave: #595959;    /* notas al pie, textos de apoyo */
+  --gris-claro: #a8a8a8;     /* texto deshabilitado, exclusiones */
+  --linea: #e0e0e0;          /* divisores finos */
+  --linea-fuerte: #cacaca;   /* bordes de tablas, campos y botones */
+  --fondo: #ececec;          /* fondo claro de la plantilla */
+  --fondo-tabla: #e7e6e6;    /* gris de la paleta de Ejemplo.pptx */
+  --fondo-tenue: #f7f7f8;    /* filas alternas y bloques secundarios */
+  --fondo-hover: #ededee;    /* estados al pasar el ratón */
+
+  /* Acentos */
+  --acento: #006e49;         /* verde de la presentación */
+  --acento-tenue: #e4efe9;   /* fondo verde suave */
+  --acento-medio: #004b33;   /* verde oscuro para texto y estados hover */
+  --acento-hover: #d5e6de;
+  --alerta-tenue: #fbe9ea;
+
+  /* Paleta institucional de Ejemplo.pptx. Verde = estructura y aceptable;
+     rojo = peligro, pendiente o crítico; el naranja queda solo para el aviso
+     de «sin cambios», que no es un estado de riesgo. */
+  --verde: #006e49;
+  --verde-medio: #497f64;
+  --verde-oscuro: #004b33;
+  --rojo: #c0242a;
+  --rojo-oscuro: #8c1a1f;
+  --carbon: #4c4a4f;
+  --naranja: #ef6c00;
+
+  /* Niveles de intervención NTP 330. Se conservan las siglas y el orden
+     (I = peor), pero los colores salen de la paleta institucional: la familia
+     roja para lo intolerable y la verde para lo aceptable. I es el rojo más
+     oscuro porque es el peor; IV es el verde medio para que se distinga del
+     institucional dentro de una celda blanca. */
+  --ni-I: #8c1a1f;
+  --ni-II: #c0242a;
+  --ni-III: #006e49;
+  --ni-IV: #497f64;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fuente);
+  background-color: var(--fondo);
+  color: var(--tinta);
+  line-height: 1.5;
+}
+
+button, input, select, textarea { font-family: inherit; }
+
+input[type="checkbox"], input[type="radio"] { accent-color: var(--acento); }
+
+/* ---------- Cabecera institucional ----------
+   El verde y el rojo de Ejemplo.pptx. La banda repite la composición de la
+   portada (bloque verde y bloque rojo) y es la primera señal de la institución
+   al abrir la aplicación. */
+.cabecera {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  background: #fff;
+  border-bottom: 3px solid var(--verde);
+  padding: 12px 20px 12px 0;
+}
+
+.cabecera-banda {
+  display: flex;
+  align-items: stretch;
+  width: 10px;
+  flex: 0 0 auto;
+}
+
+.cabecera-bloque {
+  flex: 1 1 auto;
+  background: var(--verde);
+}
+
+.cabecera-bloque--rojo { flex: 0 0 34%; background: var(--rojo); }
+
+.cabecera-texto h1 {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.25;
+  color: var(--verde-oscuro);
+  letter-spacing: -0.2px;
+}
+
+.cabecera-texto p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--carbon);
+}
+
+@media (max-width: 560px) {
+  .cabecera { padding-right: 12px; }
+  .cabecera-texto h1 { font-size: 16px; }
+}
+
+/* ---------- Contenedor ---------- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* ---------- Pestañas ---------- */
+/* La pestaña activa se rellena con el verde institucional y se remata con el
+   rojo en el borde inferior: los dos colores de la portada se leen de un
+   vistazo, sin depender del matiz para distinguir dónde se está. */
+.tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--acento);
+  margin-bottom: 18px;
+}
+
+.tab-btn {
+  padding: 10px 18px;
+  border: 1px solid var(--linea-fuerte);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: var(--fondo-tenue);
+  color: var(--tinta-media);
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tab-btn:hover { background: var(--acento-tenue); color: var(--verde-oscuro); }
+
+.tab-btn.activo {
+  background: var(--verde);
+  color: #fff;
+  border-color: var(--verde);
+  border-bottom: 2px solid var(--rojo);
+  margin-bottom: -2px;
+}
+
+.tab-panel { display: none; }
+.tab-panel.activo { display: block; }
+
+/* ---------- Selectores ---------- */
+.panel-selectores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-end;
+  background: #fff;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px;
+}
+
+.campo label {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--tinta);
+  margin-bottom: 4px;
+}
+
+.campo select,
+.campo input {
+  padding: 8px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--tinta);
+  background: #fff;
+}
+
+.campo-acciones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ---------- Los tres identificadores del numeral 1 en la misma fila ----------
+   Con el flex-box anterior, el desplegable de proyectos quedaba más alto que los
+   otros dos campos y `align-items: flex-end` lo subía: los tres controles no
+   compartían línea. Una rejilla de tres columnas los alinea siempre. */
+.panel-selectores--tres {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  column-gap: 16px;
+}
+
+.panel-selectores--tres > .campo {
+  min-width: 0;
+  flex: none;
+}
+
+/* El <input> y el <select> no tienen la misma altura intrínseca (34 px frente a
+   36 px): se fija la misma para que los tres controles se vean alineados. */
+.panel-selectores--tres .campo select,
+.panel-selectores--tres .campo input {
+  height: 36px;
+}
+
+.campo-combo .combo input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-right: 30px;
+}
+
+.panel-selectores--tres > .nota-campo {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Desplegable de proyectos anteriores ---------- */
+.campo-combo .combo {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.combo-flecha {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  width: 28px;
+  padding: 0;
+  border: none;
+  border-left: 1px solid var(--linea-fuerte);
+  border-radius: 0 4px 4px 0;
+  background: #fff;
+  color: var(--tinta-media);
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.combo-flecha:hover,
+.combo-flecha:focus-visible {
+  background: var(--fondo-tabla);
+  color: var(--acento);
+}
+
+.combo.abierto .combo-flecha {
+  background: var(--fondo-tabla);
+  color: var(--acento);
+}
+
+.combo-lista {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  margin: 3px 0 0;
+  padding: 4px 0;
+  list-style: none;
+  max-height: 260px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 6px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+}
+
+.combo-opcion {
+  padding: 7px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--tinta);
+}
+
+.combo-opcion:hover,
+.combo-opcion.activo {
+  background: var(--acento-tenue);
+}
+
+.combo-opcion .combo-detalle {
+  display: block;
+  font-size: 11.5px;
+  color: var(--tinta-media);
+}
+
+.combo-opcion--nuevo .combo-titulo {
+  font-style: italic;
+}
+
+.combo-opcion--nuevo .combo-detalle {
+  font-style: normal;
+}
+
+@media (max-width: 760px) {
+  .panel-selectores--tres { grid-template-columns: 1fr; }
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-block;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 5px;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.btn:hover { filter: brightness(1.06); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* El acento verde pasa a ser el color de las acciones principales. El
+   secundario es contorno, para que ambos no acaben siendo el mismo botón. */
+.btn-primario { background: var(--acento); color: #fff; }
+
+.btn-secundario {
+  background: #fff;
+  color: var(--acento);
+  box-shadow: inset 0 0 0 1px var(--linea-fuerte);
+}
+
+.btn-secundario:hover {
+  box-shadow: inset 0 0 0 1px var(--acento);
+  color: var(--acento-medio);
+}
+
+.btn-peligro { background: var(--rojo); color: #fff; }
+
+/* ---------- Cabecera de evaluación ---------- */
+#evaluacion-header h2 {
+  color: var(--tinta);
+  margin: 0 0 4px;
+}
+
+/* ---------- Zonas (1 · Identificación, 3 · Riesgos, 4 · ART) ---------- */
+.zona {
+  background: #fff;
+  border: 1px solid var(--linea-fuerte);
+  border-left: 4px solid var(--verde);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+/* La zona de riesgos lleva el rojo: es donde se detecta el peligro. */
+#zona-riesgos { border-left-color: var(--rojo); }
+
+.zona-titulo {
+  margin: 0 0 12px;
+  color: var(--verde-oscuro);
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zona-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--verde);
+  color: #fff;
+  font-size: 14px;
+  flex: 0 0 auto;
+}
+
+#zona-riesgos .zona-num { background: var(--rojo); }
+
+/* ---------- Secciones dentro de una tarjeta ---------- */
+.seccion {
+  border-top: 1px solid var(--linea-fuerte);
+  margin-top: 14px;
+  padding-top: 12px;
+}
+
+.seccion:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+
+.seccion h4 {
+  margin: 0 0 8px;
+  color: var(--tinta);
+  font-size: 14px;
+}
+
+.tabla-ident,
+.tabla-ndinfo {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.tabla-ident th,
+.tabla-ndinfo th {
+  background: var(--fondo-tabla);
+  padding: 6px 8px;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.tabla-ident td,
+.tabla-ndinfo td {
+  border: 1px solid var(--linea-fuerte);
+  padding: 6px 8px;
+}
+
+.tabla-ident th,
+.tabla-ndinfo th {
+  border: 1px solid var(--linea-fuerte);
+}
+
+/* ---------- Insignias (badges) ---------- */
+.badge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 10px;
+  background: var(--fondo-tabla);
+  color: var(--tinta);
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Pendiente bloquea la aprobación: se marca en rojo, no en naranja. */
+.badge.estado-PEN,
+.badge.estado-LI { background: var(--alerta-tenue); color: var(--rojo-oscuro); }
+.badge.estado-ND,
+.badge.estado-NP,
+.badge.estado-NR { background: #fff3cd; color: #6d5a00; }
+.badge.estado-COMP { background: var(--acento-tenue); color: var(--acento-medio); }
+.badge.estado-APROB { background: var(--verde); color: #fff; }
+.badge.estado-EXC { background: var(--fondo-tabla); color: var(--tinta-media); }
+
+.tarjeta-head .riesgo-nombre { flex: 1 1 300px; font-weight: bold; }
+
+.riesgo-estado-badge { background: var(--fondo-tabla); }
+.riesgo-resp-badge { background: var(--fondo-tabla); }
+.riesgo-nd-badge { background: var(--fondo-tabla); }
+
+/* ---------- Flujograma horizontal del proceso de evaluación ---------- */
+/* Sigue el flujo normal de la página y sale de la vista al bajar. */
+.flujograma {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.flujo-paso {
+  flex: 1 1 150px;
+  min-width: 130px;
+  background: var(--fondo-tenue);
+  border: 2px solid var(--acento);
+  border-radius: 8px;
+  padding: 12px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.flujo-icono {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.flujo-texto {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--tinta);
+  line-height: 1.35;
+}
+
+.flujo-flecha {
+  align-self: center;
+  font-size: 26px;
+  color: var(--rojo);
+  flex: 0 0 auto;
+}
+
+/* ---------- Zona 2 · Riesgos generados ---------- */
+.z2-descartado { opacity: 0.55; }
+.z2-detail td { background: var(--fondo-tenue); font-size: 13px; line-height: 1.6; }
+.z2-lista { max-width: 260px; }
+.z2-confirm { cursor: pointer; }
+
+/* ---------- Resumen de resultados ---------- */
+.resumen-resultados {
+  background: #fff;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.resumen-acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+/* ---------- Pestaña ARTs generados ---------- */
+.art-descargas { white-space: nowrap; }
+.art-link {
+  color: var(--acento);
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.art-link:hover { text-decoration: underline; color: var(--acento-medio); }
+.art-sep { color: var(--gris-claro); }
+#tabla-arts th { text-align: left; white-space: nowrap; }
+
+
+.tabla-riesgos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tabla-riesgos th,
+.tabla-riesgos td {
+  border: 1px solid var(--linea-fuerte);
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Cabecera de las tablas de datos: verde institucional con texto blanco.
+   Las tablas auxiliares (checklist, ayuda, ficha de identificación) conservan
+   el gris claro para no competir con estas. */
+.tabla-riesgos thead th {
+  background-color: var(--verde);
+  color: #fff;
+  font-weight: bold;
+}
+
+.tabla-riesgos tbody tr:nth-child(even) { background: var(--fondo-tenue); }
+
+/* ---------- Tarjetas de riesgo ---------- */
+.tarjeta-riesgo {
+  background: #fff;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 8px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.tarjeta-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--fondo-tabla);
+  border-bottom: 1px solid var(--linea-fuerte);
+  cursor: pointer;
+}
+
+.tarjeta-head .riesgo-nombre { flex: 1 1 300px; font-weight: bold; }
+.tarjeta-head .badge { font-size: 12px; padding: 3px 8px; border-radius: 10px; background: var(--fondo-tabla); }
+
+.tarjeta-cuerpo {
+  padding: 14px 16px;
+  display: none;
+}
+
+.tarjeta-riesgo.abierta .tarjeta-cuerpo { display: block; }
+
+/* ---------- Resultados por riesgo ---------- */
+.bloque-resultados {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.tabla-niveles {
+  flex: 1 1 320px;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tabla-niveles th,
+.tabla-niveles td {
+  border: 1px solid var(--linea-fuerte);
+  padding: 6px 8px;
+}
+
+.tabla-niveles th {
+  background: var(--fondo-tabla);
+  font-size: 12px;
+}
+
+.celda-nivel {
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ---------- Niveles de intervención ---------- */
+.ni-I { background: var(--ni-I); color: #fff; }
+.ni-II { background: var(--ni-II); color: #fff; }
+.ni-III { background: var(--ni-III); color: #fff; }
+.ni-IV { background: var(--ni-IV); color: #fff; }
+
+.chip-ni {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 13px;
+  color: #fff;
+}
+
+/* ---------- Checklist ---------- */
+.checklist {
+  margin-top: 12px;
+}
+
+.checklist table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.checklist th,
+.checklist td {
+  border: 1px solid var(--linea-fuerte);
+  padding: 7px 8px;
+  vertical-align: middle;
+}
+
+.checklist th { background: var(--fondo-tabla); }
+
+.checklist td.n-pregunta { text-align: center; width: 40px; font-weight: bold; }
+.checklist td.texto-pregunta { text-align: left; }
+.checklist td.respuesta { text-align: center; width: 70px; }
+
+.checklist input[type="radio"] { margin: 0; cursor: pointer; }
+.fila-si { background: var(--acento-tenue); }
+
+.fila-no { background: var(--alerta-tenue); }
+
+.fila-na { background: #fff8e1; }
+
+/* ---------- Referencias legales en la lista de chequeo ---------- */
+.q-legal-toggle {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 9px;
+  font-size: 11px;
+  border: 1px solid var(--acento);
+  border-radius: 4px;
+  background: var(--acento-tenue);
+  color: var(--acento-medio);
+  cursor: pointer;
+}
+
+.q-legal-toggle:hover { background: var(--acento-hover); }
+
+.q-legal-detalle {
+  display: block;
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: var(--fondo-tenue);
+  border: 1px solid var(--linea);
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.q-legal-item {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--linea);
+}
+
+.q-legal-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+.q-legal-ref {
+  display: inline-block;
+  font-weight: bold;
+  color: var(--acento-medio);
+  margin-right: 6px;
+}
+
+.q-legal-texto-detalle { margin-top: 3px; white-space: pre-line; }
+
+.seccion-num { color: var(--tinta); font-weight: bold; margin-top: 12px; border-bottom: 1px solid var(--linea-fuerte); padding-bottom: 4px; }
+
+.tabla-matrix { font-size: 12px; }
+
+.tabla-matrix th { font-size: 11px; white-space: nowrap; }
+
+.tabla-matrix td { vertical-align: middle; }
+
+.tabla-matrix .num-col { text-align: center; font-weight: bold; width: 30px; }
+
+.tabla-matrix .acciones-col { text-align: center; white-space: nowrap; }
+
+.tabla-matrix .justif-col { min-width: 220px; }
+
+.tabla-matrix .justif-col .sel-justif {
+  max-width: 210px;
+  padding: 3px 4px;
+  font-size: 11px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 3px;
+  background: #fff;
+}
+
+.tabla-matrix .justif-col .btn-reincluir { margin-left: 4px; }
+
+.fila-matrix { cursor: pointer; }
+
+.fila-matrix:hover { background: var(--fondo-hover); }
+
+.btn-pdf-lista { margin-top: 4px; }
+
+.btn-sm { padding: 2px 8px; font-size: 11px; }
+
+.tabla-matrix-wrapper { overflow-x: auto; }
+.fila-nv { background: #fff8e1; }
+
+/* ---------- Panel de identificación y evaluación del riesgo activo ---------- */
+.riesgo-tab-panel {
+  background: #fff;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.riesgo-id {
+  margin-bottom: 14px;
+}
+
+.riesgo-seccion {
+  border-top: 1px solid var(--linea-fuerte);
+  margin-top: 14px;
+  padding-top: 12px;
+}
+
+.riesgo-seccion h4 {
+  margin: 0 0 10px;
+  color: var(--tinta);
+  font-size: 14px;
+}
+
+.riesgo-seccion .checklist table { margin-top: 0; }
+
+#tabla-resumen tbody tr[data-id] { cursor: pointer; }
+#tabla-resumen tbody tr[data-id]:hover { background: var(--fondo-hover); }
+
+/* ---------- Controles ---------- */
+.controles {
+  margin-top: 14px;
+  border-top: 1px dashed var(--linea-fuerte);
+  padding-top: 10px;
+}
+
+.controles h4 {
+  margin: 0 0 8px;
+  color: var(--tinta);
+}
+
+.grupo-control {
+  margin-bottom: 10px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: var(--fondo-tenue);
+}
+
+.grupo-control .cat-titulo {
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.grupo-control .cat-titulo input[type="checkbox"] { cursor: pointer; }
+
+.grupo-control ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12.5px;
+}
+
+.grupo-control li { margin-bottom: 2px; }
+
+/* ---------- Evaluación residual ---------- */
+.residual {
+  margin-top: 14px;
+  border: 1px solid var(--acento);
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: var(--fondo-tenue);
+}
+
+.residual h4 { margin: 0 0 8px; color: var(--tinta); }
+
+.residual .residual-filas { display: flex; flex-wrap: wrap; gap: 16px; }
+
+.residual .campo { flex: 0 1 150px; }
+
+.residual select { padding: 6px; }
+
+/* ---------- Notas y misc ---------- */
+.nota {
+  font-size: 12.5px;
+  color: var(--tinta-suave);
+}
+
+.oculto { display: none !important; }
+
+.resaltado { font-weight: bold; }
+
+/* ---------- Ayuda ---------- */
+.ayuda table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 14px;
+  background: #fff;
+}
+
+.ayuda th, .ayuda td {
+  border: 1px solid var(--linea-fuerte);
+  padding: 6px 8px;
+}
+
+.ayuda th { background: var(--fondo-tabla); }
+
+.ayuda h3 { color: var(--tinta); }
+
+/* ---------- Metodología NTP 330 ---------- */
+.ayuda .ntp330 h4 {
+  color: var(--tinta);
+  margin: 2px 0 12px;
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.ayuda .ntp330 h3 { margin-top: 22px; }
+
+.ayuda .ntp330 table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 8px 0 4px;
+  background: #fff;
+}
+
+.ayuda .ntp330 th,
+.ayuda .ntp330 td {
+  border: 1px solid var(--linea-fuerte);
+  padding: 6px 8px;
+  vertical-align: top;
+}
+
+.ayuda .ntp330 th {
+  background: #f2f2f2;
+  font-weight: bold;
+  text-align: center;
+}
+
+.ayuda .ntp330 td { text-align: left; }
+
+.ayuda .ntp330 .num {
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.ayuda .ntp330 .matrix {
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.ayuda .ntp330 .chip {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: bold;
+  margin: 2px 1px;
+}
+
+.ayuda .ntp330 .ntp-ma, .ayuda .ntp330 .ntp-i { background: #f28b82; }
+.ayuda .ntp330 .ntp-a, .ayuda .ntp330 .ntp-ii { background: #ffcc80; }
+.ayuda .ntp330 .ntp-m, .ayuda .ntp330 .ntp-iii { background: #fff59d; }
+.ayuda .ntp330 .ntp-b, .ayuda .ntp330 .ntp-iv { background: #a5d6a7; }
+
+.ayuda .ntp330 .ntp-gris { background: #f2f2f2; }
+.ayuda .ntp330 .ntp-blanco { background: #ffffff; }
+
+/* ---------- Resultados de pruebas ---------- */
+.resumen-pruebas-ok {
+  background: var(--acento-tenue);
+  border: 1px solid var(--acento);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: var(--acento-medio);
+}
+
+.resumen-pruebas-fail {
+  background: var(--alerta-tenue);
+  border: 1px solid var(--rojo);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: var(--rojo);
+}
+
+.prueba-item {
+  background: #fff;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.prueba-item.ok { border-left: 5px solid var(--verde); }
+.prueba-item.fail { border-left: 5px solid var(--rojo); }
+
+/* ---------- Catálogo ---------- */
+.cat-item {
+  background: #fff;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+
+.cat-item h4 { margin: 0 0 4px; color: var(--tinta); }
+
+.cat-item .cat-meta { font-size: 12px; color: var(--tinta-suave); }
+.cat-meta { font-size: 12px; color: var(--tinta-suave); }
+
+.cat-item button { margin-top: 6px; }
+
+.cat-editor {
+  background: var(--fondo-tenue);
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 8px;
+}
+
+/* ---------- Filtros del resumen ---------- */
+.resumen-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.resumen-filtros .chk {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--tinta);
+  cursor: pointer;
+  padding-bottom: 8px;
+}
+
+.resumen-filtros .chk input { cursor: pointer; }
+
+.fila-incompleta td { background: #fff8e1; }
+
+/* ---------- Campos de NE / NC ---------- */
+.ne-campos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.ne-campos .campo { flex: 1 1 180px; }
+.ne-campos .campo input { width: 100%; }
+
+.campo textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.sel-ne, .sel-nc { max-width: 320px; }
+
+.riesgo-np, .riesgo-nr { margin-top: 6px; }
+
+/* ---------- Administración de proyectos ---------- */
+.fila-admin {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--linea-fuerte);
+}
+
+.fila-admin input[type="text"] {
+  padding: 7px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.bloque-proceso {
+  background: var(--fondo-tenue);
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+
+.ed-texto { width: 100%; }
+.ed-ndr { width: 70px; }
+.ed-resumen { margin-left: 8px; }
+
+/* ---------- Pie ---------- */
+.app-footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--tinta-suave);
+  padding: 20px 12px;
+  border-top: 1px solid var(--linea-fuerte);
+  margin-top: 24px;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 720px) {
+  .tabs { flex-wrap: wrap; }
+  .tab-btn { flex: 1 1 auto; }
+  .campo { flex: 1 1 100%; }
+  .tabla-niveles { font-size: 12px; }
+}
+
+/* ---------- correcciones4: Tabla de evaluaciones del proyecto ---------- */
+.tabla-evals {
+  margin-top: 12px;
+}
+
+.tabla-evals th {
+  background: var(--verde);
+  color: #fff;
+}
+
+.fila-activa {
+  background: var(--acento-tenue) !important;
+}
+
+/* ---------- correcciones4: Columna incluir/excluir ---------- */
+.incl-col {
+  text-align: center;
+  width: 30px;
+}
+
+.chk-incluir {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+.fila-excluido {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+.fila-excluido td {
+  color: var(--gris-claro);
+}
+
+/* ---------- correcciones4: Matriz unificada ---------- */
+.tabla-unificada {
+  font-size: 12px;
+}
+
+.tabla-unificada th {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* ---------- Matriz unificada: clasificación por proceso ---------- */
+/* Fila de encabezado de grupo: una por proceso constructivo, con su subtotal. */
+.tabla-unificada .fila-grupo td {
+  background: var(--fondo-tabla);
+  border-top: 2px solid var(--acento);
+  border-bottom: 1px solid var(--linea-fuerte);
+  font-size: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.tabla-unificada .fila-grupo .grupo-nombre {
+  font-weight: bold;
+  color: var(--tinta);
+}
+
+.tabla-unificada .fila-grupo .grupo-meta {
+  color: var(--tinta-media);
+  font-size: 11px;
+}
+
+.tabla-unificada .fila-grupo .grupo-total {
+  font-weight: bold;
+  text-align: right;
+}
+
+/* ---------- Los 5 cuadros con imagen: sombra verde y roja alternada ---------- */
+/* Colores de Ejemplo.pptx (verde #006e49, rojo #c0242a). La alternancia es
+   puramente decorativa y no codifica ningún dato: los niveles de
+   intervención conservan su color propio dentro de los gráficos. */
+.cuadros-graficos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px;
+  margin-top: 14px;
+}
+
+.cuadro-grafico {
+  margin: 0;
+  padding: 10px 12px 12px;
+  background: #fff;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 3px;
+}
+
+.cuadro-grafico--verde { box-shadow: 6px 6px 0 0 var(--acento); }
+.cuadro-grafico--rojo { box-shadow: 6px 6px 0 0 var(--rojo); }
+
+.cuadro-grafico--verde:hover { box-shadow: 9px 9px 0 0 var(--acento-medio); }
+.cuadro-grafico--rojo:hover { box-shadow: 9px 9px 0 0 #96191e; }
+
+.cuadro-grafico figcaption {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--tinta-media);
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--linea);
+  padding-bottom: 5px;
+}
+
+.cuadro-grafico canvas {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+/* ---------- Vínculo entre el numeral 2 y la matriz unificada ---------- */
+.nota-campo {
+  display: block;
+  margin-top: 4px;
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: var(--tinta-media);
+}
+
+.nota.vinculo {
+  display: block;
+  border-left: 4px solid var(--linea-fuerte);
+  background: var(--fondo-tenue);
+  padding: 7px 10px;
+  line-height: 1.45;
+}
+
+.nota.vinculo-on {
+  border-left-color: var(--acento);
+  background: var(--acento-tenue);
+  color: var(--tinta);
+}
+
+.nota.vinculo-off {
+  border-left-color: var(--rojo);
+  background: var(--alerta-tenue);
+  color: var(--tinta-media);
+}
+
+/* ---------- correcciones4: Botón volver a la matriz ---------- */
+/* Es un «btn-secundario» que se distingue por el texto, no por un color
+   propio: así no aparece un tercer naranja en la interfaz. */
+.btn-volver-matriz {
+  color: var(--tinta-media);
+  box-shadow: inset 0 0 0 1px var(--linea-fuerte);
+}
+
+.btn-volver-matriz:hover {
+  color: var(--tinta);
+  box-shadow: inset 0 0 0 1px var(--tinta-media);
+}
+
+/* ---------- Modales (overlay fijo centrado) ---------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--linea-fuerte);
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--tinta);
+}
+
+.modal-body {
+  padding: 16px 18px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--linea-fuerte);
+}
+
+.modal-cerrar {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--tinta-media);
+}
+
+.modal-cerrar:hover {
+  color: var(--rojo);
+}
+
+/* ---------- correcciones4: Estilos modal justificación ---------- */
+#justif-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#justif-opciones label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ---------- correcciones4: Estilos gráficos ---------- */
+#stats-graficos canvas {
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 4px;
+  background: #fff;
+}
+
+/* ---------- correcciones5: Badges de estado de cambios ---------- */
+.badge-sincambios {
+  background: var(--naranja);
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.badge-registrado {
+  background: var(--acento);
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* ---------- correcciones5: Botones de PDF lado a lado ---------- */
+.btn-pdf-campo,
+.btn-pdf-lista {
+  white-space: nowrap;
+}
+
+.campo-acciones .btn + .btn {
+  margin-left: 6px;
+}
+
+/* ---------- Bloque 2: Matriz editable con dropdowns ---------- */
+.tabla-evaluacion {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.tabla-evaluacion th,
+.tabla-evaluacion td {
+  border: 1px solid var(--linea-fuerte);
+  padding: 6px 8px;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.tabla-evaluacion thead th {
+  background: var(--verde);
+  color: #fff;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.tabla-evaluacion tbody tr:nth-child(even) {
+  background: var(--fondo-tenue);
+}
+
+.tabla-evaluacion tbody tr:hover {
+  background: var(--fondo-hover);
+}
+
+.tabla-evaluacion select {
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 4px;
+  font-size: 12px;
+  background: #fff;
+}
+
+.tabla-evaluacion .celda-riesgo {
+  min-width: 180px;
+}
+
+.tabla-evaluacion .celda-numerica {
+  text-align: center;
+  width: 60px;
+}
+
+.tabla-evaluacion .celda-acciones {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tabla-evaluacion .btn-sm {
+  padding: 3px 8px;
+  font-size: 11px;
+}
+
+/* ---------- Modal de cuestionario ---------- */
+.modal-checklist {
+  max-width: 900px;
+  max-height: 95vh;
+}
+
+.modal-checklist .modal-body {
+  max-height: calc(95vh - 140px);
+  overflow-y: auto;
+}
+
+.checklist-modal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.checklist-modal-table th,
+.checklist-modal-table td {
+  border: 1px solid var(--linea-fuerte);
+  padding: 6px 8px;
+  vertical-align: middle;
+}
+
+.checklist-modal-table thead th {
+  background: var(--fondo-tabla);
+  font-size: 11px;
+}
+
+.checklist-modal-table input[type="radio"] {
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Tabla de resultados ND dentro del modal del cuestionario */
+#checklist-contenido .tabla-ndinfo {
+  margin-top: 12px;
+}
+
+#checklist-contenido .tabla-riesgos {
+  font-size: 12px;
+}
+
+/* Filas excluidas de la matriz de evaluación */
+.tabla-evaluacion tbody tr.fila-excluida {
+  background: #f1f1f1;
+  color: #6b6b6b;
+}
+
+.tabla-evaluacion tbody tr.fila-excluida .sel-riesgo {
+  opacity: 0.75;
+}
+
+.badge-excluido {
+  display: inline-block;
+  background: #e0e0e0;
+  color: #4a4a4a;
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* ---------- Modales NE/NC ---------- */
+#ne-opciones,
+#nc-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#ne-opciones label,
+#nc-opciones label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--linea-fuerte);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+#ne-opciones label:hover,
+#nc-opciones label:hover {
+  background: var(--fondo-hover);
+}
+
+#ne-opciones input[type="radio"],
+#nc-opciones input[type="radio"] {
+  margin: 0;
+}

@@ -1,0 +1,767 @@
+/**
+ * Controles de ingenieria/administrativos/EPP por codigo de riesgo.
+ * Extraidos de script.js original (medidasControlFijas). 34 codigos, 447 medidas.
+ */
+window.APP_CONTROLES =  {
+  "130": [
+  {"categoria": "Controles administrativos","medidas": [
+      "Identificar las condiciones críticas en la ejecución de tareas y actividades.",
+      "Diseñar los puestos de trabajo de acuerdo con la antropometría del personal.",
+      "Evitar las condiciones ergonómicas y ambientales desfavorables.",
+      "Evitar la manipulación manual usando siempre que sea posible medios mecánicos (carretillas, carros, etc.).",
+      "Excluir los soportes y fajas como medidas de protección.",
+      "Adoptar medidas técnicas u organizativas orientadas al levantamiento , descenso, tracción y empuje de cargas.",
+      "Capacitar al personal sobre el correcto levantamiento y manipulación de cargas.",
+      "Realizar el seguimiento de capacidad funcional de los trabajadores adultos mayores.",
+      "Establecer pausas laborales enfocadas a la recuperación de los músculos afectados.",
+      "Evitar la fatiga muscular a través del control de las posturas corporales y movimientos de trabajo."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Disponer de equipo de protección personal necesarios para ejecutar tareas y actividades de acuerdo con el puesto o entrono de trabajo."
+    ]
+  }
+],
+  "170": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Garantizar la adecuada ventilación en las áreas que se manejen agentes químicos.",
+      "Designar áreas de almacenamiento de agentes químicos."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Disponer del permiso de trabajo correspondiente a la actividad a ejecutar.",
+      "Identificar y evaluar los riesgos derivados de la exposición a agentes químicos.",
+      "Establecer programas de vigilancia en función de los riesgos derivados de la exposición a agentes químicos.",
+      "Reducir o eliminar la exposición a riesgos químicos.",
+      "Definir procedimientos de medición y validación de resultados de exposición.",
+      "Establecer los valores límites ambientales (VLA) de las concentraciones de los agentes químicos.",
+      "Realizar mediciones de las concentraciones ambientales del agente químico.",
+      "Inspeccionar periódicamente y dar mantenimiento regular a los sistemas de ventilación.",
+      "Mantener las sustancias o productos químicos etiquetados y en los envases originales.",
+      "Prohibir el uso de disolventes, gasoil o productos similares como productos de limpieza del cuerpo.",
+      "Leer las etiquetas de los envases o las hojas de datos de seguridad antes de manipular sustancias, de modo que se conozcan riesgos y medidas de protección a utilizar.",
+      "Limpiarse las manos y las zonas del cuerpo afectadas por la manipulación de sustancias químicas, después de trabajar con dichos productos y antes de comer, beber y fumar.",
+      "Reforzar las prohibiciones a través de señales de seguridad."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Disponer de equipos de protección personal certificados."
+    ]
+  }
+],
+  "330": [
+    {"categoria": "Controles administrativos","medidas": [
+        "Realizar mediciones de los niveles de ruido.",
+        "Eliminar o reducir la exposición al ruido.",
+        "Monitorear las condiciones del ambiente de trabajo con relación al ruido.",
+        "Establecer los valores límite de exposición y acción.",
+        "Revisar periódicamente las medidas de control implementadas."
+      ]
+    },
+    {"categoria": "EPP","medidas": [
+        "Disponer de equipos de protección personal certificados que controlen la exposición al ruido."
+      ]
+    }
+  ],
+  "340": [
+  {"categoria": "Controles administrativos","medidas": [
+      "Eliminar o reducir la exposición a vibraciones.",
+      "Monitorear las condiciones del ambiente de trabajo con relación a vibraciones.",
+      "Implementar métodos de trabajo que reduzcan la exposición a vibraciones.",
+      "Realizar mediciones de vibración.",
+      "Establecer los valores límite de exposición y acción.",
+      "Contar con certificados de calibración periódica vigente de los instrumentos de medición.",
+      "Revisar periódicamente las medidas de control implementadas."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Disponer de equipos de protección personal certificados que controlen la exposición a vibraciones."
+    ]
+  }
+],
+  "360": [
+  {"categoria": "Controles administrativos","medidas": [
+      "Disponer de permisos de trabajo correspondiente a la actividad a ejecutar.",
+      "Disponer de personal de Seguridad Radiológica que cubran las necesidades de los usuarios de fuentes de radiación.",
+      "Controlar y registrar las dosis de radiación.",
+      "Disponer de personal debidamente autorizado mediante una licencia para la manipulación de fuentes de radiación.",
+      "Disponer de licencias para instalaciones de fuentes de radiación.",
+      "Garantizar que cualquier persona que tenga acceso a la fuente de radiación se encuentre instruido en el manejo del equipo y conozca los procedimientos en caso de emergencia.",
+      "Controlar la dosimetría personal.",
+      "Informar a las personas que trabajen en un área restringida sobre la existencia de radiación y los problemas asociados.",
+      "Prevenir los riesgos físicos asociados a la exposición ocupacional a radiaciones ionizantes.",
+      "Inspeccionar y registrar los equipos e instalaciones.",
+      "Llevar el registro de uso de las fuentes de radiación.",
+      "Someter a exámenes médicos al personal involucrado en trabajos con fuentes de radiación.",
+      "Mantener el registro de calibraciones y pruebas de las fuentes generadoras de radiación."
+    ]
+  }
+],
+  "380": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Iluminar las zonas por las que debe circular el peatón.",
+      "Iluminar las señales con reflectores, luz blanca una o varias luces de destello.",
+      "Iluminar los cercados y peligros que obstaculicen la libre y segura circulación."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Proporcionar alumbrado adecuado y suficiente en los lugares de trabajo/tránsito.",
+      "Asegurar que la iluminación natural o artificial permita una visibilidad óptima en los puestos de trabajo.",
+      "Contar con sistemas de iluminación de emergencia adecuados y suficientes."
+    ]
+  }
+],
+  "390": [
+  {"categoria": "Controles administrativos","medidas": [
+      "Evaluar los riesgos antes de cualquier trabajo subterráneo.",
+      "Disponer de permisos de trabajo correspondientes a las actividades a ejecutar.",
+      "Verificar que los trabajadores cuenten con la aptitud médica para trabajar en espacios confinados.",
+      "Contar con un vigía que mantenga la comunicación desde el exterior con quienes hayan ingresado al espacio confinado.",
+      "Capacitar y entrenar a todo trabajador que ingresa a un espacio confinado.",
+      "Verificar el ambiente de la excavación antes de ingresar.",
+      "Contar con la adecuada ventilación antes del ingreso y durante las actividades en el espacio confinado."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Proveer de equipos de protección respiratoria de acuerdo con la exposición."
+    ]
+  }
+],
+  "570": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Asegurar, adecuar y mantener las áreas de almacenamiento de materiales en condiciones seguras y en buen estado de funcionamiento."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Contar con la certificación de competencias laborales en prevención de riesgos laborales.",
+      "Identificar peligros y evaluar riesgos locativos.",
+      "Disponer de planes, medidas y procedimientos de emergencia en aquellos lugares donde se almacenan sustancias químicas.",
+      "Disponer de zonas seguras, vías de acceso y salidas de emergencia.",
+      "Señalizar las zonas de peligro, vías de escape, áreas seguras y obligatoriedades.",
+      "Contar con listas actualizadas de equipos y elementos para combatir emergencias.",
+      "Almacenar las cosas en el lugar adecuado.",
+      "Apilar los materiales de forma estable y segura.",
+      "Dejar el área de trabajo ordenada al terminar cualquier operación.",
+      "Alertar cuando se produce una emergencia.",
+      "Facilitar la localización de determinados medios.",
+      "Orientar o guiar a los trabajadores que realizan determinadas maniobras peligrosas."
+    ]
+  }
+],
+  "010-E": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Acordonar y señalizar el área a nivel de piso.",
+      "Colocar medios auxiliares (escaleras, andamios, etc.) para llegar a los sitios que no estén al alcance.",
+      "Disponer de andamios u otros medios equivalentes certificados.",
+      "Disponer de pasarelas reglamentarias u otros medios equivalentes para el tránsito y apoyo directo de los trabajadores.",
+      "Proteger los lados huecos con barandillas reglamentarias u otros sistemas equivalentes, provisionales, que eviten la caída del personal.",
+      "Colocar en las bases de las escaleras zapatas u otros elementos antideslizantes."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Disponer del permiso de trabajo correspondiente, emitido por el técnico de seguridad.",
+      "Contar con el conocimiento, experiencia y condiciones de salud adecuadas.",
+      "Contar con personal calificado para el diseño, construcción y verificación periódica de andamios.",
+      "Conformar los equipos de trabajo de al menos dos personas.",
+      "Disponer de andamios de acuerdo con las exigencias del trabajo a realizar.",
+      "Verificar periódicamente las condiciones de seguridad y funcionamiento de los equipos de protección, así como los puntos de anclaje.",
+      "Planificar y supervisar los trabajos en altura como las medidas de protección personal y colectiva.",
+      "Disponer de protecciones colectivas fáciles de transportar y almacenar.",
+      "Reponer de inmediato las protecciones colectivas cuando se retiren momentáneamente por razones de trabajo.",
+      "Revisar periódicamente las escaleras y notificar las anomalías.",
+      "Almacenar las escaleras de forma horizontal, sujetas a soportes fijos en la pared.",
+      "Verificar la verticalidad y horizontalidad de cada elemento que componen los andamios.",
+      "Disponer de los arriostramientos necesarios y adecuados para los bastidores de los andamios.",
+      "Prohibir la modificación no prevista de andamios.",
+      "Respetar las indicaciones de carga máxima de las plataformas de los andamios.",
+      "Detener los trabajos en altura cuando se presenten condiciones climáticas desfavorables."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Contar con equipos de protección colectiva y/o personal certificada, que se ajuste al trabajo a realizar y a quien los utiliza."
+    ]
+  }
+],
+  "020-E": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Disponer de accesos que permitan el paso seguro.",
+      "Habilitar los pasos peatonales necesarios.",
+      "Disponer de pasarelas reglamentarias en aquellos lugares por los que deban circular los trabajadores.",
+      "Eliminar de las plataformas y barandas los elementos o salientes que puedan provocar engarces y tropezones."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Capacitar, educar e inducir a los trabajadores en materia de seguridad y salud en el trabajo.",
+      "Señalizar las áreas de trabajo.",
+      "Acatar las indicaciones de seguridad.",
+      "Mantener las vías de acceso y áreas de trabajo ordenadas y limpias.",
+      "Prohibir colocar objetos en aquellos lugares elevados y de tránsito.",
+      "Prohibir acumular objetos en las zonas de paso.",
+      "Organizar cables y mangueras en los lugares de trabajo.",
+      "Dejar libres las zonas de paso de personas."
+    ]
+  }
+],
+  "030-E": [
+  {"categoria": "Sustitución","medidas": [
+      "Efectuar los trabajos al interior de las excavaciones a través de jaulas de seguridad, túneles metálicos o similares que garanticen la protección de los trabajadores."
+    ]
+  },
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Delimitar los bordes próximos a vías públicas o con riesgo de caída."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Contar con el correspondiente permiso de trabajo previo a la ejecución de trabajos.",
+      "Capacitar y entrenar a los trabajadores según la actividad a realizar.",
+      "Verificar la aptitud médica de los trabajadores.",
+      "Acompañar y coordinar desde el exterior todo trabajo que se realice en un recinto cerrado.",
+      "Interrumpir las actividades cuando existan peligros o surjan daños materiales.",
+      "Analizar las condiciones del terreno circundante.",
+      "Señalizar los lugares de trabajo para advertir peligros y riesgos existentes.",
+      "Prohibir la entrada de personas cuando se realicen excavaciones por medios mecánicos.",
+      "Prohibir zanjas de profundidad superior a 5 m.",
+      "Entibar y des entibar según las condiciones del terreno.",
+      "Examinar diariamente el buen estado de la excavación y sus entibaciones.",
+      "Evitar que los objetos sobresalgan de los apilamientos."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Contar y usar adecuadamente el equipamiento necesario."
+    ]
+  }
+],
+  "040-E": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Colocar marquesina protectora en la entrada y/o salida de la obra o en zonas de circulación.",
+      "Disponer de resguardos"
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Designar y autorizar al personal responsable de la maniobra de izaje.",
+      "Capacitar y entrenar a los trabajadores en la operación y funcionamiento de los equipos y accesorios para izar.",
+      "Indicar las cargas máximas y las condiciones de uso de los equipos de izaje.",
+      "Delimitar y señalizar el área de trabajo.",
+      "Advertir a los trabajadores de las operaciones de subida y bajada de materiales.",
+      "Despejar los bordes superiores de objetos que pudieran caer.",
+      "Prohibir arrojar escombros y materiales desde las plantas superiores hacia las inferiores.",
+      "Retirar diariamente los escombros o desechos de las zonas altas.",
+      "Usar ductos bajantes para la evacuación de escombros desde pisos altos.",
+      "Disponer de tablones con el ancho necesario para fácil circulación y almacenamiento de herramientas y materiales.",
+      "Evitar que los objetos sobresalgan de los apilamientos.",
+      "Verificar el amarre de las cargas antes de su izado."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Dotar de equipos de protección personal a los trabajadores que intervengan en la maniobra y en los trabajos de izaje de cargas"
+    ]
+  }
+],
+  "090-E": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Proteger las partes fijas o móviles que representen riesgo de acción atrapante, cortante, lacerante, punzante, aplastante, abrasiva y proyectiva."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Conocer el uso correcto del equipo de protección personal.",
+      "Usar los EPP obligatoriamente donde y cuando sean necesarios.",
+      "No compartir ni prestar los EPP a otros trabajadores.",
+      "Mantenerlos los EPP en perfecto estado de conservación.",
+      "Pedir que se cambie el EPP cuando estén deteriorados.",
+      "Proporcionar distancias mínimas entre trabajadores.",
+      "Mantener las herramientas almacenadas y ordenadas en lugares adecuados para ello.",
+      "Utilizar las herramientas únicamente para los fines que han sido diseñados.",
+      "Capacitar a los trabajadores en la operación segura de herramientas eléctricas.",
+      "Proporcionar herramientas manuales de dimensiones y características adecuadas.",
+      "Prohibir aumentar el brazo de palanca de las herramientas, con tubos u otros materiales.",
+      "Realizar operaciones de corte en superficies planas y estables.",
+      "Colocar las herramientas en portaherramientas o estantes adecuados.",
+      "Disponer de herramientas libres de sustancias deslizantes.",
+      "Mantener las herramientas cortantes o punzantes debidamente afiladas.",
+      "Retirar los materiales de fácil combustión o altamente volátiles previo a la realización de trabajos en caliente."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Dotar a los trabajadores equipos de protección personal conforme a los riesgos a los cuales se encuentran expuestos los trabajadores."
+    ]
+  }
+],
+  "100-E": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Proteger las partes fijas o móviles de las herramientas eléctricas que representen riesgo por acción atrapante, cortante, lacerante, punzante, aplastante, abrasiva y proyectiva."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Señalizar los lugares de trabajo en los que es obligatorio el uso de algún medio de protección.",
+      "Desarrollar programas de educación, capacitación, entrenamiento y actualización de seguridad y salud en el trabajo.",
+      "Dar a conocer los riesgos laborales a los que se encuentran expuestos los trabajadores, por escrito o por cualquier otro medio.",
+      "Informar a los trabajadores sobre los riesgos específicos que el equipo de protección personal protege, así como las actividades y situaciones en las que es necesario su uso.",
+      "Respetar la señalización e indicaciones de seguridad.",
+      "Ser solidariamente responsables en la aplicación de medidas de prevención y protección, cuando dos o más trabajadores desarrollen actividades en el mismo lugar de trabajo."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Suministrar equipos de protección personal y ropa de trabajo de acuerdo con los riesgos a los que están expuestos."
+    ]
+  }
+],
+  "110-E": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Aplicar bloqueos en equipos y fuentes de energía para prevenir accionamientos involuntarios.",
+      "Proteger las partes fijas o móviles de las herramientas eléctricas que representen riesgo por acción atrapante, cortante, lacerante, punzante, aplastante, abrasiva y proyectiva."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Asignar supervisores de acuerdo con la formación y experiencia.",
+      "Capacitar a los supervisores en la implementación y monitoreo de medidas de prevención y protección.",
+      "Prohibir la presencia de personas sobre plataformas durante las maniobras de descarga de componentes o equipos.",
+      "Verificar que la ropa de trabajo se ajuste sin perjuicio de comodidad y movimiento, carezca de partes sueltas y de elementos que cuelguen o sobresalgan.",
+      "Entrenar al personal sobre el correcto levantamiento de cargas.",
+      "Comprobar el terreno previo a cualquier trabajo de izaje de cargas.",
+      "Verificar los cables de izaje periódicamente.",
+      "Prohibir dejar las cargas suspendidas al término de la jornada laboral.",
+      "Asegurar los encofrados con puntales, en número, disposición y arrostramiento necesario para soportar las cargas.",
+      "Desencofrar por un solo lado hasta el final, evitando impactos y vibraciones.",
+      "Retirar o doblar las puntas de los clavos en el proceso de desencofrado."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Proporcionar equipos de protección personal que no supongan, ni ocasionen por sí mismos riesgos adicionales o molestias innecesarias."
+    ]
+  }
+],
+  "150a-E": [
+  {"categoria": "Controles administrativos","medidas": [
+      "Capacitar, inducir y educar en materia de seguridad y salud en el trabajo.",
+      "Acatar y respetar las indicaciones de seguridad.",
+      "Disponer del permiso de trabajo correspondiente para la actividad a realizar.",
+      "Garantizar que el personal que realiza los trabajos en caliente se encuentre capacitado en la operación segura de los equipos.",
+      "Prohibir el uso de elementos metálicos en áreas donde exista riesgo eléctrico por contacto directo."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Proporcionar equipos de protección en concordancia a las labores del puesto de trabajo."
+    ]
+  }
+],
+  "150b-E": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Implementar dispositivos limitadores de momento de carga en las grúas torre.",
+      "Reubicar o desenergizar las líneas eléctricas en el área de trabajo en altura."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Planificar los trabajos en altura.",
+      "Elaborar y socializar procedimientos de trabajo seguro.",
+      "Capacitar y entrenar a los trabajadores sobre la operación y funcionamiento de los equipos y accesorios de izaje.",
+      "Operar los equipos elevadores únicamente aquellas personas capacitadas y aptas para dicha operación.",
+      "Garantizar la operación de aparatos elevadores únicamente por operarios que cuenten con la licencia correspondiente.",
+      "Contar con la certificación de competencias laborales en prevención de riesgos laborales.",
+      "Delimitar el área a nivel de piso mediante acordonamiento y señalización.",
+      "Indicar las cargas máximas y condiciones de operación de todo equipo elevador.",
+      "Inspeccionar los equipos de izaje antes de cada uso.",
+      "Comprobar las condiciones del terreno antes de cualquier trabajo de izaje."
+    ]
+  }
+],
+  "150c-E": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Cubrir con mantas ignífugas los agujeros y aberturas por donde puedan caer partículas incandescentes hacia niveles inferiores."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Colocar señalización en lugares visibles que indique los equipos de protección personal obligatorios.",
+      "Establecer procedimientos y medidas de seguridad para la realización de trabajos en caliente.",
+      "Verificar que las condiciones sean seguras para los trabajos en caliente.",
+      "Ventilar los espacios en los que se realicen operaciones de suelda y corte para evitar la deficiencia de oxígeno.",
+      "Colocar de forma organizada los cables y mangueras en pasillos, escaleras y accesos.",
+      "Desconectar las máquinas de la fuente de energía.",
+      "Proteger cuerdas y cables que deben pasar superficies ásperas que puedan provocar cortes o abrasión."
+    ]
+  }
+],
+  "230-E": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Disponer de cuñas u obstáculos que indiquen el límite de aproximación."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Asignar supervisores de acuerdo con la formación y experiencia.",
+      "Establecer caminos internos, direcciones obligatorias y preferenciales.",
+      "Inspeccionar las máquinas diariamente y antes de comenzar turno.",
+      "Efectuar las operaciones de maquinaria pesada únicamente por personal calificado y con licencia profesional.",
+      "Evitar dejar estacionadas las máquinas en zonas de circulación.",
+      "Indicar la presencia de maquinaria pesada mediante señalización adecuada.",
+      "Marcar con señales de peligro el entorno de las máquinas durante el tiempo de parada.",
+      "Prohibir trabajar o permanecer dentro del radio de acción de la maquinaria.",
+      "Prohibir trabajar en la proximidad de líneas eléctricas hasta que se hayan tomado las precauciones y protecciones necesarias.",
+      "Prohibir el transporte de personas sobre máquinas.",
+      "Respetar la velocidad máxima permitida de 20 km/h al interior de obra.",
+      "Reforzar las prohibiciones con señalización correspondiente.",
+      "Equipar señalización acústica de marcha atrás",
+      "Contará de manera permanente durante las operaciones de un ayudante o señalero.",
+      "Establecer sistemas de riego cuando disminuya la visibilidad."
+    ]
+  }
+],
+  "250a-E": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Proteger las partes agresivas por acción atrapante, cortante, lacerante, punzante, prensante, abrasiva y proyectiva, que resulte técnicamente posible."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Disponer de permisos de trabajo correspondiente para aquellas actividades de alto riesgo.",
+      "Señalizar los lugares donde exista máquinas, maquinarias, equipos u otros.",
+      "Capacitar y entrenar a los trabajadores del uso de las máquinas.",
+      "Utilizar las máquinas únicamente en las funciones para las que han sido diseñadas.",
+      "Inspeccionar las máquinas a intervalos regulares",
+      "Dar mantenimiento a las máquinas de tipo preventivo y programado.",
+      "Prohibir inutilizar o anular los dispositivos de seguridad de las herramientas mecánicas.",
+      "Prohibir el uso de las herramientas eléctricas defectuosas.",
+      "Proporcionar espacio suficiente y estable para el apoyo de los pies.",
+      "Desconectar las máquinas al dejar de utilizarlas.",
+      "Notificar los desperfectos y anomalías de las herramientas eléctricas.",
+      "Notificar la deficiencia de dispositivos de seguridad en las herramientas eléctricas.",
+      "Prohibir inclinar las herramientas eléctricas para ensanchar la abertura practicada.",
+      "Evitar dejar las herramientas eléctricas en las proximidades de trabajadores no protegidos."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Disponer del equipo de protección personal."
+    ]
+  }
+],
+  "250b-E": [
+  {"categoria": "Controles administrativos","medidas": [
+      "Informar a los superiores de cualquier situación de trabajo que entrañe peligro para la salud y/o vida.",
+      "Cuidar que las herramientas que se utilicen no se encuentren deterioradas, inspeccionar y dar mantenimiento.",
+      "Notificar los desperfectos de las herramientas.",
+      "Almacenar las herramientas, mantenerlas limpias y en buen estado.",
+      "Seguir un plan de mantenimiento preventivo de las herramientas manuales.",
+      "Reportar la necesidad de mantenimiento correctivo.",
+      "Seleccionar y usar la herramienta adecuada para el trabajo a realizar.",
+      "Proporcionar herramientas de características que faciliten su cómodo manejo y minimicen su peso.",
+      "Utilizar las herramientas únicamente para los fines para las que han sido diseñadas.",
+      "Informar sobre cualquier alteración de salud relacionada con la actividad/condición laboral.",
+      "Prohibir guardar y transportar las herramientas manuales en los bolsillos.",
+      "Rechazar las herramientas con mangos defectuosos.",
+      "Prohibir el uso de herramientas manuales para sujetar piezas pequeñas al taladrar.",
+      "Prohibir apoyar el cuerpo sobre las herramientas manuales."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Disponer de equipos de protección colectiva y personal."
+    ]
+  }
+],
+  "160-E": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Aislar las partes conductoras de las herramientas y equipos eléctricos.",
+      "Colocar las instalaciones o conductores eléctricos en tensión a tierra, de manera temporal y segura.",
+      "Colocar enchufes y toma corrientes no desmontables.",
+      "Colocar el enchufe correspondiente en el extremo del cable.",
+      "Instalar enchufes en los puntos próximos a las áreas de trabajo para evitar usar cables demasiado largos."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Realizar evaluaciones de los riesgos eléctricos en el lugar de trabajo.",
+      "Advertir a través de señalización la presencia de equipos eléctricos y riesgos asociados.",
+      "Capacitar a los trabajadores sobre los procedimientos de seguridad y manejo seguro de los equipos.",
+      "Disponer del permiso de trabajo correspondiente.",
+      "Prohibir el uso de elementos metálicos en áreas donde exista riesgo eléctrico por contacto directo.",
+      "Diseñar, instalar, proteger y mantener las instalaciones eléctricas.",
+      "Realizar los trabajos en presencia de más de una persona que brinde soporte en caso de emergencia.",
+      "Inspeccionar antes de cada uso las instalaciones, máquinas y equipos.",
+      "Garantizar que no exista riesgos de electrificación en los sistemas eléctricos que se encuentren en el piso.",
+      "Realizar el mantenimiento regular de equipos y sistemas eléctricos.",
+      "Prohibir trabajar en la proximidad de las líneas eléctricas hasta que se hayan tomado las precauciones y protecciones necesarias contra contactos eléctricos.",
+      "Evitar cualquier empalme entre cables.",
+      "Reemplazar todo el cable cuando se detecten aislamientos defectuosos.",
+      "Prohibir conectar directamente cables desnudos a los tomacorrientes.",
+      "Desconectar los aparatos desde el enchufe y nunca desde el cable.",
+      "Prohibir trabajar con conexiones múltiples y empalmes defectuosos.",
+      "Proteger los cables eléctricos de llamas, productos corrosivos, paso de vehículos, etc.",
+      "Disponer de equipos y herramientas adecuadas para el trabajo eléctrico.",
+      "Evitar sobrecargar las instalaciones eléctricas conectando varios aparatos a una misma toma."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Implementar equipos de protección personal conforme a la tensión eléctrica."
+    ]
+  }
+],
+  "010-I": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Delimitar los bordes de toda excavación próximos a vías públicas o con riesgo de caída de personas.",
+      "Colocar medios auxiliares (escaleras, andamios, etc.) para llegar a los sitios que no estén al alcance.",
+      "Colocar gradas o escaleras fijas para la comunicación entre plataformas.",
+      "Proteger las aberturas con barandas y rodapiés reglamentarias.",
+      "Colocar en las bases de las escaleras zapatas u otros elementos antideslizantes."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Prohibir el ingreso de personas ajenas a la obra, salvo personal autorizado.",
+      "Disponer del permiso de trabajo correspondiente, emitido por el técnico de seguridad.",
+      "Inspeccionar las escaleras y los sistemas de sujeción y apoyo.",
+      "Conformar los equipos de trabajo de al menos dos personas.",
+      "Verificar que el ascenso, descenso y trabajo se realicen de frente a la escalera.",
+      "Prohibir que dos trabajadores utilicen simultáneamente la misma escalera.",
+      "Disponer de andamios de acuerdo con las exigencias del trabajo a realizar.",
+      "Revisar periódicamente las escaleras y notificar las anomalías.",
+      "Almacenar las escaleras de forma horizontal sujetas a soportes fijos en la pared.",
+      "Detener los trabajos en altura cuando se presenten condiciones climáticas desfavorables."
+    ]
+  }
+],
+  "020-I": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Incorporar accesos a intervalos no mayores a 12 m.",
+      "Habilitar los pasos peatonales necesarios.",
+      "Disponer de pasarelas reglamentarias en aquellos lugares por los que deban circular los trabajadores."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Formular y desarrollar programas de educación, capacitación, entrenamiento y actualización en temas inherentes a seguridad y salud en el trabajo.",
+      "Proporcionar un ambiente de trabajo adecuado y propicio que garantice la seguridad y salud en el trabajo.",
+      "Disponer del permiso de trabajo de acuerdo a la actividad a ejecutar.",
+      "Señalizar y mantener en perfecto estado de conservación y libres de obstáculos, todas las salidas.",
+      "Mantener las vías de acceso en condiciones óptimas de orden y limpieza, retirando los escombros de manera ágil y oportuna.",
+      "Prohibir colocar herramientas en pasillos abiertos, escaleras u otros lugares elevados.",
+      "Prohibir acumular objetos en las zonas de paso.",
+      "Organizar cables y mangueras en los lugares de trabajo.",
+      "Dejar libres las zonas de paso de personas."
+    ]
+  }
+],
+  "030-I": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Contener o entibar a partir de 1.5 m, en todos los trabajos de excavación con taludes no estables."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Disponer de permisos de trabajo correspondientes a la actividad a desarrollar.",
+      "Evitar que los objetos sobresalgan de los apilamientos.",
+      "Adoptar las precauciones necesarias y los sistemas de excavación según la naturaleza, condiciones del terreno y forma de realización de los trabajos.",
+      "Tomar en cuenta dentro de la fase de excavación los ángulos de talud de acuerdo con la naturaleza del terreno y naturaleza del terreno.",
+      "Entibar las excavaciones manuales a medida que se profundice y por franjas, según las condiciones del terreno.",
+      "Desentibar de abajo hacia arriba, manteniendo una franja de 1.5 m de altura.",
+      "Prohibir la realización de zanjas de profundidad superior a 5 m.",
+      "Examinar el buen estado de la excavación y sus entibaciones, con personal calificado y antes de comenzar la jornada o después de cualquier circunstancia que haya podido afectar la estabilidad."
+    ]
+  }
+],
+  "040-I": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Eliminar o apuntalar los elementos que se encuentren en la proximidad de la futura excavación, que puedan comprometer su equilibrio."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Señalizar las zonas con riesgo de caída de objetos.",
+      "Disponer de permiso de trabajo de acuerdo con la actividad a ejecutar.",
+      "Designar y autorizar al personal responsable de la maniobra de izaje.",
+      "Indicar las cargas máximas y las condiciones de uso de los equipos de elevación.",
+      "Verificar la influencia de los elementos próximos a la excavación, en relación con la estabilidad y resistencia.",
+      "Despejar las paredes de las excavaciones y los bordes superiores de los taludes de objetos que pudieran caer.",
+      "Acordonar la zona de carga en un contorno de 2 m.",
+      "Advertir a los trabajadores que se encuentren al interior de la excavación de las operaciones de subida y bajada de materiales.",
+      "Vigilar el efecto de los elementos que generan vibración sobre la excavación y entibado.",
+      "Verificar el amarre de las cargas antes de su izado."
+    ]
+  }
+],
+  "090-I": [
+  {"categoria": "Controles administrativos","medidas": [
+      "Disponer de permisos de trabajo correspondientes con la actividad a ejecutar.",
+      "Informar a los trabajadores por cualquier medio sobre los riesgos laborales a los que se encuentran expuestos.",
+      "Identificar y evaluar los riesgos laborales de forma inicial y periódica.",
+      "Informar a los trabajadores sobre los riesgos laborales a los que se encuentran expuestos.",
+      "Proporcionar ropa de trabajo de acuerdo con los riesgos a los que los trabajadores se encuentran expuestos los trabajadores.",
+      "Suministrar máquinas y herramientas certificadas.",
+      "Conocer el uso correcto del equipo de protección personal.",
+      "Usar los EPP obligatoriamente donde y cuando sean necesarios.",
+      "Usar adecuadamente los equipos de protección personal.",
+      "No compartir ni prestar los EPP a otros trabajadores.",
+      "Mantenerlos los EPP en perfecto estado de conservación.",
+      "Pedir que se cambie el EPP cuando estén deteriorados.",
+      "Prohibir el uso de extensiones con tubos u otro material para aumentar el brazo de palanca de las herramientas.",
+      "Vigilar el buen funcionamiento y uso de los dispositivos destinados a elevar y descender cargas.",
+      "Informar cualquier dolencia o situación de trabajo que represente un riesgo para la salud.",
+      "Interrumpir las actividades cuando exista una situación que ponga en riesgo la integridad y salud.",
+      "Respetar las distancias mínimas entre trabajadores cuando trabajen en zanjas o espacios reducidos.",
+      "Mantener las herramientas almacenadas y ordenadas en lugares adecuados para ello."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Proporcionar equipos de protección personal y colectiva certificadas."
+    ]
+  }
+],
+  "100-I": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Proteger las partes de máquinas que representen riesgo por acción atrapante, cortante, lacerante, punzante, aplastante, abrasiva y proyectiva."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Disponer de permisos correspondientes a las actividades a ejecutar.",
+      "Señalizar los lugares de trabajo en los que es obligatorio el uso de algún medio de protección personal.",
+      "Suministrar ropa de trabajo de acuerdo con los riesgos a los que se encuentran expuestos los trabajadores.",
+      "Prohibir el manejo de grandes cargas de material deleznable bajo fuertes vientos.",
+      "Regar la carga con agua para evitar la producción de polvo.",
+      "Cubrir la carga con una lona para evitar la proyección de fragmentos."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Suministrar equipos de protección personal y colectiva de acuerdo con los riesgos a los que se encuentran expuestos los trabajadores."
+    ]
+  }
+],
+  "110-I": [
+  {"categoria": "Sustitución","medidas": [
+      "Efectuar los trabajos desde instalaciones tales como jaulas de seguridad, túneles metálicos, paneles prefabricados o similares que garanticen la protección de los trabajadores cuando estos deban ingresar en excavaciones por medios mecánicos."
+    ]
+  },
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Entibar las excavaciones a medida que se profundicen, por franjas, de forma continua y conjuntamente a la extracción de tierras."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Disponer de los permisos de trabajo correspondientes a la actividad a ejecutar.",
+      "Implementar medidas de control para evitar el ingreso de personas no autorizadas.",
+      "Garantizar la vigilancia de la salud de los trabajadores .",
+      "Adaptar los puestos de trabajo de acuerdo con las capacidades de los trabajadores.",
+      "Elaborar y ejecutar planes de emergencia y contingencia en caso de una emergencia.",
+      "Prohibir anclar el arnés de seguridad a la estructura del elevador.",
+      "Desestibar de abajo hacia arriba, manteniendo una franja de 1.5 m o rellenado de forma simultánea, dando por perdida la entibación.",
+      "Examinar con personal calificado el buen estado de la excavación y sus entibaciones al comenzar la jornada o después de cualquier situación que haya podido afectar su estabilidad.",
+      "Verificar los cables de izaje periódicamente.",
+      "Prohibir dejar las cargas suspendidas al término de la jornada laboral."
+    ]
+  }
+],
+  "120-I": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Colocar tacos inmovilizadores en las ruedas de las máquinas cuanta esta se detenga. (Art. 108)",
+      "Colocar cuñas u obstáculos que indiquen el límite de aproximación a un borde con riesgo de vuelco."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Disponer de permisos de trabajo correspondientes a las actividades a ejecutar.",
+      "Inspeccionar las máquinas/maquinarias y establecer un plan de mantenimiento.",
+      "Utilizar la maquinaria para los fines y terrenos para los cuales han sido diseñadas.",
+      "Permitir la operación de máquinas únicamente por personal entrenado y con licencia para tal efecto.",
+      "Respetar la velocidad máxima establecida al interior de la obra.",
+      "Respetar el límite de carga de las máquinas, establecido por el fabricante.",
+      "Evitar dejar las máquinas en zonas de circulación o indicar la presencia de estas mediante señalización.",
+      "Contar con un guía /señalero para operaciones de marcha atrás o descarga.",
+      "Establecer un sistema de riesgo cuando la visibilidad pueda disminuir a causa del polvo.",
+      "Indicar el peso máximo autorizado a través de señalización fácilmente identificable."
+    ]
+  }
+],
+  "160-I": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Colocar enchufes y toma corrientes no desmontables.",
+      "Colocar el enchufe correspondiente en el extremo del cable.",
+      "Instalar enchufes en los puntos próximos a las áreas de trabajo para evitar usar cables demasiado largos."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Señalizar las áreas donde exista riesgo eléctrico.",
+      "Delimitar temporalmente el área de trabajo para evitar el ingreso y circulación de personas no autorizadas.",
+      "Disponer de permisos de trabajo correspondientes a la actividad a ejecutar.",
+      "Proporcionar formación a los trabajadores de los riesgos eléctricos, como identifícalos y utilizar los equipos de forma segura.",
+      "Verificar el buen estado y uso de elementos de protección personal.",
+      "Evitar cualquier empalme entre cables.",
+      "Considerar las condiciones climáticas que puedan poner en riesgo a los trabajadores o dificultar la manipulación de las herramientas cuando se trabaje a la intemperie.",
+      "Reemplazar todo el cable cuando se detecten aislamientos defectuosos.",
+      "Suspender los trabajos frente a condiciones o situaciones desfavorables.",
+      "Prohibir trabajar en las proximidades de las líneas/instalaciones eléctricas hasta que se hayan tomado las protecciones y precauciones necesarias.",
+      "Prohibir la realización de trabajos simultáneos con tensión y sin tensión por el mismo trabajador. Establecer los procedimientos para la ejecución de trabajos con tensión.",
+      "Prohibir conectar directamente cables desnudos a los tomacorrientes.",
+      "Desconectar los aparatos desde el enchufe y nunca desde el cable.",
+      "Prohibir trabajar con conexiones múltiples y empalmes defectuosos.",
+      "Proteger los cables eléctricos de llamas, productos corrosivos, paso de vehículos, etc.",
+      "Prohibir alterar, cambiar, reparar o accionar máquinas, instalaciones, sistemas eléctricos, entre otros, sin conocimiento técnico o previa autorización.",
+      "Evitar sobrecargar las instalaciones eléctricas conectado varios aparatos a una misma toma."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Disponer de equipo de protección personal necesarios para ejecutar tareas y actividades de acuerdo con el puesto o entrono de trabajo."
+    ]
+  }
+],
+  "230-I": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Establecer los caminos internos para la operación de maquinaria, direcciones obligatorias y preferenciales.",
+      "Incorporar la maquinaria con señales acústicas."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Disponer de permisos de trabajo correspondientes a la actividad a ejecutar.",
+      "Inspeccionar las máquinas antes de comenzar cada jornada.",
+      "Señalizar los caminos internos de la obra.",
+      "Prohibir el transporte de personas sobre la maquinaria.",
+      "Prohibir trabajar o permanecer dentro del radio de acción de la maquinaria en movimiento.",
+      "Marcar el entorno con señales de peligro durante el tiempo de parada de las máquinas.",
+      "Indicar el peso máximo autorizado en los elevadores.",
+      "Respetar la velocidad máxima permitida de 20 km/h al interior de obra.",
+      "Reforzar las prohibiciones con señalización."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Disponer de equipo de protección cuando se abandone la cabina de las máquinas."
+    ]
+  }
+],
+  "250a-I": [
+  {"categoria": "Controles de ingeniería","medidas": [
+      "Proteger las máquinas con riesgo por acción atrapante, cortante, lacerante, punzante, aplastante, abrasiva y proyectiva."
+    ]
+  },
+  {"categoria": "Controles administrativos","medidas": [
+      "Colocar señalización de seguridad visible y permanente para indicar zonas de peligro, vías de escape y áreas seguras en caso de emergencia.",
+      "Respetar las indicaciones de seguridad.",
+      "Disponer de permisos de trabajo correspondientes a la actividad a ejecutar.",
+      "Capacitar a los trabajadores sobre el uso, cuidado y mantenimiento de herramientas eléctricas.",
+      "Proporcionar el espacio suficiente y estable para el apoyo de los pies en el manejo de las herramientas eléctricas.",
+      "Utilizar las máquinas únicamente para las funciones que ha sido diseñadas.",
+      "Inspeccionar las máquinas al inicio y fin de la jornada de trabajo.",
+      "Mantener las máquinas en buen estado de conservación y de acuerdo a la frecuencia de uso.",
+      "Prohibir inutilizar o anular los dispositivos de seguridad de las herramientas mecánicas.",
+      "Prohibir el uso de las herramientas eléctricas defectuosas.",
+      "Desconectar las máquinas de la fuente de alimentación al dejar de utilizarlas.",
+      "Notificar los desperfectos y anomalías de las herramientas eléctricas.",
+      "Notificar la deficiencia de dispositivos de seguridad en las herramientas eléctricas.",
+      "Prohibir inclinar las herramientas eléctricas para ensanchar la abertura practicada.",
+      "Evitar dejar las herramientas eléctricas en las proximidades de trabajadores no protegidos."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Disponer de medios de protección personal conforme los riesgos a los cuales se encuentran expuestos los trabajadores."
+    ]
+  }
+],
+  "250b-I": [
+  {"categoria": "Controles administrativos","medidas": [
+      "Disponer de permisos de trabajo correspondientes a las actividades a ejecutar.",
+      "Capacitar y autorizar a los trabajadores para la operación de herramientas.",
+      "Proporcionar la distancia mínima entre trabajadores cuando deban laborar en la misma área.",
+      "Seleccionar y usar la herramienta de acuerdo a la labor a realizar.",
+      "Proporcionar las herramientas de características y tamaño adecuado para la operación a realizar.",
+      "Inspeccionar y dar mantenimiento regular a las herramientas.",
+      "Mantener las herramientas libres de sustancias deslizantes.",
+      "Mantener afiladas las partes cortantes o punzantes de las herramientas.",
+      "Notificar los desperfectos de las herramientas.",
+      "Sustituir las herramientas con desperfectos que no pueden ser corregidos.",
+      "Prohibir guardar y transportar las herramientas manuales en los bolsillos.",
+      "Rechazar las herramientas con mangos defectuosos.",
+      "Prohibir el uso de herramientas manuales para sujetar piezas pequeñas al taladrar.",
+      "Prohibir apoyar el cuerpo sobre las herramientas manuales."
+    ]
+  },
+  {"categoria": "EPP","medidas": [
+      "Proporcionar de equipos de protección personal para la prevención y control de riesgos en los puestos de trabajo."
+    ]
+  }
+]
+};

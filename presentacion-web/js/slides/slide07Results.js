@@ -28,15 +28,22 @@
   }
 
   /* La Fotografía 1 aloja la aplicación web de evaluación (un <iframe> a la
-     carpeta hermana tesis/0). El <iframe> no se pinta aquí: se monta la
+     módulo integrado ntp330/0). El <iframe> no se pinta aquí: se monta la
      primera vez que se abre y se retira al cerrar, para no cargar los ~800KB
      de la app en cada arranque de la presentación. */
   function foto(f) {
     var app = f.app;
-    return '<div class="rs2-foto' + (app ? ' rs2-foto--app' : '') + '" data-foto="' + f.key + '">' +
+    var cls = 'rs2-foto' + (app ? ' rs2-foto--app' : '') + (f.key === 'f2' ? ' rs2-foto--raw' : '');
+    var imgs = '';
+    if (f.imagen2 && f.key === 'f2') {
+      imgs = '<div class="rs-ft-imgs"><img class="rs-ft-img" src="' + f.imagen + '" alt="' + f.titulo + '"><img class="rs-ft-img" src="' + f.imagen2 + '" alt="' + f.titulo + '"></div>';
+    } else if (f.imagen) {
+      imgs = '<img class="rs-ft-img" src="' + f.imagen + '" alt="' + f.titulo + '">';
+    }
+    return '<div class="' + cls + '" data-foto="' + f.key + '">' +
       '<div class="rs-ft-t">' + f.titulo + '</div>' +
-      (f.imagen ? '<img class="rs-ft-img" src="' + f.imagen + '" alt="' + f.titulo + '">' : '') +
-      '<div class="rs-ft-n">' + (f.nota || '') + '</div>' +
+      imgs +
+      (f.nota ? '<div class="rs-ft-n">' + f.nota + '</div>' : '') +
       (app ? '<div class="rs-ft-hint">' + app.aviso + '</div>' +
         '<div class="rs-ft-frame" data-frame="' + f.key + '"></div>' : '') +
     '</div>';

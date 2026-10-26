@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tabla de Riesgos por Actividad</title>
+  <link rel="stylesheet" href="style.css" />
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Evaluación de riesgos laborales en proyectos de edificación e infraestructura</h1>
+
+    <label for="actividades">Seleccione un proyecto:</label>
+    <select id="actividades">
+      <option value="">-- Seleccione proyecto --</option>
+    </select>
+
+    <label for="tareas">Seleccione un proceso:</label>
+    <select id="tareas">
+      <option value="">-- Seleccione proceso --</option>
+    </select>
+
+    <label for="procesos" id="labelProcesos" style="display:none;">
+  Seleccione un proceso:
+</label>
+<select id="procesos" style="display:none;">
+  <option value="">-- Seleccione proceso --</option>
+</select>
+
+
+    <div id="tabla-riesgos"></div>
+
+    
+    <button id="btnDescargarPDF" class="boton-descarga">Descargar ART</button>
+  </div>
+  
+
+<div id="modal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="cerrar">&times;</span>
+    <div id="modalHeaders"></div>
+    <div id="tablaContenido"></div>
+  </div>
+</div>
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>

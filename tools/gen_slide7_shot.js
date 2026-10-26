@@ -1,7 +1,7 @@
 /* Harness de auditoría y captura para la diapositiva 7 (Resultados 2):
    flujograma de la Fase 3 (NTP 330) + recuadros de fotografía. Los bloques
    NE, NP, NC, NR y NI abren el cuadro de ER.docx que les corresponde, y la
-   Fotografía 1 aloja la aplicación web de evaluación (tesis/0).
+   Fotografía 1 aloja la aplicación web de evaluación integrada (ntp330/0).
    Genera:
      out/res2_heights.html  -> informe del estado en reposo
      out/res2_focos.html    -> informe de los 6 estados de foco (NE, NP, NC, NR, NI, F1)

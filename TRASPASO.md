@@ -1,145 +1,95 @@
-# Traspaso y guardado de la carpeta `presentacion`
+# Guardado y traspaso del proyecto único `presentacion`
 
-Procedimiento para garantizar que la carpeta `presentacion` **contiene guardado todo lo
-necesario** para retomar el trabajo en este u otro computador. Es el complemento
-práctico de `CONTINUIDAD.md`: aquí se describe el **proceso de cierre**
-(dejar la carpeta lista para guardar/llevar) y el de **apertura** (ponerla en
-marcha en un equipo nuevo).
+Actualizado: **2026-10-25**. Para el trabajo diario en este computador:
+**`iniciar.cmd`** al empezar y **`guardar.cmd`** al terminar.
+El procedimiento de respaldo, automatización y recuperación está en
+**`RESPALDO.md`**; el estado del trabajo en **`CONTINUIDAD.md`**.
 
-Herramientas:
+## 1. Una sola carpeta contiene el trabajo
 
-| Archivo | Qué hace |
-|---|---|
-| `tools/inventario.json` | Manifiesto: archivos y carpetas que DEBEN existir en `presentacion` (más la hermana `tesis`). |
-| `tools/verificar-inventario.js` | Comprueba el manifiesto y avisa de lo que git tiene sin commitear. `node tools/verificar-inventario.js`. |
-| `tools/traspaso.cmd` | Orquestador: inventario → (opcional verificación completa) → **genera el `.zip` portable** en `tools\out\traspaso\`. |
-| `tools/traspaso-empaquetar.ps1` | Empaquetador (lo llama `traspaso.cmd`): comprime `tes` + `tesis` + respaldos. |
-
----
-
-## 1. Qué debe quedar guardado en la carpeta
-
-Todo el árbol de `tes` **excepto** lo que se regenera y la basura:
-
-| Va | No va (se regenera / basura) |
-|---|---|
-| `presentacion-web\` (código, `assets\`, `css\`, `js\`) | `tools\node_modules\` (se crea con `npm install`) |
-| `tools\` (harness de verificación, `.cmd`, `.js`) | `tools\out\` (capturas e informes; se recrean con `verify-all.cmd shot`) |
-| `CONTINUIDAD.md`, `TRASPASO.md`, especificaciones `*.md` | `~$*.docx` / `~$*.pptx` / `~WRL*.tmp` (bloqueos de Office) |
-| Fuentes: `Ejemplo.pptx`, `*.docx`, `*.md`, imágenes, `fotos\` | dump temporal `f`, `*.out`, `*.tmp` |
-| `tesis\` (carpeta **hermana**): la app `0\` de evaluación NTP 330 | `tesis\0\pruebas\out\` (se regenera) |
-
-> **Regla de oro:** `presentacion` y `tesis` son **carpetas hermanas** y viajan juntas. La
-> presentación embebe la app del slide 7 desde `tesis\0`, y `reanudar.cmd`
-> comprueba que exista. Si se copia `presentacion` sola, falta la app.
-
-El verificador (`inventario.json` + `verificar-inventario.js`) es quien da fe de
-que todo lo de la columna «Va» está físicamente presente.
-
----
-
-## 2. Proceso de cierre (cada vez que se deje de trabajar)
-
-Tarda menos de un minuto. Se puede encadenar; los pasos 1 y 2 son el mínimo.
-
-> **Atajo automático:** `respaldo.cmd` hace de corrido el paso 1, el paso 2
-> (commit en las dos carpetas) y el paso 3, pero guarda el zip en
-> `D:\ejemplo\respaldos\` con rotación a 14 copias y lo puede hacer **solo cada
-> día** si creas la tarea (`respaldo.cmd agendar`). Ver `RESPALDO.md`.
-> Este proceso de traspaso sigue siendo el que se usa para **entregar** el
-> trabajo a otro equipo (con inventario y con el zip dentro de `tools\out\`).
-
-```bash
-cd tools
-traspaso.cmd               # 1. inventario + estado git
+```text
+presentacion\
+├── iniciar.cmd
+├── guardar.cmd
+├── tools\
+└── presentacion-web\
+    ├── index.html
+    └── ntp330\
+        └── 0\index.html
 ```
 
-1. **Inventario**: `traspaso.cmd` comprueba que existen todos los archivos y
-   carpetas requeridos. Si informa `INVENTARIO INCOMPLETO`, falta algo: no seguir.
-2. **Estado git**: el mismo comando lista lo que git todavía no guarda. Mientras
-   haya archivos «sin commitear», cópialos a git (el código es lo que viaja en el
-   historial y lo que permite `git bundle`):
+El slide 7 abre la app NTP 330 incluida en `presentacion-web\ntp330`. El inventario
+`tools\inventario.json` exige los archivos del proyecto único, sus fuentes,
+imágenes, herramientas y documentación necesarios para continuar.
 
-   ```bash
-   cd ..\..\tesis      # (solo si hay cambios en la app)
-   git add -A && git commit -m "Descripción breve en español"
-   cd ..\presentacion\tools
-   git -C .. add -A && git -C .. commit -m "Descripción breve en español"
+## 2. Cierre y paquete portable
+
+Primero guardar los archivos abiertos en el editor/Office. Desde `tools`:
+
+```bat
+traspaso.cmd
+traspaso.cmd paquete
+traspaso.cmd todo
+```
+
+- Sin argumentos: inventario y estado Git.
+- `paquete`: inventario y ZIP verificado en `tools\out\traspaso\`.
+- `todo`: añade la verificación completa antes de construir el paquete.
+
+El empaquetador es el mismo del respaldo diario. Conserva **archivos pendientes
+de commit**, fuentes originales, imágenes, `.gitignore`, herramientas, el
+historial Git principal y el historial de origen archivado del módulo, JSON ya exportados, `ESTADO.json`, informes,
+`LEEME.txt` y un manifiesto SHA256. No depende de `%TEMP%` y cada nombre es único.
+No exige crear commits para guardar los archivos actuales.
+
+Se excluyen dependencias, capturas/salidas regenerables y temporales de Office.
+Copiar **el ZIP y su `.zip.sha256`** al otro equipo. `tools\out` es regenerable:
+para un respaldo permanente local usar `guardar.cmd`, que guarda fuera del
+proyecto y conserva las 14 copias más recientes.
+
+## 3. Apertura en este u otro computador
+
+1. Instalar **Node.js 22+**, **Git** y **Chrome**.
+2. Si hay un proyecto disponible, usar su recuperador:
+
+   ```bat
+   recuperar.cmd -Paquete "E:\copia\presentacion-tesis-FECHA-ID.zip" -Destino "D:\ejemplo\recuperacion-FECHA"
    ```
 
-3. **Paquete portable** (cuando se vaya a guardar o llevar el trabajo):
+   El destino debe ser nuevo y su carpeta madre debe existir. Se comprueban
+   integridad, archivos extraídos e inventario y se recupera el historial Git.
+3. Si solo se dispone del ZIP, extraerlo en una carpeta nueva y, desde ella:
 
-   ```bash
-   traspaso.cmd paquete     # o: traspaso.cmd todo  (agrega verify-all completo)
+   ```bat
+   powershell -NoProfile -ExecutionPolicy Bypass -File presentacion\tools\recuperar.ps1 -CarpetaExtraida "."
    ```
 
-   Genera `tools\out\traspaso\presentacion-tesis-AAAAMMDD-HHMM.zip` que contiene:
+4. Doble clic en **`presentacion\iniciar.cmd`**. Instala las dependencias con
+   `npm ci` si faltan, verifica **54/54 + 920/920 + `TODO OK`** y abre la presentación.
+5. Leer **`CONTINUIDAD.md`**, especialmente el resumen y la última sección.
+6. Programar el respaldo en el nuevo equipo con `guardar.cmd agendar`.
 
-   - `presentacion\` — todo el árbol (sin `.git`, sin `node_modules`, sin `tools\out`, sin basura).
-   - `tesis\` — la app hermana completa (sin `.git`, sin `0\pruebas\out`).
-   - `datos-respaldo\` — copias JSON de las evaluaciones si existen en
-     `..\..\tesis\0\pruebas\out\respaldos`.
-   - `historial-presentacion.bundle` / `historial-tesis.bundle` — historial git completo.
-   - `LEEME.txt` — instrucciones de restauración.
+Si Chrome no está en la ruta habitual, ajustar `CHROME` en `iniciar.cmd`,
+`tools\reanudar.cmd` y `tools\verify-all.cmd`. El historial se restaura con
+`git clone --no-checkout` en un directorio auxiliar: nunca clonar directamente
+sobre la carpeta de archivos ya extraídos.
 
-4. Opcional, para asegurar que el zip sirve: extraerlo en una carpeta temporal
-   y volver a pasar el inventario:
+## 4. Evaluaciones y proyectos del navegador
 
-   ```bash
-   node tools/verificar-inventario.js     # en la copia extraída
-   ```
+Los archivos de la app no contienen las evaluaciones del usuario: viven en
+`localStorage`. Antes del traspaso, **exportar el respaldo JSON desde Catálogo**,
+validarlo y guardarlo en `presentacion-web\ntp330\0\pruebas\out\respaldos\`; después crear el ZIP.
+En el equipo de destino, importar el JSON propio de `datos-respaldo\` desde
+Catálogo. Un JSON de ejemplo no sustituye el de los datos reales.
 
----
+Detalle paso a paso: **`RESPALDO.md` §6** y `presentacion-web\ntp330\0\docs\continuidad.md`.
 
-## 3. Proceso de apertura (en otro computador)
+## 5. Documentación para continuar
 
-Con el `presentacion-tesis-*.zip` en el equipo nuevo:
-
-1. Instalar **Node.js 22 o superior** (npm incluido). Chrome solo hace falta si
-   se quieren capturas/verificación visual.
-2. Descomprimir el zip en la carpeta donde vayan a vivir las dos carpetas,
-   **habiendo `presentacion\` y `tesis\` al mismo nivel** (ej. `D:\ejemplo\presentacion` y
-   `D:\ejemplo\tesis`).
-3. Primera vez, instalar las dependencias de verificación y comprobar:
-
-   ```bash
-   cd presentacion\tools
-   npm install
-   reanudar.cmd            # entorno + verificación completa (54/54 + 888/888)
-   ```
-
-   Si Chrome no está en `C:\Program Files\Google\Chrome\Application\chrome.exe`,
-   editar la línea `set CHROME=...` en `verify-all.cmd` y `reanudar.cmd`.
-4. Abrir la presentación: doble clic en `presentacion-web\index.html`, o
-   `npx serve presentacion-web -l 8080`. La app de riesgos se abre desde el
-   bloque Riesgo del slide 7 y vive en `tesis\0`.
-5. Si el paquete trae `datos-respaldo\*.json` (evaluaciones de la app): abrir
-   `tesis\0\index.html` → pestaña **Catálogo** → **Restaurar respaldo**.
-6. Historial git (opcional, para recuperar los commits): en una carpeta vacía,
-   `git bundle unbundle historial-presentacion.bundle` / `historial-tesis.bundle`, o
-   `git clone historial-presentacion.bundle presentacion`.
-
-Documentación de referencia una vez dentro:
-
-| Doc | Qué es |
+| Documento | Contenido |
 |---|---|
-| `presentacion\CONTINUIDAD.md` | Cómo retomar el trabajo en este u otro equipo. |
-| `presentacion\TRASPASO.md` | Este documento. |
-| `presentacion\EPTransf.md` | Especificación de la propuesta de transformación (EPT). |
-| `tesis\AGENTS.md` | Reglas de la aplicación de evaluación de riesgos. |
-| `tesis\0\docs\ESTADO.md` | Estado y pendientes de la app NTP 330. |
-
----
-
-## 4. Datos del usuario (lo que NO está en los archivos)
-
-Las evaluaciones y proyectos de la app **no viven en los archivos**: viven en el
-`localStorage` de cada navegador (claves `ntp330.*`). Solo viajan como respaldo
-JSON explícito:
-
-- Pestaña **Catálogo** → **Exportar respaldo (JSON)** en la app.
-- Validarlo con `node tesis\0\pruebas\verificar-respaldo.js <archivo>`.
-- El paquete de `traspaso.cmd paquete` lo copia a `datos-respaldo\` si está en
-  `tesis\0\pruebas\out\respaldos\`.
-
-Sin ese respaldo, cambiar de equipo o de navegador pierde las evaluaciones.
+| `presentacion\AGENTS.md` | Reglas de trabajo y arquitectura de la presentación. |
+| `presentacion\CONTINUIDAD.md` | Estado, cambios recientes, verificaciones y capturas. |
+| `presentacion\RESPALDO.md` | Rutina diaria, tarea automática, comprobación y recuperación. |
+| `presentacion\presentacion-web\ntp330\AGENTS.md` | Reglas de la app de evaluación. |
+| `presentacion\presentacion-web\ntp330\0\docs\ESTADO.md` | Estado y pendientes de la app. |

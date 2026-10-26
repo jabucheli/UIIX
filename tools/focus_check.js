@@ -507,8 +507,8 @@ const imgF1 = r7f[0].querySelector('img.rs-ft-img');
 has(!!imgF1 && /zanja\.jpe?g$/.test(imgF1.getAttribute('src') || '') &&
   r7f[0].querySelectorAll('img, svg').length === 1,
   'el recuadro 1 muestra la imagen zanja');
-has(r7f[1].querySelectorAll('img, svg').length === 0,
-  'el recuadro 2 sigue vacio (sin imagen todavia)');
+has(r7f[1].querySelector('img'),
+  'el recuadro 2 muestra imagen th.png');
 has(r7f[0].parentNode === r7f[1].parentNode && r7f[0] !== r7f[1],
   'los dos recuadros comparten la banda inferior');
 has(rs2EtapasCount() === 6, 'seis objetivos accionables (NE, NP, NC, NR, NI y Riesgo)');
@@ -683,21 +683,22 @@ has(rs2Cuadros().every(function (c) {
 key('Escape');
 
 /* =================================================================
-   Slide 7 · Fotografía 1: la aplicación web de evaluación (tesis/0)
+   Slide 7 · Fotografía 1: la aplicación web de evaluación integrada (ntp330/0)
    Al pulsarla crece a toda la banda y monta un <iframe> con la app, que
    arranca en su pestaña «Evaluación».
    ================================================================= */
 
 const APP = win.RESULTADOS2.fotos[0];
-const APP_DIR = path.join(__dirname, '..', '..', 'tesis', '0');
+const APP_DIR = path.join(ROOT, 'ntp330', '0');
 
 has(!!APP.app, 'la Fotografía 1 lleva los datos de la app que aloja');
-has(!!APP.app && /(^|\/)tesis\/0\/index\.html$/.test(APP.app.src.replace(/\\/g, '/')),
-  'la app apunta a la carpeta hermana tesis/0/index.html');
+has(!!APP.app && APP.app.src === 'ntp330/0/index.html',
+  'la app apunta al módulo interno ntp330/0/index.html');
 has(!!APP.app && fs.existsSync(path.resolve(__dirname, '..', 'presentacion-web', APP.app.src)),
   'esa ruta existe en disco: el <iframe> no dará 404');
-has(!!APP.app && fs.existsSync(path.join(APP_DIR, 'index.html')),
-  'la aplicación de tesis/0 está presente');
+has(!!APP.app && fs.existsSync(path.join(APP_DIR, 'index.html')) &&
+  !fs.existsSync(path.join(ROOT, 'ntp330', '.git')),
+  'la aplicación integrada está presente y pertenece al repositorio único');
 
 /* la app abre en «Evaluación»: es lo que el usuario pidió como pestaña inicial */
 const appHtml = fs.readFileSync(path.join(APP_DIR, 'index.html'), 'utf8');
@@ -947,8 +948,8 @@ has(pasos8.every(function (p) {
   return fs.existsSync(path.resolve(ROOT, p.imagen));
 }), 'las seis imágenes de los resultados existen en assets/');
 has(pasos8.map(function (p) { return p.imagen; }).join(',') ===
-  'assets/MatrizER.png,assets/nd-res.png,assets/nd-res1.png,assets/riesgos-res.png,assets/riesgos-res1.png,assets/art-fin.png',
-  'las imágenes son las seis del proyecto de infraestructura, en orden');
+  'assets/MatrizER.png,assets/nd-res.png,assets/barras.png,assets/riesgos-res.png,assets/riesgos-res1.png,assets/art-fin.png',
+  'las seis imágenes están en orden; Deficiencia por factor de riesgo usa barras.png');
 has(pasos8.every(function (p, i) {
   var exp = [ 'green', 'red', 'green', 'red', 'green', 'red' ][i];
   return p.color === exp;
@@ -965,6 +966,10 @@ has(doc.querySelector('.slide.active h2').textContent === 'Resultados (3)',
   'el título de la lámina es Resultados (3)');
 has(rs3Pasos().length === 6, 'seis pasos en la banda superior');
 has(rs3Paneles().length === 6, 'seis resultados ampliados prepared en la banda inferior');
+has(!rs3Panel('p3').querySelector('.rs3-pn-f') && rs3Paneles().filter(function (panel) {
+  return panel.getAttribute('data-panel') !== 'p3';
+}).every(function (panel) { return !!panel.querySelector('.rs3-pn-f'); }),
+  'solo Deficiencia por factor de riesgo retira la lectura y la fuente inferiores para ampliar barras.png');
 has(doc.querySelectorAll('.slide.active .rs3-chain > .rs3-fx').length === 5,
   'cinco conectores entre los seis pasos');
 has(rs3Pasos().map(function (n) { return n.querySelector('.rs3-p-c').textContent; }).join(' | ') ===
@@ -1039,6 +1044,18 @@ click(idle.querySelector('.rs3-gal-view'));
 has(!idle.classList.contains('is-open'), 'se cierra dejando la galería en reposo');
 
 /* --- clic en un paso: abre su resultado y solo ese --- */
+click(rs3Pasos()[2]);
+has(rs3Focus() === 'p3' && gcs(rs3Body().querySelector('.rs3-flow')).display !== 'none' &&
+  gcs(rs3Panel('p3').querySelector('.rs3-pn-h')).display === 'none' &&
+  gcs(doc.querySelector('.slide.active .slide-head')).display !== 'none' &&
+  gcs(doc.querySelector('.slide.active .slide-logo')).display !== 'none',
+  'barras.png se abre en la banda inferior con la cabecera, el logo y la secuencia visibles');
+key('Escape');
+has(rs3Focus() === null && gcs(rs3Body().querySelector('.rs3-flow')).display !== 'none' &&
+  gcs(doc.querySelector('.slide.active .slide-head')).display !== 'none' &&
+  gcs(doc.querySelector('.slide.active .slide-logo')).display !== 'none' &&
+  gcs(idle).display !== 'none',
+  'cerrar barras.png devuelve la galería y conserva la cabecera, el logotipo y la secuencia del slide 8');
 click(rs3Pasos()[1]);
 has(rs3Focus() === 'p1' || rs3Focus() === 'p2', 'un clic en un paso abre su foco');
 const abierto = rs3Focus();
@@ -1317,11 +1334,18 @@ has(logos.every(function (l) { return l.getAttribute('src') === 'assets/logo.png
   'todos los logos apuntan a assets/logo.png');
 has(logos.every(function (l) { return l.getAttribute('alt') === 'Logotipo'; }),
   'todos los logos llevan alt="Logotipo"');
-has(fs.existsSync(path.join(ROOT, 'assets', 'logo.png')),
-  'el fichero assets/logo.png existe en disco');
+has(fs.existsSync(path.join(ROOT, 'assets', 'logo.png')) &&
+  fs.existsSync(path.join(ROOT, '..', 'logo1.png')) &&
+  fs.readFileSync(path.join(ROOT, 'assets', 'logo.png')).equals(fs.readFileSync(path.join(ROOT, '..', 'logo1.png'))),
+  'assets/logo.png es una copia exacta de logo1.png, sin recomprimir ni reducir la resolución');
 var logoCss = fs.readFileSync(path.join(ROOT, 'css/styles.css'), 'utf8');
-has(/\.slide-logo\s*\{[^}]*position\s*:\s*absolute/.test(logoCss),
-  'CSS: .slide-logo se posiciona en absoluto');
+has(/\.slide-logo\s*\{[^}]*position\s*:\s*absolute/.test(logoCss) &&
+  /\.slide-logo\s*\{[^}]*width\s*:\s*175px/.test(logoCss) &&
+  /\.slide-logo\s*\{[^}]*height\s*:\s*38\.55px/.test(logoCss) &&
+  /\.slide-logo\s*\{[^}]*object-fit\s*:\s*contain/.test(logoCss) &&
+  /\.slide-logo\s*\{[^}]*object-position\s*:\s*right top/.test(logoCss) &&
+  /\.slide\[data-slide="8"\] \.rs-subtitle\s*\{[^}]*margin-top\s*:\s*11px/.test(logoCss),
+  'CSS: logo1.png se ajusta proporcionalmente al espacio actual de 175x38,55px, con espacio para el subtítulo del slide 8');
 has(/\.slide-logo\s*\{[^}]*right\s*:\s*12px/.test(logoCss),
   'CSS: .slide-logo anclado a la derecha (right:12px)');
 has(!/\.slide-cover\s*\.slide-logo\s*\{/.test(logoCss),
@@ -1331,7 +1355,7 @@ has(!/\.slide-cover\s*\.slide-logo\s*\{/.test(logoCss),
 var coverEl = doc.querySelector('#slideFrame .slide-cover');
 has(coverEl !== null, 'la carátula existe como .slide-cover');
 has(coverEl.querySelectorAll('.slide-logo').length === 0,
-  'la carátula NO lleva el .slide-logo de logo.bmp');
+  'la carátula NO lleva el .slide-logo de logo1.png');
 var coverLogo = coverEl.querySelector('.cover-logo');
 has(coverLogo && coverLogo.getAttribute('src') === 'assets/logocaratula.png',
   'la carátula lleva logocaratula.png centrado en la banda negra');
@@ -1726,8 +1750,9 @@ has(vl.querySelectorAll('.vl-round[data-focus="r1"] .vl-r-prop').length === 6 &&
    vl.querySelectorAll('.vl-round[data-focus="r3"] .vl-r-prop').length === 3,
   'slide 10: cada ronda lista su propósito (6, 7 y 3 puntos)');
 has(/99,46/.test(vl.querySelector('.vl-round[data-focus="r1"]').textContent) &&
-   /183/.test(vl.querySelector('.vl-round[data-focus="r1"]').textContent),
-  'slide 10: la ronda 1 declara 99,46 % y 183 valoraciones');
+    vl.querySelector('.vl-round[data-focus="r1"] .vl-r-res-i:last-child').textContent ===
+      '183 Sí de 184 valoraciones (23 ítems evaluados)',
+  'slide 10: Ronda 1 indica 183 Sí de 184 valoraciones (23 ítems evaluados) junto al consenso de 99,46 %');
 has(/4,958/.test(vl.querySelector('.vl-round[data-focus="r2"]').textContent) &&
    /4,04/.test(vl.querySelector('.vl-round[data-focus="r2"]').textContent),
   'slide 10: la ronda 2 declara media 4,958 y CV 4,04 %');
@@ -1841,11 +1866,57 @@ has(victim && topBefore === victim.offsetTop,
   'el pie no desplaza el contenido (misma altura de inicio)');
 has(bodyEl && bodyHBefore === bodyEl.offsetHeight,
   'el cuerpo del slide conserva su altura: el pie va por debajo, no encima');
+var fsHeader = doc.querySelector('.app-header');
+var fsTabs = Array.prototype.slice.call(doc.querySelectorAll('#tabs .tab'));
+has(gcs(fsHeader).display === 'flex' && fsTabs.length === 12,
+  'pantalla completa: la navegación con las doce diapositivas permanece visible');
+has(fsTabs.every(function (tab, i) {
+  click(tab);
+  return doc.body.classList.contains('is-fullscreen-presentation') &&
+    gcs(fsHeader).display === 'flex' && tab.classList.contains('active') &&
+    doc.querySelector('#slideFrame').children[i].classList.contains('active') &&
+    doc.getElementById('counter').textContent === (i + 1) + ' / 12';
+}), 'pantalla completa: las doce pestañas cambian de slide manteniendo visible la navegación');
+click(fsTabs[9]);
+var fsExitCalls = 0;
+var previousExitFullscreen = doc.exitFullscreen;
+doc.exitFullscreen = function () {
+  fsExitCalls++;
+  fakeFs = null;
+  doc.dispatchEvent(new win.Event('fullscreenchange'));
+  return Promise.resolve();
+};
+click(doc.getElementById('btnFullscreen'));
+doc.exitFullscreen = previousExitFullscreen;
 delete doc.fullscreenElement;
 Object.defineProperty(doc, 'fullscreenElement', { configurable: true, get: function () { return null; } });
-doc.dispatchEvent(new win.Event('fullscreenchange'));
-has(!doc.body.classList.contains('is-fullscreen-presentation'),
-  'al salir de pantalla completa se retira la clase y el pie');
+has(fsExitCalls === 1 && !doc.body.classList.contains('is-fullscreen-presentation') &&
+  gcs(fsHeader).display === 'flex',
+  'el botón visible permite salir de pantalla completa y conserva la navegación');
+
+var fsStage = doc.getElementById('stage');
+var fsWrap = doc.getElementById('scaleWrap');
+var previousStagePadding = fsStage.style.padding;
+Object.defineProperty(fsStage, 'clientWidth', { configurable: true, value: 1920 });
+Object.defineProperty(fsStage, 'clientHeight', { configurable: true, value: 1000 });
+fsStage.style.padding = '20px 30px';
+win.dispatchEvent(new win.Event('resize'));
+has(Math.abs(parseFloat(fsWrap.style.width) - 1860) < .01 && parseFloat(fsWrap.style.height) <= 960,
+  'la escala normal aprovecha el ancho útil y respeta los márgenes del escenario');
+click(doc.getElementById('btnFullscreen'));
+has(doc.body.classList.contains('is-fullscreen-presentation') && gcs(fsHeader).display === 'flex' &&
+  !!doc.querySelector('#btnFullscreen .i-compress'),
+  'sin API nativa, el modo ampliado mantiene la navegación y ofrece el botón de salida');
+has(Math.abs(parseFloat(fsWrap.style.height) - 960) < .01 && parseFloat(fsWrap.style.width) <= 1860,
+  'la escala de pantalla completa respeta el espacio útil bajo la navegación y los márgenes');
+click(doc.getElementById('btnFullscreen'));
+has(!doc.body.classList.contains('is-fullscreen-presentation') && gcs(fsHeader).display === 'flex' &&
+  !!doc.querySelector('#btnFullscreen .i-expand'),
+  'el botón también cierra el modo ampliado sin API nativa');
+delete fsStage.clientWidth;
+delete fsStage.clientHeight;
+fsStage.style.padding = previousStagePadding;
+win.dispatchEvent(new win.Event('resize'));
 
 /* ======================= DIAPOSITIVA 11 · CONCLUSIONES ===================== */
 tabGo('11. Conclusiones');
@@ -2230,10 +2301,11 @@ has(!!pb && pb.classList.contains('slide-problem'),
   'slide 2: se renderiza .slide-problem como segunda diapositiva');
 var pbBody = pb.querySelector('.problem-body');
 var evCol = pb.querySelector('.ev-column');
-has(!!pbBody && pbBody.children.length === 4 &&
+has(!!pbBody && pbBody.children.length === 5 &&
   !!pbBody.querySelector('.ev-column') && !!pbBody.querySelector('.flow') &&
-  !!pbBody.querySelector('.just-column') && !!pbBody.querySelector('.q7-overlay'),
-  'slide 2: el cuerpo tiene las tres columnas (Evidencia, flujo, Justificación) y el overlay de la pregunta');
+  !!pbBody.querySelector('.just-column') && !!pbBody.querySelector('.q7-overlay') &&
+  !!pbBody.querySelector('.hierarchy-overlay'),
+  'slide 2: el cuerpo tiene las tres columnas y las vistas ampliadas de jerarquía y pregunta');
 has(!!evCol && evCol.getAttribute('data-focus') === 'ev' &&
   evCol.getAttribute('role') === 'button' && evCol.getAttribute('tabindex') === '0',
   'slide 2: el bloque Evidencia es accionable (data-focus=ev + role + tabindex)');
@@ -2291,8 +2363,8 @@ has(/\.problem-body--fev \.ev-sources-block\s*\{[^}]*justify-content:\s*center/.
 has(/\.ev-panel \.accent\s*\{[^}]*linear-gradient\(180deg, var\(--green\), var\(--red\)\)/.test(logoCss) &&
   /\.ev-header\s*\{[^}]*border-bottom:\s*3px solid var\(--red\)/.test(logoCss),
   'CSS: el panel de Evidencia usa el verde y el rojo de la paleta (accent y cabecera)');
-has(/sel: 'problem-body'[\s\S]{0,60}keys: \['ev', 'jf', 'q7'\]/.test(appJs),
-  "app.js: FOCUS_SCOPES registra problem-body con los focos 'ev', 'jf' y 'q7'");
+has(/sel: 'problem-body'[\s\S]{0,60}keys: \['ev', 'jf', 'p4', 'q7'\]/.test(appJs),
+  "app.js: FOCUS_SCOPES registra problem-body con los focos 'ev', 'jf', 'p4' y 'q7'");
 has(/'problem-body': \{ nodes: \['\.ev-column', '\.flow', '\.just-column'\][^}]*dir: 'row'/.test(appJs),
   'app.js: GHOST_CFG clona las tres columnas en fila (dir row)');
 
@@ -2307,9 +2379,17 @@ has(pbBody.classList.contains('problem-body--fjf') && pbBody.getAttribute('data-
 has(gcs(pbBody.querySelector('.ev-column')).display === 'none' &&
   gcs(pbBody.querySelector('.flow')).display === 'none',
   'slide 2: al agrandar Justificación, Evidencia y el flujo se ocultan');
+has(gcs(jfCol.querySelector('.pyramid-block')).display === 'none' &&
+  gcs(pbBody.querySelector('.hierarchy-overlay')).display === 'none' &&
+  gcs(jfCol.querySelector('.just-cards')).display !== 'none' &&
+  gcs(jfCol.querySelector('.obj-block')).display !== 'none' &&
+  gcs(jfCol.querySelector('.campo-block')).display !== 'none',
+  'slide 2: Justificación ampliada conserva tarjetas, objeto y campo, pero retira la jerarquía');
 click(jfCol);
 has(!pbBody.getAttribute('data-focus') && !pbBody.classList.contains('problem-body--fjf'),
   'slide 2: segundo clic en Justificación vuelve al reposo');
+has(gcs(jfCol.querySelector('.pyramid-block')).display !== 'none',
+  'slide 2: al cerrar Justificación reaparece la jerarquía en su lugar original');
 jfCol.focus();
 has(key('Enter'), 'slide 2: Enter sobre Justificación -> default evitado');
 has(pbBody.classList.contains('problem-body--fjf'), 'slide 2: Justificación también se agranda con Enter');
@@ -2334,7 +2414,7 @@ has(/\.just-card--green\s*\{[^}]*border-left-color:\s*var\(--green\)/.test(logoC
   /\.just-card-icon\.green\s*\{[^}]*background:\s*rgba\(0, 110, 73, \.12\)[^}]*color:\s*var\(--green\)/.test(logoCss) &&
   /\.just-card-icon\.red\s*\{[^}]*background:\s*rgba\(192, 36, 42, \.12\)[^}]*color:\s*var\(--red\)/.test(logoCss),
   'CSS: las tarjetas de justificación usan el estilo del nodo central (borde fino + icono en tinte claro)');
-var plevels = pb.querySelectorAll('.p-level');
+var plevels = jfCol.querySelectorAll('.p-level');
 has(plevels.length === 5 &&
   plevels[0].classList.contains('p-level--green') && plevels[1].classList.contains('p-level--red') &&
   plevels[2].classList.contains('p-level--green') && plevels[2].classList.contains('p-active') &&
@@ -2355,19 +2435,69 @@ has(!!pb.querySelector('.obj-text .obj-short') && !!pb.querySelector('.obj-text 
   /\.problem-body--fjf \.obj-full\s*\{\s*display:\s*inline;/.test(logoCss),
   'CSS: el «Objeto del estudio» usa un texto corto en reposo y el completo al agrandarlo');
 var fnodes = pb.querySelectorAll('.flow-node');
-has(fnodes.length === 7 &&
-  /Estrategia metodológica de gestión de proyectos basada en controles de ingeniería/.test(fnodes[5].querySelector('.node-body').textContent) &&
-  fnodes[5].querySelector('.node-tag').textContent.trim() === 'BRECHA',
-  'slide 2: el bloque 6 (Brecha) añade la estrategia metodológica basada en controles de ingeniería');
-has(fnodes[6].querySelector('.node-tag').textContent.trim() === 'PREGUNTA CIENTÍFICA' &&
-  !/Necesidad/i.test(fnodes[6].textContent) &&
-  /^¿Cómo contribuir a la mejora de condiciones de seguridad laboral/.test(fnodes[6].querySelector('.node-body').textContent.trim()) &&
-  fnodes[6].querySelector('.node-title').textContent.trim() === '',
-  'slide 2: el bloque 7 pasa a «Pregunta científica» con la pregunta de investigación');
-var q7node = fnodes[6];
+has(fnodes.length === 6 && gcs(pbBody.querySelector('.flow')).justifyContent === 'center' &&
+  /Estrategia metodológica de gestión de proyectos basada en controles de ingeniería/.test(fnodes[4].querySelector('.node-body').textContent) &&
+  fnodes[4].querySelector('.node-tag').textContent.trim() === 'BRECHA' &&
+  Array.prototype.map.call(fnodes, function (node) { return node.querySelector('.tnode-dot').textContent; }).join(',') === '1,2,3,4,5,6' &&
+  !Array.prototype.some.call(fnodes, function (node) { return node.querySelector('.node-tag').textContent.trim() === 'EFECTOS'; }),
+  'slide 2: quedan seis bloques centrados y numerados, sin Efectos, y Brecha ocupa el lugar 5');
+var p4node = fnodes[3];
+var hierarchyOverlay = pbBody.querySelector('.hierarchy-overlay');
+var expandedProblem = hierarchyOverlay.querySelector('.hierarchy-problem');
+has(p4node.getAttribute('data-focus') === 'p4' && p4node.getAttribute('role') === 'button' &&
+  p4node.getAttribute('tabindex') === '0',
+  'slide 2: el subbloque 4 Problema permite abrir la jerarquía con clic o teclado');
+has(hierarchyOverlay.getAttribute('data-focus') === 'p4' &&
+  hierarchyOverlay.getAttribute('role') === 'button' && hierarchyOverlay.getAttribute('tabindex') === '0' &&
+  gcs(hierarchyOverlay).display === 'none',
+  'slide 2: la vista ampliada de jerarquía está oculta en reposo y permite cerrarse');
+has(expandedProblem.querySelector('.hierarchy-problem-tag').textContent === win.PROBLEMA.flow[3].tag &&
+  expandedProblem.querySelector('.hierarchy-problem-title').textContent === win.PROBLEMA.flow[3].title &&
+  expandedProblem.querySelector('.hierarchy-problem-body').textContent === win.PROBLEMA.flow[3].body,
+  'slide 2: la vista ampliada incluye Problema, Problema central y el texto completo de Ausencia de una metodología integral');
+has(Array.prototype.map.call(hierarchyOverlay.querySelectorAll('.p-level'), function (level) {
+  return level.textContent.trim();
+}).join('|') === win.PROBLEMA.hierarchy.levels.join('|') &&
+  hierarchyOverlay.querySelector('.p-level.p-active').textContent.trim() === 'Controles de ingeniería',
+  'slide 2: la jerarquía ampliada conserva los cinco niveles en orden y resalta los controles de ingeniería');
+click(p4node.querySelector('.node-body'));
+has(pbBody.getAttribute('data-focus') === 'p4' && pbBody.classList.contains('problem-body--fp4') &&
+  gcs(hierarchyOverlay).display === 'flex' && gcs(expandedProblem).display === 'flex',
+  'slide 2: pulsar Problema muestra su contenido y la jerarquía ampliados juntos');
+has(gcs(evCol).display === 'none' && gcs(jfCol).display === 'none' &&
+  gcs(pbBody.querySelector('.flow')).display === 'none' && gcs(pbBody.querySelector('.q7-overlay')).display === 'none' &&
+  !!pb.querySelector('.scope-ghost.is-on'),
+  'slide 2: la jerarquía ampliada se muestra sola sobre la lámina original atenuada');
+click(hierarchyOverlay.querySelector('.p-level.p-active span'));
+has(!pbBody.getAttribute('data-focus') && !pbBody.classList.contains('problem-body--fp4') &&
+  gcs(hierarchyOverlay).display === 'none' && gcs(jfCol.querySelector('.pyramid-block')).display !== 'none' &&
+  !pb.querySelector('.scope-ghost'),
+  'slide 2: un segundo clic en la jerarquía cierra la ampliación y restaura el resumen');
+p4node.focus();
+has(key('Enter') && pbBody.getAttribute('data-focus') === 'p4',
+  'slide 2: Enter sobre Problema abre la jerarquía');
+has(key('Escape') && !pbBody.getAttribute('data-focus') && gcs(hierarchyOverlay).display === 'none',
+  'slide 2: Escape cierra la jerarquía ampliada');
+has(key(' ') && pbBody.getAttribute('data-focus') === 'p4',
+  'slide 2: Espacio sobre Problema también abre la jerarquía');
+click(pb.querySelector('.slide-head'));
+has(!pbBody.getAttribute('data-focus') && gcs(hierarchyOverlay).display === 'none',
+  'slide 2: un clic fuera de la jerarquía vuelve al estado normal');
+click(p4node);
+tabGo('4. Teorías');
+tabGo('2. Problematización');
+has(!pbBody.getAttribute('data-focus') && !pbBody.classList.contains('problem-body--fp4') &&
+  gcs(hierarchyOverlay).display === 'none' && !pb.querySelector('.scope-ghost'),
+  'slide 2: al volver desde otra diapositiva no queda la jerarquía abierta');
+has(fnodes[5].querySelector('.node-tag').textContent.trim() === 'PREGUNTA CIENTÍFICA' &&
+  !/Necesidad/i.test(fnodes[5].textContent) &&
+  /^¿Cómo contribuir a la mejora de condiciones de seguridad laboral/.test(fnodes[5].querySelector('.node-body').textContent.trim()) &&
+  fnodes[5].querySelector('.node-title').textContent.trim() === '',
+  'slide 2: el bloque 6 es la Pregunta científica con su texto de investigación');
+var q7node = fnodes[5];
 has(q7node.getAttribute('data-focus') === 'q7' && q7node.getAttribute('role') === 'button' &&
   q7node.getAttribute('tabindex') === '0',
-  'slide 2: el bloque 7 (pregunta científica) es accionable (data-focus=q7 + role + tabindex)');
+  'slide 2: el bloque 6 (pregunta científica) conserva la ampliación (data-focus=q7 + role + tabindex)');
 var q7ov = pb.querySelector('.q7-overlay');
 has(!!q7ov && q7ov.getAttribute('data-focus') === 'q7' && !!q7ov.querySelector('.q7-card'),
   'slide 2: existe el overlay de la pregunta ampliada (data-focus=q7 con su tarjeta)');
@@ -2377,15 +2507,15 @@ has(!!q7ov.querySelector('.q7-card .accent') && !!q7ov.querySelector('.q7-card .
 click(q7node);
 has(pbBody.classList.contains('problem-body--fq7') && pbBody.getAttribute('data-focus') === 'q7' &&
   gcs(q7ov).display === 'flex',
-  'slide 2: al pulsar el bloque 7 se muestra el overlay ampliado (problem-body--fq7)');
+  'slide 2: al pulsar el bloque 6 se muestra el overlay ampliado (problem-body--fq7)');
 has(gcs(pbBody.querySelector('.flow')).display === 'none' && !!pb.querySelector('.scope-ghost.is-on'),
   'slide 2: al ampliar la pregunta se oculta el contenido real y queda el fondo atenuado (ghost)');
 click(q7ov);
 has(!pbBody.getAttribute('data-focus') && gcs(q7ov).display === 'none',
   'slide 2: un clic sobre el overlay ampliado lo cierra');
 q7node.focus();
-has(key('Enter'), 'slide 2: Enter sobre el bloque 7 -> default evitado');
-has(pbBody.classList.contains('problem-body--fq7'), 'slide 2: el bloque 7 también se amplía con Enter');
+has(key('Enter'), 'slide 2: Enter sobre el bloque 6 -> default evitado');
+has(pbBody.classList.contains('problem-body--fq7'), 'slide 2: el bloque 6 también se amplía con Enter');
 key('Escape');
 has(!pbBody.getAttribute('data-focus') && gcs(q7ov).display === 'none',
   'slide 2: Escape cierra la pregunta ampliada');
@@ -2399,11 +2529,13 @@ has(/\.q7-card\s*\{[^}]*width:\s*50%/.test(logoCss) &&
   /\.q7-card \.accent\s*\{[^}]*width:\s*4px/.test(logoCss) &&
   /\.q7-header\s*\{[^}]*linear-gradient\(135deg, #4c4a4f, #262626\)[^}]*border-bottom:\s*4px solid var\(--green\)/.test(logoCss),
   'CSS: el recuadro de la pregunta replica el panel de Evidencia/Justificación (50% + accent + cabecera oscura)');
-has(/\.green \.node-tag\s*\{[^}]*color:\s*#000/.test(logoCss),
-  'CSS: en reposo, la etiqueta «Pregunta científica» del bloque 7 va en negro');
+has(q7node.classList.contains('flow-node--question') &&
+  /\.flow-node--question\s*\{[^}]*background:\s*linear-gradient\(135deg, rgba\(192, 36, 42, \.10\), rgba\(192, 36, 42, \.16\)\)/.test(logoCss) &&
+  /\.flow-node--question \.node-tag\s*\{[^}]*color:\s*var\(--ink\)/.test(logoCss),
+  'CSS: la pregunta científica del bloque 6 usa rojo atenuado con etiqueta oscura');
 has(/\.flow-node\[data-focus="q7"\]\s*\{[^}]*transition:\s*box-shadow[^}]*transform/.test(logoCss) &&
   /\.flow-node\[data-focus="q7"\]:hover\s*\{[^}]*transform:\s*translateY\(-1px\)/.test(logoCss),
-  'CSS: el bloque 7 replica el realce al pasar el ratón (translateY -1px + sombra)');
+  'CSS: el bloque 6 replica el realce al pasar el ratón (translateY -1px + sombra)');
 
 /* ========================= DIAPOSITIVA 4 · MARCO TEÓRICO ==================== */
 tabGo('4. Teorías');
@@ -2660,9 +2792,12 @@ has(!!th.querySelector('.scope-ghost.is-on'),
   'ghost: la lámina original queda atenuada al ampliar «Teorías base»');
 has(gcs(th.querySelector('.th-intro')).visibility === 'hidden' &&
   gcs(th.querySelector('.th-grid')).visibility === 'hidden' &&
-  gcs(thTeo).visibility !== 'hidden',
-  'slide 4: al ampliar «Teorías base» se oculta el contenido real y el panel queda visible');
-has(/\.th-body--fteo \.th-panel\s*\{[^}]*position:\s*absolute[^}]*left:\s*50%[^}]*top:\s*50%[^}]*transform:\s*translate\(-50%,\s*-50%\)[^}]*z-index:\s*2/.test(logoCss) &&
+  gcs(thTeo).visibility !== 'hidden' &&
+  gcs(thBody.querySelector('.th-legal')).visibility !== 'hidden' &&
+  thBody.querySelectorAll('.th-legal .th-lh-row').length === 6,
+  'slide 4: Teorías base ampliada muestra ambos paneles y los seis niveles del marco legal');
+has((/\.th-body--fteo \.th-panel\s*\{[^}]*position:\s*absolute[^}]*top:\s*50%[^}]*transform:\s*translateY\(-50%\)[^}]*z-index:\s*2/.test(logoCss) ||
+   /\.th-body--fteo \.th-panel\s*\{[^}]*position:\s*absolute[^}]*left:\s*50%[^}]*top:\s*50%[^}]*transform:\s*translate\(-50%,\s*-50%\)[^}]*z-index:\s*2/.test(logoCss)) &&
   /\.th-panel\[data-focus\]\s*\{\s*cursor:\s*pointer/.test(logoCss),
   'CSS: el panel «Teorías base» se centra sobre el ghost y anuncia cursor pointer');
 click(thTeo);

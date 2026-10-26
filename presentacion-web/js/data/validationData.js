@@ -49,7 +49,7 @@ window.VALIDACION = {
       ],
       instrumento: 'Sí / No / No aplica + observaciones cualitativas',
       criterio: 'Frecuencia · Porcentaje · Aceptación inicial',
-      resultado: ['99,46 % consenso afirmativo', '183 Sí de 184 valoraciones'],
+      resultado: ['99,46 % consenso afirmativo', '183 Sí de 184 valoraciones (23 ítems evaluados)'],
       dictamen: 'Apta para continuar',
       modal: {
         titulo: 'Ronda 1 — Resultados generales',

@@ -1,7 +1,7 @@
 @echo off
 REM ============================================================
 REM Verificación completa de la presentación (12 slides):
-REM   sintaxis + map_check (54) + focus_check (888) + harness + capturas.
+REM   sintaxis + map_check (54) + focus_check (920) + harness + capturas.
 REM Uso:  verify-all.cmd   (sin Screenshot)
 REM       verify-all.cmd shot   (con screenshots en tools\out\)
 REM Requisitos: Node.js + npm install en tools/
@@ -38,6 +38,10 @@ node --check "..\presentacion-web\js\data\recomendacionesData.js" || goto :err
 node --check "..\presentacion-web\js\slides\slide12Recomendaciones.js" || goto :err
 node --check "..\presentacion-web\js\data\erTables.js" || goto :err
 node --check "..\presentacion-web\js\app.js" || goto :err
+node --check "nav_check.js" || goto :err
+node --check "integration_check.js" || goto :err
+node --check "prepare-pages.js" || goto :err
+node --check "app_cdp.js" || goto :err
 echo OK
 
 echo [2/4] jsdom map check (map_check.js)...
@@ -64,6 +68,7 @@ if /I "%~1"=="shot" (
     call :shot slide02.png pb_shot.html
     call :shot slide02_fev.png pb_shot_fev.html
     call :shot slide02_fjf.png pb_shot_jf.html
+    call :shot slide02_p4.png pb_shot_p4.html
     call :shot slide02_q7.png pb_shot_q7.html
     call :shot slide03.png sl3_shot.html
     call :shot slide04.png sl4_shot.html
@@ -150,6 +155,7 @@ if /I "%~1"=="shot" (
     call :shot slide12_frc4.png rc_shot_frc4.html
     call :shot slide12_frc5.png rc_shot_frc5.html
     call :shot slide12_frc6.png rc_shot_frc6.html
+    echo Jerarquia de controles ampliada: out\slide02_p4.png
     echo Screenshots: out\slide02.png [Problematización], out\slide02_fev.png [Evidencia agrandada], out\slide02_fjf.png [Justificación agrandada], out\slide02_q7.png [pregunta científica ampliada], out\slide03.png [Objetivos], out\slide04.png [Marco teórico], out\slide04_hist.png [Marco histórico ampliado], out\slide04_apl.png [Aplicación ampliada], out\slide04_legal.png [Marco legal ampliado + jerarquía], out\slide04_ctx.png [Marco contextual ampliado en óvalo radial], out\slide05_map.png, out\slide06.png, out\slide06_foco1-3.png, out\slide06_foco1a-1b.png, out\slide06_foco2a-2b.png, out\slide06_foco3a-3b.png, out\slide06_foco3aimg.png, out\slide06_foco3bimg.png, out\slide07.png, out\slide07_fne-fni.png, out\slide07_ff1.png, out\slide08.png, out\slide08_fp1-fp6.png, out\slide08_fp1i-fp6i.png [nivel 2], out\slide08_fp1z.png, out\slide08_fp2z.png [acercado], out\slide08_foto1.png, out\slide08_foto2.png [galería], out\slide08_art1.png, out\slide08_art2.png [ART], out\slide09.png [EPT], out\slide09_f1-f2.png [pt1/pt2], out\slide09_f2img.png [riesgos en paralelo], out\slide09_f3.png [pt3+pt4 en paralelo], out\slide09_frs.png [resultado esperado], out\slide10.png [Validación], out\slide10_fr1-fr3.png, out\slide10_frn.png, out\slide11.png [Conclusiones], out\slide11_zoom1-6.png [bloque agrandado], out\slide11_fb1-fb6.png [conclusión], out\slide12.png [Recomendaciones], out\slide12_frc1-frc6.png [detalle ampliado], out\md_shot*.png
   ) else (
     echo Chrome no encontrado en la ruta por defecto; omitiendo screenshot.
@@ -166,7 +172,7 @@ exit /b 0
 "%CHROME%" --headless=new --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=5000 --force-device-scale-factor=2 --window-size=1408,720 "--user-data-dir=%TEMP%\openchromeshots_%RANDOM%" --screenshot="%~dp0out\%~1" "file:///%CD:\=/%/out/%~2"
 goto :eof
 
-rem La Fotografía 1 aloja la aplicación de tesis/0: sus 16 scripts tardan en
+rem La Fotografía 1 aloja la aplicación integrada ntp330/0: sus scripts tardan en
 rem cargarse, así que esta captura necesita bastante más tiempo virtual que las
 rem demás (si no, sale el marco vacío).
 :shotapp

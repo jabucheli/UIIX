@@ -35,13 +35,12 @@ window.PROBLEMA = {
     { n: 3, text: 'Acciones que más exponen al trabajador — CAMICON (2020)' }
   ],
   flow: [
-    { tag: 'CONTEXTO', color: '#4e7f9d', icon: 'building', title: 'Contexto del sector', body: 'Pilar de la economía — 7,9% del PIB · 6.206 empresas · 158.303 empleos' },
+    { tag: 'CONTEXTO', color: '#4e7f9d', icon: 'building', title: 'Contexto del sector de la construcción', body: 'Pilar de la economía — 7,9% del PIB (2020) · 6.206 empresas · 158.303 empleos' },
     { tag: 'CAUSAS', color: '#b8822f', icon: 'hardhat', title: 'Condiciones de riesgo laboral', body: 'Mano de obra no calificada · gestión reactiva · altura, excavación e izaje', tall: true },
     { tag: 'DEFICIENCIAS', color: '#c26a1e', icon: 'clipboard', title: 'Limitaciones de la gestión de riesgos', body: 'Prevención como requisito legal, no cultura · evaluación cualitativa y fragmentada', tall: true },
     { tag: 'PROBLEMA', color: '#a5151f', icon: 'target', title: 'PROBLEMA CENTRAL', body: 'Ausencia de una metodología integral que articule la identificación, evaluación y control de riesgos desde un enfoque de ingeniería', central: true },
-    { tag: 'EFECTOS', color: '#c0242a', icon: 'trend', title: 'Consecuencias', body: 'Accidentes, incapacidades y fatalidades · costo humano y económico — 2,78 M muertes/año (OIT)' },
     { tag: 'BRECHA', color: '#7d3b5e', icon: 'balance', title: 'Brecha de gestión', body: 'Marco normativo vigente sin materialización efectiva en obra — D.E. 255-2024 · AM-MDT-2025-122 · AM-MDT-2024-196 (Anexo 3) · C.D. 513 (IESS) - Estrategia metodológica de gestión de proyectos basada en controles de ingeniería', tall: true },
-    { tag: 'PREGUNTA CIENTÍFICA', color: '#0a7a55', icon: 'flag', title: '', body: '¿Cómo contribuir a la mejora de condiciones de seguridad laboral y la prevención de riesgos en proyectos de construcción de la ciudad de Quito, en conformidad con la normativa ecuatoriana vigente entre 2024 y 2026?', green: true }
+    { tag: 'PREGUNTA CIENTÍFICA', color: '#c0242a', icon: 'flag', title: '', body: '¿Cómo contribuir a la mejora de condiciones de seguridad laboral y la prevención de riesgos en proyectos de construcción de la ciudad de Quito, en conformidad con la normativa ecuatoriana vigente entre 2024 y 2026?' }
   ],
   hierarchy: {
     focus: 'Foco: controles de ingeniería',

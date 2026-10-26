@@ -49,10 +49,10 @@
         '<span class="rs3-zoom-nv">×1,0</span>' +
         '<span>clic: acercar &middot; arrastrar: desplazar &middot; clic fuera: volver</span>' +
       '</p>' +
-      '<footer class="rs3-pn-f">' +
+      (p.mostrarPie === false ? '' : '<footer class="rs3-pn-f">' +
         '<em>' + p.detalle + '</em>' +
         '<span>' + p.pie + '</span>' +
-      '</footer>' +
+      '</footer>') +
     '</article>';
   }
 

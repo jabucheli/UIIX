@@ -1,9 +1,12 @@
 # Continuidad — Presentación web de tesis doctoral
 
 > Documento de trabajo autónomo para retomar el trabajo **en este computador o en otro**.
-> Alcance actual: **los 12 slides de la presentación** de `presentacion-web` + integración con la app
-> de `D:\ejemplo\tesis\0` (desde el bloque Riesgo del slide 7).
-> Última actualización: **2026-10-16**.
+> Alcance actual: **los 12 slides y la app NTP 330 integrada**, en un único proyecto
+> `presentacion`; la app vive en `presentacion-web/ntp330/0` y abre desde el slide 7.
+> Última actualización: **2026-10-26**.
+>
+> **Desde §70 todo el trabajo está integrado.** Las referencias a la carpeta
+> hermana en las secciones anteriores describen la evolución histórica.
 
 ---
 
@@ -11,21 +14,25 @@
 
 | | |
 |---|---|
-| **Reanudar (este equipo)** | `cd tools` y ejecutar **`reanudar.cmd`** → comprueba Node/Chrome/jsdom/app hermana, verifica todo (**54/54 + 897/897**), genera capturas, y muestra el estado git de los dos repos y dónde sigue la doc. Variantes: `reanudar.cmd shot` (además genera los PNG) y `reanudar.cmd app` (además ejecuta las **52/52** pruebas de la app). Ver §17. |
-| **Guardar / llevar a otro equipo** | `cd tools` y **`traspaso.cmd paquete`** → comprueba el **inventario** completo (`verificar-inventario.js`, manifiesto en `tools/inventario.json`), avisa de lo que git no ha guardado y genera el zip portable `tools\out\traspaso\presentacion-tesis-AAAAMMDD-HHMM.zip` (presentacion + tesis hermana + respaldos JSON + historial git + LEEME). Procedimiento completo en `TRASPASO.md`. |
-| **Guardar sin pérdidas (automático)** | `cd tools` y **`respaldo.cmd`** → verificación (nunca se salta aunque salga en rojo) + **commit git automático** de las dos carpetas + zip en `D:\ejemplo\respaldos\` (fuera del proyecto, rota a los últimos 14) + log. **`respaldo.cmd estado`** enseña el resumen; **`respaldo.cmd agendar`** crea la tarea programada diaria a las 18:00 (ver §55 y `RESPALDO.md`). |
+| **Reanudar (este equipo)** | Doble clic en **`iniciar.cmd`**, o `cd tools` y **`reanudar.cmd`** → Node 22+/Chrome/jsdom/inventario del proyecto único, **54/54 + 920/920** y estado Git. **`reanudar.cmd app`** añade **52/52**, recorrido completo, cinco PDF locales e integración del slide 7 en file/HTTP; `shot` genera PNG. Dependencias con `npm ci`. Ver §70. |
+| **Guardar / llevar a otro equipo** | `cd tools` y **`traspaso.cmd paquete`** → ZIP portable verificado en `tools\out\traspaso\`, con el proyecto **presentacion completo**, app integrada, historial Git, archivos pendientes, JSON exportados y manifiesto SHA256. Procedimiento en `TRASPASO.md`. |
+| **Guardar al terminar y automáticamente** | Doble clic en **`guardar.cmd`** → árbol actual del proyecto integrado + historial Git + ZIP verificado con SHA256 en `D:\ejemplo\respaldos\` (últimas 14 copias). **`guardar.cmd estado`**, **`guardar.cmd verificar`** y **`guardar.cmd agendar`** (diaria, 18:00). Conserva cambios pendientes de commit. Ver `RESPALDO.md` y §70. |
+| **Recuperación** | **`recuperar.cmd -Paquete "RUTA\copia.zip" -Destino "D:\ejemplo\recuperacion-NUEVA"`** → verifica ZIP y archivos extraídos, recupera Git conservando cambios pendientes y comprueba inventario. El destino debe ser nuevo. Ver `RESPALDO.md` §5. |
+| **Datos NTP 330** | Exportar desde **Catálogo** a `presentacion-web\ntp330\0\pruebas\out\respaldos\`. La integración conservó el estado real de Chrome (**2 claves, 1 evaluación**) y verificó su igualdad tras recargar la nueva ubicación. JSON real `ntp330-migracion-2026-10-26T01-17-41-444Z.json`; detalle en §70. |
+| **Respaldo comprobado (§70)** | **22/22** pruebas: proyecto único, recuperación, conservación de JSON para el siguiente guardado, integridad, rutas con espacios, bloqueo y rotación. La copia vigente y su checksum están en `D:\ejemplo\respaldos\ultimo-respaldo.json`. |
+| **Último ajuste (§71)** | Publicación del proyecto integrado en **`github.com/jabucheli/UIIX`** y sitio **`https://jabucheli.github.io/UIIX/`**. Workflow de Pages con verificaciones y preparación del sitio estático. **54/54 + 920/920 + 52/52 + recorrido completo + cinco PDF locales**. La app sigue abriendo desde el slide 7. |
 
-**Regla de oro para mover el trabajo:** `presentacion` y `tesis` son carpetas **hermanas**
-(al mismo nivel) y viajan **juntas**: la presentación embebe la app `tesis\0`
-desde el bloque Riesgo del slide 7. El paquete de `traspaso.cmd paquete` lleva
-ambas.
+**Proyecto único:** trasladar la carpeta **`presentacion`** completa. La app,
+sus documentos fuente y sus pruebas están en **`presentacion-web/ntp330/`**.
+El repositorio vigente es el principal; `historial-origen.bundle` conserva el
+historial anterior del módulo para consulta.
 | Estado | **Los 12 slides están desarrollados y verificados**: carátula (réplica del slide 1 de `Ejemplo.pptx`), problematización, objetivos+hipótesis, marco teórico, metodología (5 fases + mapa circular con zoom por clic), resultados (3 columnas + sub-bloques + nivel 2 de imágenes), resultados (2) (flujograma NTP 330 + cuadros de `ER.docx` + embebido de la app de `tesis/0`), resultados (3) (6 resultados + ART + galería de fotos) y **EPT** (diagrama esquemático de 5 franjas aplicado **muy detalladamente** según `EPTransf.md`: secuencia de transformación arriba, franja central Fundamento → Etapa 1 → Etapa 2 → Etapa 3 → Propósito, resultado esperado y recursos clave, con la paleta verde/rojo del deck; banda central al **75 % de alto (309 px)**, conjunto **centrado verticalmente**, títulos de etapa **+20 %** y flechas centrales **verde → rojo → verde → rojo**, §27-§28; y **clic en cada etapa → imagen de detalle** `pt1..pt4.png` en primer plano con aparición sencilla (proyección de escala `scale(.5→1)` al abrir y de más a menos al cerrar, sin giro), nivel 2 en Etapa 3 (pt3 → pt4) y clic fuera/ESC → pantalla principal, con el slide atenuado detrás, §29; y **nivel 2 en Etapa 2**: clic sobre pt2 → `riesgos1.png` + `riesgos2.png` lado a lado, §33); y **Validación** (slide 10 nuevo, §31: mapa mental del proceso Delphi con núcleo «Validación de la propuesta», panel de 8 expertos, tres rondas —verde/rojo/verde— y banda de síntesis, con **clic en cada ronda o en la síntesis** → modal con su tabla y comparativa final; y mapa a **altura natural con el conjunto centrado en vertical**, §32); y **Conclusiones** (slide 11 nuevo, §34: seis bloques encadenados 1→6 —verde/rojo, **el bloque 6 en rojo**— con conectores radiales hacia el nodo central «CONCLUSIONES» y franja de aporte central, códigos normativos como chips y la validación Delphi como cajas; **interacción en dos pasos**: 1.er clic → el bloque se **agranda y centra**, 2.º clic → pantalla con la conclusión completa del bloque, §34); y **Recomendaciones** (slide 12 nuevo, §35: tres columnas de ámbito —metodológico y académico en verde, práctico en rojo— con seis subbloques 1-6 que llevan número, título, palabras clave y franja de cierre, y una banda operacional «Ampliar → Aplicar → Actualizar → Investigar»; **un clic en cualquier subbloque** abre su detalle ampliado). Ver §18-§36 para la historia reciente. |
 | Carátula (slide 1) | **Reescrita en §23**: banda negra `#262626` de 211px con `logocaratula.png` centrado (430px, `aspect-ratio:306/65`), textos del ejemplo ("Presentación Tesis Doctoral", título, "DOCTORADO EN DIRECCIÓN DE PROYECTOS", "Candidato: Jorge Alexander Bucheli García", "Asesora: Dra. Julia Ayuso, Ph.D."), franjas verticales a la izquierda, tira abstracta rojo/verde a la derecha **atenuada al 50%** (`opacity: 0.5`, §24). **Sin** el logotipo de `logo.bmp` y **sin** la etiqueta "ETIQUETA". |
-| Encabezado | Pestañas de navegación con el índice; **retirado el texto** "Tesis Doctoral · Gestión de proyectos…" (`.brand-text`), queda solo el punto verde de la izquierda. |
-| Logo superior | `logo.bmp` convertido a `assets/logo.png` en la **esquina superior derecha de los slides 2-9** (no en la carátula), `top:8px; right:12px; width:140px`. Ver §21. |
+| Encabezado | Panel de navegación con **12 pestañas visible en modo normal y pantalla completa** (§65); en una o dos filas según el ancho. Retirado el texto "Tesis Doctoral · Gestión de proyectos…" (`.brand-text`), queda el punto verde de la izquierda. |
+| Logo superior | **`logo1.png`** copiado exactamente a `assets/logo.png` en la **esquina superior derecha de los slides 2–12** (§68). Caja de **175×38,55 CSS px**, `top:8px; right:12px; object-fit:contain; object-position:right top`. Imagen proporcional de **173,46×38,55 CSS px** dentro de esa caja. |
 | Pie institucional | `logo-inf.png` → `assets/logo-inf.png` (1316→1119px, −15%) **solo en pantalla completa**: banda de 80px en flujo al pie del marco (720→800px) que NO desplaza el contenido; `align-items:flex-end` lo apoya en el borde inferior. Ver §22. |
 | Paleta | Verde `#006E49` · Rojo `#C0242A` · negros/grises de `Ejemplo.pptx` (banda `#262626`, textos `#4C4A4F`/`#595959`, verde de programa `#006E49`). |
-| Verificación | **`cd tools && reanudar.cmd`** (una orden: entorno + todo + estado git); atajo: `verify-all.cmd shot`. Objetivo actual: **54/54 (map) + 897/897 (focus, los 12 slides) + `TODO OK`**. |
+| Verificación | **`cd tools && reanudar.cmd`** (una orden: entorno + todo + estado git); atajo: `verify-all.cmd shot`. Objetivo actual: **54/54 (map) + 920/920 (focus, los 12 slides) + `TODO OK`**. |
 | Capturas | `tools/out/slide01_cover.png` y `slide01_cover_fs.png` (carátula normal/pantalla completa) · `slide_fs_foot.png` (pie en pantalla completa) · `slide02.png` + `slide02_fev.png` (Problematización y bloque Evidencia agrandado) + `slide02_fjf.png` (Justificación agrandada) + `slide02_q7.png` (pregunta científica ampliada) · `slide03.png` (Objetivos) · `slide04.png` (Marco teórico) + `slide04_hist.png` (bloque «Marco histórico» ampliado) + `slide04_apl.png` / `slide04_legal.png` / `slide04_ctx.png` (técnicas aplicadas, marco legal y **marco contextual ampliados**) · `slide05_map.png`, `md_shot*.png` · `slide06*.png` · `slide07*.png` · `slide08*.png` · `slide09.png` + `slide09_f1/f2/f3/f3img.png` + `slide09_f2img.png` + `slide09_frs.png` (EPT y sus detalles) · `slide10.png` + `slide10_fr1/fr2/fr3/frn.png` (Validación y sus modales) · `slide11.png` + `slide11_zoom1..6.png` (bloque agrandado) + `slide11_fb1..6.png` (conclusión) [Conclusiones] · `slide12.png` + `slide12_frc1..6.png` (Recomendaciones y sus detalles) · `res2_shot*.png` · `res3_shot*.png` |
 | Revisar a ojo (no las puede leer el asistente) | `slide01_cover.png` (banda negra + logos + tira al 50%), `slide_fs_foot.png` (pie 1119px al borde), `slide04.png` (Marco teórico en reposo: el «Marco histórico» solo con los años y el «Marco contextual actual» en **óvalo radial con solo los títulos**) y `slide04_hist.png` (Marco histórico ampliado y centrado, resto atenuado) + `slide04_ctx.png` (marco contextual ampliado: 8 tarjetas en el óvalo, resto atenuado), `slide09.png` (esquema EPT) y `slide09_f1/f2/f3/f3img.png` (imágenes de detalle al hacer clic en cada Etapa) + `slide09_f2img.png` (riesgos1 + riesgos2 en paralelo, §33), `slide10.png` (mapa de validación) y `slide10_fr1/fr2/fr3/frn.png` (modales de ronda y tabla comparativa), las capturas de logos en los slides 2-11, más `slide11.png` + `slide11_zoom1..6.png` (el bloque agrandado y centrado) + `slide11_fb1..6.png` (la conclusión) del slide de Conclusiones, y `slide12.png` + `slide12_frc1..6.png` (las tres columnas de ámbito y el detalle ampliado de cada subbloque) del slide de Recomendaciones. El usuario impone el diseño; el asistente mide geometría con Chrome y el usuario valida lo visual. |
  | Pendiente | Nada bloqueado. Próximos pasos típicos: revisión visual del usuario de las capturas (en especial del slide 12: `slide12.png` y `slide12_frc1..6.png` — el subbloque 1 es ahora un **diagrama radial** «C. Chequeo» + 5 riesgos + cadena NTP 324→330, §37), ajustes de textos/tamaños, nuevos contenidos por slide. Pendiente aparte: transcribir a HTML las imágenes `pt1..pt5` del slide 9 (falta fuente para `pt5`). |
@@ -51,24 +58,23 @@ Lo que hay que llevar (clone/zip de la carpeta del repo): **todo EXCEPTO** `tool
 `presentacion-web/assets/`** (ref-norm.png, c-cheq.png, procesos1/2.png, riesgos1/2.png,
 Imagen1.png) — si el clone no las trae, las fases/sub-bloques mostrarán «Imagen pendiente».
 
-> **Atajo:** `traspaso.cmd paquete` genera un único `.zip` con `presentacion` y la app hermana
-> `tesis` listo para otro equipo; el procedimiento completo está en `TRASPASO.md`.
-> La carpeta hermana `tesis` hay que llevarla **sí o sí** (slide 7 y `reanudar.cmd`
-> la requieren todo el tiempo).
+> **Atajo:** `traspaso.cmd paquete` genera un único `.zip` con el proyecto
+> **presentacion y su app integrada**, listo para otro equipo. Procedimiento
+> completo en `TRASPASO.md`.
 
 ```bash
 # 1. Instalar Node.js 22+ (npm incluido). Chrome solo si se quieren capturas.
 
 # 2. Dependencias de verificación (UNA SOLA VEZ)
 cd tools
-npm install            # instala jsdom ^24 (única dependencia)
+npm ci                 # instala las versiones del package-lock.json
 
 # 3. Verificación completa.
 #    En Windows:  verify-all.cmd  /  verify-all.cmd shot
 #    En macOS/Linux (los scripts son .cmd; usa los comandos sueltos):
 node --check ../presentacion-web/js/app.js   # y demás JS (verify-all los lista)
 node map_check.js                            # 54 checks jsdom (slide 5)
-node focus_check.js                          # 763 checks jsdom (los 12 slides)
+node focus_check.js                          # 920 checks jsdom (los 12 slides)
 node gen_map_shot.js && node gen_heights.js  # harness slide 5
 node gen_results_heights.js                  # harness slide 6 (+ copia assets a out/)
 # capturas (opcional): apuntar CHROME a la ruta local y usar
@@ -92,11 +98,12 @@ completa en la cabecera.
 | Archivo | Qué hace |
 |---|---|
 | `verify-all.cmd` | Orquestador: `node --check` × 8 (incluye `js/data/erTables.js`) → `map_check.js` → `focus_check.js` → `gen_map_shot.js` → `gen_heights.js` → `gen_results_heights.js` → `gen_slide7_shot.js` → captura opcional (incluye `slide07*.png` y `res2_shot*.html`). |
-| `reanudar.cmd` | **Punto de entrada al retomar el trabajo**: [1] entorno (Node, jsdom con `npm install` automático, Chrome, app hermana `../../tesis/0`), [2] `verify-all`, [3] opcional `app` → `app_cdp.js --tab=pruebas --run` (52/52), [4] `git status` de `presentacion` y `tesis`, [5] rutas de doc y comandos. Uso: `reanudar.cmd` · `reanudar.cmd shot` · `reanudar.cmd app` · `reanudar.cmd shot app` (ver §17). |
-| `verificar-inventario.js` | **Comprueba el inventario** (`tools/inventario.json`): que existan todos los archivos y carpetas requeridos de `presentacion` **y** de la hermana `tesis`, avisa de la basura y de lo que git tiene sin commitear. `node verificar-inventario.js`. |
+| `reanudar.cmd` | **Punto de entrada al retomar el trabajo**: entorno y módulo integrado → `verify-all` → con `app`, verificador NTP 330 completo e integración file/HTTP → estado del repositorio único → rutas de documentación. Uso: `reanudar.cmd`, `reanudar.cmd shot`, `reanudar.cmd app`, `reanudar.cmd shot app`. Ver §70. |
+| `verificar-inventario.js` | **Comprueba el inventario** (`tools/inventario.json`) de todo `presentacion`, incluido `presentacion-web/ntp330/`, y muestra el estado Git y los artefactos regenerables. `node verificar-inventario.js`. |
 | `traspaso.cmd` | **Guardado y traspaso**: `traspaso.cmd` (inventario + git), `traspaso.cmd paquete` (además genera el zip portable en `tools\out\traspaso\`), `traspaso.cmd todo` (paquete + `verify-all`). Todo el procedimiento en `TRASPASO.md`. |
-| `traspaso-empaquetar.ps1` | Empaquetador que llama `traspaso.cmd` (PowerShell, sin dependencias): comprime `presentacion` + `tesis` + respaldos JSON + historial git en `tools\out\traspaso\.` |
+| `traspaso-empaquetar.ps1` | Empaquetador del respaldo y traspaso: comprime el proyecto único, los JSON exportados y el historial Git en un ZIP con SHA256. |
 | `map_check.js` | **54 checks** en jsdom: estructura, posiciones, colores, insignias, textos prohibidos, ruta, nota, higiene. No necesita Chrome. |
+| `nav_check.js` | Chrome/CDP: verifica las 12 pestañas en cuatro resoluciones, en modo normal y pantalla completa nativa, incluidos el botón de salida y la ausencia de recortes o pestañas tapadas. Genera `tools/out/nav_fs_*.png`. `node tools/nav_check.js`. |
 `focus_check.js` | **383 checks** en jsdom de la interacción (mínimo histórico; **hoy el total es 654** y desde §21 también comprueba el logo superior de los slides 2-10, el pie de pantalla completa, los contenidos/forma de la carátula de §23-§25 y el esquema EPT del §26): foco por clic/teclado/ESC del slide 6 (**sub-bloques 1a/1b/2a/2b, fases 3a/3b y nivel 2 3aimg/3bimg** + ghost), del slide 5 (bloques 1-2 y 5 ramas + ghost) y del slide 7 (**página seccionada**: banda del flujograma al 18.75% con los 7 nodos, banda inferior con los dos recuadros de fotos, **los cinco cuadros de `ER.docx`**: cinco objetivos `data-focus` ne/np/nc/nr/ni, `window.ER_TABLES` cargado, los cinco cuadros ocultos en reposo, `Enter` y clic abriendo **solo** el cuadro del bloque pulsado, severidad rojo/verde, cierre con segundo clic y con `ESC`/clic fuera, ghost al abrir y ausente al cerrar, el CSS del crecimiento/encogimiento, **el centrado de todas las celdas**, **la matriz NR con sus tres ejes rotulados** — banner «Nivel de Probabilidad (NP)» con `colspan` de 4, rótulo vertical «Nivel de Consecuencias (NC)» con `rowspan` de 4, y los nombres del NP en las columnas y del NC en las filas — y **el bloque Riesgo abre la app de `tesis/0`**: `data-focus="f1"`, aria-label «Abrir la aplicación de evaluación de riesgos», iframe perezoso con `src` y `title` correctos, los 7 bloques ocultos con efecto (`opacity: 0; visibility: hidden`), fondo blanco opaco del recuadro abierto delante del ghost (`z-index: 2` sobre `z-index: 0`), y los recuadros de foto sin `data-focus`/`tabindex`/`role`) y **del slide 8** (`RESULTADOS3`: seis pasos `p1`…`p6` en secuencia con sus seis imágenes en disco y en orden, cifras resumen, verde/rojo, clic abre un único resultado y abre el de ese paso, cierre con segundo clic y `ESC`, ghost al abrir, resumen `.rs3-idle` visible en reposo y oculto al abrir, y el CSS de `.rs3-body`/`.rs3-panel`) y **del slide 9** (`EPT`: título "Estructura de la propuesta de transformación", subtítulo de EPTransf.md (secuencia metodológica orientada al fortalecimiento de la gestión preventiva en proyectos de construcción de edificaciones e infraestructura básica en Quito), el registro en `SLIDES`, las **5 franjas** de la lámina, la franja de lógica con sus 4 nodos, el central con Fundamento/Propósito y las 3 etapas (nombres exactos de EPTransf con su segunda línea, 4+4+5 viñetas exactas, cápsulas `NTP 324`/`NTP 330` solo en las etapas 2-3, los 3 grupos de "Recursos requeridos" con 5 pill cada uno y las 3 franjas de salida), el resultado esperado con sus 3 nodos, los 7 ítems de recursos clave, y el CSS verde/rojo (alternancia) / tintes EPTransf / `flex:1` del cuerpo). Inyecta `css/styles.css` para poder usar `getComputedStyle` (jsdom no carga el `<link>`). No necesita Chrome. |
 | `gen_map_shot.js` | Escribe `out/map_shot.html` para la captura. |
 | `gen_heights.js` | Escribe `out/heights.html` con un `<pre id="report">` de geometría del slide 5: estado normal detallado + auditoría de **9 estados** (normal, f1, f2, las 5 ramas, restaurado). También escribe `out/md_shot*.html`. |
@@ -105,7 +112,8 @@ completa en la cabecera.
 | `gen_slide7_shot.js` | Audita el **slide 7**: `out/res2_heights.html` (reposo), `out/res2_focos.html` (seis focos) y `out/res2_shot.html` + `out/res2_shot_f{ne,np,nc,nr,ni,f1}.html`. Encabezado 1408×76, cuerpo 1408×644, flujo 1368×118 y 7 nodos de 166×118. En reposo: fotos 1368×486 y recuadros 677×486, sin iframe. Con tabla: fotos colapsadas y un cuadro 1368×486. Con `f1`: foto 1352×486 e iframe 1338×431 (`app-rect 27 259 1338 431`). **0 clip/tx/OVERFLOW** en los siete estados. Resuelve a absoluta la ruta de la app (`path.resolve(ROOT, …fotos[0].app.src)`) y falla si falta `tesis/0`. Excluye el ghost y los elementos colapsados al medir. |
 | `gen_ept_shot.js` | Audita el **slide 9 (EPT)**: escribe `out/ept_shot.html` con un `#report` fuera de pantalla (`left:-9999px`). Cabecera 1408×92 (subtítulo de 2 líneas), cuerpo 1408×628, franjas lógica 1364×75 / central 1364×309 / resultado 1364×73 / recursos 1364×28; 3 tarjetas de 316×309 (anchos iguales 3/3), 4 nodos de lógica, 3 nodos de resultado, 7 ítems de recursos, logo y pie presentes. **0 clip/tx/OVERFLOW**. La franja central tiene **alto fijo de 309 px** (el 75 % de los 412 px anteriores) y el resultado esperado va **pegado a continuación** (sin `margin-top: auto`); los laterales Fundamento/Propósito la igualan con `align-items: stretch` (ver §27). Inyecta el logo y el pie (oculto sin pantalla completa) como `app.js`. |
 | `png_stats.js` | Lee un PNG de Chrome (decodifica IDAT con `zlib`, sin dependencias) e informa de **cuántos colores distintos y qué porcentaje de píxeles pintados** hay en un rectángulo. Comprueba que el iframe cargó aunque su DOM sea de otro origen. La captura actual, con fondo sólido, da **7 980 colores y 32,8 % pintado** en `54 518 2676 862`. `uso: node png_stats.js <archivo.png> [x y w h]`; las coordenadas salen de `app-rect` en el reporte de `gen_slide7_shot.js`, multiplicadas por 2 por la escala de la captura. |
-| `app_cdp.js` | Controlador Chrome/CDP de la app hermana, sin dependencias npm (WebSocket de Node 22). Captura errores JS, estilos calculados, colores NI y desborde horizontal. `--tab=pruebas --run` exige **52/52**; `--flow` recorre la evaluación y comprueba los gráficos; `--pdf` genera y revisa cuatro PDF con las bibliotecas reales; `--viewport --width=1338 --height=431` simula el tamaño interior actual de Fotografía 1. Copia de trabajo y perfil aislados por ejecución. |
+| `app_cdp.js` | Acceso al driver del módulo integrado, con perfiles aislados. `--tab=pruebas --run` exige **52/52**. El recorrido completo vigente y los cinco PDF locales se verifican con `reanudar.cmd app`. |
+| `integration_check.js` | Copia autónoma del árbol web, apertura del slide 7 con `file://` y HTTP, 52/52 dentro del iframe, PDF sin CDN, persistencia al cerrar/reabrir y auditoría geométrica de los siete estados del slide. |
 | `gen_fase_probe.js` | Probe de **app real** (Chrome `--dump-dom`): clic real sobre las fases 3a/3b y sus imágenes (**nivel 2 3aimg/3bimg**), y el bloque **S7** del slide 7, que con la lámina en blanco comprueba el encabezado (`h2=RESULTADOS (2)`, subtítulo de la Fase 3), el cuerpo 1408×644 con `texto=""` y 0 etapas/0 flechas/0 paneles/0 secuencia, y que no queda foco. Debe ejecutarse con `*{transition:none !important;animation:none !important}`. Cuando el slide 7 tenga contenido accionable, el bloque S7 deberá ampliar bloques reales y **excluir la capa `scope-ghost`** (`!x.closest('.scope-ghost')`) al medirlos, si no cada bloque se cuenta dos veces. |
 | `extract_er_tables.js` | Lee `ER.docx` (descomprime `word/document.xml` a `tools/tmp_er/`, ya borrado) y genera `presentacion-web/js/data/erTables.js` con las cinco tablas `ne, np, nc, nr, ni`. Limpia campos Zotero (`ADDIN ZOTERO…`) y el texto posterior a las tablas, y aplica correcciones menores de espaciado/erratas documentadas en el propio archivo. `node tools/extract_er_tables.js`. El `tono` (`green`/`red`) es decisión de diseño por severidad, no del documento. |
 | `out/` | `map_dom.html`, `map_shot.html`, `heights.html`, `results_heights.html`, `res2_heights.html`, `res2_focos.html`, `res2_shot*.html`, `slide05_map.png`, `slide06*.png`, `slide07.png`, `slide07_f*.png`, `md_shot*.png`. |
@@ -162,7 +170,7 @@ con qué se quería / qué se hizo / verificación / capturas para revisar a ojo
 3. **Sincronizar las autoverificaciones** en `tools/focus_check.js` (jsdom) cuando
    cambies DOM/clases/CSS/recuentos: añade `has(…)` y actualiza las cantidades
    (total = nº de `has()`; avísalo en la sección nueva del doc). El objetivo es
-   **54/54 (map) + 654/654 (focus) + `TODO OK`** de `verify-all.cmd`.
+    **54/54 (map) + 920/920 (focus) + `TODO OK`** de `verify-all.cmd`.
 4. **Verificar:** `cd tools && verify-all.cmd` (o `reanudar.cmd` para entorno+git).
    Nunca terminar al rojo.
 5. **Auditoría de layout real** (cuando el cambio afecte a la geometría): crear un
@@ -3022,6 +3030,9 @@ generarse**, así que tras tocar `styles.css` hay que volver a lanzar
 
 ## 55. Respaldo automático: `tools\respaldo.cmd` (2026-10-16)
 
+> Registro histórico: el proceso de esta sección queda sustituido por el
+> respaldo verificado y la recuperación de **§59** (sin commits automáticos).
+
 **Objetivo**: que no se pueda perder trabajo por olvidarse de guardarlo. Una sola
 orden deja verificado, commiteado y empaquetado, y hay una tarea diaria que lo
 hace sola. Procedimiento completo en **`RESPALDO.md`**.
@@ -3162,3 +3173,574 @@ ctx-overlap 0`, sin clips ni overflow de marco. Captura para revisión visual:
 4. **`css/styles.css`**: `.photo` pasa a `border: 1px solid #d7dbd9`, `overflow: hidden` y `position: relative`. Se añade `.photo-img { position: absolute; inset: 0; width:100%; height:100%; object-fit: cover; z-index:0; }`. Las etiquetas/captions se pasan a `position: relative; z-index:1` con ligero `text-shadow` para legibilidad sobre la foto. Se retira el estilo punteado y el centrado exclusivamente en texto.
 
 **Verificación**: `map_check.js` 54/54 · `focus_check.js` **897/897** (no hay cambios en tests). Captura regenerada: `tools/out/slide03.png`. Las fotos se ajustan por `cover` al recuadro 340×212 (16/10).
+
+---
+
+## 59. Guardado verificado, recuperación y continuidad local (2026-10-25)
+
+**Petición:** generar los procesos necesarios para evitar pérdida de información
+y poder seguir trabajando en este computador.
+
+**Situación encontrada:** ya existía una tarea diaria, pero los ZIP compartían
+nombre dentro de un mismo minuto, no tenían comprobación de contenido ni
+recuperador automatizado, utilizaban `%TEMP%` y la tarea omitía batería y
+horarios perdidos. Había cambios pendientes del usuario en slides 2/4/7 y en
+`focus_check.js`, además de las imágenes `th.png`/`th1.png`; se incluyen en las
+copias junto con el resto del árbol actual.
+
+**Procesos disponibles desde la raíz:**
+
+- **`iniciar.cmd`**: Node 22+, dependencias reproducibles (`npm ci`), inventario,
+  verificación y apertura. `tools\reanudar.cmd` ofrece la misma comprobación.
+- **`guardar.cmd`**: guarda ambas carpetas, archivos sin commit e historial Git.
+  `estado`, `verificar`, `agendar [HH:mm]` y `quitar` consultan y gestionan el proceso.
+- **`recuperar.cmd -Paquete "copia.zip" -Destino "carpeta-NUEVA"`**: comprueba
+  integridad antes de extraer, contrasta los archivos recuperados, restaura el
+  historial sin sobrescribir los cambios pendientes y comprueba el inventario.
+- **`tools\traspaso.cmd paquete`** utiliza el mismo empaquetador verificado para
+  entregar un ZIP portable; `todo` añade la verificación completa.
+
+**Implementación:** `tools\respaldo.ps1`, `paquete-integridad.ps1`,
+`traspaso-empaquetar.ps1` y `recuperar.ps1`; `.cmd` como accesos. Nombres únicos
+con segundos/milisegundos/ID, bloqueo de concurrencia, staging en `tools\out`,
+manifiesto SHA256 por archivo, checksum del ZIP, publicación después de
+verificar, historial en bundles comprobados, `ESTADO.json`, informes y log.
+Los archivos ocultos también viajan. Solo se rotan las 14 copias más recientes
+después de validar la nueva. Las verificaciones en rojo se registran, pero no
+impiden guardar. La copia ya no crea commits ni modifica el índice: se preservan
+el árbol actual y los commits existentes de los dos repos.
+
+**Automatización local:** tarea **«Respaldo Presentacion Tesis»** diaria a las
+**18:00**, con rutas explícitas de Node/Git, sesión interactiva del usuario,
+`StartWhenAvailable`, batería permitida y exclusión de ejecuciones simultáneas.
+Destino por defecto **`D:\ejemplo\respaldos\`**. `RESPALDO_DIR` permite usar un
+disco externo o carpeta sincronizada y queda incorporado al programar la tarea.
+
+**Documentación e inventario:** reescritos `RESPALDO.md` y `TRASPASO.md`,
+sincronizados `AGENTS.md` y el resumen de este documento. El inventario ahora
+exige también accesos y scripts de respaldo/recuperación, documentación,
+generadores de los slides 2–4 y las imágenes recientes de los slides 3 y 7.
+
+**Comprobación inicial:** `reanudar.cmd` → **54/54 + 897/897 + `TODO OK`**.
+`tools\probar-respaldo.ps1` → **18/18** en carpetas aisladas: restauración,
+archivos ocultos y JSON, pruebas en rojo, rutas con espacios/apóstrofes, rechazo
+de destino existente, corrupción externa/interna, rutas inválidas, copias
+consecutivas, concurrencia, rotación y conservación de las copias ante fallos.
+Primera copia nueva comprobada: **249 archivos**,
+`D:\ejemplo\respaldos\presentacion-tesis-20261025-073232-866-c2882e34.zip`.
+
+**Datos de la app:** solo se encontró exportado
+`tesis\0\pruebas\out\respaldos\ntp330-respaldo-ejemplo.json`. Es un ejemplo de
+pruebas, no un respaldo de los datos reales del navegador. El procedimiento de
+exportación, validación e inclusión del JSON propio está en `RESPALDO.md` §6.
+
+**Verificación de cierre:**
+
+- `reanudar.cmd app`: **54/54 mapa + 897/897 foco + `TODO OK`**;
+  app hermana **52/52**, sin errores JavaScript. Las bibliotecas PDF del CDN no
+  estuvieron disponibles en la prueba; no se verificó la exportación PDF en esta sesión.
+- Suite ampliada `probar-respaldo.ps1`: **20/20**. Incluye historial Git real,
+  `.git` oculto de Windows e índice recuperado sin sobrescribir el árbol del ZIP.
+  La recuperación usa `robocopy` para `.git` porque Windows denegaba su traslado
+  por renombrado en la copia completa.
+- **Tarea ejecutada realmente el 2026-10-25 a las 08:00:16**: resultado **0**;
+  próxima ejecución diaria a las **18:00**. Parámetros de batería y horario
+  omitido confirmados mediante el Programador de tareas.
+- **Recuperación completa comprobada** en
+  `tools\out\recuperacion-comprobada-20261025-v3\`: los **249 archivos** coinciden,
+  ambos historiales Git recuperados e inventario **182 OK / 0 faltan**.
+  `npm ci` desde esa copia instaló las 63 dependencias y `reanudar.cmd` terminó
+  con **54/54 + 897/897 + `TODO OK`**. Esta carpeta es un artefacto de prueba:
+  la carpeta de trabajo sigue siendo `D:\ejemplo\presentacion`.
+- **Capturas regeneradas:** `tools\out\slide07.png`, `slide07_ff1.png` y
+  `reanudar_pruebas.png`. Harness del slide 7 en reposo y seis focos:
+  **0 clip / 0 textx-overflow / 0 frame OVERFLOW**. La captura del iframe tiene
+  **8 948 colores / 28,4 % de píxeles pintados**, confirmando que cargó la app.
+- La copia más reciente y su checksum se consultan en
+  `D:\ejemplo\respaldos\ultimo-respaldo.json`; `guardar.cmd verificar` permite
+  comprobar otra vez todos sus archivos.
+
+**Para la próxima sesión:** doble clic en `iniciar.cmd`; consultar esta sección
+y el resumen. Al terminar, guardar los archivos abiertos y usar `guardar.cmd`.
+Las copias locales protegen la recuperación del proyecto; para cubrir también
+una avería del disco, guardar ZIP + SHA256 en otra unidad o ubicación sincronizada.
+
+---
+
+## 60. Slide 2: título del subbloque 1 del bloque central (2026-10-25)
+
+**Petición:** la línea del subbloque 1 debe decir
+**«Contexto del sector de la construcción»**.
+
+**Cambio:** actualizado `PROBLEMA.flow[0].title` en
+`presentacion-web/js/data/problematizationData.js` con el texto solicitado.
+
+**Verificación:** `tools\reanudar.cmd` → **54/54 + 897/897 + `TODO OK`**.
+Chrome confirma el título renderizado y **0 clip / 0 textx-overflow / 0 frame
+OVERFLOW** en reposo, Evidencia, Justificación, pregunta científica y restaurado.
+Captura regenerada para revisión visual: **`tools/out/slide02.png`**.
+
+---
+
+## 61. Slide 2: año del PIB en el subbloque 1 (2026-10-25)
+
+**Petición:** añadir «(2020)» al lado de «PIB» en el mismo subbloque.
+
+**Cambio:** `PROBLEMA.flow[0].body` ahora dice:
+«Pilar de la economía — 7,9% del PIB (2020) · 6.206 empresas · 158.303 empleos».
+
+**Verificación:** `tools\reanudar.cmd` → **54/54 + 897/897 + `TODO OK`**.
+Chrome confirma el texto y **0 clip / 0 textx-overflow / 0 frame OVERFLOW**
+en los cinco estados del harness. Captura actualizada: **`tools/out/slide02.png`**.
+
+---
+
+## 62. Problematización: seis bloques, jerarquía ampliada y centrado (2026-10-25)
+
+**Peticiones incorporadas:**
+
+1. Clic en **Problema central** abre la jerarquía de controles de riesgos
+   agrandada, mostrando también **PROBLEMA / PROBLEMA CENTRAL / Ausencia de una
+   metodología integral…** con el texto completo.
+2. La jerarquía se retira de **Justificación ampliada** y reaparece en el resumen
+   al cerrar la ampliación.
+3. El flujo queda en **seis bloques**: se retira **Efectos–Consecuencias**,
+   **Brecha** ocupa el lugar **5** y **Pregunta científica** el **6**, conservando
+   su ampliación por clic y teclado.
+4. Los seis bloques se centran verticalmente. El sexto usa **rojo atenuado** con
+   textos oscuros, icono y borde rojos.
+5. La flecha roja de la derecha del bloque 4 se alinea con la mitad de su alto,
+   conservando su posición horizontal.
+
+**Implementación:**
+
+- `problematizationData.js`: seis entradas en `flow`; se conservan el título
+  «Contexto del sector de la construcción» y «PIB (2020)» del bloque 1.
+- `slide02Problematization.js`: la pregunta se obtiene del último elemento del
+  flujo; el identificador interno `q7` se conserva para su interacción. El nuevo
+  foco **`p4`** muestra un panel con el problema completo y la pirámide original
+  ampliados juntos, con sus cinco niveles y el énfasis en controles de ingeniería.
+- `app.js`: `p4` registrado en `FOCUS_SCOPES` de `problem-body`, con la misma
+  sombra de las tres columnas originales. Cierre con segundo clic, clic fuera o
+  Escape; apertura con Enter o Espacio.
+- `styles.css`: centrado de `.flow`, tono rojo atenuado de
+  `.flow-node--question`, jerarquía oculta en el foco `jf` y vista `p4` centrada.
+  La flecha usa `top: calc(50% + 40px)` y `translateY(-50%)`.
+- `focus_check.js`: **14 comprobaciones nuevas** respecto a §61; total
+  **911 `has()` / 911 comprobaciones**. Incluyen la interacción, texto completo,
+  ocultación/restauración, seis bloques en orden, centrado y tonalidad de la pregunta.
+- `gen_slide2_shot.js`: audita reposo, `ev`, `jf`, `p4`, `q7` y restaurado;
+  comprueba también que la flecha está centrada respecto al bloque 4.
+  `verify-all.cmd shot` incluye `slide02_p4.png`.
+
+**Medición en Chrome:**
+
+- Flujo: **42 px libres arriba y 42 px abajo**.
+- Flecha: **x=1025, y=408**, tamaño 34×34 CSS; su centro **y=425** coincide con
+  el centro del bloque 4: **0 px de desfase**. La coordenada horizontal se conserva.
+- Panel Problema + jerarquía: **985,6×563,2 CSS px**, con la descripción completa
+  sin truncar. Verificado también en pantalla completa.
+- **0 clip / 0 textx-overflow / 0 frame OVERFLOW** en los seis estados.
+  Verificado el clic real de Problema y de la pregunta ubicada en el lugar 6.
+- Probe temporal `presentacion-web/_probe.html` eliminado al terminar las medidas.
+
+**Verificación:** `tools\reanudar.cmd` → **54/54 + 911/911 + `TODO OK`**.
+Capturas para revisión del usuario: **`tools/out/slide02.png`**,
+**`slide02_p4.png`**, **`slide02_fjf.png`**, **`slide02_q7.png`** y
+**`slide02_p4_fs.png`** (pantalla completa).
+
+---
+
+## 63. Slide 8: barras.png actualizada y visor maximizado (2026-10-25)
+
+> Desde §64, la apertura se realiza en la banda inferior de la diapositiva.
+
+**Peticiones:** sustituir la imagen de **Deficiencia por factor de riesgo** por
+`barras.png`, retirar las dos líneas de lectura y fuente inferiores y aprovechar
+el espacio horizontal y vertical de la pantalla con proporciones correctas.
+
+**Cambios:**
+
+- `resultsData3.js`: el paso **p3** utiliza `assets/barras.png` y
+  `mostrarPie: false`.
+- `slide08Results.js`: omite el pie de ese resultado. La imagen utiliza el
+  ajuste `object-fit: contain`, con su relación de aspecto original.
+- `styles.css`: al abrir p3, el gráfico ocupa toda la superficie útil de la
+  diapositiva con un margen de 2 px. Las cabeceras, el logo superior, la secuencia
+  y la pista superpuesta se ocultan durante esta vista; al cerrarla se restaura
+  la lámina. Se conservan el zoom adicional y el pie institucional en pantalla
+  completa. El mismo ajuste se aplica al nivel p3i.
+- Original `barras.png` y copia en `presentacion-web/assets/` sincronizados con
+  la versión actual del usuario: **1532×798 px, 93 522 bytes**, sin recomprimir
+  ni reducir resolución. SHA256 idéntico:
+  `E4E80D0958F2D025D5ACF49580FF4BF17D6B3D5D09151CDF82A87D943A23AED0`.
+- Inventario actualizado para exigir el original y la copia de la presentación.
+- `focus_check.js`: ruta de la imagen actualizada y **3 comprobaciones nuevas**
+  para el pie y la apertura/cierre del visor. Total: **914 comprobaciones**.
+
+**Verificación:** `tools\reanudar.cmd` → **54/54 + 914/914 + `TODO OK`**.
+Chrome confirma clic real, apertura con teclado, zoom y regreso con Escape.
+Imagen contenida en **1402×714 CSS px**, dibujo proporcional de **1370,7×714**:
+ocupa más del **96 % de ambos ejes** del área útil, sin recorte ni deformación.
+Verificado en modo normal y pantalla completa. Auditoría del harness del slide 8:
+**13 estados, 0 clip / 0 textx-overflow / 0 frame OVERFLOW**.
+
+Capturas actualizadas para revisión visual: **`tools/out/slide08_fp3.png`**,
+**`slide08_fp3i.png`** y **`slide08_fp3_fs.png`**. Probe temporal
+`presentacion-web/_probe.html` eliminado tras las mediciones.
+
+---
+
+## 64. Slide 8: barras.png en la banda inferior (2026-10-25)
+
+**Corrección solicitada:** abrir `barras.png` en la parte inferior del slide,
+sin maximización automática, utilizando toda el área disponible proporcionalmente.
+
+**Cambios:**
+
+- El foco **p3** mantiene visibles la cabecera, el logotipo y la secuencia de
+  seis resultados. La imagen ocupa la banda inferior completa, sin padding del
+  panel, encabezado duplicado ni las dos líneas de lectura/fuente inferiores.
+- Retiradas las reglas que ocultaban la cabecera y expandían p3 a toda la lámina.
+  La ampliación secundaria sigue disponible únicamente al volver a pulsar la imagen.
+- Ajuste con `object-fit: contain`: proporciones conservadas y gráfico completo.
+  El PNG original y su copia siguen idénticos: **1532×798 px**, SHA256
+  `E4E80D0958F2D025D5ACF49580FF4BF17D6B3D5D09151CDF82A87D943A23AED0`.
+- Actualizadas las dos comprobaciones de apertura/cierre existentes en
+  `focus_check.js`; el total sigue en **914**.
+
+**Verificación:** `tools\reanudar.cmd` → **54/54 + 914/914 + `TODO OK`**.
+Chrome verifica clic real, teclado y retorno con Escape. Imagen en una caja
+de **1368×498 CSS px**, coincidente con toda la banda inferior; el gráfico se
+ajusta proporcionalmente a **956,1×498 CSS px**. Confirmado también en pantalla
+completa, con la cabecera y los pasos visibles. Harness del slide 8:
+**13 estados, 0 clip / 0 textx-overflow / 0 frame OVERFLOW**.
+
+Capturas actualizadas: **`tools/out/slide08_fp3.png`** y
+**`slide08_fp3_fs.png`**; `slide08_fp3i.png` refleja el nivel secundario.
+Probe temporal eliminado tras verificar la geometría.
+
+---
+
+## 65. Navegación de los 12 slides visible en pantalla completa (2026-10-25)
+
+**Petición:** al maximizar la presentación, mantener visible el panel de
+navegación de las 12 diapositivas en todos los slides.
+
+**Cambios:**
+
+- `styles.css`: `.app-header` se muestra como `flex` también en
+  `is-fullscreen-presentation`. Las pestañas se distribuyen en filas según el ancho.
+- `app.js`: el escalado descuenta el padding del escenario y utiliza su espacio
+  real bajo la barra de navegación. El marco completo y el pie institucional
+  quedan dentro del área disponible. El botón visible permite entrar y salir
+  tanto de pantalla completa nativa como del modo ampliado alternativo.
+- `focus_check.js`: **6 comprobaciones nuevas** para navegación, selección de los
+  12 slides, márgenes de la escala y el botón de salida. Total **920 `has()`**.
+- `tools/nav_check.js`: verificador reutilizable con Chrome/CDP, sin dependencias
+  adicionales. Comprueba posiciones, clics, pestaña activa, contador y entrada/salida
+  nativas con el botón. Incluido en el inventario y en el chequeo de sintaxis.
+
+**Verificación:** `tools\reanudar.cmd` → **54/54 + 920/920 + `TODO OK`**.
+La auditoría Chrome recorrió las 12 diapositivas en ambos modos en **1024×768,
+1366×768, 1920×1080 y 2816×1600**: **96 selecciones de diapositiva**. Panel de
+**69 px / dos filas** en 1024 y 1366, y **54 px / una fila** en 1920 y 2816.
+Las 12 pestañas permanecen visibles, sin recortes ni elementos que impidan el
+clic. Se comprobó también la barra con `barras.png` abierta en el slide 8.
+
+Capturas para revisión visual: `tools/out/nav_fs_slide01.png`,
+`nav_fs_slide08.png`, `nav_fs_slide12.png`, `nav_fs_slide08_barras.png`,
+`nav_fs_1366.png` y `nav_fs_2816.png`.
+
+El probe temporal se eliminó tras las mediciones. Para repetir la verificación
+sobre la presentación actual: **`node tools/nav_check.js`**.
+
+---
+
+## 66. Slide 4: diagrama legal un 40 % mayor al ampliar Teorías base (2026-10-25)
+
+**Petición:** al abrir **Marco teórico — Teorías base**, aumentar un 40 % el
+diagrama de **Marco Legal y Normativo** que se muestra a su derecha.
+
+**Cambios:**
+
+- `styles.css`: la escala del bloque legal en el foco `teo` pasa de **0,90 a
+  1,26**, equivalente a **1,4×**. Aumentan proporcionalmente el diagrama, sus seis
+  niveles y los textos.
+- Ambos paneles se disponen con **16 px de separación** y la flecha se acorta
+  para ajustarse a ese espacio. El panel teórico mantiene su ancho interno de
+  680 px, se presenta a escala 0,875 y se elimina la altura máxima previa que
+  dejaba parte del enfoque integrado fuera de su caja.
+- La disposición resultante muestra completos ambos bloques: teorías de
+  **595×599,94 CSS px** y bloque legal de **781,20×279,92 CSS px**.
+- `focus_check.js`: la comprobación de esta vista valida los dos paneles y los
+  seis niveles legales, excluyendo la copia atenuada. Total **920**.
+- `gen_slide4_shot.js`: registra las dimensiones reales y la separación y revisa
+  también el enfoque integrado. La flecha exterior se distingue del contenido
+  interno al auditar el desbordamiento horizontal.
+
+**Medición en Chrome:** el diagrama pasa de **516,60×127,02** a
+**723,24×177,83 CSS px**, aumento del **40 % en ambos ejes**. Verificado también
+en pantalla completa, con **0 recortes, 0 desbordes y 0 solapamientos**.
+Comprobados clic, Enter, Escape, restauración del estado normal y apertura
+individual del marco legal. Probe temporal eliminado tras medir.
+
+**Verificación:** `tools\reanudar.cmd` → **54/54 + 920/920 + `TODO OK`**.
+Auditoría del slide 4 en sus **seis estados** sin recortes ni solapamientos.
+Capturas: **`tools/out/slide04_teo.png`**, **`slide04_teo_fs.png`**,
+`slide04.png` y `slide04_legal.png`. Referencia anterior para comparar:
+`slide04_teo_before.png`.
+
+---
+
+## 67. Logotipo actualizado desde logo.bmp y ampliado un 25 % (2026-10-25)
+
+**Petición:** actualizar la imagen superior de los slides que la utilizan por
+`logo.bmp` y aumentar su tamaño actual un 25 %.
+
+**Cambios:**
+
+- Se identificó como objetivo el logotipo común `.slide-logo`, situado en la
+  esquina superior derecha en el código existente, y se conserva ese anclaje.
+- `presentacion-web/assets/logo.png`: regenerado desde el original **`logo.bmp`**,
+  de **454×100 px**, preservando los colores y convirtiendo únicamente el blanco
+  puro en transparencia, según la convención existente. PNG resultante:
+  **20 821 bytes**, SHA256
+  `0daefe9a8f1e50883c3f9d01ea06778b446dbbb06343cfcf48667bfaaa98ab55`.
+- `styles.css`: ancho de `.slide-logo` de **140 a 175 px** (**1,25×**), con
+  `height: auto`, `top: 8px` y `right: 12px`. Aplicado a los **slides 2–12**.
+- El subtítulo del slide 8 pasa de **3 a 11 px de margen superior** para evitar
+  el cruce con el logo ampliado, conservando el alto de su cabecera en 76 px.
+- `focus_check.js`: actualizada la comprobación existente del CSS del logo para
+  validar el ancho, las proporciones y el espaciado del slide 8. Total **920**.
+
+**Verificación:** `tools\reanudar.cmd` → **54/54 + 920/920 + `TODO OK`**.
+Chrome, a escala de dispositivo 1 y con el `zoom: 2` real, verificó **22 estados**:
+los 11 slides en modo normal (**2816×1440**) y pantalla completa (**2816×1600**).
+Logo medido en **175×38,54 CSS px**, posición **x=1221, y=8**, sin recortes ni
+solapamientos con los textos. El harness del slide 8 verifica reposo y sus doce
+estados ampliados con **0 clip / 0 textx-overflow / 0 frame OVERFLOW**.
+
+**Capturas para revisión visual:** `tools/out/slide02_logo.png` …
+`slide12_logo.png` y `slide02_logo_fs.png` … `slide12_logo_fs.png`.
+Informe de geometría: **`tools/out/logo_report.json`**; informes del slide 8:
+`res3_heights_logo.txt` y `res3_focos_logo.txt`.
+Probe temporal `presentacion-web/_probe.html` y scripts temporales eliminados
+tras las mediciones.
+
+---
+
+## 68. Logotipo logo1.png adaptado al espacio actual (2026-10-25)
+
+**Petición:** sustituir el logotipo por `logo1.png` y adaptar su tamaño a las
+dimensiones actuales donde se muestra.
+
+**Cambios:**
+
+- `presentacion-web/assets/logo.png`: copia binaria exacta de **`logo1.png`**,
+  de **1422×316 px** y **46 669 bytes**, conservando la resolución y los colores
+  del PNG original. SHA256 de ambos archivos:
+  `8f84cfa52df1c796cc22e16cd29edea4f215ab448e5c23531fb765156495d423`.
+- `styles.css`: `.slide-logo` dispone de una caja de **175×38,55 CSS px**,
+  correspondiente al espacio del ajuste anterior, con **`object-fit: contain`**
+  y **`object-position: right top`**. La imagen completa se escala uniformemente
+  dentro de la caja y queda alineada con su borde superior derecho.
+- `app.js`: actualizado el origen documentado del recurso a `logo1.png`.
+  La ruta compartida `assets/logo.png` permite que los renderizados y sus
+  generadores de capturas utilicen la nueva imagen.
+- `focus_check.js`: las comprobaciones existentes validan la igualdad binaria
+  con `logo1.png`, la caja de presentación y el ajuste proporcional. Total **920**.
+- `tools/inventario.json`: añadido el original `logo1.png` al inventario requerido.
+
+**Verificación:** `tools\reanudar.cmd` → **54/54 + 920/920 + `TODO OK`**.
+Chrome verificó los **11 slides de contenido en 22 estados**, con ventanas de
+**2816×1440** en modo normal y **2816×1600** en pantalla completa, escala de
+dispositivo 1 y `zoom: 2`. Caja medida: **175×38,546875 CSS px**; imagen
+proporcional: **173,4609375×38,546875 CSS px**, sin deformación ni recorte.
+Cabeceras con **0 clip / 0 textx-overflow** y sin solapamientos con el logo.
+
+**Capturas para revisión visual:** `tools/out/slide02_logo1.png` …
+`slide12_logo1.png` y `slide02_logo1_fs.png` … `slide12_logo1_fs.png`.
+Informe: **`tools/out/logo1_report.json`**.
+Probe temporal `presentacion-web/_probe.html` y script temporal eliminados al
+terminar la verificación.
+
+---
+
+## 69. Ronda 1: ítems evaluados y eliminación de la prueba av. 1 (2026-10-25)
+
+**Peticiones:** añadir **«(23 ítems evaluados)»** a la derecha de
+**«184 valoraciones»** en Ronda 1 del slide 10 y borrar la evaluación de prueba
+**«av. 1»** de la app `tesis/0` vinculada al slide 7.
+
+### Slide 10
+
+- `validationData.js`: el segundo resultado de Ronda 1 queda como
+  **«183 Sí de 184 valoraciones (23 ítems evaluados)»**.
+- `focus_check.js`: actualizada la comprobación existente para validar el texto
+  completo. El total permanece en **920 comprobaciones**.
+- Chrome confirma que la aclaración ocupa la **misma línea** y está a la derecha
+  de «184 valoraciones»: ambos textos en **y=228,30 CSS px**, separados por
+  **3,05 CSS px**. Verificado en modo normal y pantalla completa, a `zoom: 2`.
+- Auditoría del slide en sus seis estados por modo: **0 clip / 0 textx-overflow /
+  0 frame OVERFLOW**.
+
+**Verificación:** `tools\reanudar.cmd` → **54/54 + 920/920 + `TODO OK`**.
+Capturas: **`tools/out/slide10.png`** y **`slide10_fs.png`**.
+Informe: `tools/out/slide10_ronda1_report.json`; auditorías completas:
+`slide10_ronda1_report.txt` y `slide10_ronda1_fs_report.txt`.
+Probe temporal `presentacion-web/_probe.html` eliminado tras medir.
+
+### Evaluación de prueba av. 1
+
+- Se localizó en el **localStorage de la sesión real de Chrome** la evaluación
+  **`EVAL-0002`**, proyecto **«av. 1»**, tipo **Infraestructura**, proceso
+  **Obras preliminares**, con **dos riesgos**. No existía una ficha independiente
+  del proyecto en `ntp330.proyectos`.
+- Se eliminó esa evaluación mediante la API `DBApp` de la app original, sin
+  alterar las demás claves de almacenamiento. Las comprobaciones confirmaron
+  que catálogo, configuración y contadores se conservaron.
+- Tras recargar la app original, se verificaron **0 evaluaciones de av. 1** y
+  **0 evaluaciones guardadas en total** en ese navegador.
+- Registro de la operación: **`tools/out/limpieza_av1.json`**, solo con los
+  identificadores, recuentos y comprobaciones de la limpieza.
+- Los instrumentos temporales se retiraron. El repositorio `tesis` quedó sin
+  cambios en sus archivos; la eliminación corresponde a los datos del navegador.
+
+Si el iframe del slide 7 seguía abierto con la prueba en memoria, recargar la
+presentación actualiza su vista con el almacenamiento ya limpio.
+
+---
+
+## 70. Proyecto único: presentación y app NTP 330 integradas (2026-10-25)
+
+**Petición:** incorporar a `presentacion` todo lo necesario de la app `tesis`
+para continuar el trabajo desde un solo proyecto.
+
+### Estructura y funcionamiento
+
+- **`presentacion-web/ntp330/`** contiene los 49 archivos originales de la app:
+  código, documentación, pruebas, fuentes metodológicas, correcciones y versión
+  histórica de referencia. La app abre en **`ntp330/0/index.html`**.
+- El bloque **Riesgo** del slide 7 apunta a esa ruta interna. Funciona al abrir
+  la presentación como archivo y al servir únicamente `presentacion-web` por HTTP.
+- El historial de trabajo es el del repositorio principal. El historial anterior
+  del módulo se conserva en **`historial-origen.bundle`**, desde el commit
+  **`aaf2c3441a3af6bfaac0b9257e9e2ed7e31cb9d9`**. **`ORIGEN.json`** registra los
+  hashes de incorporación; los documentos fuente conservan sus bytes originales.
+- `README.md`, `AGENTS.md` y las guías de arranque, continuidad, respaldo y
+  traspaso describen el flujo integrado. Los archivos `correcciones*.md` e
+  `instrucciones.md` del módulo son las fuentes históricas originales.
+
+### PDF, herramientas y verificaciones
+
+- **jsPDF 2.5.1** y **AutoTable 3.5.28** están en `ntp330/0/vendor/`, con sus
+  licencias. Los PDF se generan sin conexión a Internet.
+- La prueba real de PDF detectó un argumento incompatible en el color de texto
+  de la matriz unificada. `app.reportes.js` usa ahora el color hexadecimal del
+  mismo tema. El motor y las fórmulas NTP 330 se mantienen.
+- `tools/app_cdp.js` delega en el driver del módulo. Las copias de verificación
+  y perfiles aislados se crean en `tools/out/` del proyecto principal.
+- El verificador del recorrido exige un proceso correcto y un informe válido;
+  una salida de error ya no puede interpretarse como un recorrido aprobado.
+- `tools/integration_check.js` crea una copia autónoma del árbol web y comprueba
+  **52/52 dentro del iframe tanto en file como HTTP**, PDF local, creación y
+  persistencia de un registro al cerrar/reabrir, recursos internos y geometría
+  de los siete estados del slide 7. Los probes de medición se eliminan al terminar.
+- La comprobación de foco se sincronizó con la nueva ruta y el repositorio
+  único. El total sigue en **920**.
+
+**Resultado:** `tools\reanudar.cmd app` → **54/54 mapa + 920/920 foco + `TODO OK`**;
+**52/52 app + recorrido completo sin errores + cinco PDF locales**.
+Integración file/HTTP y geometría: **0 clip / 0 textx-overflow /
+0 frame OVERFLOW**. El recorrido incluye aislamiento de proyectos, recarga,
+matriz unificada, gráficos y vista móvil.
+
+Capturas: **`tools/out/slide07_integrada_file.png`** y
+**`slide07_integrada_http.png`**. Informes: `integracion_ntp330.json`,
+`res2_heights_integrada.txt` y `res2_focos_integrada.txt`.
+Los cinco PDF de muestra quedan en
+`presentacion-web/ntp330/0/pruebas/out/pdf-local-1.pdf` … `pdf-local-5.pdf`.
+
+### Datos reales del navegador
+
+Se exportó y comparó el estado de la sesión real de Chrome en las ubicaciones
+anterior e integrada. Ambas compartían los mismos datos: **2 claves, 1
+evaluación y 0 fichas de proyecto**. Se confirmó la igualdad de todas las claves
+`ntp330.*` después de recargar la app integrada.
+
+Exportación real preservada en:
+`presentacion-web/ntp330/0/pruebas/out/respaldos/ntp330-migracion-2026-10-26T01-17-41-444Z.json`.
+SHA256: `309370a5d517e59e214546cb466280bc3fffc6c602d774337a4546cf9f57b518`.
+Informe: **`tools/out/migracion_ntp330.json`**. Los instrumentos temporales de
+migración se retiraron de ambas ubicaciones al finalizar.
+
+### Guardado y recuperación
+
+- `guardar.cmd` y `traspaso.cmd paquete` guardan una sola carpeta **presentacion**,
+  con la app, sus fuentes, historial principal y JSON reales exportados.
+- El paquete registra **`formato: 2` / `proyecto-integrado`** en `ESTADO.json`.
+  Se conserva la verificación de paquetes antiguos de dos carpetas.
+- Los informes y perfiles regenerables se excluyen del ZIP; los JSON exportados
+  de la app se incluyen en `datos-respaldo` y vuelven a su carpeta interna al
+  recuperar, para conservarlos en los siguientes guardados.
+- **`tools/probar-respaldo.ps1`: 22/22** comprobaciones, incluidas recuperación
+  con un único proyecto, conservación de JSON, rutas con espacios/apóstrofes,
+  integridad, bloqueo, rotación y rechazo de sobrescritura.
+- Se creó un respaldo verificado previo a la integración. La copia integrada
+  vigente, su checksum y el recuento de archivos se consultan en
+  **`D:\ejemplo\respaldos\ultimo-respaldo.json`**.
+
+**Para continuar:** abrir la carpeta `presentacion` y usar **`iniciar.cmd`**;
+para verificar también la app, **`iniciar.cmd app`**; al terminar,
+**`guardar.cmd`**. Todas las modificaciones se hacen en este repositorio.
+
+---
+
+## 71. Publicación en GitHub y GitHub Pages (2026-10-26)
+
+**Petición:** subir el proyecto integrado al repositorio
+**`https://github.com/jabucheli/UIIX`** y publicarlo en GitHub Pages.
+
+**Configuración:**
+
+- Sitio: **`https://jabucheli.github.io/UIIX/`**.
+- App: **`https://jabucheli.github.io/UIIX/ntp330/0/index.html`**.
+- `.github/workflows/pages.yml`: publicación por GitHub Actions al subir cambios
+  a **`main`**, con ejecución manual disponible desde Actions.
+- El workflow instala las herramientas con `npm ci --prefix tools`, verifica
+  mapa y foco, prepara el sitio y comprueba la app en Chrome antes de desplegar.
+- `tools/prepare-pages.js` genera **94 archivos / 13 517 803 bytes** en
+  `tools/out/pages/`. Verifica **89 recursos**, incluidas las mayúsculas de las
+  rutas, para funcionar en el alojamiento Linux bajo `/UIIX/`.
+- El sitio incluye `index.html`, CSS, JavaScript, imágenes y los recursos de la
+  app `ntp330/0` y sus bibliotecas locales. Los documentos fuente, historial y
+  herramientas forman parte del repositorio; el artefacto web contiene los
+  recursos utilizados por la aplicación.
+- `tools/integration_check.js` admite `--site=...`, `--base-path=...` y `--url=...`
+  para verificar el sitio preparado y la URL HTTPS publicada.
+
+**Verificación local:** **54/54 mapa + 920/920 foco + `TODO OK`**, **52/52 app**,
+recorrido completo y generación de los cinco PDF locales. Se mantiene el total
+de **920** comprobaciones de foco.
+
+Para comprobar el artefacto en Git Bash:
+
+```bash
+node tools/prepare-pages.js
+MSYS_NO_PATHCONV=1 node tools/integration_check.js --site=tools/out/pages --base-path=/UIIX/
+```
+
+Para comprobar la publicación:
+
+```bash
+node tools/integration_check.js --url=https://jabucheli.github.io/UIIX/
+```
+
+Informes y capturas: `tools/out/integracion_pages_local.json`,
+`integracion_pages.json` y `slide07_integrada_pages.png`.
+El estado de los despliegues se consulta en **`github.com/jabucheli/UIIX/actions`**.
+
+Las evaluaciones se guardan en el almacenamiento del navegador de la dirección
+que se esté usando. Para trasladarlas desde la versión local a HTTPS se utiliza
+**Catálogo → Exportar / Restaurar respaldo JSON**.

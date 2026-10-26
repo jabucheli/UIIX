@@ -1,0 +1,8 @@
+# Normalizar fin de línea en el repositorio: evita que todo el proyecto
+# aparezca como modificado al cambiar entre Windows (CRLF) y Linux/Mac (LF).
+* text=auto
+
+# Documentos y datos que deben Stay intactos
+*.pdf binary
+*.xlsx binary
+*.docx binary
